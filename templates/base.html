@@ -1,8 +1,11 @@
+{% load static tailwind_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Cpfed</title>
+    {% tailwind_css %}
 </head>
 
 {% if user.id is not None %}
