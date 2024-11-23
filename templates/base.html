@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cpfed</title>
+</head>
+
+{% if user.id is not None %}
+<h1>Hello, {{ user.handle }}!</h1>
+<h2><a href="/logout">Log out</a></h2>
+{% else %}
+<h2><a href="/login">Log in</a></h2>
+<h2><a href="/register">Register</a></h2>
+{% endif %}
+
+<body>
+
+{% if error %}
+<p>{{error}}</p>
+{% endif %}
+
+{% block content %}
+{% endblock %}
+</body>
+
+</html>
