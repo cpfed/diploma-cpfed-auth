@@ -1,3 +1,4 @@
 /.idea
 migrations/
 .env
+__pycache__/
