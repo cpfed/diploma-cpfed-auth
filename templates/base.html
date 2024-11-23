@@ -7,14 +7,26 @@
     <title>Cpfed</title>
     {% tailwind_css %}
 </head>
+<header>
+    <div class="bg-blue-500 text-white border-gray-200 px-4 lg:px-6 py-2.5 py-6">
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl text-l">
+            <div>
+                {% if user.id is not None %}
+                <p>Hello, {{ user.handle }}!</p>
+                {% endif %}
+            </div>
+            <div class="flex items-center space-x-4">
+                {% if user.id is not None %}
+                <p><a href="/logout">Log out</a></p>
+                {% else %}
+                <p><a href="/login">Log in</a></p>
+                <p><a href="/register">Register</a></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>
 
-{% if user.id is not None %}
-<h1>Hello, {{ user.handle }}!</h1>
-<h2><a href="/logout">Log out</a></h2>
-{% else %}
-<h2><a href="/login">Log in</a></h2>
-<h2><a href="/register">Register</a></h2>
-{% endif %}
 
 <body>
 

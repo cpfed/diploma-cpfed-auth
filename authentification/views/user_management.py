@@ -3,7 +3,7 @@ from django.http import HttpResponse, response
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 
-from authentification.forms import UserLoginForm, UserCreateForm
+from authentification.forms import UserCreateForm
 from authentification.models import MainUser
 
 # Create your views here.
@@ -13,11 +13,13 @@ def user_new(request: HttpResponse):
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            user = MainUser(**form.cleaned_data)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
             login(request, user)
             return redirect(settings.AFTER_LOGIN_URL)
         error = str(form.errors)
-    return render(request, 'login.html', {'form': UserCreateForm(), 'error': error})
+    return render(request, 'new_user.html', {'error': error})
 
 
 def user_login(request: HttpResponse):
@@ -30,7 +32,7 @@ def user_login(request: HttpResponse):
             login(request, user)
             return redirect(settings.AFTER_LOGIN_URL)
         error = "Некорректный хэндл или пароль"
-    return render(request, 'login.html', {'form': UserLoginForm(), 'error': error})
+    return render(request, 'login.html', {'error': error})
 
 
 def user_logout(request: HttpResponse):

@@ -3,12 +3,14 @@
 {% block form %}
 <div class="flex flex-col items-center justify-center my-4">
     <p class="text-xl font-bold text-gray-900 md:text-2xl ">
-        Войти в аккаунт
+        Зарегистрироваться
     </p>
 </div>
 <form method="POST" class="space-y-4">
     {% csrf_token %}
     <input type="text" name="handle" placeholder="Хэндл" required=""
+           class="rounded-lg w-full">
+    <input type="email" name="email" placeholder="Email" required=""
            class="rounded-lg w-full">
     <input type="password" name="password" placeholder="Пароль" required=""
            class="rounded-lg w-full">

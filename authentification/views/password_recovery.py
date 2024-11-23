@@ -27,9 +27,10 @@ def password_recovery_request(request: HttpResponse):
                 rec.save()
                 print(str(rec.id))
                 return render(request, 'recovery_password_request_successful.html')
-    return render(request, 'recovery_password_request.html', {'form': UserPasswordRecoveryRequest(), 'error': error})
+    return render(request, 'recovery_password_request.html', {'error': error})
 
-def password_recovery(request: HttpResponse, token:uuid):
+
+def password_recovery(request: HttpResponse, token: uuid):
     error = None
     try:
         rec = PasswordRecovery.objects.get(id=token)
@@ -52,6 +53,6 @@ def password_recovery(request: HttpResponse, token:uuid):
             rec.is_used = True
             rec.save()
             error = None
-            return render(request, 'password_recovery_result.html', {'error': error, 'ok':True})
+            return render(request, 'recovery_password_result.html', {'error': error, 'ok': True})
         error = "Неверные данные"
-    return render(request, 'recovery_password.html', {'form': UserPasswordRecovery(), 'error': error})
+    return render(request, 'recovery_password.html', {'error': error})

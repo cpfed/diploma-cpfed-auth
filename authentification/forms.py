@@ -2,14 +2,6 @@ from django import forms
 from authentification.models import MainUser
 
 
-class UserLoginForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
-
-    class Meta:
-        model = MainUser
-        fields = ('handle', 'password')
-
-
 class UserCreateForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
 
