@@ -5,8 +5,11 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+from django.core.validators import ValidationError
 
 from utils import constants
+from mixins.models import TimestampMixin
+
 
 class MainUserManager(BaseUserManager):
     DELETE_FIELD = "is_deleted"
@@ -36,7 +39,7 @@ class MainUserManager(BaseUserManager):
         return user
 
 
-class MainUser(AbstractBaseUser, PermissionsMixin):
+class MainUser(AbstractBaseUser, PermissionsMixin, TimestampMixin):
     handle = models.CharField(
         max_length=100,
         unique=True,
@@ -138,11 +141,12 @@ class MainUser(AbstractBaseUser, PermissionsMixin):
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
 
+
 def _password_default_exp_date():
     return timezone.now() + timezone.timedelta(minutes=30)
 
 
-class PasswordRecovery(models.Model):
+class PasswordRecovery(TimestampMixin):
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
@@ -168,6 +172,54 @@ class PasswordRecovery(models.Model):
 
     def __str__(self):
         return f"Ссылка {self.id} для {self.user.handle} {'еще активна' if self.is_still_valid else ('использована' if self.is_used else 'не была использована')}"
+
     class Meta:
         verbose_name = _("Восстановление пароля")
         verbose_name_plural = _("Восстановление пароля")
+
+
+class UserActivation(TimestampMixin):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+    )
+    handle = models.CharField(
+        max_length=100,
+        unique=True,
+        verbose_name=_("Хэндл")
+    )
+    email = models.EmailField(
+        max_length=100,
+        unique=True,
+        verbose_name=_("Электронная почта")
+    )
+    is_used = models.BooleanField(
+        default=False,
+        verbose_name=_("Ссылка использована?")
+    )
+    expiration_date = models.DateTimeField(
+        default=_password_default_exp_date,
+    )
+
+    @property
+    def is_still_valid(self):
+        return not self.is_used and self.expiration_date > timezone.now()
+
+    def validate_unique(self, *args, **kwargs):
+        super().validate_unique(*args, **kwargs)
+        if MainUser.objects.filter(handle=self.handle).exists():
+            raise ValidationError(
+                _('Хэндл уже занят')
+            )
+        if MainUser.objects.filter(email=self.email).exists():
+            raise ValidationError(
+                _('Email уже занят')
+            )
+
+    def __str__(self):
+        return f"Ссылка {self.id} для {self.handle} {'еще активна' if self.is_still_valid else ('использована' if self.is_used else 'не была использована')}"
+
+    class Meta:
+        verbose_name = _("Активация аккаунта")
+        verbose_name_plural = _("Активация аккаунта")

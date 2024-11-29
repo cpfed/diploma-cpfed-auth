@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import ObjectDoesNotExist
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 from authentification.forms import UserPasswordRecovery, UserPasswordRecoveryRequest
 from authentification.models import MainUser, PasswordRecovery
@@ -26,7 +27,8 @@ def password_recovery_request(request: HttpResponse):
                 rec = PasswordRecovery(user=user)
                 rec.save()
                 print(str(rec.id))
-                return render(request, 'recovery_password_request_successful.html')
+                return render(request, 'result_message.html',
+                              {'message': 'Ссылка для восстановления пароля отправлена на почту.'})
     return render(request, 'recovery_password_request.html', {'error': error})
 
 
@@ -35,14 +37,14 @@ def password_recovery(request: HttpResponse, token: uuid):
     try:
         rec = PasswordRecovery.objects.get(id=token)
     except ObjectDoesNotExist:
-        error = "Запрашиваемая страница не существует"
+        error = _("Запрашиваемая страница не существует")
     else:
         if rec.is_used:
-            error = "Токен уже использован"
-        elif rec.expiration_date < timezone.now():
-            error = "Время жизни токена истекло"
+            error = _("Токен уже использован")
+        elif not rec.is_still_valid:
+            error = _("Время жизни токена истекло")
     if error is not None:
-        return render(request, 'password_recovery_result.html', {'error': error})
+        return render(request, 'result_message.html', {'message': error})
 
     if request.method == 'POST':
         form = UserPasswordRecovery(request.POST)
@@ -52,7 +54,6 @@ def password_recovery(request: HttpResponse, token: uuid):
 
             rec.is_used = True
             rec.save()
-            error = None
-            return render(request, 'recovery_password_result.html', {'error': error, 'ok': True})
+            return render(request, 'result_message.html', {'message': _('Пароль успешно изменен!')})
         error = "Неверные данные"
-    return render(request, 'recovery_password.html', {'error': error})
+    return render(request, 'recovery_password.html', {'error': error, 'name': _('Введите новый пароль')})

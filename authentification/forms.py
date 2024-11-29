@@ -1,13 +1,11 @@
 from django import forms
-from authentification.models import MainUser
+from authentification.models import UserActivation
 
 
 class UserCreateForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
-
     class Meta:
-        model = MainUser
-        fields = ('handle', 'email', 'password')
+        model = UserActivation
+        fields = ('handle', 'email')
 
 
 class UserPasswordRecoveryRequest(forms.Form):
