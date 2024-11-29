@@ -186,12 +186,10 @@ class UserActivation(TimestampMixin):
     )
     handle = models.CharField(
         max_length=100,
-        unique=True,
         verbose_name=_("Хэндл")
     )
     email = models.EmailField(
         max_length=100,
-        unique=True,
         verbose_name=_("Электронная почта")
     )
     is_used = models.BooleanField(
@@ -208,11 +206,13 @@ class UserActivation(TimestampMixin):
 
     def validate_unique(self, *args, **kwargs):
         super().validate_unique(*args, **kwargs)
-        if MainUser.objects.filter(handle=self.handle).exists():
+        if MainUser.objects.filter(handle=self.handle).exists() or \
+                UserActivation.objects.filter(handle=self.handle, expiration_date__gt=timezone.now()):
             raise ValidationError(
                 _('Хэндл уже занят')
             )
-        if MainUser.objects.filter(email=self.email).exists():
+        if MainUser.objects.filter(email=self.email).exists() or \
+                UserActivation.objects.filter(email=self.email, expiration_date__gt=timezone.now()):
             raise ValidationError(
                 _('Email уже занят')
             )
