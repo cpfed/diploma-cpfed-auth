@@ -6,7 +6,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.utils.translation import gettext_lazy as _
 
-from authentication.forms import UserCreateForm, UserPasswordRecovery
+from authentication.forms import UserCreateForm, UserPasswordRecovery, UserLoginForm
 from authentication.models import UserActivation, MainUser
 from .services.send_email import send_email
 
@@ -19,16 +19,24 @@ def user_new(request: HttpResponse):
         form = UserCreateForm(request.POST)
         if form.is_valid():
             user_act = UserActivation(**form.cleaned_data)
+
+            # save password safely
+            dummy_user = MainUser()
+            dummy_user.set_password(user_act.password)
+            user_act.password = dummy_user.password
             user_act.save()
-            send_email(email=user_act.email,
-                       link=request.build_absolute_uri("/register/" + str(user_act.id)),
-                       subject="Активация аккаунта Cpfed",
-                       template_name="emails/user_activation.html",
-                       username=user_act.handle)
+            try:
+                send_email(email=user_act.email,
+                           link=request.build_absolute_uri("/register/" + str(user_act.id)),
+                           subject="Активация аккаунта Cpfed",
+                           template_name="emails/user_activation.html",
+                           username=user_act.handle)
+            except Exception as e:
+                print("ERROR sending email: ", str(e))
             return render(request, 'result_message.html',
                           {'message': 'На почту отправлено письмо для активации аккаунта'})
         error = str(form.errors)
-    return render(request, 'new_user.html', {'error': error})
+    return render(request, 'new_user.html', {'error': error, 'form': UserCreateForm(), 'form_name': 'Зарегистрироваться'})
 
 
 def user_activate(request: HttpResponse, token: uuid):
@@ -42,22 +50,16 @@ def user_activate(request: HttpResponse, token: uuid):
             error = _("Токен уже использован")
         elif not user_act.is_still_valid:
             error = _("Время жизни токена истекло")
-    if error is not None:
-        return render(request, 'result_message.html', {'message': error})
+    if error is None:
+        user = MainUser(handle=user_act.handle, email=user_act.email, password=user_act.password)
+        user.save()
+        login(request, user)
 
-    if request.method == 'POST':
-        form = UserPasswordRecovery(request.POST)
-        if form.is_valid():
-            user = MainUser.objects.create_user(handle=user_act.handle, email=user_act.email,
-                                                password=form.cleaned_data['new_password'])
+        user_act.is_used = True
+        user_act.save()
 
-            user_act.is_used = True
-            user_act.save()
-            login(request, user)
-            error = None
-            return redirect(settings.AFTER_LOGIN_URL)
-        error = "Неверные данные"
-    return render(request, 'recovery_password.html', {'error': error, 'name': _('Введите пароль для аккаунта')})
+        return redirect(settings.AFTER_LOGIN_URL)
+    return render(request, 'result_message.html', {'message': error})
 
 
 def user_login(request: HttpResponse):
@@ -70,7 +72,7 @@ def user_login(request: HttpResponse):
             login(request, user)
             return redirect(settings.AFTER_LOGIN_URL)
         error = "Некорректный хэндл или пароль"
-    return render(request, 'login.html', {'error': error})
+    return render(request, 'login.html', {'error': error, 'form': UserLoginForm(), 'form_name': 'Войти в аккаунт'})
 
 
 def user_logout(request: HttpResponse):

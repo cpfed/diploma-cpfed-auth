@@ -34,7 +34,7 @@ def password_recovery_request(request: HttpResponse):
                            username=user.handle)
                 return render(request, 'result_message.html',
                               {'message': 'Ссылка для восстановления пароля отправлена на почту.'})
-    return render(request, 'recovery_password_request.html', {'error': error})
+    return render(request, 'base_form.html', {'error': error, 'form': UserPasswordRecoveryRequest(), 'form_name': 'Восстановление пароля'})
 
 
 def password_recovery(request: HttpResponse, token: uuid):
@@ -61,4 +61,4 @@ def password_recovery(request: HttpResponse, token: uuid):
             rec.save()
             return render(request, 'result_message.html', {'message': _('Пароль успешно изменен!')})
         error = "Неверные данные"
-    return render(request, 'recovery_password.html', {'error': error, 'name': _('Введите новый пароль')})
+    return render(request, 'base_form.html', {'error': error, 'form': UserPasswordRecovery(), 'form_name': _('Введите новый пароль')})

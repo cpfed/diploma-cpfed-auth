@@ -90,18 +90,18 @@ class MainUser(AbstractBaseUser, PermissionsMixin, TimestampMixin):
         null=True,
         verbose_name=_("Размер футболки")
     )
-    place_of_study_of_work = models.CharField(
-        max_length=128,
-        blank=True,
-        null=True,
-        verbose_name=_("Место учебы или работы")
-    )
     employment_status = models.CharField(
         choices=constants.EMPLOYMENT_STATUS,
         max_length=128,
         blank=True,
         null=True,
         verbose_name=_("Статус занятости")
+    )
+    place_of_study_of_work = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+        verbose_name=_("Место учебы или работы")
     )
     # region = models.ForeignKey(
     #     Region,
@@ -191,6 +191,10 @@ class UserActivation(TimestampMixin):
     email = models.EmailField(
         max_length=100,
         verbose_name=_("Электронная почта")
+    )
+    password = models.CharField(
+        max_length=128,
+        verbose_name=_("Пароль")
     )
     is_used = models.BooleanField(
         default=False,

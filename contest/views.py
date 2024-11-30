@@ -37,9 +37,10 @@ def contest_reg(request: HttpResponse, constest_id: int):
                 user_reg.save()
                 return redirect(settings.AFTER_LOGIN_URL)
             error = str(form.errors)
-    return render(request, 'contest_reg.html', {
+    return render(request, 'base_form.html', {
         'form': form,
         'error': error,
+        'form_name': 'Регистрация на ' + contest.name,
         'page_name': 'Contest Registration'
     })
 
