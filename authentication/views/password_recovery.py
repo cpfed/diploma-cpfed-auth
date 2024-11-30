@@ -8,8 +8,9 @@ from django.db.models import ObjectDoesNotExist
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from authentification.forms import UserPasswordRecovery, UserPasswordRecoveryRequest
-from authentification.models import MainUser, PasswordRecovery
+from authentication.forms import UserPasswordRecovery, UserPasswordRecoveryRequest
+from authentication.models import MainUser, PasswordRecovery
+from .services.send_email import send_email
 
 
 # Create your views here.
@@ -26,7 +27,11 @@ def password_recovery_request(request: HttpResponse):
             else:
                 rec = PasswordRecovery(user=user)
                 rec.save()
-                print(str(rec.id))
+                send_email(email=user.email,
+                           link=request.build_absolute_uri("/passwordRecovery/" + str(rec.id)),
+                           subject="Восстановление пароля Cpfed",
+                           template_name="emails/recovery_password.html",
+                           username=user.handle)
                 return render(request, 'result_message.html',
                               {'message': 'Ссылка для восстановления пароля отправлена на почту.'})
     return render(request, 'recovery_password_request.html', {'error': error})

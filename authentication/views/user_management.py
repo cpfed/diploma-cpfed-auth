@@ -6,8 +6,9 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.utils.translation import gettext_lazy as _
 
-from authentification.forms import UserCreateForm, UserPasswordRecovery
-from authentification.models import UserActivation, MainUser
+from authentication.forms import UserCreateForm, UserPasswordRecovery
+from authentication.models import UserActivation, MainUser
+from .services.send_email import send_email
 
 
 # Create your views here.
@@ -17,8 +18,13 @@ def user_new(request: HttpResponse):
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
         if form.is_valid():
-            new_user = UserActivation(**form.cleaned_data)
-            new_user.save()
+            user_act = UserActivation(**form.cleaned_data)
+            user_act.save()
+            send_email(email=user_act.email,
+                       link=request.build_absolute_uri("/register/" + str(user_act.id)),
+                       subject="Активация аккаунта Cpfed",
+                       template_name="emails/user_activation.html",
+                       username=user_act.handle)
             return render(request, 'result_message.html',
                           {'message': 'На почту отправлено письмо для активации аккаунта'})
         error = str(form.errors)

@@ -1,0 +1,88 @@
+{% extends 'emails/email_base.html' %}
+
+{% block content %}
+
+<table
+        class="main__container"
+        style="
+        max-width: 640px;
+        width: 100%;
+        padding: 32px;
+      "
+>
+    <tr>
+        <td
+                class="header__container"
+                style="
+            padding: 24px;
+          "
+        >
+        </td>
+    </tr>
+    <tr>
+        <td
+                class="content"
+                style="
+            padding: 32px 24px;
+          "
+        >
+            Здравствуйте
+            <span class="name" style="color: #101828; font-weight: 500"
+            >{{ username }}</span
+            >,<br/><br/>
+            Для подтверждения электронной почты и завершения процесса регистрации, нажмите на кнопку ниже.
+        </td>
+    </tr>
+    <tr>
+        <td
+                class="btn__container"
+                style="
+            padding: 0 24px;
+          "
+        >
+            <a
+                    href="{{ link }}"
+                    class="btn__primary"
+                    style="
+              text-decoration: none;
+              color: #ffffff;
+              font-weight: 600;
+              line-height: 20px;
+              font-size: 14px;
+              padding: 12px 16px;
+              background-color: #3447f6;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+            >Активировать аккаунт</a
+            >
+        </td>
+    </tr>
+    <tr>
+        <td
+                class="content additional__info"
+                style="
+            padding: 32px 24px;
+            color: #98a2b3;
+            line-height: 20px;
+            font-weight: 400;
+            font-size: 14px;
+          "
+        >
+            Если вы получили это письмо по ошибке, просто игнорируйте его.
+            Ссылка действительна только в течение следующих 30 минут.
+        </td>
+    </tr>
+    <tr>
+        <td
+                class="content"
+                style="
+            padding: 0 24px;
+          "
+        >
+            Спасибо,<br/>команда Cpfed.
+        </td>
+    </tr>
+</table>
+
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.urls import path
-from authentification.views import user_management, password_recovery
+from authentication.views import user_management, password_recovery
 
 urlpatterns = [
     path('login/', user_management.user_login),

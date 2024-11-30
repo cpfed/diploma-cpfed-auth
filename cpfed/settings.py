@@ -31,7 +31,7 @@ NPM_BIN_PATH = os.getenv("NPM_BIN_PATH", None)
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = os.getenv("EMAIL_HOST", None)
 EMAIL_PORT = os.getenv("EMAIL_PORT", None)
-EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", None)
+EMAIL_USE_TLS = (os.getenv("EMAIL_USE_TLS", None) == "True")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", None)
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", None)
 
@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'authentification',
+
+    'authentication',
     'contest',
 
     'tailwind',
@@ -124,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = "authentification.MainUser"
+AUTH_USER_MODEL = "authentication.MainUser"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

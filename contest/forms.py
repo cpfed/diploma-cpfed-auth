@@ -2,7 +2,6 @@ from django import forms
 from django.conf import settings
 from django.forms.models import fields_for_model
 from .models import Contest
-from authentification.models import MainUser
 
 
 class ContestRegistrationForm(forms.Form):
@@ -10,7 +9,7 @@ class ContestRegistrationForm(forms.Form):
         super().__init__(*args, **kwargs)
         req_fields = contest.required_fields
         # list of available fields in user model
-        user_fields = fields_for_model(MainUser)
+        user_fields = fields_for_model(settings.AUTH_USER_MODEL)
         for field in req_fields:
             self.fields[field] = forms.CharField()
             if (user is not None) and field in user_fields:

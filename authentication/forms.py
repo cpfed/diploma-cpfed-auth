@@ -1,5 +1,5 @@
 from django import forms
-from authentification.models import UserActivation
+from .models import UserActivation
 
 
 class UserCreateForm(forms.ModelForm):

@@ -4,7 +4,6 @@ from django.conf import settings
 
 from .models import Contest, UserContest
 from .forms import ContestRegistrationForm
-from authentification.models import MainUser
 
 
 # Create your views here.
@@ -26,7 +25,7 @@ def contest_reg(request: HttpResponse, constest_id: int):
             form = ContestRegistrationForm(contest, request.user, request.POST)
             if form.is_valid():
                 # divide submitted data into remembered fields and contest-specific
-                mem_fields = {x.name for x in MainUser._meta.get_fields()}
+                mem_fields = {x.name for x in settings.AUTH_USER_MODEL._meta.get_fields()}
                 contest_data = dict()
                 for field, value in form.cleaned_data.items():
                     if field in mem_fields:
