@@ -16,29 +16,28 @@ def contest_reg(request: HttpResponse, constest_id: int):
         return redirect(settings.LOGIN_URL)
 
     error = None
-    form = None
     try:
         contest = Contest.objects.get(id=constest_id)
     except Contest.DoesNotExist:
-        error = _("Соревнование не найдено")
-    else:
-        form = ContestRegistrationForm(contest, request.user)
-        if request.method == 'POST':
-            form = ContestRegistrationForm(contest, request.user, request.POST)
-            if form.is_valid():
-                # divide submitted data into remembered fields and contest-specific
-                mem_fields = {x.name for x in get_user_model()._meta.get_fields()}
-                contest_data = dict()
-                for field, value in form.cleaned_data.items():
-                    if field in mem_fields:
-                        setattr(request.user, field, value)
-                    else:
-                        contest_data[field] = value
-                request.user.save()
-                user_reg = UserContest(user=request.user, contest=contest, additional_fields=contest_data)
-                user_reg.save()
-                return redirect(settings.AFTER_LOGIN_URL)
-            error = str(form.errors)
+        return render(request, 'result_message.html',
+                      {'message': _("Соревнование не найдено")})
+    form = ContestRegistrationForm(contest, request.user)
+    if request.method == 'POST':
+        form = ContestRegistrationForm(contest, request.user, request.POST)
+        if form.is_valid():
+            # divide submitted data into remembered fields and contest-specific
+            mem_fields = {x.name for x in get_user_model()._meta.get_fields()}
+            contest_data = dict()
+            for field, value in form.cleaned_data.items():
+                if field in mem_fields:
+                    setattr(request.user, field, value)
+                else:
+                    contest_data[field] = value
+            request.user.save()
+            user_reg = UserContest(user=request.user, contest=contest, additional_fields=contest_data)
+            user_reg.save()
+            return redirect(settings.AFTER_LOGIN_URL)
+        error = str(form.errors)
     return render(request, 'base_form.html', {
         'form': form,
         'error': error,

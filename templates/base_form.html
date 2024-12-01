@@ -12,15 +12,14 @@
                         {{ form_name }}
                     </p>
                 </div>
-                <form method="POST" class="space-y-4">
+                <form method="POST" class="space-y-4 text-gray-500" >
                     {% csrf_token %}
 
                     {% for fld in form %}
-                    <div class="form-group">
-                        {% for error in fld.errors %}<p class="help-block text-danger">{{ error }}</p>{% endfor %}
-                        <label class="text-gray-500">{{ fld.label }}</label>
-                        {% render_field fld class+="rounded-lg w-full" %}
-                        <p class="help-block">{{ fld.help_text|safe }}</p>
+                    <div {% if fld.errors %} class="text-red-500 border-red-500" {% endif %}>
+                        <label>{{ fld.label }}</label>
+                        {% render_field fld class+="rounded-lg w-full text-black border-inherit" %}
+                        {% for error in fld.errors %}<p class="text-xs">{{ error }}</p>{% endfor %}
                     </div>
                     {% endfor %}
 

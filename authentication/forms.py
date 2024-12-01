@@ -8,12 +8,9 @@ class UserCreateForm(forms.ModelForm):
         model = UserActivation
         fields = ('handle', 'email', 'password')
 
-class UserLoginForm(forms.ModelForm):
+class UserLoginForm(forms.Form):
+    handle = forms.CharField(label='Хэндл')
     password = forms.CharField(widget=forms.PasswordInput, label='Пароль')
-    class Meta:
-        model = MainUser
-        fields = ('handle', 'password')
-        labels = {'password': 'Пароль'}
 
 
 class UserPasswordRecoveryRequest(forms.Form):

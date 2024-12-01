@@ -16,4 +16,5 @@ class ContestRegistrationForm(forms.Form):
             self.fields[field] = forms.CharField()
             if (user is not None) and field in user_fields:
                 self.fields[field] = user_fields[field]
+                self.fields[field].required = True
                 self.initial[field] = getattr(user, field)

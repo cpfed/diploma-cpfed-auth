@@ -16,25 +16,29 @@ from .services.send_email import send_email
 # Create your views here.
 def password_recovery_request(request: HttpResponse):
     error = None
+    form = UserPasswordRecoveryRequest()
     if request.method == 'POST':
         form = UserPasswordRecoveryRequest(request.POST)
-        error = "Неверные данные"
         if form.is_valid():
             try:
                 user = MainUser.objects.get(**form.cleaned_data)
             except ObjectDoesNotExist:
-                error = "Нет пользователя с данной почтой"
+                form.add_error('email', 'Нет пользователя с данной почтой')
             else:
                 rec = PasswordRecovery(user=user)
                 rec.save()
-                send_email(email=user.email,
-                           link=request.build_absolute_uri("/passwordRecovery/" + str(rec.id)),
-                           subject="Восстановление пароля Cpfed",
-                           template_name="emails/recovery_password.html",
-                           username=user.handle)
+                try:
+                    send_email(email=user.email,
+                               link=request.build_absolute_uri("/passwordRecovery/" + str(rec.id)),
+                               subject="Восстановление пароля Cpfed",
+                               template_name="emails/recovery_password.html",
+                               username=user.handle)
+                except Exception as e:
+                    print("ERROR sending email", str(e))
                 return render(request, 'result_message.html',
                               {'message': 'Ссылка для восстановления пароля отправлена на почту.'})
-    return render(request, 'base_form.html', {'error': error, 'form': UserPasswordRecoveryRequest(), 'form_name': 'Восстановление пароля'})
+        error = str(form.errors)
+    return render(request, 'base_form.html', {'error': error, 'form': form, 'form_name': 'Восстановление пароля'})
 
 
 def password_recovery(request: HttpResponse, token: uuid):
@@ -51,6 +55,7 @@ def password_recovery(request: HttpResponse, token: uuid):
     if error is not None:
         return render(request, 'result_message.html', {'message': error})
 
+    form = UserPasswordRecovery()
     if request.method == 'POST':
         form = UserPasswordRecovery(request.POST)
         if form.is_valid():
@@ -60,5 +65,5 @@ def password_recovery(request: HttpResponse, token: uuid):
             rec.is_used = True
             rec.save()
             return render(request, 'result_message.html', {'message': _('Пароль успешно изменен!')})
-        error = "Неверные данные"
-    return render(request, 'base_form.html', {'error': error, 'form': UserPasswordRecovery(), 'form_name': _('Введите новый пароль')})
+        error = str(form.errors)
+    return render(request, 'base_form.html', {'error': error, 'form': form, 'form_name': _('Введите новый пароль')})

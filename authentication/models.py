@@ -12,7 +12,7 @@ from utils import constants
 from mixins.models import TimestampMixin
 from locations.models import Region
 
-handle_validator = RegexValidator(regex=re.compile(r'^[a-zA-z_0-9]+$'))
+handle_validator = RegexValidator(regex=re.compile(r'^[a-zA-z_0-9]+$'), message='Хэндл может состоять только из латинских букв, цифр и _')
 
 class MainUserManager(BaseUserManager):
     DELETE_FIELD = "is_deleted"
@@ -180,6 +180,7 @@ class PasswordRecovery(TimestampMixin):
     class Meta:
         verbose_name = _("Восстановление пароля")
         verbose_name_plural = _("Восстановление пароля")
+        ordering = ["-expiration_date"]
 
 
 class UserActivation(TimestampMixin):
@@ -217,14 +218,11 @@ class UserActivation(TimestampMixin):
         super().validate_unique(*args, **kwargs)
         if MainUser.objects.filter(handle=self.handle).exists() or \
                 UserActivation.objects.filter(handle=self.handle, expiration_date__gt=timezone.now()):
-            raise ValidationError(
-                _('Хэндл уже занят')
-            )
+            raise ValidationError({'handle': _('Хэндл уже занят') })
+
         if MainUser.objects.filter(email=self.email).exists() or \
                 UserActivation.objects.filter(email=self.email, expiration_date__gt=timezone.now()):
-            raise ValidationError(
-                _('Email уже занят')
-            )
+            raise ValidationError({'email': _('Email уже занят') })
 
     def __str__(self):
         return f"Ссылка {self.id} для {self.handle} {'еще активна' if self.is_still_valid else ('использована' if self.is_used else 'не была использована')}"
@@ -232,3 +230,4 @@ class UserActivation(TimestampMixin):
     class Meta:
         verbose_name = _("Активация аккаунта")
         verbose_name_plural = _("Активация аккаунта")
+        ordering = ["-expiration_date"]

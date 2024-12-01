@@ -15,6 +15,7 @@ from .services.send_email import send_email
 
 def user_new(request: HttpResponse):
     error = None
+    form = UserCreateForm()
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
         if form.is_valid():
@@ -36,7 +37,7 @@ def user_new(request: HttpResponse):
             return render(request, 'result_message.html',
                           {'message': 'На почту отправлено письмо для активации аккаунта'})
         error = str(form.errors)
-    return render(request, 'new_user.html', {'error': error, 'form': UserCreateForm(), 'form_name': 'Зарегистрироваться'})
+    return render(request, 'new_user.html', {'error': error, 'form': form, 'form_name': 'Зарегистрироваться'})
 
 
 def user_activate(request: HttpResponse, token: uuid):
@@ -64,15 +65,17 @@ def user_activate(request: HttpResponse, token: uuid):
 
 def user_login(request: HttpResponse):
     error = None
+    form = UserLoginForm()
     if request.method == 'POST':
+        form = UserLoginForm(request.POST)
         handle = request.POST['handle']
         password = request.POST['password']
         user = authenticate(request, handle=handle, password=password)
         if user is not None:
             login(request, user)
             return redirect(settings.AFTER_LOGIN_URL)
-        error = "Некорректный хэндл или пароль"
-    return render(request, 'login.html', {'error': error, 'form': UserLoginForm(), 'form_name': 'Войти в аккаунт'})
+        form.add_error('password', 'Некорректный хэндл или пароль')
+    return render(request, 'login.html', {'error': error, 'form': form, 'form_name': 'Войти в аккаунт'})
 
 
 def user_logout(request: HttpResponse):
