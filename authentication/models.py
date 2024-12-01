@@ -1,16 +1,18 @@
 import uuid
+import re
 
 from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser, BaseUserManager
 from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-from django.core.validators import ValidationError
+from django.core.validators import ValidationError, RegexValidator
 
 from utils import constants
 from mixins.models import TimestampMixin
 from locations.models import Region
 
+handle_validator = RegexValidator(regex=re.compile(r'^[a-zA-z_0-9]+$'))
 
 class MainUserManager(BaseUserManager):
     DELETE_FIELD = "is_deleted"
@@ -44,7 +46,8 @@ class MainUser(AbstractBaseUser, PermissionsMixin, TimestampMixin):
     handle = models.CharField(
         max_length=100,
         unique=True,
-        verbose_name=_("Хэндл")
+        verbose_name=_("Хэндл"),
+        validators=[handle_validator]
     )
     email = models.EmailField(
         max_length=100,
@@ -187,7 +190,8 @@ class UserActivation(TimestampMixin):
     )
     handle = models.CharField(
         max_length=100,
-        verbose_name=_("Хэндл")
+        verbose_name=_("Хэндл"),
+        validators=[handle_validator]
     )
     email = models.EmailField(
         max_length=100,
