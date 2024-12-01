@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-01 18:55+0500\n"
+"POT-Creation-Date: 2024-12-01 19:33+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -147,6 +147,14 @@ msgstr "Password changed successfully!"
 #: .\authentication\views\password_recovery.py:66
 msgid "Введите новый пароль"
 msgstr "Enter new password"
+
+#: .\authentication\views\user_management.py:38
+msgid "На почту отправлено письмо для активации аккаунта"
+msgstr "Email has been sent to activate your account."
+
+#: .\authentication\views\user_management.py:40
+msgid "Зарегистрироваться"
+msgstr "Registration"
 
 #: .\authentication\views\user_management.py:49
 msgid "Время жизни токена истекло"

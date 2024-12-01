@@ -35,9 +35,9 @@ def user_new(request: HttpResponse):
             except Exception as e:
                 print("ERROR sending email: ", str(e))
             return render(request, 'result_message.html',
-                          {'message': 'На почту отправлено письмо для активации аккаунта'})
+                          {'message': _('На почту отправлено письмо для активации аккаунта')})
         error = str(form.errors)
-    return render(request, 'new_user.html', {'error': error, 'form': form, 'form_name': 'Зарегистрироваться'})
+    return render(request, 'new_user.html', {'error': error, 'form': form, 'form_name': _('Зарегистрироваться')})
 
 
 def user_activate(request: HttpResponse, token: uuid):

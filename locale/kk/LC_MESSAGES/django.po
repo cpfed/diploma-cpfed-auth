@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-01 18:51+0500\n"
+"POT-Creation-Date: 2024-12-01 19:33+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,11 +84,11 @@ msgstr "Есептік жазбаңыз белсенді ме?"
 
 #: .\authentication\models.py:133 .\authentication\models.py:163
 msgid "Пользователь"
-msgstr ""
+msgstr "Пайдаланушы"
 
 #: .\authentication\models.py:134
 msgid "Пользователи"
-msgstr "Пайдаланушы"
+msgstr "Пайдаланушылар"
 
 #: .\authentication\models.py:167 .\authentication\models.py:208
 msgid "Ссылка использована?"
@@ -121,11 +121,14 @@ msgstr "Тіркелгіні белсендіру"
 
 #: .\authentication\views\password_recovery.py:26
 msgid "Указанный для восстановления пароля email не найден"
-msgstr "Құпиясөзді қалпына келтіру үшін көрсетілген электрондық пошта мекенжайы табылмады"
+msgstr ""
+"Құпиясөзді қалпына келтіру үшін көрсетілген электрондық пошта мекенжайы "
+"табылмады"
 
 #: .\authentication\views\password_recovery.py:39
 msgid "Ссылка для восстановления пароля отправлена на почту."
-msgstr "Құпиясөзді қалпына келтіру сілтемесі электрондық пошта арқылы жіберілді."
+msgstr ""
+"Құпиясөзді қалпына келтіру сілтемесі электрондық пошта арқылы жіберілді."
 
 #: .\authentication\views\password_recovery.py:48
 #: .\authentication\views\user_management.py:47
@@ -147,6 +150,14 @@ msgstr "Құпиясөз сәтті өзгертілді!"
 #: .\authentication\views\password_recovery.py:66
 msgid "Введите новый пароль"
 msgstr "Жаңа құпиясөзді енгізіңіз"
+
+#: .\authentication\views\user_management.py:38
+msgid "На почту отправлено письмо для активации аккаунта"
+msgstr "Есептік жазбаңызды белсендіру үшін электрондық хат жіберілді."
+
+#: .\authentication\views\user_management.py:40
+msgid "Зарегистрироваться"
+msgstr "Тіркелу"
 
 #: .\authentication\views\user_management.py:49
 msgid "Время жизни токена истекло"
