@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, response
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
 
 from authentication.forms import UserCreateForm, UserPasswordRecovery, UserLoginForm
 from authentication.models import UserActivation, MainUser
@@ -74,8 +74,8 @@ def user_login(request: HttpResponse):
         if user is not None:
             login(request, user)
             return redirect(settings.AFTER_LOGIN_URL)
-        form.add_error('password', 'Некорректный хэндл или пароль')
-    return render(request, 'login.html', {'error': error, 'form': form, 'form_name': 'Войти в аккаунт'})
+        form.add_error('password', _('Некорректный хэндл или пароль'))
+    return render(request, 'login.html', {'error': error, 'form': form, 'form_name': _('Войти в аккаунт')})
 
 
 def user_logout(request: HttpResponse):

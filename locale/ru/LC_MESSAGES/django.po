@@ -1,0 +1,192 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-01 16:35+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\authentication\models.py:49 .\authentication\models.py:194
+msgid "Хэндл"
+msgstr ""
+
+#: .\authentication\models.py:55 .\authentication\models.py:199
+msgid "Электронная почта"
+msgstr ""
+
+#: .\authentication\models.py:61
+msgid "Имя"
+msgstr ""
+
+#: .\authentication\models.py:67
+msgid "Фамилия"
+msgstr ""
+
+#: .\authentication\models.py:74
+msgid "Телефонный номер"
+msgstr ""
+
+#: .\authentication\models.py:81
+msgid "Пол"
+msgstr ""
+
+#: .\authentication\models.py:88
+msgid "ИИН"
+msgstr ""
+
+#: .\authentication\models.py:95
+msgid "Размер футболки"
+msgstr ""
+
+#: .\authentication\models.py:102
+msgid "Статус занятости"
+msgstr ""
+
+#: .\authentication\models.py:108
+msgid "Место учебы или работы"
+msgstr ""
+
+#: .\authentication\models.py:115 .\locations\models.py:14
+msgid "Регион"
+msgstr ""
+
+#: .\authentication\models.py:118
+msgid "Гражданин РК?"
+msgstr ""
+
+#: .\authentication\models.py:122
+msgid "Админ?"
+msgstr ""
+
+#: .\authentication\models.py:123
+msgid "Модератор?"
+msgstr ""
+
+#: .\authentication\models.py:124
+msgid "Аккаунт удален?"
+msgstr ""
+
+#: .\authentication\models.py:125
+msgid "Аккаунт активен?"
+msgstr ""
+
+#: .\authentication\models.py:133 .\authentication\models.py:163
+msgid "Пользователь"
+msgstr ""
+
+#: .\authentication\models.py:134
+msgid "Пользователи"
+msgstr ""
+
+#: .\authentication\models.py:167 .\authentication\models.py:207
+msgid "Ссылка использована?"
+msgstr ""
+
+#: .\authentication\models.py:181 .\authentication\models.py:182
+msgid "Восстановление пароля"
+msgstr ""
+
+#: .\authentication\models.py:203
+msgid "Пароль"
+msgstr ""
+
+#: .\authentication\models.py:221
+msgid "Хэндл уже занят"
+msgstr ""
+
+#: .\authentication\models.py:225
+msgid "Email уже занят"
+msgstr ""
+
+#: .\authentication\models.py:231 .\authentication\models.py:232
+msgid "Активация аккаунта"
+msgstr ""
+
+#: .\authentication\views\password_recovery.py:49
+#: .\authentication\views\user_management.py:48
+msgid "Запрашиваемая страница не существует"
+msgstr ""
+
+#: .\authentication\views\password_recovery.py:52
+#: .\authentication\views\user_management.py:51
+msgid "Токен уже использован"
+msgstr ""
+
+#: .\authentication\views\password_recovery.py:54
+#: .\authentication\views\user_management.py:53
+msgid "Время жизни токена истекло"
+msgstr ""
+
+#: .\authentication\views\password_recovery.py:67
+msgid "Пароль успешно изменен!"
+msgstr ""
+
+#: .\authentication\views\password_recovery.py:69
+msgid "Введите новый пароль"
+msgstr ""
+
+#: .\authentication\views\user_management.py:77
+msgid "Некорректный хэндл или пароль"
+msgstr ""
+
+#: .\authentication\views\user_management.py:78
+msgid "Войти в аккаунт"
+msgstr ""
+
+#: .\contest\models.py:13
+msgid "Название контеста"
+msgstr ""
+
+#: .\contest\models.py:33
+msgid "Контест"
+msgstr ""
+
+#: .\contest\models.py:34
+msgid "Контесты"
+msgstr ""
+
+#: .\contest\models.py:49
+msgid "ID пользователя"
+msgstr ""
+
+#: .\contest\models.py:54
+msgid "ID контеста"
+msgstr ""
+
+#: .\contest\models.py:61 .\contest\models.py:62
+msgid "Данные пользователей к контестам"
+msgstr ""
+
+#: .\contest\views.py:23
+msgid "Соревнование не найдено"
+msgstr ""
+
+#: .\locations\models.py:10
+msgid "Название региона"
+msgstr ""
+
+#: .\locations\models.py:15
+msgid "Регионы"
+msgstr ""
+
+#: .\mixins\models.py:9
+msgid "Время создания"
+msgstr ""
+
+#: .\mixins\models.py:11
+msgid "Время последнего изменения"
+msgstr ""

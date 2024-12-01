@@ -31,6 +31,18 @@
         </div>
     </div>
 </header>
+
+<form action="{% url 'set_language' %}" method="post">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}"/>
+    <select name="language">
+        <option value="en">English</option>
+        <option value="kk">Қазақ</option>
+        <option value="ru">Русский</option>
+    </select>
+    <input type="submit" value="Change Language">
+</form>
+
 <div>
     {% if error %}
     <p>{{error}}</p>
