@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-01 19:33+0500\n"
+"POT-Creation-Date: 2024-12-02 01:09+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -179,7 +179,7 @@ msgstr "Сайыстың аты"
 msgid "Контест"
 msgstr "Сайыс"
 
-#: .\contest\models.py:34 .\templates\base.html:21
+#: .\contest\models.py:34 .\templates\base.html:22
 msgid "Контесты"
 msgstr "Сайыстар"
 
@@ -215,39 +215,39 @@ msgstr ""
 msgid "Время последнего изменения"
 msgstr ""
 
-#: .\templates\base.html:20 .\templates\base.html:58
+#: .\templates\base.html:21 .\templates\base.html:57
 msgid "О нас"
 msgstr "Біз туралы"
 
-#: .\templates\base.html:22 .\templates\base.html:61
+#: .\templates\base.html:23 .\templates\base.html:58
 msgid "Контакты"
 msgstr "Контактілер"
 
-#: .\templates\base.html:26
+#: .\templates\base.html:27
 msgid "Привет"
 msgstr "Сәлем"
 
-#: .\templates\base.html:27
+#: .\templates\base.html:28
 msgid "Выйти"
 msgstr "Шығу"
 
-#: .\templates\base.html:29
+#: .\templates\base.html:30
 msgid "Войти"
 msgstr "Кіру"
 
-#: .\templates\base.html:30
+#: .\templates\base.html:32 .\templates\main_page.html:26
 msgid "Регистрация"
 msgstr "Тіркеу"
 
-#: .\templates\base.html:55
+#: .\templates\base.html:56
 msgid "Главная"
 msgstr "Негізгі бет"
 
-#: .\templates\base.html:64
+#: .\templates\base.html:59
 msgid "Помощь"
 msgstr "Көмек"
 
-#: .\templates\base.html:70
+#: .\templates\base.html:63
 msgid "Все права защищены."
 msgstr "Барлық құқықтар қорғалған."
 
@@ -258,3 +258,69 @@ msgstr "Жіберу"
 #: .\templates\login.html:6 .\templates\new_user.html:6
 msgid "Забыли пароль?"
 msgstr "Құпия сөзіңізді ұмыттыңыз ба?"
+
+#: .\templates\main_page.html:14
+msgid "Чемпионаты и турниры — время побеждать и удивлять!"
+msgstr ""
+
+#: .\templates\main_page.html:17
+msgid ""
+"Тебя ждут захватывающие турниры, где ты можешь проявить свои спортивные "
+"навыки. Прими участие в чемпионатах, узнай расписание и зарегистрируйся, "
+"чтобы не упустить шанс стать лучшим!"
+msgstr ""
+
+#: .\templates\main_page.html:21 .\templates\main_page.html:70
+msgid "Узнать больше"
+msgstr ""
+
+#: .\templates\main_page.html:35
+msgid "Что нужно знать о чемпионате CPFED?"
+msgstr ""
+
+#: .\templates\main_page.html:36
+msgid "Федерация спортивного программирования Казахстана CPFED"
+msgstr ""
+
+#: .\templates\main_page.html:38
+msgid ""
+"Наша основная цель - развивать человеческий потенциал нашей страны и всего "
+"мира через спортивное программирование. На данном сайте вы можете "
+"зарегистрироваться на все наши соревнования и стать частью сообщества "
+"спортивного программирования в Казахстане."
+msgstr ""
+
+#: .\templates\main_page.html:43
+msgid "Чемпионаты и конкурсы"
+msgstr ""
+
+#: .\templates\main_page.html:53
+msgid "Дата"
+msgstr ""
+
+#: .\templates\main_page.html:54
+msgid "Время"
+msgstr ""
+
+#: .\templates\main_page.html:59
+#, fuzzy
+#| msgid "Зарегистрироваться"
+msgid "Вы уже зарегистрированы"
+msgstr "Тіркелу"
+
+#: .\templates\main_page.html:64
+#, fuzzy
+#| msgid "Зарегистрироваться"
+msgid "Зарегистрироваться на контест"
+msgstr "Тіркелу"
+
+#: .\templates\main_page.html:78
+msgid "осталось"
+msgstr ""
+
+#: .\templates\main_page.html:79
+#, python-format
+msgid "%(days)s день"
+msgid_plural "%(days)s дней"
+msgstr[0] ""
+msgstr[1] ""

@@ -75,15 +75,5 @@ def user_login(request: HttpResponse):
 
 
 def user_logout(request: HttpResponse):
-    # remember current language as logout function drop it
-    language = None
-    if hasattr(request, 'session'):
-        if 'django_language' in request.session:
-            language = request.session['django_language']
-
     logout(request)
-
-    # restore language
-    if language:
-        request.session['django_language'] = language
     return redirect(settings.LOGOUT_REDIRECT_URL)
