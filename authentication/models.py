@@ -168,6 +168,7 @@ class PasswordRecovery(TimestampMixin):
     )
     expiration_date = models.DateTimeField(
         default=_password_default_exp_date,
+        verbose_name=_('Срок годности')
     )
 
     @property
@@ -208,6 +209,7 @@ class UserActivation(TimestampMixin):
     )
     expiration_date = models.DateTimeField(
         default=_password_default_exp_date,
+        verbose_name=_('Срок годности')
     )
 
     @property

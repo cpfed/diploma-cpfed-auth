@@ -1,7 +1,9 @@
 {% load static tailwind_tags %}
+{% load i18n %}
 
 <!DOCTYPE html>
-<html lang="en">
+{% get_current_language as LANGUAGE_CODE %}
+<html lang={{LANGUAGE_CODE}}>
 <head>
     <meta charset="UTF-8">
     <title>Cpfed</title>
@@ -15,33 +17,22 @@
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl text-l text-gray-500">
             <div class="flex space-x-6">
                 <img src="logo"/>
-                <a href="#" class="hover:underline">О нас</a>
-                <a href="#" class="hover:underline">Конкурсы</a>
-                <a href="#" class="hover:underline">Контакты</a>
+                <a href="#" class="hover:underline">{% translate "О нас" %}</a>
+                <a href="#" class="hover:underline">{% translate "Контесты" %}</a>
+                <a href="#" class="hover:underline">{% translate "Контакты" %}</a>
             </div>
             <div class="flex items-center space-x-4 font-semibold">
                 {% if user.id is not None %}
-                <p>Hello, {{ user.handle }}!</p>
-                <a href="/logout">Log out</a>
+                <p>{% translate "Привет" %}, {{ user.handle }}!</p>
+                <a href="/logout">{% translate "Выйти" %}</a>
                 {% else %}
-                <div class="text-blue-600"><a href="/login">Войти</a></div>
-                <div class="bg-blue-600 p-2 text-gray-100 rounded-lg"><a href="/register">Регистрация</a></div>
+                <div class="text-blue-600"><a href="{%url 'login' %}">{% translate "Войти" %}</a></div>
+                <div class="bg-blue-600 p-2 text-gray-100 rounded-lg"><a href="{%url 'register' %}">{% translate "Регистрация" %}</a></div>
                 {% endif %}
             </div>
         </div>
     </div>
 </header>
-
-<form action="{% url 'set_language' %}" method="post">
-    {% csrf_token %}
-    <input name="next" type="hidden" value="{{ redirect_to }}"/>
-    <select name="language">
-        <option value="en">English</option>
-        <option value="kk">Қазақ</option>
-        <option value="ru">Русский</option>
-    </select>
-    <input type="submit" value="Change Language">
-</form>
 
 <div>
     {% if error %}
@@ -61,27 +52,25 @@
             <div>
                 <ul class="flex flex-wrap items-center mb-6 text-xl font-medium">
                     <li>
-                        <a href="/" class="hover:underline me-4 md:me-6">Главная</a>
+                        <a href="{%url 'main_page' %}" class="hover:underline me-4 md:me-6">{% translate "Главная" %}</a>
                     </li>
                     <li>
-                        <a href="#" class="hover:underline me-4 md:me-6">О нас</a>
+                        <a href="#" class="hover:underline me-4 md:me-6">{% translate "О нас" %}</a>
                     </li>
                     <li>
-                        <a href="#" class="hover:underline me-4 md:me-6">Контакты</a>
+                        <a href="#" class="hover:underline me-4 md:me-6">{% translate "Контакты" %}</a>
                     </li>
                     <li>
-                        <a href="#" class="hover:underline">Помощь</a>
+                        <a href="#" class="hover:underline">{% translate "Помощь" %}</a>
                     </li>
                 </ul>
             </div>
         </div>
         <hr class="my-3 border-gray-200"/>
-        <span class="block text-sm sm:text-center mb-8 ">cpfed 2024 © Все права защищены.</span>
+        <span class="block text-sm sm:text-center mb-8 ">cpfed 2024 © {% translate "Все права защищены." %}</span>
     </div>
 </footer>
 
-
 </body>
-
 
 </html>

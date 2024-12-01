@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, response
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.forms.models import fields_for_model
+from django.utils.translation import gettext_lazy as _
 
 from .models import Contest, UserContest
 from .forms import ContestRegistrationForm
@@ -11,16 +12,12 @@ from .forms import ContestRegistrationForm
 # Create your views here.
 
 
-def contest_reg(request: HttpResponse, constest_id: int):
+def contest_reg(request: HttpResponse, contest_id: int):
     if not request.user.is_authenticated:
         return redirect(settings.LOGIN_URL)
 
     error = None
-    try:
-        contest = Contest.objects.get(id=constest_id)
-    except Contest.DoesNotExist:
-        return render(request, 'result_message.html',
-                      {'message': _("Соревнование не найдено")})
+    contest = get_object_or_404(Contest, id=contest_id)
     form = ContestRegistrationForm(contest, request.user)
     if request.method == 'POST':
         form = ContestRegistrationForm(contest, request.user, request.POST)
@@ -41,8 +38,7 @@ def contest_reg(request: HttpResponse, constest_id: int):
     return render(request, 'base_form.html', {
         'form': form,
         'error': error,
-        'form_name': 'Регистрация на ' + contest.name,
-        'page_name': 'Contest Registration'
+        'form_name': _('Регистрация на ') + contest.name,
     })
 
 

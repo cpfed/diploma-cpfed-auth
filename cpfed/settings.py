@@ -135,7 +135,7 @@ AUTH_USER_MODEL = "authentication.MainUser"
 
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'UTC+5'
+TIME_ZONE = 'Asia/Almaty'
 
 USE_I18N = True
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
@@ -157,8 +157,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = '/login/'
-AFTER_LOGIN_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
+AFTER_LOGIN_URL = 'main_page'
+LOGOUT_REDIRECT_URL = 'main_page'
 
 TAILWIND_APP_NAME = 'theme'

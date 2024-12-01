@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-01 16:35+0500\n"
+"POT-Creation-Date: 2024-12-01 18:51+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,11 +20,11 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: .\authentication\models.py:49 .\authentication\models.py:194
+#: .\authentication\models.py:49 .\authentication\models.py:195
 msgid "Хэндл"
 msgstr ""
 
-#: .\authentication\models.py:55 .\authentication\models.py:199
+#: .\authentication\models.py:55 .\authentication\models.py:200
 msgid "Электронная почта"
 msgstr ""
 
@@ -92,58 +92,71 @@ msgstr ""
 msgid "Пользователи"
 msgstr ""
 
-#: .\authentication\models.py:167 .\authentication\models.py:207
+#: .\authentication\models.py:167 .\authentication\models.py:208
 msgid "Ссылка использована?"
 msgstr ""
 
-#: .\authentication\models.py:181 .\authentication\models.py:182
+#: .\authentication\models.py:171 .\authentication\models.py:212
+msgid "Срок годности"
+msgstr ""
+
+#: .\authentication\models.py:182 .\authentication\models.py:183
+#: .\authentication\views\password_recovery.py:41
 msgid "Восстановление пароля"
 msgstr ""
 
-#: .\authentication\models.py:203
+#: .\authentication\models.py:204
 msgid "Пароль"
 msgstr ""
 
-#: .\authentication\models.py:221
+#: .\authentication\models.py:223
 msgid "Хэндл уже занят"
 msgstr ""
 
-#: .\authentication\models.py:225
+#: .\authentication\models.py:227
 msgid "Email уже занят"
 msgstr ""
 
-#: .\authentication\models.py:231 .\authentication\models.py:232
+#: .\authentication\models.py:233 .\authentication\models.py:234
 msgid "Активация аккаунта"
 msgstr ""
 
-#: .\authentication\views\password_recovery.py:49
-#: .\authentication\views\user_management.py:48
-msgid "Запрашиваемая страница не существует"
+#: .\authentication\views\password_recovery.py:26
+msgid "Указанный для восстановления пароля email не найден"
 msgstr ""
 
-#: .\authentication\views\password_recovery.py:52
-#: .\authentication\views\user_management.py:51
+#: .\authentication\views\password_recovery.py:39
+msgid "Ссылка для восстановления пароля отправлена на почту."
+msgstr ""
+
+#: .\authentication\views\password_recovery.py:48
+#: .\authentication\views\user_management.py:47
 msgid "Токен уже использован"
 msgstr ""
 
-#: .\authentication\views\password_recovery.py:54
-#: .\authentication\views\user_management.py:53
-msgid "Время жизни токена истекло"
+#: .\authentication\views\password_recovery.py:51
+msgid ""
+"Выбранная ссылка для восстановления уже устарела. Повторно укажите свой "
+"адрес электронной почты, чтобы получить новую ссылку для восстановления."
 msgstr ""
 
-#: .\authentication\views\password_recovery.py:67
+#: .\authentication\views\password_recovery.py:64
 msgid "Пароль успешно изменен!"
 msgstr ""
 
-#: .\authentication\views\password_recovery.py:69
+#: .\authentication\views\password_recovery.py:66
 msgid "Введите новый пароль"
 msgstr ""
 
-#: .\authentication\views\user_management.py:77
+#: .\authentication\views\user_management.py:49
+msgid "Время жизни токена истекло"
+msgstr ""
+
+#: .\authentication\views\user_management.py:73
 msgid "Некорректный хэндл или пароль"
 msgstr ""
 
-#: .\authentication\views\user_management.py:78
+#: .\authentication\views\user_management.py:74
 msgid "Войти в аккаунт"
 msgstr ""
 
@@ -155,7 +168,7 @@ msgstr ""
 msgid "Контест"
 msgstr ""
 
-#: .\contest\models.py:34
+#: .\contest\models.py:34 .\templates\base.html:21
 msgid "Контесты"
 msgstr ""
 
@@ -171,8 +184,8 @@ msgstr ""
 msgid "Данные пользователей к контестам"
 msgstr ""
 
-#: .\contest\views.py:23
-msgid "Соревнование не найдено"
+#: .\contest\views.py:41
+msgid "Регистрация на "
 msgstr ""
 
 #: .\locations\models.py:10
@@ -189,4 +202,48 @@ msgstr ""
 
 #: .\mixins\models.py:11
 msgid "Время последнего изменения"
+msgstr ""
+
+#: .\templates\base.html:20 .\templates\base.html:58
+msgid "О нас"
+msgstr ""
+
+#: .\templates\base.html:22 .\templates\base.html:61
+msgid "Контакты"
+msgstr ""
+
+#: .\templates\base.html:26
+msgid "Привет"
+msgstr ""
+
+#: .\templates\base.html:27
+msgid "Выйти"
+msgstr ""
+
+#: .\templates\base.html:29
+msgid "Войти"
+msgstr ""
+
+#: .\templates\base.html:30
+msgid "Регистрация"
+msgstr ""
+
+#: .\templates\base.html:55
+msgid "Главная"
+msgstr ""
+
+#: .\templates\base.html:64
+msgid "Помощь"
+msgstr ""
+
+#: .\templates\base.html:70
+msgid "Все права защищены."
+msgstr ""
+
+#: .\templates\base_form.html:32
+msgid "Отправить"
+msgstr ""
+
+#: .\templates\login.html:6 .\templates\new_user.html:6
+msgid "Забыли пароль?"
 msgstr ""

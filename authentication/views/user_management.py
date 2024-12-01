@@ -1,10 +1,10 @@
 import uuid
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, response
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 from authentication.forms import UserCreateForm, UserPasswordRecovery, UserLoginForm
 from authentication.models import UserActivation, MainUser
@@ -42,15 +42,11 @@ def user_new(request: HttpResponse):
 
 def user_activate(request: HttpResponse, token: uuid):
     error = None
-    try:
-        user_act = UserActivation.objects.get(id=token)
-    except ObjectDoesNotExist:
-        error = _("Запрашиваемая страница не существует")
-    else:
-        if user_act.is_used:
-            error = _("Токен уже использован")
-        elif not user_act.is_still_valid:
-            error = _("Время жизни токена истекло")
+    user_act = get_object_or_404(UserActivation, id=token)
+    if user_act.is_used:
+        error = _("Токен уже использован")
+    elif not user_act.is_still_valid:
+        error = _("Время жизни токена истекло")
     if error is None:
         user = MainUser(handle=user_act.handle, email=user_act.email, password=user_act.password)
         user.save()
@@ -79,5 +75,15 @@ def user_login(request: HttpResponse):
 
 
 def user_logout(request: HttpResponse):
+    # remember current language as logout function drop it
+    language = None
+    if hasattr(request, 'session'):
+        if 'django_language' in request.session:
+            language = request.session['django_language']
+
     logout(request)
+
+    # restore language
+    if language:
+        request.session['django_language'] = language
     return redirect(settings.LOGOUT_REDIRECT_URL)

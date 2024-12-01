@@ -1,6 +1,6 @@
 import uuid
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, response
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
@@ -23,7 +23,7 @@ def password_recovery_request(request: HttpResponse):
             try:
                 user = MainUser.objects.get(**form.cleaned_data)
             except ObjectDoesNotExist:
-                form.add_error('email', 'Нет пользователя с данной почтой')
+                form.add_error('email', _('Указанный для восстановления пароля email не найден'))
             else:
                 rec = PasswordRecovery(user=user)
                 rec.save()
@@ -36,22 +36,19 @@ def password_recovery_request(request: HttpResponse):
                 except Exception as e:
                     print("ERROR sending email", str(e))
                 return render(request, 'result_message.html',
-                              {'message': 'Ссылка для восстановления пароля отправлена на почту.'})
+                              {'message': _('Ссылка для восстановления пароля отправлена на почту.')})
         error = str(form.errors)
-    return render(request, 'base_form.html', {'error': error, 'form': form, 'form_name': 'Восстановление пароля'})
+    return render(request, 'base_form.html', {'error': error, 'form': form, 'form_name': _('Восстановление пароля')})
 
 
 def password_recovery(request: HttpResponse, token: uuid):
     error = None
-    try:
-        rec = PasswordRecovery.objects.get(id=token)
-    except ObjectDoesNotExist:
-        error = _("Запрашиваемая страница не существует")
-    else:
-        if rec.is_used:
-            error = _("Токен уже использован")
-        elif not rec.is_still_valid:
-            error = _("Время жизни токена истекло")
+    rec = get_object_or_404(PasswordRecovery, id=token)
+    if rec.is_used:
+        error = _("Токен уже использован")
+    elif not rec.is_still_valid:
+        error = _(
+            """Выбранная ссылка для восстановления уже устарела. Повторно укажите свой адрес электронной почты, чтобы получить новую ссылку для восстановления.""")
     if error is not None:
         return render(request, 'result_message.html', {'message': error})
 

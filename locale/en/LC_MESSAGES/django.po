@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-01 16:35+0500\n"
+"POT-Creation-Date: 2024-12-01 18:55+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\authentication\models.py:49 .\authentication\models.py:194
+#: .\authentication\models.py:49 .\authentication\models.py:195
 msgid "Хэндл"
 msgstr "Handle"
 
-#: .\authentication\models.py:55 .\authentication\models.py:199
+#: .\authentication\models.py:55 .\authentication\models.py:200
 msgid "Электронная почта"
 msgstr "Email"
 
@@ -40,7 +40,7 @@ msgstr "Phone number"
 
 #: .\authentication\models.py:81
 msgid "Пол"
-msgstr ""
+msgstr "Gender"
 
 #: .\authentication\models.py:88
 msgid "ИИН"
@@ -48,143 +48,202 @@ msgstr "UIN"
 
 #: .\authentication\models.py:95
 msgid "Размер футболки"
-msgstr ""
+msgstr "T-shirt size"
 
 #: .\authentication\models.py:102
 msgid "Статус занятости"
-msgstr ""
+msgstr "Employment status"
 
 #: .\authentication\models.py:108
 msgid "Место учебы или работы"
-msgstr ""
+msgstr "Place of study or work"
 
 #: .\authentication\models.py:115 .\locations\models.py:14
 msgid "Регион"
-msgstr ""
+msgstr "Place of study or work"
 
 #: .\authentication\models.py:118
 msgid "Гражданин РК?"
-msgstr ""
+msgstr "Citizen of the Republic of Kazakhstan?"
 
 #: .\authentication\models.py:122
 msgid "Админ?"
-msgstr ""
+msgstr "Admin?"
 
 #: .\authentication\models.py:123
 msgid "Модератор?"
-msgstr ""
+msgstr "Moderator?"
 
 #: .\authentication\models.py:124
 msgid "Аккаунт удален?"
-msgstr ""
+msgstr "Account deleted?"
 
 #: .\authentication\models.py:125
 msgid "Аккаунт активен?"
-msgstr ""
+msgstr "Account active?"
 
 #: .\authentication\models.py:133 .\authentication\models.py:163
 msgid "Пользователь"
-msgstr ""
+msgstr "User"
 
 #: .\authentication\models.py:134
 msgid "Пользователи"
-msgstr ""
+msgstr "Users"
 
-#: .\authentication\models.py:167 .\authentication\models.py:207
+#: .\authentication\models.py:167 .\authentication\models.py:208
 msgid "Ссылка использована?"
-msgstr ""
+msgstr "Link used?"
 
-#: .\authentication\models.py:181 .\authentication\models.py:182
+#: .\authentication\models.py:171 .\authentication\models.py:212
+msgid "Срок годности"
+msgstr "Expiration date"
+
+#: .\authentication\models.py:182 .\authentication\models.py:183
+#: .\authentication\views\password_recovery.py:41
 msgid "Восстановление пароля"
-msgstr ""
+msgstr "Password recovery"
 
-#: .\authentication\models.py:203
+#: .\authentication\models.py:204
 msgid "Пароль"
-msgstr ""
+msgstr "Password"
 
-#: .\authentication\models.py:221
+#: .\authentication\models.py:223
 msgid "Хэндл уже занят"
-msgstr ""
+msgstr "The handle is already taken"
 
-#: .\authentication\models.py:225
+#: .\authentication\models.py:227
 msgid "Email уже занят"
-msgstr ""
+msgstr "The email is already taken"
 
-#: .\authentication\models.py:231 .\authentication\models.py:232
+#: .\authentication\models.py:233 .\authentication\models.py:234
 msgid "Активация аккаунта"
-msgstr ""
+msgstr "Account activation"
 
-#: .\authentication\views\password_recovery.py:49
-#: .\authentication\views\user_management.py:48
-msgid "Запрашиваемая страница не существует"
-msgstr ""
+#: .\authentication\views\password_recovery.py:26
+msgid "Указанный для восстановления пароля email не найден"
+msgstr "The email specified for password recovery was not found"
 
-#: .\authentication\views\password_recovery.py:52
-#: .\authentication\views\user_management.py:51
+#: .\authentication\views\password_recovery.py:39
+msgid "Ссылка для восстановления пароля отправлена на почту."
+msgstr "A link to reset your password has been sent to your email."
+
+#: .\authentication\views\password_recovery.py:48
+#: .\authentication\views\user_management.py:47
 msgid "Токен уже использован"
-msgstr ""
+msgstr "Token already used"
 
-#: .\authentication\views\password_recovery.py:54
-#: .\authentication\views\user_management.py:53
-msgid "Время жизни токена истекло"
+#: .\authentication\views\password_recovery.py:51
+msgid ""
+"Выбранная ссылка для восстановления уже устарела. Повторно укажите свой "
+"адрес электронной почты, чтобы получить новую ссылку для восстановления."
 msgstr ""
+"The recovery link you selected has expired. Please re-enter your email "
+"address to receive a new recovery link."
 
-#: .\authentication\views\password_recovery.py:67
+#: .\authentication\views\password_recovery.py:64
 msgid "Пароль успешно изменен!"
-msgstr ""
+msgstr "Password changed successfully!"
 
-#: .\authentication\views\password_recovery.py:69
+#: .\authentication\views\password_recovery.py:66
 msgid "Введите новый пароль"
-msgstr ""
+msgstr "Enter new password"
 
-#: .\authentication\views\user_management.py:77
+#: .\authentication\views\user_management.py:49
+msgid "Время жизни токена истекло"
+msgstr "Token expired"
+
+#: .\authentication\views\user_management.py:73
 msgid "Некорректный хэндл или пароль"
 msgstr "Incorrect handle or password"
 
-#: .\authentication\views\user_management.py:78
+#: .\authentication\views\user_management.py:74
 msgid "Войти в аккаунт"
 msgstr "Login"
 
 #: .\contest\models.py:13
 msgid "Название контеста"
-msgstr ""
+msgstr "Name of the contest"
 
 #: .\contest\models.py:33
 msgid "Контест"
-msgstr ""
+msgstr "Contest"
 
-#: .\contest\models.py:34
+#: .\contest\models.py:34 .\templates\base.html:21
 msgid "Контесты"
-msgstr ""
+msgstr "Contests"
 
 #: .\contest\models.py:49
 msgid "ID пользователя"
-msgstr ""
+msgstr "User ID"
 
 #: .\contest\models.py:54
 msgid "ID контеста"
-msgstr ""
+msgstr "Contest ID"
 
 #: .\contest\models.py:61 .\contest\models.py:62
 msgid "Данные пользователей к контестам"
-msgstr ""
+msgstr "User data for contests"
 
-#: .\contest\views.py:23
-msgid "Соревнование не найдено"
-msgstr ""
+#: .\contest\views.py:41
+msgid "Регистрация на "
+msgstr "Registration on "
 
 #: .\locations\models.py:10
 msgid "Название региона"
-msgstr ""
+msgstr "Region name"
 
 #: .\locations\models.py:15
 msgid "Регионы"
-msgstr ""
+msgstr "Regions"
 
 #: .\mixins\models.py:9
 msgid "Время создания"
-msgstr ""
+msgstr "Creation time"
 
 #: .\mixins\models.py:11
 msgid "Время последнего изменения"
-msgstr ""
+msgstr "Last modified time"
+
+#: .\templates\base.html:20 .\templates\base.html:58
+msgid "О нас"
+msgstr "About us"
+
+#: .\templates\base.html:22 .\templates\base.html:61
+msgid "Контакты"
+msgstr "Contacts"
+
+#: .\templates\base.html:26
+msgid "Привет"
+msgstr "Hello"
+
+#: .\templates\base.html:27
+msgid "Выйти"
+msgstr "Logout"
+
+#: .\templates\base.html:29
+msgid "Войти"
+msgstr "Enter"
+
+#: .\templates\base.html:30
+msgid "Регистрация"
+msgstr "Registration"
+
+#: .\templates\base.html:55
+msgid "Главная"
+msgstr "Main page"
+
+#: .\templates\base.html:64
+msgid "Помощь"
+msgstr "Help"
+
+#: .\templates\base.html:70
+msgid "Все права защищены."
+msgstr "All rights reserved."
+
+#: .\templates\base_form.html:32
+msgid "Отправить"
+msgstr "Submit"
+
+#: .\templates\login.html:6 .\templates\new_user.html:6
+msgid "Забыли пароль?"
+msgstr "Forgot your password?"

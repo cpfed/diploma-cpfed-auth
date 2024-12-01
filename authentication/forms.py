@@ -1,5 +1,6 @@
 from django import forms
 from .models import UserActivation, MainUser
+from django.utils.translation import gettext_lazy as _
 
 
 class UserCreateForm(forms.ModelForm):

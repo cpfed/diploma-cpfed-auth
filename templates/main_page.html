@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
 {% for contest, is_reg in contests.items %}
 <div>
-    {{ contest.name }}: {% if is_reg %} You already registered! {% else %} <a href="contestRegistration/{{contest.id}}">
+    {{ contest.name }}: {% if is_reg %} You already registered! {% else %} <a href="{% url 'contestRegistration' contest_id=contest.id %}">
     Regiser</a> {% endif %}
 </div>
 {% endfor %}
