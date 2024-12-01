@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, response
 from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.forms.models import fields_for_model
 
 from .models import Contest, UserContest
 from .forms import ContestRegistrationForm
@@ -25,7 +27,7 @@ def contest_reg(request: HttpResponse, constest_id: int):
             form = ContestRegistrationForm(contest, request.user, request.POST)
             if form.is_valid():
                 # divide submitted data into remembered fields and contest-specific
-                mem_fields = {x.name for x in settings.AUTH_USER_MODEL._meta.get_fields()}
+                mem_fields = {x.name for x in get_user_model()._meta.get_fields()}
                 contest_data = dict()
                 for field, value in form.cleaned_data.items():
                     if field in mem_fields:
