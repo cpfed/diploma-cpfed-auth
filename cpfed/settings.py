@@ -50,13 +50,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'authentication',
-    'contest',
-
     'tailwind',
     'theme',
     'django_browser_reload',
     'widget_tweaks',
+
+    'authentication',
+    'contest',
+    'locations',
 ]
 
 MIDDLEWARE = [

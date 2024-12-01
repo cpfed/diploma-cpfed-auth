@@ -9,6 +9,7 @@ from django.core.validators import ValidationError
 
 from utils import constants
 from mixins.models import TimestampMixin
+from locations.models import Region
 
 
 class MainUserManager(BaseUserManager):
@@ -103,13 +104,13 @@ class MainUser(AbstractBaseUser, PermissionsMixin, TimestampMixin):
         null=True,
         verbose_name=_("Место учебы или работы")
     )
-    # region = models.ForeignKey(
-    #     Region,
-    #     on_delete=models.CASCADE,
-    #     blank=True,
-    #     null=True,
-    #     verbose_name=_("Регион")
-    # )
+    region = models.ForeignKey(
+        Region,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        verbose_name=_("Регион")
+    )
     citizen_of_kz = models.BooleanField(
         verbose_name=_("Гражданин РК?"),
         default=True
