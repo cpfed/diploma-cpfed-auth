@@ -18,6 +18,7 @@ def contest_reg(request: HttpResponse, contest_id: int):
 
     error = None
     contest = get_object_or_404(Contest, id=contest_id)
+
     form = ContestRegistrationForm(contest, request.user)
     if request.method == 'POST':
         form = ContestRegistrationForm(contest, request.user, request.POST)
@@ -27,12 +28,15 @@ def contest_reg(request: HttpResponse, contest_id: int):
             contest_data = dict()
             for field, value in form.cleaned_data.items():
                 if field in mem_fields:
+                    # save remembered fields
                     setattr(request.user, field, value)
                 else:
                     contest_data[field] = value
             request.user.save()
-            user_reg = UserContest(user=request.user, contest=contest, additional_fields=contest_data)
+            user_reg, created = UserContest.objects.get_or_create(user=request.user, contest=contest)
+            user_reg.additional_fields = contest_data
             user_reg.save()
+
             return redirect(settings.AFTER_LOGIN_URL)
         error = str(form.errors)
     return render(request, 'base_form.html', {

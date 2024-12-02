@@ -70,7 +70,7 @@ class MainUser(AbstractBaseUser, PermissionsMixin, TimestampMixin):
         max_length=50,
         blank=True,
         null=True,
-        unique=True,
+        # unique=True, TODO
         verbose_name=_("Телефонный номер")
     )
     gender = models.CharField(
@@ -84,7 +84,7 @@ class MainUser(AbstractBaseUser, PermissionsMixin, TimestampMixin):
         max_length=12,
         blank=True,
         null=True,
-        unique=True,
+        # unique=True, TODO
         verbose_name=_("ИИН")
     )
     t_shirt_size = models.CharField(
