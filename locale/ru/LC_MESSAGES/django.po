@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-02 14:22+0500\n"
+"POT-Creation-Date: 2024-12-02 22:51+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -212,43 +212,43 @@ msgstr ""
 msgid "Время последнего изменения"
 msgstr ""
 
-#: .\templates\base.html:21 .\templates\base.html:57
+#: .\templates\base.html:21 .\templates\base.html:68
 msgid "О нас"
 msgstr ""
 
-#: .\templates\base.html:23 .\templates\base.html:58
+#: .\templates\base.html:23 .\templates\base.html:69
 msgid "Контакты"
 msgstr ""
 
-#: .\templates\base.html:27
+#: .\templates\base.html:42
 msgid "Привет"
 msgstr ""
 
-#: .\templates\base.html:28
+#: .\templates\base.html:43
 msgid "Выйти"
 msgstr ""
 
-#: .\templates\base.html:30
+#: .\templates\base.html:46
 msgid "Войти"
 msgstr ""
 
-#: .\templates\base.html:32 .\templates\main_page.html:26
+#: .\templates\base.html:49 .\templates\main_page.html:26
 msgid "Регистрация"
 msgstr ""
 
-#: .\templates\base.html:56
+#: .\templates\base.html:67
 msgid "Главная"
 msgstr ""
 
-#: .\templates\base.html:59
+#: .\templates\base.html:70
 msgid "Помощь"
 msgstr ""
 
-#: .\templates\base.html:63
+#: .\templates\base.html:74
 msgid "Все права защищены."
 msgstr ""
 
-#: .\templates\base_form.html:32
+#: .\templates\base_form.html:31
 msgid "Отправить"
 msgstr ""
 
@@ -366,6 +366,30 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
+
+#: .\utils\constants.py:46
+msgid "Мужской"
+msgstr ""
+
+#: .\utils\constants.py:47
+msgid "Женский"
+msgstr ""
+
+#: .\utils\constants.py:48
+msgid "Небинарный"
+msgstr ""
+
+#: .\utils\constants.py:57
+msgid "Работаю"
+msgstr ""
+
+#: .\utils\constants.py:58
+msgid "Учусь"
+msgstr ""
+
+#: .\utils\constants.py:59
+msgid "Не учусь и не работаю"
+msgstr ""
 
 #: .\utils\error_list.py:5
 msgid ""

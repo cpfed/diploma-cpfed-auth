@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-02 14:22+0500\n"
+"POT-Creation-Date: 2024-12-02 22:51+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -215,43 +215,43 @@ msgstr ""
 msgid "Время последнего изменения"
 msgstr ""
 
-#: .\templates\base.html:21 .\templates\base.html:57
+#: .\templates\base.html:21 .\templates\base.html:68
 msgid "О нас"
 msgstr "Біз туралы"
 
-#: .\templates\base.html:23 .\templates\base.html:58
+#: .\templates\base.html:23 .\templates\base.html:69
 msgid "Контакты"
 msgstr "Контактілер"
 
-#: .\templates\base.html:27
+#: .\templates\base.html:42
 msgid "Привет"
 msgstr "Сәлем"
 
-#: .\templates\base.html:28
+#: .\templates\base.html:43
 msgid "Выйти"
 msgstr "Шығу"
 
-#: .\templates\base.html:30
+#: .\templates\base.html:46
 msgid "Войти"
 msgstr "Кіру"
 
-#: .\templates\base.html:32 .\templates\main_page.html:26
+#: .\templates\base.html:49 .\templates\main_page.html:26
 msgid "Регистрация"
 msgstr "Тіркеу"
 
-#: .\templates\base.html:56
+#: .\templates\base.html:67
 msgid "Главная"
 msgstr "Негізгі бет"
 
-#: .\templates\base.html:59
+#: .\templates\base.html:70
 msgid "Помощь"
 msgstr "Көмек"
 
-#: .\templates\base.html:63
+#: .\templates\base.html:74
 msgid "Все права защищены."
 msgstr "Барлық құқықтар қорғалған."
 
-#: .\templates\base_form.html:32
+#: .\templates\base_form.html:31
 msgid "Отправить"
 msgstr "Жіберу"
 
@@ -264,19 +264,21 @@ msgstr "Сәлем"
 msgid ""
 "Недавно вы запросили сброс пароля для вашей учетной записи Cpfed. Нажмите на "
 "кнопку ниже, чтобы продолжить."
-msgstr "Сіз жақында Cpfed тіркелгіңіз үшін құпия сөзді қалпына келтіруді сұрадыңыз. Жалғастыру үшін төмендегі түймені басыңыз."
+msgstr ""
+"Сіз жақында Cpfed тіркелгіңіз үшін құпия сөзді қалпына келтіруді сұрадыңыз. "
+"Жалғастыру үшін төмендегі түймені басыңыз."
 
 #: .\templates\emails\recovery_password.html:58
-#, fuzzy
-#| msgid "Введите новый пароль"
 msgid "Сбросить мой пароль"
-msgstr "Жаңа құпиясөзді енгізіңіз"
+msgstr "Құпия сөзімді қалпына келтіріңіз"
 
 #: .\templates\emails\recovery_password.html:73
 msgid ""
 "Если вы не запрашивали сброс, пожалуйста, проигнорируйте это письмо. Ссылка "
 "действительна только в течение следующих 30 минут."
-msgstr "Қалпына келтіруді сұрамаған болсаңыз, бұл электрондық поштаны елемеңіз. Сілтеме тек келесі 30 минут ішінде жарамды."
+msgstr ""
+"Қалпына келтіруді сұрамаған болсаңыз, бұл электрондық поштаны елемеңіз. "
+"Сілтеме тек келесі 30 минут ішінде жарамды."
 
 #: .\templates\emails\recovery_password.html:83
 #: .\templates\emails\user_activation.html:83
@@ -292,11 +294,11 @@ msgstr "Cpfed командасы."
 msgid ""
 "Для подтверждения электронной почты и завершения процесса регистрации, "
 "нажмите на кнопку ниже."
-msgstr "Электрондық поштаңызды растау және тіркеу процесін аяқтау үшін төмендегі түймені басыңыз."
+msgstr ""
+"Электрондық поштаңызды растау және тіркеу процесін аяқтау үшін төмендегі "
+"түймені басыңыз."
 
 #: .\templates\emails\user_activation.html:58
-#, fuzzy
-#| msgid "Активация аккаунта"
 msgid "Активировать аккаунт"
 msgstr "Тіркелгіні белсендіру"
 
@@ -304,7 +306,9 @@ msgstr "Тіркелгіні белсендіру"
 msgid ""
 "Если вы получили это письмо по ошибке, просто игнорируйте его. Ссылка "
 "действительна только в течение следующих 30 минут."
-msgstr "Егер сіз бұл электрондық поштаны қателікпен алсаңыз, оны елемеңіз. Сілтеме тек келесі 30 минут ішінде жарамды."
+msgstr ""
+"Егер сіз бұл электрондық поштаны қателікпен алсаңыз, оны елемеңіз. Сілтеме "
+"тек келесі 30 минут ішінде жарамды."
 
 #: .\templates\login.html:6 .\templates\new_user.html:6
 msgid "Забыли пароль?"
@@ -354,16 +358,12 @@ msgid "Время"
 msgstr ""
 
 #: .\templates\main_page.html:59
-#, fuzzy
-#| msgid "Зарегистрироваться"
 msgid "Вы уже зарегистрированы"
-msgstr "Тіркелу"
+msgstr "Сіз әлдеқашан тіркелгенсіз"
 
 #: .\templates\main_page.html:64
-#, fuzzy
-#| msgid "Зарегистрироваться"
 msgid "Зарегистрироваться на контест"
-msgstr "Тіркелу"
+msgstr "Сайысқа тіркелу"
 
 #: .\templates\main_page.html:78
 msgid "осталось"
@@ -375,6 +375,30 @@ msgid "%(days)s день"
 msgid_plural "%(days)s дней"
 msgstr[0] ""
 msgstr[1] ""
+
+#: .\utils\constants.py:46
+msgid "Мужской"
+msgstr "Еркек"
+
+#: .\utils\constants.py:47
+msgid "Женский"
+msgstr "Әйел "
+
+#: .\utils\constants.py:48
+msgid "Небинарный"
+msgstr "Екілік емес"
+
+#: .\utils\constants.py:57
+msgid "Работаю"
+msgstr "Жұмыс істеу"
+
+#: .\utils\constants.py:58
+msgid "Учусь"
+msgstr "Оқу"
+
+#: .\utils\constants.py:59
+msgid "Не учусь и не работаю"
+msgstr "Оқымаймын немесе жұмыс істемеймін"
 
 #: .\utils\error_list.py:5
 msgid ""

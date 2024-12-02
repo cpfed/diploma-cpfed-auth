@@ -1,5 +1,6 @@
 {% load static tailwind_tags %}
 {% load i18n %}
+{% load translate_url %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -11,9 +12,8 @@
     {% tailwind_css %}
 </head>
 
-<body class="min-h-screen flex flex-col">
-
-<header>
+<body class="min-h-screen flex flex-col bg-gray-50">
+<header class="bg-white">
     <div class="border-gray-200 px-4 py-2.5">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-5xl text-l text-gray-700">
             <div class="flex space-x-6 items-center">
@@ -23,11 +23,28 @@
                 <a href="#" class="hover:underline">{% translate "Контакты" %}</a>
             </div>
             <div class="flex items-center space-x-4 font-semibold">
+                <div class="relative inline-block text-left">
+
+                    <script>
+                        function toggle_lang_dropdown(){
+                            document.getElementById("lang_dropdown").classList.toggle("hidden");
+                        }
+                    </script>
+                    <button onclick="toggle_lang_dropdown()" class="lang_drop_btn"><img
+                            src="{% static 'icon-globe-02.png' %}"/></button>
+                    <ul id="lang_dropdown" class="hidden absolute px-2 py-4 origin-top-right rounded-md bg-white shadow-xl text-lg font-normal space-y-2">
+                        <li><a href="{% change_lang 'en' %}" class="p-2 hover:bg-blue-200">EN</a></li>
+                        <li><a href="{% change_lang 'kk' %}" class="p-2 hover:bg-blue-200">KZ</a></li>
+                        <li><a href="{% change_lang 'ru' %}" class="p-2 hover:bg-blue-200">RU</a></li>
+                    </ul>
+                </div>
                 {% if user.id is not None %}
                 <p>{% translate "Привет" %}, {{ user.handle }}!</p>
                 <a href="/logout">{% translate "Выйти" %}</a>
                 {% else %}
-                <a href="{%url 'login' %}"><div class="text-blue-600">{% translate "Войти" %}</div></a>
+                <a href="{%url 'login' %}">
+                    <div class="text-blue-600">{% translate "Войти" %}</div>
+                </a>
                 <a href="{%url 'register' %}">
                     <div class="bg-blue-600 p-3 text-gray-100 rounded-lg">{% translate "Регистрация" %}</div>
                 </a>

@@ -4,40 +4,38 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<section class="bg-gray-50">
-    <div class="flex flex-col items-center justify-center px-6 py-4 mx-auto">
-        <div class="w-full max-w-md">
-            <div class="flex flex-col space-y-0 px-8 shadow-2xl rounded-2xl">
-                <div class="flex flex-col items-center justify-center my-2">
-                    <p class="text-xl font-bold text-gray-900 md:text-2xl ">
-                        {{ form_name }}
-                    </p>
-                </div>
-                <form method="POST" class="space-y-2 text-gray-500" >
-                    {% csrf_token %}
-
-                    {% for fld in form %}
-                    <div {% if fld.errors %} class="text-red-500 border-red-500" {% endif %}>
-                        <label>{% translate fld.label %}</label>
-                        {% render_field fld class+="rounded-lg w-full text-black border-inherit" %}
-                        {% for error in fld.errors %}<p class="text-xs">{% translate error %}</p>{% endfor %}
-                    </div>
-                    {% endfor %}
-
-                    <button type="submit"
-                            class="w-full bg-amber-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                        {% if submit_text %}
-                            {{ submit_text %}
-                        {% else %}
-                            {% translate "Отправить" %}
-                        {% endif %}
-                    </button>
-                </form>
-                {% block form_addition_bottom %}
-                {% endblock %}
+<div class="flex flex-col items-center justify-center px-6 py-4 mx-auto">
+    <div class="w-full max-w-md">
+        <div class="flex flex-col space-y-0 px-8 shadow-2xl rounded-2xl">
+            <div class="flex flex-col items-center justify-center my-2">
+                <p class="text-xl font-bold text-gray-900 md:text-2xl ">
+                    {{ form_name }}
+                </p>
             </div>
+            <form method="POST" class="space-y-2 text-gray-500">
+                {% csrf_token %}
+
+                {% for fld in form %}
+                <div {% if fld.errors %} class="text-red-500 border-red-500" {% endif %}>
+                    <label>{% translate fld.label %}</label>
+                    {% render_field fld class+="rounded-lg w-full text-black border-inherit" %}
+                    {% for error in fld.errors %}<p class="text-xs">{% translate error %}</p>{% endfor %}
+                </div>
+                {% endfor %}
+
+                <button type="submit"
+                        class="w-full bg-amber-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    {% if submit_text %}
+                    {{ submit_text %}
+                    {% else %}
+                    {% translate "Отправить" %}
+                    {% endif %}
+                </button>
+            </form>
+            {% block form_addition_bottom %}
+            {% endblock %}
         </div>
     </div>
-</section>
+</div>
 
 {% endblock %}

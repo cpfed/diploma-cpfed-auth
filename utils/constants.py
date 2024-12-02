@@ -1,3 +1,5 @@
+from django.utils.translation import gettext_lazy as _
+
 # T-Shirt sizes
 SMALL = "S"
 MEDIUM = "M"
@@ -41,9 +43,9 @@ WOMAN = "WOMAN"
 NON_BINARY = "NON_BINARY"
 
 GENDER = (
-    (MAN, "Мужской"),
-    (WOMAN, "Женский"),
-    (NON_BINARY, "Не бинарный")
+    (MAN, _("Мужской")),
+    (WOMAN, _("Женский")),
+    (NON_BINARY, _("Небинарный"))
 )
 
 # Employment status
@@ -52,7 +54,7 @@ STUDYING = "STUDYING"
 NOT_WORKING_AND_STUDYING = "NOT_WORKING_AND_STUDYING"
 
 EMPLOYMENT_STATUS = (
-    (WORKING, "Работаю"),
-    (STUDYING, "Учусь"),
-    (NOT_WORKING_AND_STUDYING, "Не учусь и не работаю")
+    (WORKING, _("Работаю")),
+    (STUDYING, _("Учусь")),
+    (NOT_WORKING_AND_STUDYING, _("Не учусь и не работаю"))
 )
