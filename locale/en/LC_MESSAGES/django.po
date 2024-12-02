@@ -373,7 +373,7 @@ msgstr[1] ""
 
 #: .\utils\constants.py:46
 msgid "Мужской"
-msgstr ""
+msgstr "Male"
 
 #: .\utils\constants.py:47
 msgid "Женский"

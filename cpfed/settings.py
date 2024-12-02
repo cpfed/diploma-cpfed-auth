@@ -165,5 +165,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'login'
 AFTER_LOGIN_URL = 'main_page'
 LOGOUT_REDIRECT_URL = 'main_page'
+HOME_PAGE_URL = os.getenv("HOME_PAGE_URL", './')
 
 TAILWIND_APP_NAME = 'theme'
