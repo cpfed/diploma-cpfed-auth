@@ -1,13 +1,17 @@
 from django import forms
-from .models import UserActivation, MainUser
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.password_validation import validate_password
+
+from .models import UserActivation, MainUser
 
 
 class UserCreateForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput, label='Пароль')
+    password = forms.CharField(widget=forms.PasswordInput, label='Пароль', validators=[validate_password])
+
     class Meta:
         model = UserActivation
         fields = ('handle', 'email', 'password')
+
 
 class UserLoginForm(forms.Form):
     handle = forms.CharField(label='Хэндл')
@@ -19,4 +23,4 @@ class UserPasswordRecoveryRequest(forms.Form):
 
 
 class UserPasswordRecovery(forms.Form):
-    new_password = forms.CharField(widget=forms.PasswordInput(), label='Пароль')
+    new_password = forms.CharField(widget=forms.PasswordInput(), label='Пароль', validators=[validate_password])

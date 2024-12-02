@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-02 01:09+0500\n"
+"POT-Creation-Date: 2024-12-02 14:22+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -255,6 +255,57 @@ msgstr "Барлық құқықтар қорғалған."
 msgid "Отправить"
 msgstr "Жіберу"
 
+#: .\templates\emails\recovery_password.html:30
+#: .\templates\emails\user_activation.html:30
+msgid "Здравствуйте"
+msgstr "Сәлем"
+
+#: .\templates\emails\recovery_password.html:34
+msgid ""
+"Недавно вы запросили сброс пароля для вашей учетной записи Cpfed. Нажмите на "
+"кнопку ниже, чтобы продолжить."
+msgstr "Сіз жақында Cpfed тіркелгіңіз үшін құпия сөзді қалпына келтіруді сұрадыңыз. Жалғастыру үшін төмендегі түймені басыңыз."
+
+#: .\templates\emails\recovery_password.html:58
+#, fuzzy
+#| msgid "Введите новый пароль"
+msgid "Сбросить мой пароль"
+msgstr "Жаңа құпиясөзді енгізіңіз"
+
+#: .\templates\emails\recovery_password.html:73
+msgid ""
+"Если вы не запрашивали сброс, пожалуйста, проигнорируйте это письмо. Ссылка "
+"действительна только в течение следующих 30 минут."
+msgstr "Қалпына келтіруді сұрамаған болсаңыз, бұл электрондық поштаны елемеңіз. Сілтеме тек келесі 30 минут ішінде жарамды."
+
+#: .\templates\emails\recovery_password.html:83
+#: .\templates\emails\user_activation.html:83
+msgid "Спасибо"
+msgstr "Рақмет"
+
+#: .\templates\emails\recovery_password.html:83
+#: .\templates\emails\user_activation.html:83
+msgid "команда Cpfed."
+msgstr "Cpfed командасы."
+
+#: .\templates\emails\user_activation.html:34
+msgid ""
+"Для подтверждения электронной почты и завершения процесса регистрации, "
+"нажмите на кнопку ниже."
+msgstr "Электрондық поштаңызды растау және тіркеу процесін аяқтау үшін төмендегі түймені басыңыз."
+
+#: .\templates\emails\user_activation.html:58
+#, fuzzy
+#| msgid "Активация аккаунта"
+msgid "Активировать аккаунт"
+msgstr "Тіркелгіні белсендіру"
+
+#: .\templates\emails\user_activation.html:73
+msgid ""
+"Если вы получили это письмо по ошибке, просто игнорируйте его. Ссылка "
+"действительна только в течение следующих 30 минут."
+msgstr "Егер сіз бұл электрондық поштаны қателікпен алсаңыз, оны елемеңіз. Сілтеме тек келесі 30 минут ішінде жарамды."
+
 #: .\templates\login.html:6 .\templates\new_user.html:6
 msgid "Забыли пароль?"
 msgstr "Құпия сөзіңізді ұмыттыңыз ба?"
@@ -324,3 +375,21 @@ msgid "%(days)s день"
 msgid_plural "%(days)s дней"
 msgstr[0] ""
 msgstr[1] ""
+
+#: .\utils\error_list.py:5
+msgid ""
+"Введённый пароль слишком короткий. Он должен содержать как минимум 8 "
+"символов."
+msgstr "Енгізілген құпия сөз тым қысқа. Ол кемінде 8 таңбадан тұруы керек."
+
+#: .\utils\error_list.py:6
+msgid "Введённый пароль слишком широко распространён."
+msgstr "Сіз енгізген құпия сөз тым жиі кездеседі."
+
+#: .\utils\error_list.py:7
+msgid "Введённый пароль состоит только из цифр."
+msgstr "Енгізілген құпия сөз тек сандардан тұрады."
+
+#: .\utils\error_list.py:9
+msgid "Хэндл может состоять только из латинских букв, цифр и _"
+msgstr "Хэндл тек латын әріптері, сандар және _ құрауы мүмкін."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-02 01:09+0500\n"
+"POT-Creation-Date: 2024-12-02 14:22+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -252,6 +252,53 @@ msgstr ""
 msgid "Отправить"
 msgstr ""
 
+#: .\templates\emails\recovery_password.html:30
+#: .\templates\emails\user_activation.html:30
+msgid "Здравствуйте"
+msgstr ""
+
+#: .\templates\emails\recovery_password.html:34
+msgid ""
+"Недавно вы запросили сброс пароля для вашей учетной записи Cpfed. Нажмите на "
+"кнопку ниже, чтобы продолжить."
+msgstr ""
+
+#: .\templates\emails\recovery_password.html:58
+msgid "Сбросить мой пароль"
+msgstr ""
+
+#: .\templates\emails\recovery_password.html:73
+msgid ""
+"Если вы не запрашивали сброс, пожалуйста, проигнорируйте это письмо. Ссылка "
+"действительна только в течение следующих 30 минут."
+msgstr ""
+
+#: .\templates\emails\recovery_password.html:83
+#: .\templates\emails\user_activation.html:83
+msgid "Спасибо"
+msgstr ""
+
+#: .\templates\emails\recovery_password.html:83
+#: .\templates\emails\user_activation.html:83
+msgid "команда Cpfed."
+msgstr ""
+
+#: .\templates\emails\user_activation.html:34
+msgid ""
+"Для подтверждения электронной почты и завершения процесса регистрации, "
+"нажмите на кнопку ниже."
+msgstr ""
+
+#: .\templates\emails\user_activation.html:58
+msgid "Активировать аккаунт"
+msgstr ""
+
+#: .\templates\emails\user_activation.html:73
+msgid ""
+"Если вы получили это письмо по ошибке, просто игнорируйте его. Ссылка "
+"действительна только в течение следующих 30 минут."
+msgstr ""
+
 #: .\templates\login.html:6 .\templates\new_user.html:6
 msgid "Забыли пароль?"
 msgstr ""
@@ -319,3 +366,21 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
+
+#: .\utils\error_list.py:5
+msgid ""
+"Введённый пароль слишком короткий. Он должен содержать как минимум 8 "
+"символов."
+msgstr ""
+
+#: .\utils\error_list.py:6
+msgid "Введённый пароль слишком широко распространён."
+msgstr ""
+
+#: .\utils\error_list.py:7
+msgid "Введённый пароль состоит только из цифр."
+msgstr ""
+
+#: .\utils\error_list.py:9
+msgid "Хэндл может состоять только из латинских букв, цифр и _"
+msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-02 01:09+0500\n"
+"POT-Creation-Date: 2024-12-02 14:22+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -252,6 +252,57 @@ msgstr "All rights reserved."
 msgid "Отправить"
 msgstr "Submit"
 
+#: .\templates\emails\recovery_password.html:30
+#: .\templates\emails\user_activation.html:30
+msgid "Здравствуйте"
+msgstr ""
+
+#: .\templates\emails\recovery_password.html:34
+msgid ""
+"Недавно вы запросили сброс пароля для вашей учетной записи Cpfed. Нажмите на "
+"кнопку ниже, чтобы продолжить."
+msgstr ""
+
+#: .\templates\emails\recovery_password.html:58
+#, fuzzy
+#| msgid "Введите новый пароль"
+msgid "Сбросить мой пароль"
+msgstr "Enter new password"
+
+#: .\templates\emails\recovery_password.html:73
+msgid ""
+"Если вы не запрашивали сброс, пожалуйста, проигнорируйте это письмо. Ссылка "
+"действительна только в течение следующих 30 минут."
+msgstr "If you did not request a reset, please ignore this email. The link is only valid for the next 30 minutes."
+
+#: .\templates\emails\recovery_password.html:83
+#: .\templates\emails\user_activation.html:83
+msgid "Спасибо"
+msgstr "Thank you"
+
+#: .\templates\emails\recovery_password.html:83
+#: .\templates\emails\user_activation.html:83
+msgid "команда Cpfed."
+msgstr "Cpfed team."
+
+#: .\templates\emails\user_activation.html:34
+msgid ""
+"Для подтверждения электронной почты и завершения процесса регистрации, "
+"нажмите на кнопку ниже."
+msgstr "To confirm your email and complete the registration process, click the button below."
+
+#: .\templates\emails\user_activation.html:58
+#, fuzzy
+#| msgid "Активация аккаунта"
+msgid "Активировать аккаунт"
+msgstr "Account activation"
+
+#: .\templates\emails\user_activation.html:73
+msgid ""
+"Если вы получили это письмо по ошибке, просто игнорируйте его. Ссылка "
+"действительна только в течение следующих 30 минут."
+msgstr "If you received this email by mistake just ignore it. The link is only valid for the next 30 minutes."
+
 #: .\templates\login.html:6 .\templates\new_user.html:6
 msgid "Забыли пароль?"
 msgstr "Forgot your password?"
@@ -321,3 +372,21 @@ msgid "%(days)s день"
 msgid_plural "%(days)s дней"
 msgstr[0] ""
 msgstr[1] ""
+
+#: .\utils\error_list.py:5
+msgid ""
+"Введённый пароль слишком короткий. Он должен содержать как минимум 8 "
+"символов."
+msgstr "This password is too short. It must contain at least 8 characters."
+
+#: .\utils\error_list.py:6
+msgid "Введённый пароль слишком широко распространён."
+msgstr "This password is too common."
+
+#: .\utils\error_list.py:7
+msgid "Введённый пароль состоит только из цифр."
+msgstr "This password is entirely numeric."
+
+#: .\utils\error_list.py:9
+msgid "Хэндл может состоять только из латинских букв, цифр и _"
+msgstr "The handle can only consist of Latin letters, numbers and _"
