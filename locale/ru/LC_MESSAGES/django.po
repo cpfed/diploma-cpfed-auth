@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-02 22:51+0500\n"
+"POT-Creation-Date: 2024-12-03 16:39+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,7 +130,7 @@ msgid "Ссылка для восстановления пароля отпра�
 msgstr ""
 
 #: .\authentication\views\password_recovery.py:48
-#: .\authentication\views\user_management.py:47
+#: .\authentication\views\user_management.py:45
 msgid "Токен уже использован"
 msgstr ""
 
@@ -148,24 +148,28 @@ msgstr ""
 msgid "Введите новый пароль"
 msgstr ""
 
-#: .\authentication\views\user_management.py:38
+#: .\authentication\views\user_management.py:37
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr ""
 
-#: .\authentication\views\user_management.py:40
+#: .\authentication\views\user_management.py:38
 msgid "Зарегистрироваться"
 msgstr ""
 
-#: .\authentication\views\user_management.py:49
+#: .\authentication\views\user_management.py:47
 msgid "Время жизни токена истекло"
 msgstr ""
 
-#: .\authentication\views\user_management.py:73
+#: .\authentication\views\user_management.py:70
 msgid "Некорректный хэндл или пароль"
 msgstr ""
 
-#: .\authentication\views\user_management.py:74
+#: .\authentication\views\user_management.py:71
 msgid "Войти в аккаунт"
+msgstr ""
+
+#: .\contest\forms.py:27
+msgid "Поле не может быть пустым"
 msgstr ""
 
 #: .\contest\models.py:13
@@ -192,7 +196,15 @@ msgstr ""
 msgid "Данные пользователей к контестам"
 msgstr ""
 
+#: .\contest\views.py:39
+msgid "В системе есть пользователь с таким номером телефона"
+msgstr ""
+
 #: .\contest\views.py:41
+msgid "В системе есть пользователь с таким ИИН"
+msgstr ""
+
+#: .\contest\views.py:53
 msgid "Регистрация на "
 msgstr ""
 

@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.forms.models import fields_for_model
 from django.utils.translation import gettext_lazy as _
+from django.db.utils import IntegrityError
 
 from .models import Contest, UserContest
 from .forms import ContestRegistrationForm
@@ -16,7 +17,6 @@ def contest_reg(request: HttpResponse, contest_id: int):
     if not request.user.is_authenticated:
         return redirect(settings.LOGIN_URL)
 
-    error = None
     contest = get_object_or_404(Contest, id=contest_id)
 
     form = ContestRegistrationForm(contest, request.user)
@@ -32,16 +32,24 @@ def contest_reg(request: HttpResponse, contest_id: int):
                     setattr(request.user, field, value)
                 else:
                     contest_data[field] = value
-            request.user.save()
-            user_reg, created = UserContest.objects.get_or_create(user=request.user, contest=contest)
-            user_reg.additional_fields = contest_data
-            user_reg.save()
+            try:
+                request.user.save()
+            except IntegrityError as e:
+                if 'authentication_mainuser_phone_number' in str(e.args):
+                    form.add_error('phone_number', _('В системе есть пользователь с таким номером телефона'))
+                elif 'authentication_mainuser_uin' in str(e.args):
+                    form.add_error('uin', _('В системе есть пользователь с таким ИИН'))
+                else:
+                    print("ERROR on contest registration: ", str(e))
+                    return render(request, 'result_message.html', {'message': 'Внутренняя ошибка сервера'})
+            else:
+                user_reg, created = UserContest.objects.get_or_create(user=request.user, contest=contest)
+                user_reg.additional_fields = contest_data
+                user_reg.save()
 
-            return redirect(settings.AFTER_LOGIN_URL)
-        error = str(form.errors)
+                return render(request, 'result_message.html', {'message': 'Вы успешно зарегистрированы!'})
     return render(request, 'base_form.html', {
         'form': form,
-        'error': error,
         'form_name': _('Регистрация на ') + contest.name,
     })
 

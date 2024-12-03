@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-02 22:51+0500\n"
+"POT-Creation-Date: 2024-12-03 16:39+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -131,7 +131,7 @@ msgstr ""
 "Құпиясөзді қалпына келтіру сілтемесі электрондық пошта арқылы жіберілді."
 
 #: .\authentication\views\password_recovery.py:48
-#: .\authentication\views\user_management.py:47
+#: .\authentication\views\user_management.py:45
 msgid "Токен уже использован"
 msgstr "Токен әлдеқашан қолданылған"
 
@@ -151,25 +151,29 @@ msgstr "Құпиясөз сәтті өзгертілді!"
 msgid "Введите новый пароль"
 msgstr "Жаңа құпиясөзді енгізіңіз"
 
-#: .\authentication\views\user_management.py:38
+#: .\authentication\views\user_management.py:37
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr "Есептік жазбаңызды белсендіру үшін электрондық хат жіберілді."
 
-#: .\authentication\views\user_management.py:40
+#: .\authentication\views\user_management.py:38
 msgid "Зарегистрироваться"
 msgstr "Тіркелу"
 
-#: .\authentication\views\user_management.py:49
+#: .\authentication\views\user_management.py:47
 msgid "Время жизни токена истекло"
 msgstr "Токеннің қызмет ету мерзімі аяқталды"
 
-#: .\authentication\views\user_management.py:73
+#: .\authentication\views\user_management.py:70
 msgid "Некорректный хэндл или пароль"
 msgstr "Қате хэндл немесе құпиясөз"
 
-#: .\authentication\views\user_management.py:74
+#: .\authentication\views\user_management.py:71
 msgid "Войти в аккаунт"
 msgstr "Тіркелгіге кіру"
+
+#: .\contest\forms.py:27
+msgid "Поле не может быть пустым"
+msgstr ""
 
 #: .\contest\models.py:13
 msgid "Название контеста"
@@ -195,7 +199,15 @@ msgstr "Сайыстың ID"
 msgid "Данные пользователей к контестам"
 msgstr "Сайыстарға арналған пайдаланушы деректері"
 
+#: .\contest\views.py:39
+msgid "В системе есть пользователь с таким номером телефона"
+msgstr "Жүйеде осы телефон нөмірі бар пайдаланушы бар"
+
 #: .\contest\views.py:41
+msgid "В системе есть пользователь с таким ИИН"
+msgstr "Жүйеде бірдей ЖСН бар пайдаланушы бар"
+
+#: .\contest\views.py:53
 msgid "Регистрация на "
 msgstr ""
 

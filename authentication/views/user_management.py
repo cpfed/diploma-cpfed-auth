@@ -14,7 +14,6 @@ from .services.send_email import send_email
 # Create your views here.
 
 def user_new(request: HttpResponse):
-    error = None
     form = UserCreateForm()
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
@@ -36,8 +35,7 @@ def user_new(request: HttpResponse):
                 print("ERROR sending email: ", str(e))
             return render(request, 'result_message.html',
                           {'message': _('На почту отправлено письмо для активации аккаунта')})
-        error = str(form.errors)
-    return render(request, 'new_user.html', {'error': error, 'form': form, 'form_name': _('Зарегистрироваться')})
+    return render(request, 'new_user.html', {'form': form, 'form_name': _('Зарегистрироваться')})
 
 
 def user_activate(request: HttpResponse, token: uuid):
@@ -60,7 +58,6 @@ def user_activate(request: HttpResponse, token: uuid):
 
 
 def user_login(request: HttpResponse):
-    error = None
     form = UserLoginForm()
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
@@ -71,7 +68,7 @@ def user_login(request: HttpResponse):
             login(request, user)
             return redirect(settings.AFTER_LOGIN_URL)
         form.add_error('password', _('Некорректный хэндл или пароль'))
-    return render(request, 'login.html', {'error': error, 'form': form, 'form_name': _('Войти в аккаунт')})
+    return render(request, 'login.html', {'form': form, 'form_name': _('Войти в аккаунт')})
 
 
 def user_logout(request: HttpResponse):

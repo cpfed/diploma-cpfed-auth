@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-02 22:51+0500\n"
+"POT-Creation-Date: 2024-12-03 16:39+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -128,7 +128,7 @@ msgid "Ссылка для восстановления пароля отпра�
 msgstr "A link to reset your password has been sent to your email."
 
 #: .\authentication\views\password_recovery.py:48
-#: .\authentication\views\user_management.py:47
+#: .\authentication\views\user_management.py:45
 msgid "Токен уже использован"
 msgstr "Token already used"
 
@@ -148,25 +148,29 @@ msgstr "Password changed successfully!"
 msgid "Введите новый пароль"
 msgstr "Enter new password"
 
-#: .\authentication\views\user_management.py:38
+#: .\authentication\views\user_management.py:37
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr "Email has been sent to activate your account."
 
-#: .\authentication\views\user_management.py:40
+#: .\authentication\views\user_management.py:38
 msgid "Зарегистрироваться"
 msgstr "Registration"
 
-#: .\authentication\views\user_management.py:49
+#: .\authentication\views\user_management.py:47
 msgid "Время жизни токена истекло"
 msgstr "Token expired"
 
-#: .\authentication\views\user_management.py:73
+#: .\authentication\views\user_management.py:70
 msgid "Некорректный хэндл или пароль"
 msgstr "Incorrect handle or password"
 
-#: .\authentication\views\user_management.py:74
+#: .\authentication\views\user_management.py:71
 msgid "Войти в аккаунт"
 msgstr "Login"
+
+#: .\contest\forms.py:27
+msgid "Поле не может быть пустым"
+msgstr "The field cannot be empty"
 
 #: .\contest\models.py:13
 msgid "Название контеста"
@@ -192,7 +196,15 @@ msgstr "Contest ID"
 msgid "Данные пользователей к контестам"
 msgstr "User data for contests"
 
+#: .\contest\views.py:39
+msgid "В системе есть пользователь с таким номером телефона"
+msgstr "There is a user with this phone number in the system"
+
 #: .\contest\views.py:41
+msgid "В системе есть пользователь с таким ИИН"
+msgstr "There is a user with this UIN in the system"
+
+#: .\contest\views.py:53
 msgid "Регистрация на "
 msgstr "Registration on "
 
@@ -255,13 +267,13 @@ msgstr "Submit"
 #: .\templates\emails\recovery_password.html:30
 #: .\templates\emails\user_activation.html:30
 msgid "Здравствуйте"
-msgstr ""
+msgstr "Hello"
 
 #: .\templates\emails\recovery_password.html:34
 msgid ""
 "Недавно вы запросили сброс пароля для вашей учетной записи Cpfed. Нажмите на "
 "кнопку ниже, чтобы продолжить."
-msgstr ""
+msgstr "You recently requested a password reset for your Cpfed account. Click the button below to continue."
 
 #: .\templates\emails\recovery_password.html:58
 msgid "Сбросить мой пароль"
