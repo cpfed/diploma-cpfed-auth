@@ -8,11 +8,14 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.core.validators import ValidationError, RegexValidator
 
+from phonenumber_field.modelfields import PhoneNumberField
+
 from utils import constants
 from mixins.models import TimestampMixin
 from locations.models import Region
 
-handle_validator = RegexValidator(regex=re.compile(r'^[a-zA-z_0-9]+$'), message='Хэндл может состоять только из латинских букв, цифр и _')
+handle_validator = RegexValidator(regex=re.compile(r'^[a-zA-z_0-9]+$'), message=_('Хэндл может состоять только из латинских букв, цифр и _'))
+uin_validator = RegexValidator(regex=re.compile(r'^[0-9]{12}$'), message=_('ИИН может состоять только из 12 цифр'))
 
 class MainUserManager(BaseUserManager):
     DELETE_FIELD = "is_deleted"
@@ -66,8 +69,8 @@ class MainUser(AbstractBaseUser, PermissionsMixin, TimestampMixin):
         null=True,
         verbose_name=_("Фамилия")
     )
-    phone_number = models.CharField(
-        max_length=50,
+    phone_number = PhoneNumberField(
+        max_length=20,
         blank=True,
         null=True,
         unique=True,
@@ -85,7 +88,8 @@ class MainUser(AbstractBaseUser, PermissionsMixin, TimestampMixin):
         blank=True,
         null=True,
         unique=True,
-        verbose_name=_("ИИН")
+        verbose_name=_("ИИН"),
+        validators=[uin_validator]
     )
     t_shirt_size = models.CharField(
         choices=constants.T_SHIRT_SIZES,

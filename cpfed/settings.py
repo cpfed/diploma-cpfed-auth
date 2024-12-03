@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     'widget_tweaks',
+    'phonenumber_field',
 
     'authentication',
     'contest',
@@ -168,3 +169,6 @@ LOGOUT_REDIRECT_URL = 'main_page'
 HOME_PAGE_URL = os.getenv("HOME_PAGE_URL", './')
 
 TAILWIND_APP_NAME = 'theme'
+
+# phone validation
+PHONENUMBER_DEFAULT_REGION = 'KZ'

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-03 16:39+0500\n"
+"POT-Creation-Date: 2024-12-03 19:15+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,104 +18,112 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\authentication\models.py:49 .\authentication\models.py:195
+#: .\authentication\models.py:17
+msgid "Хэндл может состоять только из латинских букв, цифр и _"
+msgstr "The handle can only consist of Latin letters, numbers and _"
+
+#: .\authentication\models.py:18
+msgid "ИИН может состоять только из 12 цифр"
+msgstr "UIN can only consist of 12 digits"
+
+#: .\authentication\models.py:52 .\authentication\models.py:199
 msgid "Хэндл"
 msgstr "Handle"
 
-#: .\authentication\models.py:55 .\authentication\models.py:200
+#: .\authentication\models.py:58 .\authentication\models.py:204
 msgid "Электронная почта"
 msgstr "Email"
 
-#: .\authentication\models.py:61
+#: .\authentication\models.py:64
 msgid "Имя"
 msgstr "First name"
 
-#: .\authentication\models.py:67
+#: .\authentication\models.py:70
 msgid "Фамилия"
 msgstr "Last name"
 
-#: .\authentication\models.py:74
+#: .\authentication\models.py:77
 msgid "Телефонный номер"
 msgstr "Phone number"
 
-#: .\authentication\models.py:81
+#: .\authentication\models.py:84
 msgid "Пол"
 msgstr "Gender"
 
-#: .\authentication\models.py:88
+#: .\authentication\models.py:91
 msgid "ИИН"
 msgstr "UIN"
 
-#: .\authentication\models.py:95
+#: .\authentication\models.py:99
 msgid "Размер футболки"
 msgstr "T-shirt size"
 
-#: .\authentication\models.py:102
+#: .\authentication\models.py:106
 msgid "Статус занятости"
 msgstr "Employment status"
 
-#: .\authentication\models.py:108
+#: .\authentication\models.py:112
 msgid "Место учебы или работы"
 msgstr "Place of study or work"
 
-#: .\authentication\models.py:115 .\locations\models.py:14
+#: .\authentication\models.py:119 .\locations\models.py:14
 msgid "Регион"
 msgstr "Place of study or work"
 
-#: .\authentication\models.py:118
+#: .\authentication\models.py:122
 msgid "Гражданин РК?"
 msgstr "Citizen of the Republic of Kazakhstan?"
 
-#: .\authentication\models.py:122
+#: .\authentication\models.py:126
 msgid "Админ?"
 msgstr "Admin?"
 
-#: .\authentication\models.py:123
+#: .\authentication\models.py:127
 msgid "Модератор?"
 msgstr "Moderator?"
 
-#: .\authentication\models.py:124
+#: .\authentication\models.py:128
 msgid "Аккаунт удален?"
 msgstr "Account deleted?"
 
-#: .\authentication\models.py:125
+#: .\authentication\models.py:129
 msgid "Аккаунт активен?"
 msgstr "Account active?"
 
-#: .\authentication\models.py:133 .\authentication\models.py:163
+#: .\authentication\models.py:137 .\authentication\models.py:167
 msgid "Пользователь"
 msgstr "User"
 
-#: .\authentication\models.py:134
+#: .\authentication\models.py:138
 msgid "Пользователи"
 msgstr "Users"
 
-#: .\authentication\models.py:167 .\authentication\models.py:208
+#: .\authentication\models.py:171 .\authentication\models.py:212
 msgid "Ссылка использована?"
 msgstr "Link used?"
 
-#: .\authentication\models.py:171 .\authentication\models.py:212
+#: .\authentication\models.py:175 .\authentication\models.py:216
 msgid "Срок годности"
 msgstr "Expiration date"
 
-#: .\authentication\models.py:182 .\authentication\models.py:183
+#: .\authentication\models.py:186 .\authentication\models.py:187
 #: .\authentication\views\password_recovery.py:41
 msgid "Восстановление пароля"
 msgstr "Password recovery"
 
-#: .\authentication\models.py:204
+#: .\authentication\models.py:208
 msgid "Пароль"
 msgstr "Password"
 
-#: .\authentication\models.py:223
+#: .\authentication\models.py:227
 msgid "Хэндл уже занят"
 msgstr "The handle is already taken"
 
-#: .\authentication\models.py:227
+#: .\authentication\models.py:231
 msgid "Email уже занят"
 msgstr "The email is already taken"
 
-#: .\authentication\models.py:233 .\authentication\models.py:234
+#: .\authentication\models.py:237 .\authentication\models.py:238
 msgid "Активация аккаунта"
 msgstr "Account activation"
 
@@ -196,15 +204,11 @@ msgstr "Contest ID"
 msgid "Данные пользователей к контестам"
 msgstr "User data for contests"
 
-#: .\contest\views.py:39
-msgid "В системе есть пользователь с таким номером телефона"
-msgstr "There is a user with this phone number in the system"
+#: .\contest\views.py:40
+msgid "Вы успешно зарегистрированы!"
+msgstr "You have registered successfully!"
 
-#: .\contest\views.py:41
-msgid "В системе есть пользователь с таким ИИН"
-msgstr "There is a user with this UIN in the system"
-
-#: .\contest\views.py:53
+#: .\contest\views.py:48
 msgid "Регистрация на "
 msgstr "Registration on "
 
@@ -244,7 +248,7 @@ msgstr "Logout"
 msgid "Войти"
 msgstr "Enter"
 
-#: .\templates\base.html:49 .\templates\main_page.html:26
+#: .\templates\base.html:49
 msgid "Регистрация"
 msgstr "Registration"
 
@@ -273,7 +277,9 @@ msgstr "Hello"
 msgid ""
 "Недавно вы запросили сброс пароля для вашей учетной записи Cpfed. Нажмите на "
 "кнопку ниже, чтобы продолжить."
-msgstr "You recently requested a password reset for your Cpfed account. Click the button below to continue."
+msgstr ""
+"You recently requested a password reset for your Cpfed account. Click the "
+"button below to continue."
 
 #: .\templates\emails\recovery_password.html:58
 msgid "Сбросить мой пароль"
@@ -321,68 +327,6 @@ msgstr ""
 msgid "Забыли пароль?"
 msgstr "Forgot your password?"
 
-#: .\templates\main_page.html:14
-msgid "Чемпионаты и турниры — время побеждать и удивлять!"
-msgstr ""
-
-#: .\templates\main_page.html:17
-msgid ""
-"Тебя ждут захватывающие турниры, где ты можешь проявить свои спортивные "
-"навыки. Прими участие в чемпионатах, узнай расписание и зарегистрируйся, "
-"чтобы не упустить шанс стать лучшим!"
-msgstr ""
-
-#: .\templates\main_page.html:21 .\templates\main_page.html:70
-msgid "Узнать больше"
-msgstr ""
-
-#: .\templates\main_page.html:35
-msgid "Что нужно знать о чемпионате CPFED?"
-msgstr ""
-
-#: .\templates\main_page.html:36
-msgid "Федерация спортивного программирования Казахстана CPFED"
-msgstr ""
-
-#: .\templates\main_page.html:38
-msgid ""
-"Наша основная цель - развивать человеческий потенциал нашей страны и всего "
-"мира через спортивное программирование. На данном сайте вы можете "
-"зарегистрироваться на все наши соревнования и стать частью сообщества "
-"спортивного программирования в Казахстане."
-msgstr ""
-
-#: .\templates\main_page.html:43
-msgid "Чемпионаты и конкурсы"
-msgstr ""
-
-#: .\templates\main_page.html:53
-msgid "Дата"
-msgstr ""
-
-#: .\templates\main_page.html:54
-msgid "Время"
-msgstr ""
-
-#: .\templates\main_page.html:59
-msgid "Вы уже зарегистрированы"
-msgstr "You already registered"
-
-#: .\templates\main_page.html:64
-msgid "Зарегистрироваться на контест"
-msgstr "Registration on contest"
-
-#: .\templates\main_page.html:78
-msgid "осталось"
-msgstr ""
-
-#: .\templates\main_page.html:79
-#, python-format
-msgid "%(days)s день"
-msgid_plural "%(days)s дней"
-msgstr[0] ""
-msgstr[1] ""
-
 #: .\utils\constants.py:46
 msgid "Мужской"
 msgstr "Male"
@@ -422,5 +366,13 @@ msgid "Введённый пароль состоит только из цифр
 msgstr "This password is entirely numeric."
 
 #: .\utils\error_list.py:9
-msgid "Хэндл может состоять только из латинских букв, цифр и _"
-msgstr "The handle can only consist of Latin letters, numbers and _"
+msgid ""
+"Введите корректный номер телефона (например, 8 (71234) 5 67 89) или номер с "
+"префиксом международной связи."
+msgstr ""
+"Please enter a valid phone number (e.g. 8 (71234) 5 67 89) or a number with "
+"an international calling prefix."
+
+#: .\utils\error_list.py:11
+msgid "Пользователь с таким Телефонный номер уже существует."
+msgstr ""

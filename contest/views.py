@@ -8,6 +8,7 @@ from django.db.utils import IntegrityError
 
 from .models import Contest, UserContest
 from .forms import ContestRegistrationForm
+from authentication.forms import get_user_form
 
 
 # Create your views here.
@@ -22,32 +23,26 @@ def contest_reg(request: HttpResponse, contest_id: int):
     form = ContestRegistrationForm(contest, request.user)
     if request.method == 'POST':
         form = ContestRegistrationForm(contest, request.user, request.POST)
-        if form.is_valid():
-            # divide submitted data into remembered fields and contest-specific
+        # to update user data from registration
+        user_form = get_user_form(contest.required_fields)(request.POST, instance=request.user)
+        if form.is_valid() and user_form.is_valid():
             mem_fields = {x.name for x in get_user_model()._meta.get_fields()}
             contest_data = dict()
             for field, value in form.cleaned_data.items():
-                if field in mem_fields:
-                    # save remembered fields
-                    setattr(request.user, field, value)
-                else:
+                if field not in mem_fields:
                     contest_data[field] = value
-            try:
-                request.user.save()
-            except IntegrityError as e:
-                if 'authentication_mainuser_phone_number' in str(e.args):
-                    form.add_error('phone_number', _('В системе есть пользователь с таким номером телефона'))
-                elif 'authentication_mainuser_uin' in str(e.args):
-                    form.add_error('uin', _('В системе есть пользователь с таким ИИН'))
-                else:
-                    print("ERROR on contest registration: ", str(e))
-                    return render(request, 'result_message.html', {'message': 'Внутренняя ошибка сервера'})
-            else:
-                user_reg, created = UserContest.objects.get_or_create(user=request.user, contest=contest)
-                user_reg.additional_fields = contest_data
-                user_reg.save()
 
-                return render(request, 'result_message.html', {'message': 'Вы успешно зарегистрированы!'})
+            user_reg, created = UserContest.objects.get_or_create(user=request.user, contest=contest)
+            user_reg.additional_fields = contest_data
+            user_reg.save()
+
+            user_form.save()
+            return render(request, 'result_message.html', {'message': _('Вы успешно зарегистрированы!')})
+        # add all errors for user fields
+        for field, errs in user_form.errors.items():
+            for err in errs:
+                if err not in form.errors.get(field, []):
+                    form.add_error(field, err)
     return render(request, 'base_form.html', {
         'form': form,
         'form_name': _('Регистрация на ') + contest.name,
