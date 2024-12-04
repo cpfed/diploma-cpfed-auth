@@ -1,0 +1,60 @@
+name: "Build docker image from master branch"
+
+on:
+  push:
+    branches:
+      - 'master'
+  workflow_dispatch: # This enables manual execution
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./docker/local.Dockerfile
+          push: true
+          tags: zharaskhan/auth-cpfed-master:latest,zharaskhan/auth-cpfed-master:${{ github.sha }}
+          cache-from: type=registry,ref=zharaskhan/auth-cpfed-master:latest
+          cache-to: type=inline
+      - 
+        name: Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+      - 
+        name: Set kubectl context
+        uses: azure/k8s-set-context@v1
+        id: setcontext
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+      - 
+        name: Checkout
+        uses: actions/checkout@v2
+      - 
+        name: Deploy to k8s
+        uses: Azure/k8s-deploy@v1.4
+        with:
+          manifests: |
+            k8s/deployment.yaml
+            k8s/service.yaml
+          images: 'zharaskhan/auth-cpfed-master:${{ github.sha }}'
+          kubectl-version: 'latest'
+      - 
+        name: send telegram message
+        uses: appleboy/telegram-action@master
+        with:
+            to: ${{ secrets.TELEGRAM_TO }}
+            token: ${{ secrets.TELEGRAM_TOKEN }}
