@@ -39,6 +39,7 @@ DEBUG = (os.getenv("DEBUG", None) == "True")
 
 ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS", "*")]
 
+CLOUDFLARE_SECRET_KEY = os.getenv("CLOUDFLARE_SECRET_KEY", None)
 # Application definition
 
 INSTALLED_APPS = [

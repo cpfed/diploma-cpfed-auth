@@ -10,7 +10,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from authentication.forms import UserCreateForm, UserPasswordRecovery, UserLoginForm
 from authentication.models import UserActivation, MainUser
 from .services.send_email import send_email
-
+from utils.cloudflare import check_turnstile_captcha
 
 # Create your views here.
 
@@ -19,6 +19,9 @@ def user_new(request: HttpResponse):
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
         if form.is_valid():
+
+            check_turnstile_captcha(request)
+
             user_act = UserActivation(**form.cleaned_data)
 
             # save password safely
@@ -36,7 +39,7 @@ def user_new(request: HttpResponse):
                 print("ERROR sending email: ", str(e))
             return render(request, 'result_message.html',
                           {'message': _('На почту отправлено письмо для активации аккаунта')})
-    return render(request, 'new_user.html', {'form': form, 'form_name': _('Зарегистрироваться')})
+    return render(request, 'new_user.html', {'form': form, 'form_name': _('Зарегистрироваться'), 'enable_captcha': not settings.DEBUG})
 
 
 def user_activate(request: HttpResponse, token: uuid):
