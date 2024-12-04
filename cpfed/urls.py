@@ -22,5 +22,4 @@ urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
     path('', include('contest.urls')),
-    path('__reload__/', include('django_browser_reload.urls')),
 )

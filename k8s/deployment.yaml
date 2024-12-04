@@ -30,7 +30,7 @@ spec:
             - containerPort: 8000
               name: auth-svc
           resources: {}
+          envFrom:
+            - configMapRef:
+                name: auth-configmap
       restartPolicy: Always
-      envFrom:
-        - configMapRef:
-            name: auth-configmap

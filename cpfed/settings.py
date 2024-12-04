@@ -26,8 +26,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY", None)
 
-NPM_BIN_PATH = os.getenv("NPM_BIN_PATH", None)
-
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = os.getenv("EMAIL_HOST", None)
 EMAIL_PORT = os.getenv("EMAIL_PORT", None)
@@ -36,9 +34,9 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", None)
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", None)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (os.getenv("DEBUG", None) == "True")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS", "*")]
 
 # Application definition
 
@@ -50,9 +48,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'tailwind',
-    'theme',
-    'django_browser_reload',
     'widget_tweaks',
     'phonenumber_field',
 
@@ -71,8 +66,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-
-    'django_browser_reload.middleware.BrowserReloadMiddleware',
 
 ]
 
@@ -168,7 +161,6 @@ AFTER_LOGIN_URL = 'main_page'
 LOGOUT_REDIRECT_URL = 'main_page'
 HOME_PAGE_URL = os.getenv("HOME_PAGE_URL", './')
 
-TAILWIND_APP_NAME = 'theme'
 
 # phone validation
 PHONENUMBER_DEFAULT_REGION = 'KZ'
