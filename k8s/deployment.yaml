@@ -16,9 +16,16 @@ spec:
         app.kubernetes.io/name: auth-cpfed
     spec:
       containers:
-        - image: zharaskhan/auth-cpfed-master
+        - name: auth-cpfed 
+          image: zharaskhan/auth-cpfed-master
           imagePullPolicy: "Always"
-          name: auth-cpfed
+          workingDir: /app/
+          command: ["sh", "-c"]
+          args:
+          - |
+            echo "$(pwd)"
+            echo "Hello from auth-cpfed"
+            ./docker/web_entrypoint.sh
           ports:
             - containerPort: 8000
               name: auth-svc
