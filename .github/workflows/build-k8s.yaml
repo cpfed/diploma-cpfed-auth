@@ -24,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./docker/local.Dockerfile
+          file: ./docker/production.Dockerfile
           push: true
           tags: zharaskhan/auth-cpfed-master:latest,zharaskhan/auth-cpfed-master:${{ github.sha }}
           cache-from: type=registry,ref=zharaskhan/auth-cpfed-master:latest
