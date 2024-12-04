@@ -5,6 +5,7 @@ from django.http import HttpResponse, response
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ObjectDoesNotExist
 
 from authentication.forms import UserCreateForm, UserPasswordRecovery, UserLoginForm
 from authentication.models import UserActivation, MainUser
@@ -61,13 +62,18 @@ def user_login(request: HttpResponse):
     form = UserLoginForm()
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
-        handle = request.POST['handle']
+        handle_or_email = request.POST['handle_or_email']
         password = request.POST['password']
+        try:
+            user = MainUser.objects.get(email=handle_or_email)
+            handle = user.handle
+        except ObjectDoesNotExist:
+            handle = handle_or_email
         user = authenticate(request, handle=handle, password=password)
         if user is not None:
             login(request, user)
             return redirect(settings.AFTER_LOGIN_URL)
-        form.add_error('password', _('Некорректный хэндл или пароль'))
+        form.add_error('password', _('Некорректный хэндл/email или пароль'))
     return render(request, 'login.html', {'form': form, 'form_name': _('Войти в аккаунт')})
 
 

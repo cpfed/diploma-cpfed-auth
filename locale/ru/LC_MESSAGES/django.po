@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-03 19:15+0500\n"
+"POT-Creation-Date: 2024-12-04 17:03+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,7 +138,7 @@ msgid "Ссылка для восстановления пароля отпра�
 msgstr ""
 
 #: .\authentication\views\password_recovery.py:48
-#: .\authentication\views\user_management.py:45
+#: .\authentication\views\user_management.py:46
 msgid "Токен уже использован"
 msgstr ""
 
@@ -156,23 +156,23 @@ msgstr ""
 msgid "Введите новый пароль"
 msgstr ""
 
-#: .\authentication\views\user_management.py:37
+#: .\authentication\views\user_management.py:38
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr ""
 
-#: .\authentication\views\user_management.py:38
+#: .\authentication\views\user_management.py:39
 msgid "Зарегистрироваться"
 msgstr ""
 
-#: .\authentication\views\user_management.py:47
+#: .\authentication\views\user_management.py:48
 msgid "Время жизни токена истекло"
 msgstr ""
 
-#: .\authentication\views\user_management.py:70
-msgid "Некорректный хэндл или пароль"
+#: .\authentication\views\user_management.py:76
+msgid "Некорректный хэндл/email или пароль"
 msgstr ""
 
-#: .\authentication\views\user_management.py:71
+#: .\authentication\views\user_management.py:77
 msgid "Войти в аккаунт"
 msgstr ""
 
