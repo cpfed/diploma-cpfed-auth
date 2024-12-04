@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-cpfed
+  labels:
+    app: auth-cpfed
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-cpfed
+  template:
+    metadata:
+      labels:
+        app: auth-cpfed
+        app.kubernetes.io/name: auth-cpfed
+    spec:
+      containers:
+        - image: zharaskhan/auth-cpfed-master
+          imagePullPolicy: "Always"
+          name: auth-cpfed
+          ports:
+            - containerPort: 8000
+              name: auth-svc
+          resources: {}
+      restartPolicy: Always
