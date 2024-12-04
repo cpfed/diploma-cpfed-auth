@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 17:03+0500\n"
+"POT-Creation-Date: 2024-12-04 23:32+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -136,17 +136,12 @@ msgid "Ссылка для восстановления пароля отпра�
 msgstr "A link to reset your password has been sent to your email."
 
 #: .\authentication\views\password_recovery.py:48
-#: .\authentication\views\user_management.py:46
-msgid "Токен уже использован"
-msgstr "Token already used"
+msgid "Ссылка уже использована."
+msgstr "Link was used"
 
 #: .\authentication\views\password_recovery.py:51
-msgid ""
-"Выбранная ссылка для восстановления уже устарела. Повторно укажите свой "
-"адрес электронной почты, чтобы получить новую ссылку для восстановления."
-msgstr ""
-"The recovery link you selected has expired. Please re-enter your email "
-"address to receive a new recovery link."
+msgid "Ссылка для восстановления пароля уже устарела. Попробуйте заново."
+msgstr "The password recovery link has expired. Please try again."
 
 #: .\authentication\views\password_recovery.py:64
 msgid "Пароль успешно изменен!"
@@ -164,9 +159,13 @@ msgstr "Email has been sent to activate your account."
 msgid "Зарегистрироваться"
 msgstr "Registration"
 
+#: .\authentication\views\user_management.py:46
+msgid "Ссылка уже использована"
+msgstr "Link used?"
+
 #: .\authentication\views\user_management.py:48
-msgid "Время жизни токена истекло"
-msgstr "Token expired"
+msgid "Ссылка для активации аккаунта устарела"
+msgstr "The account activation link expired"
 
 #: .\authentication\views\user_management.py:76
 msgid "Некорректный хэндл/email или пароль"
@@ -188,7 +187,7 @@ msgstr "Name of the contest"
 msgid "Контест"
 msgstr "Contest"
 
-#: .\contest\models.py:34 .\templates\base.html:22
+#: .\contest\models.py:34 .\templates\base.html:21
 msgid "Контесты"
 msgstr "Contests"
 
@@ -228,15 +227,15 @@ msgstr "Creation time"
 msgid "Время последнего изменения"
 msgstr "Last modified time"
 
-#: .\templates\base.html:21 .\templates\base.html:68
+#: .\templates\base.html:20 .\templates\base.html:69
 msgid "О нас"
 msgstr "About us"
 
-#: .\templates\base.html:23 .\templates\base.html:69
+#: .\templates\base.html:22 .\templates\base.html:70
 msgid "Контакты"
 msgstr "Contacts"
 
-#: .\templates\base.html:42
+#: .\templates\base.html:41
 msgid "Привет"
 msgstr "Hello"
 
@@ -244,23 +243,23 @@ msgstr "Hello"
 msgid "Выйти"
 msgstr "Logout"
 
-#: .\templates\base.html:46
+#: .\templates\base.html:47
 msgid "Войти"
 msgstr "Enter"
 
-#: .\templates\base.html:49
+#: .\templates\base.html:50
 msgid "Регистрация"
 msgstr "Registration"
 
-#: .\templates\base.html:67
+#: .\templates\base.html:68
 msgid "Главная"
 msgstr "Main page"
 
-#: .\templates\base.html:70
+#: .\templates\base.html:71
 msgid "Помощь"
 msgstr "Help"
 
-#: .\templates\base.html:74
+#: .\templates\base.html:75
 msgid "Все права защищены."
 msgstr "All rights reserved."
 
@@ -349,7 +348,7 @@ msgstr "Studying"
 
 #: .\utils\constants.py:59
 msgid "Не учусь и не работаю"
-msgstr "Not studying or working"
+msgstr "Not studying and not working"
 
 #: .\utils\error_list.py:5
 msgid ""
@@ -370,9 +369,9 @@ msgid ""
 "Введите корректный номер телефона (например, 8 (71234) 5 67 89) или номер с "
 "префиксом международной связи."
 msgstr ""
-"Please enter a valid phone number (e.g. 8 (712) 345 67 89 or a number with "
+"Please enter a valid phone number (e.g. 8 (712) 345 67 89)) or a number with "
 "an international calling prefix."
 
 #: .\utils\error_list.py:11
 msgid "Пользователь с таким Телефонный номер уже существует."
-msgstr ""
+msgstr "A user with this phone number already exists."

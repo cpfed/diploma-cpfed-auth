@@ -38,17 +38,17 @@ def password_recovery_request(request: HttpResponse):
                 return render(request, 'result_message.html',
                               {'message': _('Ссылка для восстановления пароля отправлена на почту.')})
         error = str(form.errors)
-    return render(request, 'base_form.html', {'error': error, 'form': form, 'form_name': _('Восстановление пароля')})
+    return render(request, 'base_form.html', {'form': form, 'form_name': _('Восстановление пароля')})
 
 
 def password_recovery(request: HttpResponse, token: uuid):
     error = None
     rec = get_object_or_404(PasswordRecovery, id=token)
     if rec.is_used:
-        error = _("Токен уже использован")
+        error = _("Ссылка уже использована.")
     elif not rec.is_still_valid:
         error = _(
-            """Выбранная ссылка для восстановления уже устарела. Повторно укажите свой адрес электронной почты, чтобы получить новую ссылку для восстановления.""")
+            "Ссылка для восстановления пароля уже устарела. Попробуйте заново.")
     if error is not None:
         return render(request, 'result_message.html', {'message': error})
 
@@ -63,4 +63,4 @@ def password_recovery(request: HttpResponse, token: uuid):
             rec.save()
             return render(request, 'result_message.html', {'message': _('Пароль успешно изменен!')})
         error = str(form.errors)
-    return render(request, 'base_form.html', {'error': error, 'form': form, 'form_name': _('Введите новый пароль')})
+    return render(request, 'base_form.html', {'form': form, 'form_name': _('Введите новый пароль')})

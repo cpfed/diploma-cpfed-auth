@@ -39,13 +39,15 @@
                 </div>
                 {% if user.id is not None %}
                 <p>{% translate "Привет" %}, {{ user.handle }}!</p>
-                <a href="/logout">{% translate "Выйти" %}</a>
+                <a href="{%url 'logout' %}">
+                    <div class="bg-blue-600 px-3 py-2 text-gray-100 rounded-lg">{% translate "Выйти" %}</div>
+                </a>
                 {% else %}
                 <a href="{%url 'login' %}">
                     <div class="text-blue-600">{% translate "Войти" %}</div>
                 </a>
                 <a href="{%url 'register' %}">
-                    <div class="bg-blue-600 p-3 text-gray-100 rounded-lg">{% translate "Регистрация" %}</div>
+                    <div class="bg-blue-600 px-3 py-2 text-gray-100 rounded-lg">{% translate "Регистрация" %}</div>
                 </a>
                 {% endif %}
             </div>

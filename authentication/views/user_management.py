@@ -43,9 +43,9 @@ def user_activate(request: HttpResponse, token: uuid):
     error = None
     user_act = get_object_or_404(UserActivation, id=token)
     if user_act.is_used:
-        error = _("Токен уже использован")
+        error = _("Ссылка уже использована")
     elif not user_act.is_still_valid:
-        error = _("Время жизни токена истекло")
+        error = _("Ссылка для активации аккаунта устарела")
     if error is None:
         user = MainUser(handle=user_act.handle, email=user_act.email, password=user_act.password)
         user.save()
