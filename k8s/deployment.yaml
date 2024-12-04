@@ -31,3 +31,6 @@ spec:
               name: auth-svc
           resources: {}
       restartPolicy: Always
+      envFrom:
+        - configMapRef:
+            name: auth-configmap
