@@ -166,3 +166,10 @@ HOME_PAGE_URL = os.getenv("HOME_PAGE_URL", './')
 
 # phone validation
 PHONENUMBER_DEFAULT_REGION = 'KZ'
+
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
