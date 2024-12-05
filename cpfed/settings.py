@@ -25,6 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY", None)
+CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "http://localhost:8000,https://auth.cpfed.kz").split(",")
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = os.getenv("EMAIL_HOST", None)
@@ -38,6 +39,7 @@ DEBUG = (os.getenv("DEBUG", None) == "True")
 
 ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS", "*")]
 
+CLOUDFLARE_SECRET_KEY = os.getenv("CLOUDFLARE_SECRET_KEY", None)
 # Application definition
 
 INSTALLED_APPS = [
@@ -164,3 +166,12 @@ HOME_PAGE_URL = os.getenv("HOME_PAGE_URL", './')
 
 # phone validation
 PHONENUMBER_DEFAULT_REGION = 'KZ'
+
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

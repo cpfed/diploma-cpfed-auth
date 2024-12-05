@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from authentication.forms import UserPasswordRecovery, UserPasswordRecoveryRequest
 from authentication.models import MainUser, PasswordRecovery
 from .services.send_email import send_email
-
+from utils.cloudflare import check_turnstile_captcha
 
 # Create your views here.
 def password_recovery_request(request: HttpResponse):
@@ -20,6 +20,7 @@ def password_recovery_request(request: HttpResponse):
     if request.method == 'POST':
         form = UserPasswordRecoveryRequest(request.POST)
         if form.is_valid():
+            check_turnstile_captcha(request)
             try:
                 user = MainUser.objects.get(**form.cleaned_data)
             except ObjectDoesNotExist:
@@ -38,7 +39,7 @@ def password_recovery_request(request: HttpResponse):
                 return render(request, 'result_message.html',
                               {'message': _('Ссылка для восстановления пароля отправлена на почту.')})
         error = str(form.errors)
-    return render(request, 'base_form.html', {'form': form, 'form_name': _('Восстановление пароля')})
+    return render(request, 'base_form.html', {'form': form, 'form_name': _('Восстановление пароля'), 'enable_captcha': not settings.DEBUG})
 
 
 def password_recovery(request: HttpResponse, token: uuid):
