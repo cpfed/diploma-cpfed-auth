@@ -20,9 +20,3 @@ class ContestRegistrationForm(forms.Form):
                     self.fields[field].required = True
                 self.initial[field] = getattr(user, field)
 
-    def clean(self):
-        cleaned_data = super().clean()
-        if 'place_of_study_of_work' in cleaned_data and 'employment_status' in cleaned_data and cleaned_data.get(
-                'place_of_study_of_work') == '':
-            self.add_error('place_of_study_of_work', _('Поле не может быть пустым'))
-        return cleaned_data

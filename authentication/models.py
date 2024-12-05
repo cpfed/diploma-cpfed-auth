@@ -149,6 +149,11 @@ class MainUser(AbstractBaseUser, PermissionsMixin, TimestampMixin):
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
 
+    def clean(self):
+        super().clean()
+        if self.employment_status != constants.EMPLOYMENT_STATUS[2][0] and self.place_of_study_of_work is None:
+            raise ValidationError({'place_of_study_of_work': _('Поле не может быть пустым')})
+
 
 def _password_default_exp_date():
     return timezone.now() + timezone.timedelta(minutes=30)

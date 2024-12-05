@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-05 11:13+0500\n"
+"POT-Creation-Date: 2024-12-05 11:52+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,11 +26,11 @@ msgstr "The handle can only consist of Latin letters, numbers and _"
 msgid "ИИН может состоять только из 12 цифр"
 msgstr "UIN can only consist of 12 digits"
 
-#: .\authentication\models.py:52 .\authentication\models.py:199
+#: .\authentication\models.py:52 .\authentication\models.py:204
 msgid "Хэндл"
 msgstr "Handle"
 
-#: .\authentication\models.py:58 .\authentication\models.py:204
+#: .\authentication\models.py:58 .\authentication\models.py:209
 msgid "Электронная почта"
 msgstr "Email"
 
@@ -68,7 +68,7 @@ msgstr "Place of study or work"
 
 #: .\authentication\models.py:119 .\locations\models.py:14
 msgid "Регион"
-msgstr "Place of study or work"
+msgstr "Region"
 
 #: .\authentication\models.py:122
 msgid "Гражданин РК?"
@@ -90,7 +90,7 @@ msgstr "Account deleted?"
 msgid "Аккаунт активен?"
 msgstr "Account active?"
 
-#: .\authentication\models.py:137 .\authentication\models.py:167
+#: .\authentication\models.py:137 .\authentication\models.py:172
 msgid "Пользователь"
 msgstr "User"
 
@@ -98,32 +98,36 @@ msgstr "User"
 msgid "Пользователи"
 msgstr "Users"
 
-#: .\authentication\models.py:171 .\authentication\models.py:212
+#: .\authentication\models.py:155
+msgid "Поле не может быть пустым"
+msgstr "The field cannot be empty"
+
+#: .\authentication\models.py:176 .\authentication\models.py:217
 msgid "Ссылка использована?"
 msgstr "Link used?"
 
-#: .\authentication\models.py:175 .\authentication\models.py:216
+#: .\authentication\models.py:180 .\authentication\models.py:221
 msgid "Срок годности"
 msgstr "Expiration date"
 
-#: .\authentication\models.py:186 .\authentication\models.py:187
+#: .\authentication\models.py:191 .\authentication\models.py:192
 #: .\authentication\views\password_recovery.py:42
 msgid "Восстановление пароля"
 msgstr "Password recovery"
 
-#: .\authentication\models.py:208
+#: .\authentication\models.py:213
 msgid "Пароль"
 msgstr "Password"
 
-#: .\authentication\models.py:227
+#: .\authentication\models.py:232
 msgid "Хэндл уже занят"
 msgstr "The handle is already taken"
 
-#: .\authentication\models.py:231
+#: .\authentication\models.py:236
 msgid "Email уже занят"
 msgstr "The email is already taken"
 
-#: .\authentication\models.py:237 .\authentication\models.py:238
+#: .\authentication\models.py:242 .\authentication\models.py:243
 msgid "Активация аккаунта"
 msgstr "Account activation"
 
@@ -174,10 +178,6 @@ msgstr "Incorrect handle/email or password"
 #: .\authentication\views\user_management.py:80
 msgid "Войти в аккаунт"
 msgstr "Login"
-
-#: .\contest\forms.py:27
-msgid "Поле не может быть пустым"
-msgstr "The field cannot be empty"
 
 #: .\contest\models.py:13
 msgid "Название контеста"
@@ -275,7 +275,9 @@ msgid ""
 "d/1SUViRvUiOa_Onpq32CLzRaLuU73YDXfq/view\" class=\"text-"
 "blue-600\">регламенте</a>"
 msgstr ""
-"By indicating the location of your educational institution or work, you can apply for a regional quota when passing to the Championship final. More detailed information in the <a href=\"https://drive.google.com/file/"
+"By indicating the location of your educational institution or work, you can "
+"apply for a regional quota when passing to the Championship final. More "
+"detailed information in the <a href=\"https://drive.google.com/file/"
 "d/1SUViRvUiOa_Onpq32CLzRaLuU73YDXfq/view\" class=\"text-"
 "blue-600\">regulations</a>"
 
