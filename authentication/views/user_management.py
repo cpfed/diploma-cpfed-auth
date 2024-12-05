@@ -22,13 +22,11 @@ def user_new(request: HttpResponse):
 
             check_turnstile_captcha(request)
 
-            user_act = UserActivation(**form.cleaned_data)
-
             # save password safely
             dummy_user = MainUser()
-            dummy_user.set_password(user_act.password)
-            user_act.password = dummy_user.password
-            user_act.save()
+            dummy_user.set_password(form.cleaned_data['password'])
+            form.cleaned_data['password'] = dummy_user.password
+            user_act = form.save()
             try:
                 send_email(email=user_act.email,
                            link=request.build_absolute_uri("/register/" + str(user_act.id)),

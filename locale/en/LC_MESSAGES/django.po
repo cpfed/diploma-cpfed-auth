@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-05 11:52+0500\n"
+"POT-Creation-Date: 2024-12-05 16:45+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\authentication\forms.py:19 .\authentication\forms.py:38
+msgid "Пароли не совпадают"
+msgstr "The passwords do not match"
+
+#: .\authentication\forms.py:33
+msgid "Подтвердите пароль"
+msgstr "Confirm password"
 
 #: .\authentication\models.py:17
 msgid "Хэндл может состоять только из латинских букв, цифр и _"
@@ -155,27 +163,27 @@ msgstr "Password changed successfully!"
 msgid "Введите новый пароль"
 msgstr "Enter new password"
 
-#: .\authentication\views\user_management.py:41
+#: .\authentication\views\user_management.py:39
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr "Email has been sent to activate your account."
 
-#: .\authentication\views\user_management.py:42
+#: .\authentication\views\user_management.py:40
 msgid "Зарегистрироваться"
 msgstr "Registration"
 
-#: .\authentication\views\user_management.py:49
+#: .\authentication\views\user_management.py:47
 msgid "Ссылка уже использована"
 msgstr "Link used?"
 
-#: .\authentication\views\user_management.py:51
+#: .\authentication\views\user_management.py:49
 msgid "Ссылка для активации аккаунта устарела"
 msgstr "The account activation link expired"
 
-#: .\authentication\views\user_management.py:79
+#: .\authentication\views\user_management.py:77
 msgid "Некорректный хэндл/email или пароль"
 msgstr "Incorrect handle/email or password"
 
-#: .\authentication\views\user_management.py:80
+#: .\authentication\views\user_management.py:78
 msgid "Войти в аккаунт"
 msgstr "Login"
 
@@ -263,7 +271,7 @@ msgstr "Help"
 msgid "Все права защищены."
 msgstr "All rights reserved."
 
-#: .\templates\base_form.html:34
+#: .\templates\base_form.html:38
 msgid "Отправить"
 msgstr "Submit"
 
@@ -355,7 +363,7 @@ msgstr ""
 "If you received this email by mistake just ignore it. The link is only valid "
 "for the next 30 minutes."
 
-#: .\templates\login.html:6 .\templates\new_user.html:14
+#: .\templates\login.html:6 .\templates\new_user.html:7
 msgid "Забыли пароль?"
 msgstr "Forgot your password?"
 

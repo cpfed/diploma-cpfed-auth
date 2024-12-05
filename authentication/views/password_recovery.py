@@ -57,7 +57,7 @@ def password_recovery(request: HttpResponse, token: uuid):
     if request.method == 'POST':
         form = UserPasswordRecovery(request.POST)
         if form.is_valid():
-            rec.user.set_password(form.cleaned_data['new_password'])
+            rec.user.set_password(form.cleaned_data['password'])
             rec.user.save()
 
             rec.is_used = True

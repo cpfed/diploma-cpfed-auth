@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-05 11:52+0500\n"
+"POT-Creation-Date: 2024-12-05 16:45+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,14 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\authentication\forms.py:19 .\authentication\forms.py:38
+msgid "Пароли не совпадают"
+msgstr ""
+
+#: .\authentication\forms.py:33
+msgid "Подтвердите пароль"
+msgstr ""
 
 #: .\authentication\models.py:17
 msgid "Хэндл может состоять только из латинских букв, цифр и _"
@@ -157,27 +165,27 @@ msgstr ""
 msgid "Введите новый пароль"
 msgstr ""
 
-#: .\authentication\views\user_management.py:41
+#: .\authentication\views\user_management.py:39
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr ""
 
-#: .\authentication\views\user_management.py:42
+#: .\authentication\views\user_management.py:40
 msgid "Зарегистрироваться"
 msgstr ""
 
-#: .\authentication\views\user_management.py:49
+#: .\authentication\views\user_management.py:47
 msgid "Ссылка уже использована"
 msgstr ""
 
-#: .\authentication\views\user_management.py:51
+#: .\authentication\views\user_management.py:49
 msgid "Ссылка для активации аккаунта устарела"
 msgstr ""
 
-#: .\authentication\views\user_management.py:79
+#: .\authentication\views\user_management.py:77
 msgid "Некорректный хэндл/email или пароль"
 msgstr ""
 
-#: .\authentication\views\user_management.py:80
+#: .\authentication\views\user_management.py:78
 msgid "Войти в аккаунт"
 msgstr ""
 
@@ -265,7 +273,7 @@ msgstr ""
 msgid "Все права защищены."
 msgstr ""
 
-#: .\templates\base_form.html:34
+#: .\templates\base_form.html:38
 msgid "Отправить"
 msgstr ""
 
@@ -339,7 +347,7 @@ msgid ""
 "действительна только в течение следующих 30 минут."
 msgstr ""
 
-#: .\templates\login.html:6 .\templates\new_user.html:14
+#: .\templates\login.html:6 .\templates\new_user.html:7
 msgid "Забыли пароль?"
 msgstr ""
 
