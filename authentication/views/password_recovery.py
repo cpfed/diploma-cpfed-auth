@@ -7,11 +7,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.db.models import ObjectDoesNotExist
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django.urls import reverse
 
 from authentication.forms import UserPasswordRecovery, UserPasswordRecoveryRequest
 from authentication.models import MainUser, PasswordRecovery
 from .services.send_email import send_email
 from utils.cloudflare import check_turnstile_captcha
+from utils.funcs import get_next_urlenc
+
 
 # Create your views here.
 def password_recovery_request(request: HttpResponse):
@@ -30,7 +33,7 @@ def password_recovery_request(request: HttpResponse):
                 rec.save()
                 try:
                     send_email(email=user.email,
-                               link=request.build_absolute_uri("/passwordRecovery/" + str(rec.id)),
+                               link=request.build_absolute_uri(reverse("pass_rec")) + str(rec.id) + get_next_urlenc(request),
                                subject="Восстановление пароля Cpfed",
                                template_name="emails/recovery_password.html",
                                username=user.handle)
@@ -39,8 +42,8 @@ def password_recovery_request(request: HttpResponse):
                 return render(request, 'result_message.html',
                               {'message': _('Ссылка для восстановления пароля отправлена на почту.')})
         error = str(form.errors)
-    return render(request, 'base_form.html', {'form': form, 'form_name': _('Восстановление пароля'), 'enable_captcha': not settings.DEBUG})
-
+    return render(request, 'base_form.html',
+                  {'form': form, 'form_name': _('Восстановление пароля'), 'enable_captcha': not settings.DEBUG})
 
 def password_recovery(request: HttpResponse, token: uuid):
     error = None
@@ -62,6 +65,9 @@ def password_recovery(request: HttpResponse, token: uuid):
 
             rec.is_used = True
             rec.save()
+            login(request, rec.user)
+            if 'next' in request.GET:
+                return redirect(request.GET['next'])
             return render(request, 'result_message.html', {'message': _('Пароль успешно изменен!')})
         error = str(form.errors)
     return render(request, 'base_form.html', {'form': form, 'form_name': _('Введите новый пароль')})

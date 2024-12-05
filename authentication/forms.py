@@ -25,7 +25,7 @@ class UserLoginForm(forms.Form):
 
 
 class UserPasswordRecoveryRequest(forms.Form):
-    email = forms.EmailField()
+    email = forms.EmailField(label=_('Электронная почта'))
 
 
 class UserPasswordRecovery(forms.Form):

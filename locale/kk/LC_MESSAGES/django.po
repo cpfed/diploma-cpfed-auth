@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-05 16:45+0500\n"
+"POT-Creation-Date: 2024-12-05 18:02+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,11 @@ msgstr ""
 #: .\authentication\forms.py:19 .\authentication\forms.py:38
 msgid "Пароли не совпадают"
 msgstr "Құпия сөздер бірдей емес"
+
+#: .\authentication\forms.py:28 .\authentication\models.py:58
+#: .\authentication\models.py:209
+msgid "Электронная почта"
+msgstr "Электрондық пошта"
 
 #: .\authentication\forms.py:33
 msgid "Подтвердите пароль"
@@ -37,10 +42,6 @@ msgstr "ЖСН тек 12 саннан тұру керек"
 #: .\authentication\models.py:52 .\authentication\models.py:204
 msgid "Хэндл"
 msgstr "Хэндл"
-
-#: .\authentication\models.py:58 .\authentication\models.py:209
-msgid "Электронная почта"
-msgstr "Электрондық пошта"
 
 #: .\authentication\models.py:64
 msgid "Имя"
@@ -119,7 +120,7 @@ msgid "Срок годности"
 msgstr "Жарамдылық мерзімі"
 
 #: .\authentication\models.py:191 .\authentication\models.py:192
-#: .\authentication\views\password_recovery.py:42
+#: .\authentication\views\password_recovery.py:46
 msgid "Восстановление пароля"
 msgstr "Құпия сөзді қалпына келтіру"
 
@@ -139,52 +140,52 @@ msgstr "Электрондық пошта бос емес"
 msgid "Активация аккаунта"
 msgstr "Аккаунтты белсендіру"
 
-#: .\authentication\views\password_recovery.py:27
+#: .\authentication\views\password_recovery.py:30
 msgid "Указанный для восстановления пароля email не найден"
 msgstr ""
 "Құпиясөзді қалпына келтіру үшін көрсетілген электрондық пошта табылмады"
 
-#: .\authentication\views\password_recovery.py:40
+#: .\authentication\views\password_recovery.py:43
 msgid "Ссылка для восстановления пароля отправлена на почту."
 msgstr "Құпиясөзді қалпына келтіру сілтемесі поштаға жіберіледі."
 
-#: .\authentication\views\password_recovery.py:49
+#: .\authentication\views\password_recovery.py:52
 msgid "Ссылка уже использована."
 msgstr "Сілтеме пайдаланылды."
 
-#: .\authentication\views\password_recovery.py:52
+#: .\authentication\views\password_recovery.py:55
 msgid "Ссылка для восстановления пароля уже устарела. Попробуйте заново."
 msgstr "Таңдалған қалпына келтіру сілтемесі ескірген. Қайтадан көріңіз."
 
-#: .\authentication\views\password_recovery.py:65
+#: .\authentication\views\password_recovery.py:71
 msgid "Пароль успешно изменен!"
 msgstr "Құпиясөз сәтті өзгертілді!"
 
-#: .\authentication\views\password_recovery.py:67
+#: .\authentication\views\password_recovery.py:73
 msgid "Введите новый пароль"
 msgstr "Жаңа құпиясөзді енгізіңіз"
 
-#: .\authentication\views\user_management.py:39
+#: .\authentication\views\user_management.py:40
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr "Аккаунтты белсендіру үшін поштаға хат жіберілді"
 
-#: .\authentication\views\user_management.py:40
+#: .\authentication\views\user_management.py:41
 msgid "Зарегистрироваться"
 msgstr "Тіркелу"
 
-#: .\authentication\views\user_management.py:47
+#: .\authentication\views\user_management.py:48
 msgid "Ссылка уже использована"
 msgstr "Сілтеме пайдаланылды"
 
-#: .\authentication\views\user_management.py:49
+#: .\authentication\views\user_management.py:50
 msgid "Ссылка для активации аккаунта устарела"
 msgstr "Аккаунтты белсендіру сілтемесі ескірген"
 
-#: .\authentication\views\user_management.py:77
+#: .\authentication\views\user_management.py:82
 msgid "Некорректный хэндл/email или пароль"
 msgstr "Қате хэндл/электрондық пошта немесе құпиясөз"
 
-#: .\authentication\views\user_management.py:78
+#: .\authentication\views\user_management.py:83
 msgid "Войти в аккаунт"
 msgstr "Аккаунтқа кіру"
 
@@ -212,11 +213,11 @@ msgstr "Сайыстың ID"
 msgid "Данные пользователей к контестам"
 msgstr "Сайыстарға арналған пайдаланушы деректері"
 
-#: .\contest\views.py:40
+#: .\contest\views.py:42
 msgid "Вы успешно зарегистрированы!"
 msgstr "Сіз сәтті тіркелдіңіз!"
 
-#: .\contest\views.py:48
+#: .\contest\views.py:50
 msgid "Регистрация на чемпионат"
 msgstr "Чемпионатқа тіркелу"
 
@@ -362,7 +363,7 @@ msgstr ""
 "Егер сіз бұл электрондық поштаны қате алсаңыз, оны елемеңіз. Сілтеме келесі "
 "30 минут ішінде ғана жарамды."
 
-#: .\templates\login.html:6 .\templates\new_user.html:7
+#: .\templates\login.html:8 .\templates\new_user.html:7
 msgid "Забыли пароль?"
 msgstr "Құпия сөзіңізді ұмыттыңыз ба?"
 

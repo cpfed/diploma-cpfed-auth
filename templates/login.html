@@ -3,6 +3,10 @@
 
 {% block form_addition_bottom %}
 <div>
-    <p class="text-blue-800 text-right my-4"><a href="{%url 'pass_rec'%}">{% translate "Забыли пароль?" %}</a></p>
+    <p class="text-blue-800 text-right my-4">
+        <a href="{% url 'pass_rec'%}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">
+        {% translate "Забыли пароль?" %}
+        </a>
+    </p>
 </div>
 {% endblock %}

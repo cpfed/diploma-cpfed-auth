@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-05 16:45+0500\n"
+"POT-Creation-Date: 2024-12-05 18:02+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,11 @@ msgstr ""
 #: .\authentication\forms.py:19 .\authentication\forms.py:38
 msgid "Пароли не совпадают"
 msgstr "The passwords do not match"
+
+#: .\authentication\forms.py:28 .\authentication\models.py:58
+#: .\authentication\models.py:209
+msgid "Электронная почта"
+msgstr "Email"
 
 #: .\authentication\forms.py:33
 msgid "Подтвердите пароль"
@@ -37,10 +42,6 @@ msgstr "UIN can only consist of 12 digits"
 #: .\authentication\models.py:52 .\authentication\models.py:204
 msgid "Хэндл"
 msgstr "Handle"
-
-#: .\authentication\models.py:58 .\authentication\models.py:209
-msgid "Электронная почта"
-msgstr "Email"
 
 #: .\authentication\models.py:64
 msgid "Имя"
@@ -119,7 +120,7 @@ msgid "Срок годности"
 msgstr "Expiration date"
 
 #: .\authentication\models.py:191 .\authentication\models.py:192
-#: .\authentication\views\password_recovery.py:42
+#: .\authentication\views\password_recovery.py:46
 msgid "Восстановление пароля"
 msgstr "Password recovery"
 
@@ -139,51 +140,51 @@ msgstr "The email is already taken"
 msgid "Активация аккаунта"
 msgstr "Account activation"
 
-#: .\authentication\views\password_recovery.py:27
+#: .\authentication\views\password_recovery.py:30
 msgid "Указанный для восстановления пароля email не найден"
 msgstr "The email specified for password recovery was not found"
 
-#: .\authentication\views\password_recovery.py:40
+#: .\authentication\views\password_recovery.py:43
 msgid "Ссылка для восстановления пароля отправлена на почту."
 msgstr "A link to reset your password has been sent to your email."
 
-#: .\authentication\views\password_recovery.py:49
+#: .\authentication\views\password_recovery.py:52
 msgid "Ссылка уже использована."
 msgstr "Link was used"
 
-#: .\authentication\views\password_recovery.py:52
+#: .\authentication\views\password_recovery.py:55
 msgid "Ссылка для восстановления пароля уже устарела. Попробуйте заново."
 msgstr "The password recovery link has expired. Please try again."
 
-#: .\authentication\views\password_recovery.py:65
+#: .\authentication\views\password_recovery.py:71
 msgid "Пароль успешно изменен!"
 msgstr "Password changed successfully!"
 
-#: .\authentication\views\password_recovery.py:67
+#: .\authentication\views\password_recovery.py:73
 msgid "Введите новый пароль"
 msgstr "Enter new password"
 
-#: .\authentication\views\user_management.py:39
+#: .\authentication\views\user_management.py:40
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr "Email has been sent to activate your account."
 
-#: .\authentication\views\user_management.py:40
+#: .\authentication\views\user_management.py:41
 msgid "Зарегистрироваться"
 msgstr "Registration"
 
-#: .\authentication\views\user_management.py:47
+#: .\authentication\views\user_management.py:48
 msgid "Ссылка уже использована"
 msgstr "Link used?"
 
-#: .\authentication\views\user_management.py:49
+#: .\authentication\views\user_management.py:50
 msgid "Ссылка для активации аккаунта устарела"
 msgstr "The account activation link expired"
 
-#: .\authentication\views\user_management.py:77
+#: .\authentication\views\user_management.py:82
 msgid "Некорректный хэндл/email или пароль"
 msgstr "Incorrect handle/email or password"
 
-#: .\authentication\views\user_management.py:78
+#: .\authentication\views\user_management.py:83
 msgid "Войти в аккаунт"
 msgstr "Login"
 
@@ -211,11 +212,11 @@ msgstr "Contest ID"
 msgid "Данные пользователей к контестам"
 msgstr "User data for contests"
 
-#: .\contest\views.py:40
+#: .\contest\views.py:42
 msgid "Вы успешно зарегистрированы!"
 msgstr "You have registered successfully!"
 
-#: .\contest\views.py:48
+#: .\contest\views.py:50
 msgid "Регистрация на чемпионат"
 msgstr "Registration for the championship"
 
@@ -363,7 +364,7 @@ msgstr ""
 "If you received this email by mistake just ignore it. The link is only valid "
 "for the next 30 minutes."
 
-#: .\templates\login.html:6 .\templates\new_user.html:7
+#: .\templates\login.html:8 .\templates\new_user.html:7
 msgid "Забыли пароль?"
 msgstr "Forgot your password?"
 

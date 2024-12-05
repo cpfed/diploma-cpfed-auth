@@ -45,10 +45,10 @@
                     <div class="bg-blue-600 px-3 py-2 text-gray-100 rounded-lg">{% translate "Выйти" %}</div>
                 </a>
                 {% else %}
-                <a href="{%url 'login' %}">
+                <a href="{%url 'login' %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">
                     <div class="text-blue-600">{% translate "Войти" %}</div>
                 </a>
-                <a href="{%url 'register' %}">
+                <a href="{%url 'register' %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">
                     <div class="bg-blue-600 px-3 py-2 text-gray-100 rounded-lg">{% translate "Регистрация" %}</div>
                 </a>
                 {% endif %}

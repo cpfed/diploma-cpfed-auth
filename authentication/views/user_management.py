@@ -11,6 +11,7 @@ from authentication.forms import UserCreateForm, UserPasswordRecovery, UserLogin
 from authentication.models import UserActivation, MainUser
 from .services.send_email import send_email
 from utils.cloudflare import check_turnstile_captcha
+from utils.funcs import get_next_urlenc
 
 # Create your views here.
 
@@ -29,7 +30,7 @@ def user_new(request: HttpResponse):
             user_act = form.save()
             try:
                 send_email(email=user_act.email,
-                           link=request.build_absolute_uri("/register/" + str(user_act.id)),
+                           link=request.build_absolute_uri("/register/" + str(user_act.id)) + get_next_urlenc(request),
                            subject="Активация аккаунта Cpfed",
                            template_name="emails/user_activation.html",
                            username=user_act.handle)
@@ -55,6 +56,8 @@ def user_activate(request: HttpResponse, token: uuid):
         user_act.is_used = True
         user_act.save()
 
+        if 'next' in request.GET:
+            return redirect(request.GET['next'])
         return redirect(settings.AFTER_LOGIN_URL)
     return render(request, 'result_message.html', {'message': error})
 
@@ -73,6 +76,8 @@ def user_login(request: HttpResponse):
         user = authenticate(request, handle=handle, password=password)
         if user is not None:
             login(request, user)
+            if 'next' in request.GET:
+                return redirect(request.GET['next'])
             return redirect(settings.AFTER_LOGIN_URL)
         form.add_error('password', _('Некорректный хэндл/email или пароль'))
     return render(request, 'login.html', {'form': form, 'form_name': _('Войти в аккаунт')})

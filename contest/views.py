@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, response
+from django.http import HttpResponse, HttpResponseRedirect, response
+from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.forms.models import fields_for_model
 from django.utils.translation import gettext_lazy as _
+from django.utils.http import urlencode
 from django.db.utils import IntegrityError
 
 from .models import Contest, UserContest
@@ -16,7 +18,7 @@ from authentication.forms import get_user_form
 
 def contest_reg(request: HttpResponse, contest_id: int):
     if not request.user.is_authenticated:
-        return redirect(settings.LOGIN_URL)
+        return HttpResponseRedirect(f"{reverse('login')}?{urlencode({'next': request.path})}")
 
     contest = get_object_or_404(Contest, id=contest_id)
 
