@@ -43,9 +43,9 @@ def contest_reg(request: HttpResponse, contest_id: int):
             for err in errs:
                 if err not in form.errors.get(field, []):
                     form.add_error(field, err)
-    return render(request, 'base_form.html', {
+    return render(request, 'crk_reg.html', {
         'form': form,
-        'form_name': _('Регистрация на ') + contest.name,
+        'form_name': _('Регистрация на чемпионат'),
     })
 
 

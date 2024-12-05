@@ -1,0 +1,17 @@
+{% extends 'base_form.html' %}
+{% load i18n %}
+
+{% block form_addition_before_button %}
+<div>
+    <p class="text-sm mb-2">
+        {% translate "Отмечая место расположения учебного заведения или работы, Вы можете претендовать на региональную квоту при прохождении в финал Чемпионата. Более подробная информация в" %}<a href="#" class="text-blue-600">{% translate "регламенте" %}</a>
+        <br/>
+        {% translate "Обратите внимание, что для верификации принадлежности к региону необходимо будет предоставить справку со школы/ВУЗа/ работы по запросу организаторов олимпиады." %}
+    </p>
+    <input type="checkbox" checked="true" id="polycy_conf" onchange="document.getElementById('form_submit_button').disabled = !this.checked;" />
+    <label for="polycy_conf">
+        {% translate "Согласен с политикой " %}<a href="#" class="text-blue-600">{% translate "конфиденциальности" %}</a>
+    </label>
+<!--    <p class="text-blue-800 text-left my-4"><a href="{%url 'pass_rec'%}">{% translate "Забыли пароль?" %}</a></p>-->
+</div>
+{% endblock %}
