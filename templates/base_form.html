@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="flex flex-col items-center justify-center px-6 py-4 mx-auto">
-    <div class="w-full max-w-md">
+    <div class="w-full max-w-lg">
         <div class="flex flex-col space-y-0 p-8 shadow-2xl rounded-2xl">
             <div class="flex flex-col items-center justify-center my-2">
                 <p class="text-2xl font-bold text-gray-900">
@@ -25,6 +25,10 @@
 
                 {% block form_addition_before_button %}
                 {% endblock %}
+
+                {% if enable_captcha %}
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAAA1gLBJEprLgdf5y"></div>
+                {% endif %}
 
                 <button type="submit"
                         class="w-full bg-amber-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
