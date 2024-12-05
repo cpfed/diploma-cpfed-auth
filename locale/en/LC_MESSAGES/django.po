@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-05 18:02+0500\n"
+"POT-Creation-Date: 2024-12-05 18:10+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -216,9 +216,13 @@ msgstr "User data for contests"
 msgid "Вы успешно зарегистрированы!"
 msgstr "You have registered successfully!"
 
-#: .\contest\views.py:50
+#: .\contest\views.py:51
 msgid "Регистрация на чемпионат"
 msgstr "Registration for the championship"
+
+#: .\contest\views.py:51
+msgid "Изменить регистрацию"
+msgstr "Change registration"
 
 #: .\locations\models.py:10
 msgid "Название региона"

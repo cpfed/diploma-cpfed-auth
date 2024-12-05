@@ -45,9 +45,10 @@ def contest_reg(request: HttpResponse, contest_id: int):
             for err in errs:
                 if err not in form.errors.get(field, []):
                     form.add_error(field, err)
+    was_reg = UserContest.objects.filter(user=request.user, contest=contest).exists()
     return render(request, 'crk_reg.html', {
         'form': form,
-        'form_name': _('Регистрация на чемпионат'),
+        'form_name': (_('Регистрация на чемпионат') if not was_reg else _('Изменить регистрацию')),
     })
 
 
