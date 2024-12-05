@@ -8,11 +8,11 @@
     <div class="w-full max-w-md">
         <div class="flex flex-col space-y-0 p-8 shadow-2xl rounded-2xl">
             <div class="flex flex-col items-center justify-center my-2">
-                <p class="text-xl font-bold text-gray-900 md:text-2xl ">
+                <p class="text-2xl font-bold text-gray-900">
                     {{ form_name }}
                 </p>
             </div>
-            <form method="POST" class="space-y-2 text-gray-500">
+            <form method="POST" class="space-y-2 text-gray-700">
                 {% csrf_token %}
 
                 {% for fld in form %}

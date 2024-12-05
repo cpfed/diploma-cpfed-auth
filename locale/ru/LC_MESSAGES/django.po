@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 23:32+0500\n"
+"POT-Creation-Date: 2024-12-05 11:13+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,7 +109,7 @@ msgid "Срок годности"
 msgstr ""
 
 #: .\authentication\models.py:186 .\authentication\models.py:187
-#: .\authentication\views\password_recovery.py:41
+#: .\authentication\views\password_recovery.py:42
 msgid "Восстановление пароля"
 msgstr ""
 
@@ -129,51 +129,51 @@ msgstr ""
 msgid "Активация аккаунта"
 msgstr ""
 
-#: .\authentication\views\password_recovery.py:26
+#: .\authentication\views\password_recovery.py:27
 msgid "Указанный для восстановления пароля email не найден"
 msgstr ""
 
-#: .\authentication\views\password_recovery.py:39
+#: .\authentication\views\password_recovery.py:40
 msgid "Ссылка для восстановления пароля отправлена на почту."
 msgstr ""
 
-#: .\authentication\views\password_recovery.py:48
+#: .\authentication\views\password_recovery.py:49
 msgid "Ссылка уже использована."
 msgstr ""
 
-#: .\authentication\views\password_recovery.py:51
+#: .\authentication\views\password_recovery.py:52
 msgid "Ссылка для восстановления пароля уже устарела. Попробуйте заново."
 msgstr ""
 
-#: .\authentication\views\password_recovery.py:64
+#: .\authentication\views\password_recovery.py:65
 msgid "Пароль успешно изменен!"
 msgstr ""
 
-#: .\authentication\views\password_recovery.py:66
+#: .\authentication\views\password_recovery.py:67
 msgid "Введите новый пароль"
 msgstr ""
 
-#: .\authentication\views\user_management.py:38
+#: .\authentication\views\user_management.py:41
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr ""
 
-#: .\authentication\views\user_management.py:39
+#: .\authentication\views\user_management.py:42
 msgid "Зарегистрироваться"
 msgstr ""
 
-#: .\authentication\views\user_management.py:46
+#: .\authentication\views\user_management.py:49
 msgid "Ссылка уже использована"
 msgstr ""
 
-#: .\authentication\views\user_management.py:48
+#: .\authentication\views\user_management.py:51
 msgid "Ссылка для активации аккаунта устарела"
 msgstr ""
 
-#: .\authentication\views\user_management.py:76
+#: .\authentication\views\user_management.py:79
 msgid "Некорректный хэндл/email или пароль"
 msgstr ""
 
-#: .\authentication\views\user_management.py:77
+#: .\authentication\views\user_management.py:80
 msgid "Войти в аккаунт"
 msgstr ""
 
@@ -189,7 +189,7 @@ msgstr ""
 msgid "Контест"
 msgstr ""
 
-#: .\contest\models.py:34 .\templates\base.html:21
+#: .\contest\models.py:34 .\templates\base.html:23
 msgid "Контесты"
 msgstr ""
 
@@ -210,7 +210,7 @@ msgid "Вы успешно зарегистрированы!"
 msgstr ""
 
 #: .\contest\views.py:48
-msgid "Регистрация на "
+msgid "Регистрация на чемпионат"
 msgstr ""
 
 #: .\locations\models.py:10
@@ -229,44 +229,67 @@ msgstr ""
 msgid "Время последнего изменения"
 msgstr ""
 
-#: .\templates\base.html:20 .\templates\base.html:69
+#: .\templates\base.html:22 .\templates\base.html:71
 msgid "О нас"
 msgstr ""
 
-#: .\templates\base.html:22 .\templates\base.html:70
+#: .\templates\base.html:24 .\templates\base.html:72
 msgid "Контакты"
 msgstr ""
 
-#: .\templates\base.html:41
+#: .\templates\base.html:43
 msgid "Привет"
 msgstr ""
 
-#: .\templates\base.html:43
+#: .\templates\base.html:45
 msgid "Выйти"
 msgstr ""
 
-#: .\templates\base.html:47
+#: .\templates\base.html:49
 msgid "Войти"
 msgstr ""
 
-#: .\templates\base.html:50
+#: .\templates\base.html:52
 msgid "Регистрация"
 msgstr ""
 
-#: .\templates\base.html:68
+#: .\templates\base.html:70
 msgid "Главная"
 msgstr ""
 
-#: .\templates\base.html:71
+#: .\templates\base.html:73
 msgid "Помощь"
 msgstr ""
 
-#: .\templates\base.html:75
+#: .\templates\base.html:77
 msgid "Все права защищены."
 msgstr ""
 
-#: .\templates\base_form.html:31
+#: .\templates\base_form.html:34
 msgid "Отправить"
+msgstr ""
+
+#: .\templates\crk_reg.html:7
+msgid ""
+"Отмечая место расположения учебного заведения или работы, Вы можете "
+"претендовать на региональную квоту при прохождении в финал Чемпионата. Более "
+"подробная информация в <a href=\"https://drive.google.com/file/"
+"d/1SUViRvUiOa_Onpq32CLzRaLuU73YDXfq/view\" class=\"text-"
+"blue-600\">регламенте</a>"
+msgstr ""
+
+#: .\templates\crk_reg.html:9
+msgid ""
+"Обратите внимание, что для верификации принадлежности к региону необходимо "
+"будет предоставить справку со школы/ВУЗа/ работы по запросу организаторов "
+"олимпиады."
+msgstr ""
+
+#: .\templates\crk_reg.html:13
+msgid ""
+"Согласен с политикой <a href=\"https://drive.google.com/file/"
+"d/1ReERKx_HgGimV-pp5n_DEMfB6-axesku/view\" class=\"text-"
+"blue-600\">конфиденциальности</a>"
 msgstr ""
 
 #: .\templates\emails\recovery_password.html:30
@@ -316,7 +339,7 @@ msgid ""
 "действительна только в течение следующих 30 минут."
 msgstr ""
 
-#: .\templates\login.html:6 .\templates\new_user.html:6
+#: .\templates\login.html:6 .\templates\new_user.html:14
 msgid "Забыли пароль?"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 23:32+0500\n"
+"POT-Creation-Date: 2024-12-05 11:13+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -107,7 +107,7 @@ msgid "Срок годности"
 msgstr "Expiration date"
 
 #: .\authentication\models.py:186 .\authentication\models.py:187
-#: .\authentication\views\password_recovery.py:41
+#: .\authentication\views\password_recovery.py:42
 msgid "Восстановление пароля"
 msgstr "Password recovery"
 
@@ -127,51 +127,51 @@ msgstr "The email is already taken"
 msgid "Активация аккаунта"
 msgstr "Account activation"
 
-#: .\authentication\views\password_recovery.py:26
+#: .\authentication\views\password_recovery.py:27
 msgid "Указанный для восстановления пароля email не найден"
 msgstr "The email specified for password recovery was not found"
 
-#: .\authentication\views\password_recovery.py:39
+#: .\authentication\views\password_recovery.py:40
 msgid "Ссылка для восстановления пароля отправлена на почту."
 msgstr "A link to reset your password has been sent to your email."
 
-#: .\authentication\views\password_recovery.py:48
+#: .\authentication\views\password_recovery.py:49
 msgid "Ссылка уже использована."
 msgstr "Link was used"
 
-#: .\authentication\views\password_recovery.py:51
+#: .\authentication\views\password_recovery.py:52
 msgid "Ссылка для восстановления пароля уже устарела. Попробуйте заново."
 msgstr "The password recovery link has expired. Please try again."
 
-#: .\authentication\views\password_recovery.py:64
+#: .\authentication\views\password_recovery.py:65
 msgid "Пароль успешно изменен!"
 msgstr "Password changed successfully!"
 
-#: .\authentication\views\password_recovery.py:66
+#: .\authentication\views\password_recovery.py:67
 msgid "Введите новый пароль"
 msgstr "Enter new password"
 
-#: .\authentication\views\user_management.py:38
+#: .\authentication\views\user_management.py:41
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr "Email has been sent to activate your account."
 
-#: .\authentication\views\user_management.py:39
+#: .\authentication\views\user_management.py:42
 msgid "Зарегистрироваться"
 msgstr "Registration"
 
-#: .\authentication\views\user_management.py:46
+#: .\authentication\views\user_management.py:49
 msgid "Ссылка уже использована"
 msgstr "Link used?"
 
-#: .\authentication\views\user_management.py:48
+#: .\authentication\views\user_management.py:51
 msgid "Ссылка для активации аккаунта устарела"
 msgstr "The account activation link expired"
 
-#: .\authentication\views\user_management.py:76
+#: .\authentication\views\user_management.py:79
 msgid "Некорректный хэндл/email или пароль"
 msgstr "Incorrect handle/email or password"
 
-#: .\authentication\views\user_management.py:77
+#: .\authentication\views\user_management.py:80
 msgid "Войти в аккаунт"
 msgstr "Login"
 
@@ -187,7 +187,7 @@ msgstr "Name of the contest"
 msgid "Контест"
 msgstr "Contest"
 
-#: .\contest\models.py:34 .\templates\base.html:21
+#: .\contest\models.py:34 .\templates\base.html:23
 msgid "Контесты"
 msgstr "Contests"
 
@@ -208,8 +208,8 @@ msgid "Вы успешно зарегистрированы!"
 msgstr "You have registered successfully!"
 
 #: .\contest\views.py:48
-msgid "Регистрация на "
-msgstr "Registration on "
+msgid "Регистрация на чемпионат"
+msgstr "Registration for the championship"
 
 #: .\locations\models.py:10
 msgid "Название региона"
@@ -227,45 +227,76 @@ msgstr "Creation time"
 msgid "Время последнего изменения"
 msgstr "Last modified time"
 
-#: .\templates\base.html:20 .\templates\base.html:69
+#: .\templates\base.html:22 .\templates\base.html:71
 msgid "О нас"
 msgstr "About us"
 
-#: .\templates\base.html:22 .\templates\base.html:70
+#: .\templates\base.html:24 .\templates\base.html:72
 msgid "Контакты"
 msgstr "Contacts"
 
-#: .\templates\base.html:41
+#: .\templates\base.html:43
 msgid "Привет"
 msgstr "Hello"
 
-#: .\templates\base.html:43
+#: .\templates\base.html:45
 msgid "Выйти"
 msgstr "Logout"
 
-#: .\templates\base.html:47
+#: .\templates\base.html:49
 msgid "Войти"
 msgstr "Enter"
 
-#: .\templates\base.html:50
+#: .\templates\base.html:52
 msgid "Регистрация"
 msgstr "Registration"
 
-#: .\templates\base.html:68
+#: .\templates\base.html:70
 msgid "Главная"
 msgstr "Main page"
 
-#: .\templates\base.html:71
+#: .\templates\base.html:73
 msgid "Помощь"
 msgstr "Help"
 
-#: .\templates\base.html:75
+#: .\templates\base.html:77
 msgid "Все права защищены."
 msgstr "All rights reserved."
 
-#: .\templates\base_form.html:31
+#: .\templates\base_form.html:34
 msgid "Отправить"
 msgstr "Submit"
+
+#: .\templates\crk_reg.html:7
+msgid ""
+"Отмечая место расположения учебного заведения или работы, Вы можете "
+"претендовать на региональную квоту при прохождении в финал Чемпионата. Более "
+"подробная информация в <a href=\"https://drive.google.com/file/"
+"d/1SUViRvUiOa_Onpq32CLzRaLuU73YDXfq/view\" class=\"text-"
+"blue-600\">регламенте</a>"
+msgstr ""
+"By indicating the location of your educational institution or work, you can apply for a regional quota when passing to the Championship final. More detailed information in the <a href=\"https://drive.google.com/file/"
+"d/1SUViRvUiOa_Onpq32CLzRaLuU73YDXfq/view\" class=\"text-"
+"blue-600\">regulations</a>"
+
+#: .\templates\crk_reg.html:9
+msgid ""
+"Обратите внимание, что для верификации принадлежности к региону необходимо "
+"будет предоставить справку со школы/ВУЗа/ работы по запросу организаторов "
+"олимпиады."
+msgstr ""
+"Please note that to verify your regional affiliation, you will need to "
+"provide a certificate from your school/university/work at the request of the "
+"Olympiad organizers."
+
+#: .\templates\crk_reg.html:13
+msgid ""
+"Согласен с политикой <a href=\"https://drive.google.com/file/"
+"d/1ReERKx_HgGimV-pp5n_DEMfB6-axesku/view\" class=\"text-"
+"blue-600\">конфиденциальности</a>"
+msgstr ""
+"I agree with <a href=\"https://drive.google.com/file/d/1ReERKx_HgGimV-"
+"pp5n_DEMfB6-axesku/view\" class=\"text-blue-600\">the privacy policy</a>"
 
 #: .\templates\emails\recovery_password.html:30
 #: .\templates\emails\user_activation.html:30
@@ -322,7 +353,7 @@ msgstr ""
 "If you received this email by mistake just ignore it. The link is only valid "
 "for the next 30 minutes."
 
-#: .\templates\login.html:6 .\templates\new_user.html:6
+#: .\templates\login.html:6 .\templates\new_user.html:14
 msgid "Забыли пароль?"
 msgstr "Forgot your password?"
 
