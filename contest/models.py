@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.contrib.postgres.fields import ArrayField
+from django.utils import timezone
 from django import forms
 
 # Create your models here.
@@ -28,6 +29,10 @@ class Contest(models.Model):
     required_fields = ArrayField(
         models.CharField(max_length=100)
     )
+    playing_desc = models.TextField()
+    date = models.DateTimeField(
+        verbose_name=_('Дата контеста')
+    )
 
     class Meta:
         verbose_name = _("Контест")
@@ -36,6 +41,10 @@ class Contest(models.Model):
 
     def __str__(self):
         return f"ID: {self.id}. Контест {self.name}"
+
+    @property
+    def remaining_days(self):
+        return (self.date - timezone.now()).days
 
 class Championship():
     # date, contests

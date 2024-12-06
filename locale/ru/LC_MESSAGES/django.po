@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-06 14:15+0500\n"
+"POT-Creation-Date: 2024-12-06 15:23+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -134,15 +134,15 @@ msgstr ""
 msgid "Пароль"
 msgstr ""
 
-#: .\authentication\models.py:232
+#: .\authentication\models.py:242
 msgid "Хэндл уже занят"
 msgstr ""
 
-#: .\authentication\models.py:236
+#: .\authentication\models.py:245
 msgid "Email уже занят"
 msgstr ""
 
-#: .\authentication\models.py:242 .\authentication\models.py:243
+#: .\authentication\models.py:251 .\authentication\models.py:252
 msgid "Активация аккаунта"
 msgstr ""
 
@@ -170,28 +170,32 @@ msgstr ""
 msgid "Введите новый пароль"
 msgstr ""
 
-#: .\authentication\views\user_management.py:40
+#: .\authentication\views\user_management.py:42
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr ""
 
-#: .\authentication\views\user_management.py:41
+#: .\authentication\views\user_management.py:43
 msgid "Зарегистрироваться"
 msgstr ""
 
-#: .\authentication\views\user_management.py:48
+#: .\authentication\views\user_management.py:50
 msgid "Ссылка уже использована"
 msgstr ""
 
-#: .\authentication\views\user_management.py:50
+#: .\authentication\views\user_management.py:52
 msgid "Ссылка для активации аккаунта устарела"
 msgstr ""
 
-#: .\authentication\views\user_management.py:82
+#: .\authentication\views\user_management.py:84
 msgid "Некорректный хэндл/email или пароль"
 msgstr ""
 
-#: .\authentication\views\user_management.py:83
+#: .\authentication\views\user_management.py:85
 msgid "Войти в аккаунт"
+msgstr ""
+
+#: .\authentication\views\user_management.py:95
+msgid "Профиль"
 msgstr ""
 
 #: .\contest\models.py:13
@@ -202,7 +206,7 @@ msgstr ""
 msgid "Контест"
 msgstr ""
 
-#: .\contest\models.py:34 .\templates\base.html:23
+#: .\contest\models.py:34 .\templates\base.html:26
 msgid "Контесты"
 msgstr ""
 
@@ -246,39 +250,43 @@ msgstr ""
 msgid "Время последнего изменения"
 msgstr ""
 
-#: .\templates\base.html:22 .\templates\base.html:71
-msgid "О нас"
-msgstr ""
-
-#: .\templates\base.html:24 .\templates\base.html:72
-msgid "Контакты"
-msgstr ""
-
-#: .\templates\base.html:43
-msgid "Привет"
-msgstr ""
-
-#: .\templates\base.html:45
-msgid "Выйти"
-msgstr ""
-
-#: .\templates\base.html:49
-msgid "Войти"
-msgstr ""
-
-#: .\templates\base.html:52 .\templates\main_page.html:29
-msgid "Регистрация"
-msgstr ""
-
-#: .\templates\base.html:70
+#: .\templates\base.html:24 .\templates\base.html:75
 msgid "Главная"
 msgstr ""
 
-#: .\templates\base.html:73
+#: .\templates\base.html:25
+msgid "О ЧРК"
+msgstr ""
+
+#: .\templates\base.html:27 .\templates\base.html:77
+msgid "Контакты"
+msgstr ""
+
+#: .\templates\base.html:48
+msgid "Привет"
+msgstr ""
+
+#: .\templates\base.html:50
+msgid "Выйти"
+msgstr ""
+
+#: .\templates\base.html:54
+msgid "Войти"
+msgstr ""
+
+#: .\templates\base.html:57 .\templates\main_page.html:29
+msgid "Регистрация"
+msgstr "Зарегистрироваться"
+
+#: .\templates\base.html:76
+msgid "О нас"
+msgstr ""
+
+#: .\templates\base.html:78
 msgid "Помощь"
 msgstr ""
 
-#: .\templates\base.html:77
+#: .\templates\base.html:82
 msgid "Все права защищены."
 msgstr ""
 

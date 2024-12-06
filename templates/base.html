@@ -18,10 +18,13 @@
     <div class="border-gray-200 px-4 py-2.5">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-5xl text-lg text-gray-700">
             <div class="flex space-x-6 items-center">
-                <img src="{% static 'icon_256.png' %}" alt="" height="64" width="64"/>
-                <a href="https://contest.cpfed.kz" class="hover:underline">{% translate "О нас" %}</a>
-<!--                <a href="#" class="hover:underline">{% translate "Контесты" %}</a>-->
-<!--                <a href="#" class="hover:underline">{% translate "Контакты" %}</a>-->
+                <a href="{%url 'main_page' %}">
+                    <img src="{% static 'icon_256.png' %}" alt="" height="64" width="64"/>
+                </a>
+                <a href="{%url 'main_page' %}" class="hover:underline">{% translate "Главная" %}</a>
+                <a href="https://contest.cpfed.kz" class="hover:underline">{% translate "О ЧРК" %}</a>
+                <!--                <a href="#" class="hover:underline">{% translate "Контесты" %}</a>-->
+                <!--                <a href="#" class="hover:underline">{% translate "Контакты" %}</a>-->
             </div>
             <div class="flex items-center space-x-4">
                 <div class="relative inline-block text-left">
@@ -30,26 +33,28 @@
                         function toggle_lang_dropdown(){
                             document.getElementById("lang_dropdown").classList.toggle("hidden");
                         }
+
                     </script>
                     <button onclick="toggle_lang_dropdown()" class="lang_drop_btn">
                         <img src="{% static 'icon-globe-02.svg' %}" height="20" width="20"/></button>
-                    <ul id="lang_dropdown" class="hidden absolute px-2 py-4 origin-top-right rounded-md bg-white shadow-xl text-lg font-normal space-y-2">
+                    <ul id="lang_dropdown"
+                        class="hidden absolute px-2 py-4 origin-top-right rounded-md bg-white shadow-xl text-lg font-normal space-y-2">
                         <li><a href="{% change_lang 'en' %}" class="p-2 hover:bg-blue-200 rounded-sm">EN</a></li>
                         <li><a href="{% change_lang 'kk' %}" class="p-2 hover:bg-blue-200 rounded-sm">KZ</a></li>
                         <li><a href="{% change_lang 'ru' %}" class="p-2 hover:bg-blue-200 rounded-sm">RU</a></li>
                     </ul>
                 </div>
                 {% if user.id is not None %}
-                <p>{% translate "Привет" %}, {{ user.handle }}!</p>
+                <p>{% translate "Привет" %}, <a href="{% url 'profile' %}" class="text-blue-600 underline">{{ user.handle }}</a></p>
                 <a href="{%url 'logout' %}">
-                    <div class="bg-blue-600 px-3 py-2 text-gray-100 rounded-lg">{% translate "Выйти" %}</div>
+                    <div class="text-blue-600 underline">{% translate "Выйти" %}</div>
                 </a>
                 {% else %}
                 <a href="{%url 'login' %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">
-                    <div class="text-blue-600">{% translate "Войти" %}</div>
+                    <div class="text-blue-600 underline">{% translate "Войти" %}</div>
                 </a>
                 <a href="{%url 'register' %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">
-                    <div class="bg-blue-600 px-3 py-2 text-gray-100 rounded-lg">{% translate "Регистрация" %}</div>
+                    <div class="text-blue-600 underline">{% translate "Регистрация" %}</div>
                 </a>
                 {% endif %}
             </div>
@@ -68,9 +73,9 @@
             <img src="{% static 'icon_256.png' %}" alt="" height="64" width="64"/>
             <div class="flex flex-wrap items-center text-xl font-medium space-x-6">
                 <a href="{%url 'main_page' %}" class="hover:underline">{% translate "Главная" %}</a>
-<!--                <a href="#" class="hover:underline">{% translate "О нас" %}</a>-->
-<!--                <a href="#" class="hover:underline">{% translate "Контакты" %}</a>-->
-<!--                <a href="#" class="hover:underline">{% translate "Помощь" %}</a>-->
+                <!--                <a href="#" class="hover:underline">{% translate "О нас" %}</a>-->
+                <!--                <a href="#" class="hover:underline">{% translate "Контакты" %}</a>-->
+                <!--                <a href="#" class="hover:underline">{% translate "Помощь" %}</a>-->
             </div>
         </div>
         <hr class="my-3 border-gray-200"/>

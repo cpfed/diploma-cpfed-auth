@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-06 14:15+0500\n"
+"POT-Creation-Date: 2024-12-06 15:23+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -132,15 +132,15 @@ msgstr "Password recovery"
 msgid "Пароль"
 msgstr "Password"
 
-#: .\authentication\models.py:232
+#: .\authentication\models.py:242
 msgid "Хэндл уже занят"
 msgstr "The handle is already taken"
 
-#: .\authentication\models.py:236
+#: .\authentication\models.py:245
 msgid "Email уже занят"
 msgstr "The email is already taken"
 
-#: .\authentication\models.py:242 .\authentication\models.py:243
+#: .\authentication\models.py:251 .\authentication\models.py:252
 msgid "Активация аккаунта"
 msgstr "Account activation"
 
@@ -168,29 +168,33 @@ msgstr "Password changed successfully!"
 msgid "Введите новый пароль"
 msgstr "Enter new password"
 
-#: .\authentication\views\user_management.py:40
+#: .\authentication\views\user_management.py:42
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr "Email has been sent to activate your account."
 
-#: .\authentication\views\user_management.py:41
+#: .\authentication\views\user_management.py:43
 msgid "Зарегистрироваться"
-msgstr "Registration"
+msgstr "Register"
 
-#: .\authentication\views\user_management.py:48
+#: .\authentication\views\user_management.py:50
 msgid "Ссылка уже использована"
 msgstr "Link used?"
 
-#: .\authentication\views\user_management.py:50
+#: .\authentication\views\user_management.py:52
 msgid "Ссылка для активации аккаунта устарела"
 msgstr "The account activation link expired"
 
-#: .\authentication\views\user_management.py:82
+#: .\authentication\views\user_management.py:84
 msgid "Некорректный хэндл/email или пароль"
 msgstr "Incorrect handle/email or password"
 
-#: .\authentication\views\user_management.py:83
+#: .\authentication\views\user_management.py:85
 msgid "Войти в аккаунт"
 msgstr "Login"
+
+#: .\authentication\views\user_management.py:95
+msgid "Профиль"
+msgstr ""
 
 #: .\contest\models.py:13
 msgid "Название контеста"
@@ -200,7 +204,7 @@ msgstr "Name of the contest"
 msgid "Контест"
 msgstr "Contest"
 
-#: .\contest\models.py:34 .\templates\base.html:23
+#: .\contest\models.py:34 .\templates\base.html:26
 msgid "Контесты"
 msgstr "Contests"
 
@@ -222,7 +226,7 @@ msgstr "You have registered successfully!"
 
 #: .\contest\views.py:51
 msgid "Регистрация на чемпионат"
-msgstr "Registration for the championship"
+msgstr "Register for the championship"
 
 #: .\contest\views.py:51
 msgid "Изменить регистрацию"
@@ -244,39 +248,43 @@ msgstr "Creation time"
 msgid "Время последнего изменения"
 msgstr "Last modified time"
 
-#: .\templates\base.html:22 .\templates\base.html:71
-msgid "О нас"
-msgstr "About us"
-
-#: .\templates\base.html:24 .\templates\base.html:72
-msgid "Контакты"
-msgstr "Contacts"
-
-#: .\templates\base.html:43
-msgid "Привет"
-msgstr "Hello"
-
-#: .\templates\base.html:45
-msgid "Выйти"
-msgstr "Logout"
-
-#: .\templates\base.html:49
-msgid "Войти"
-msgstr "Enter"
-
-#: .\templates\base.html:52 .\templates\main_page.html:29
-msgid "Регистрация"
-msgstr "Registration"
-
-#: .\templates\base.html:70
+#: .\templates\base.html:24 .\templates\base.html:75
 msgid "Главная"
 msgstr "Main page"
 
-#: .\templates\base.html:73
+#: .\templates\base.html:25
+msgid "О ЧРК"
+msgstr "About ЧРК"
+
+#: .\templates\base.html:27 .\templates\base.html:77
+msgid "Контакты"
+msgstr "Contacts"
+
+#: .\templates\base.html:48
+msgid "Привет"
+msgstr "Hello"
+
+#: .\templates\base.html:50
+msgid "Выйти"
+msgstr "Logout"
+
+#: .\templates\base.html:54
+msgid "Войти"
+msgstr "Enter"
+
+#: .\templates\base.html:57 .\templates\main_page.html:29
+msgid "Регистрация"
+msgstr "Register"
+
+#: .\templates\base.html:76
+msgid "О нас"
+msgstr "About us"
+
+#: .\templates\base.html:78
 msgid "Помощь"
 msgstr "Help"
 
-#: .\templates\base.html:77
+#: .\templates\base.html:82
 msgid "Все права защищены."
 msgstr "All rights reserved."
 
@@ -432,7 +440,7 @@ msgstr "You already registered"
 
 #: .\templates\main_page.html:71
 msgid "Зарегистрироваться на контест"
-msgstr "Registration on contest"
+msgstr "Register on contest"
 
 #: .\templates\main_page.html:85
 #, python-format

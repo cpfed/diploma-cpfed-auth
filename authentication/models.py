@@ -225,14 +225,23 @@ class UserActivation(TimestampMixin):
     def is_still_valid(self):
         return not self.is_used and self.expiration_date > timezone.now()
 
+    def _check_unique_email_or_handle(self, **kwargs):
+        if MainUser.objects.filter(**kwargs).exists():
+            return True
+        # check UserActivation for active links
+        qs = UserActivation.objects.filter(**kwargs, expiration_date__gt=timezone.now(), is_used=False)
+        if self.pk is not None:
+            qs = qs.exclude(pk=self.pk)
+        if qs.exists():
+            return True
+        return False
+
     def validate_unique(self, *args, **kwargs):
         super().validate_unique(*args, **kwargs)
-        if MainUser.objects.filter(handle=self.handle).exists() or \
-                UserActivation.objects.filter(handle=self.handle, expiration_date__gt=timezone.now()):
+        if self._check_unique_email_or_handle(handle=self.handle):
             raise ValidationError({'handle': _('Хэндл уже занят') })
 
-        if MainUser.objects.filter(email=self.email).exists() or \
-                UserActivation.objects.filter(email=self.email, expiration_date__gt=timezone.now()):
+        if self._check_unique_email_or_handle(email=self.email):
             raise ValidationError({'email': _('Email уже занят') })
 
     def __str__(self):

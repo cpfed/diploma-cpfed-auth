@@ -49,3 +49,15 @@ def get_user_form(req_fields: list[str]):
             fields = tuple(f for f in req_fields if f in user_fields)
 
     return UserForm
+
+
+UserFullForm = get_user_form(
+    ['handle', 'email', 'first_name', 'last_name', 'phone_number', 'uin', 't_shirt_size', 'employment_status',
+     'place_of_study_of_work', 'region'])
+
+
+def get_user_form_with_data(user: MainUser):
+    data = dict()
+    for f in UserFullForm().fields:
+        data[f] = getattr(user, f)
+    return UserFullForm(data)

@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
 
-from authentication.forms import UserCreateForm, UserPasswordRecovery, UserLoginForm
+from authentication.forms import UserCreateForm, UserPasswordRecovery, UserLoginForm, get_user_form_with_data
 from authentication.models import UserActivation, MainUser
 from .services.send_email import send_email
 from utils.cloudflare import check_turnstile_captcha
@@ -23,11 +23,13 @@ def user_new(request: HttpResponse):
 
             check_turnstile_captcha(request)
 
+            user_act = form.save()
+
             # save password safely
             dummy_user = MainUser()
             dummy_user.set_password(form.cleaned_data['password'])
-            form.cleaned_data['password'] = dummy_user.password
-            user_act = form.save()
+            user_act.password = dummy_user.password
+            user_act.save()
             try:
                 send_email(email=user_act.email,
                            link=request.build_absolute_uri("/register/" + str(user_act.id)) + get_next_urlenc(request),
@@ -86,3 +88,8 @@ def user_login(request: HttpResponse):
 def user_logout(request: HttpResponse):
     logout(request)
     return redirect(settings.LOGOUT_REDIRECT_URL)
+
+def user_profile(request: HttpResponse):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    return render(request, 'profile.html', {'form': get_user_form_with_data(request.user), 'form_name': _('Профиль')})

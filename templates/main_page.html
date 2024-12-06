@@ -19,19 +19,19 @@
                     чемпионатах, узнай расписание и зарегистрируйся, чтобы не упустить шанс стать лучшим!
                     {% endblocktranslate %}
                 </p>
-                <div class="flex space-x-6 py-2">
-                    <a href="#">
-                        <div class="bg-blue-600 py-2 px-6 text-gray-100 rounded-lg">{% translate "Узнать больше" %}
-                        </div>
-                    </a>
-                    <a href="{% url 'register' %}">
-                        <div class="border-blue-600 border py-2 px-6 text-blue-600 rounded-lg">
-                            {% translate "Регистрация" %}
-                        </div>
-                    </a>
-                </div>
+<!--                <div class="flex space-x-6 py-2">-->
+<!--                    <a href="https://contest.cpfed.kz">-->
+<!--                        <div class="bg-blue-600 py-2 px-6 text-gray-100 rounded-lg">{% translate "Узнать больше" %}-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                    <a href="{% url 'register' %}">-->
+<!--                        <div class="border-blue-600 border py-2 px-6 text-blue-600 rounded-lg">-->
+<!--                            {% translate "Регистрация" %}-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </div>-->
             </div>
-            <img src="{% static 'capybara.png' %}" alt="" class="rounded-lg object-cover h-96 w-96" height="494"
+            <img src="{% static 'capybara.png' %}" alt="" class="rounded-lg object-cover h-80 w-96" height="494"
                  width="490"/>
         </div>
         <div class="my-8 text-center text-xl font-semibold">
@@ -49,20 +49,20 @@
         <div class="my-8 text-center">
             <p class="text-blue-900 text-4xl my-4">{% translate "Чемпионаты и конкурсы" %}</p>
             {% for contest, is_reg in contests.items %}
-            <div class="flex items-center justify-between bg-gray-100 p-8 round-lg h-72">
+            <div class="flex items-center justify-between bg-gray-100 p-8 rounded-xl h-72">
                 <div class="flex space-x-6">
                     <img src="{% static 'capybara.png' %}" alt="" class="rounded-lg object-cover" height="271"
                          width="235"/>
                     <div class="flex flex-col justify-between text-left">
-                        <div>
+                        <div class="mx-2">
                             <div class="text-2xl font-semibold mb-2">{{ contest.name }}</div>
-                            <div class="text-xl font-medium mb-6">{{ contest.name }}</div>
-                            <div class="mb-2">{% translate "Дата" %}:</div>
-                            <div class="mb-8">{% translate "Время" %}:</div>
+                            <div class="text-l font-normal mb-4">{{ contest.playing_desc }}</div>
+                            <div class="mb-2">{% translate "Дата" %}: {{ contest.date | date:'d.m.Y' }}</div>
+<!--                            <div class="mb-8">{% translate "Время" %}: {{ contest.date | date:'H:i' }} </div>-->
                         </div>
                         <div class="flex space-x-4">
                             {% if is_reg %}
-                            <div class="bg-blue-600 py-2 px-6 text-gray-100 rounded-lg">
+                            <div class="bg-gray-500 py-2 px-6 text-gray-100 rounded-lg">
                                 {% translate "Вы уже зарегистрированы" %}
                             </div>
                             {% else %}
@@ -72,17 +72,17 @@
                                 </div>
                             </a>
                             {% endif %}
-                            <a href="{% url 'register' %}">
-                                <div class="border-blue-600 border py-2 px-6 text-blue-600 rounded-lg">
-                                    {% translate "Узнать больше" %}
-                                </div>
-                            </a>
+<!--                            <a href="{% url 'register' %}">-->
+<!--                                <div class="border-blue-600 border py-2 px-6 text-blue-600 rounded-lg">-->
+<!--                                    {% translate "Узнать больше" %}-->
+<!--                                </div>-->
+<!--                            </a>-->
                         </div>
                     </div>
                 </div>
                 <div class="h-full">
-                    <p class="bg-white rounded-full p-2">
-                        {% blocktranslate count days=1 %}Остался {{days}} день{% plural %}Осталось {{days}} дней{% endblocktranslate %}
+                    <p class="bg-white rounded-full px-4 py-2 text-nowrap">
+                        {% blocktranslate count days=contest.remaining_days %}Остался {{days}} день{% plural %}Осталось {{days}} дней{% endblocktranslate %}
                     </p>
                 </div>
             </div>
