@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-06 16:23+0500\n"
+"POT-Creation-Date: 2024-12-06 19:45+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -214,7 +214,7 @@ msgstr ""
 msgid "Контест"
 msgstr ""
 
-#: .\contest\models.py:57 .\templates\base.html:26
+#: .\contest\models.py:57
 msgid "Контесты"
 msgstr ""
 
@@ -266,6 +266,10 @@ msgstr ""
 msgid "О ЧРК"
 msgstr ""
 
+#: .\templates\base.html:26 .\templates\base.html:76
+msgid "О нас"
+msgstr ""
+
 #: .\templates\base.html:27 .\templates\base.html:77
 msgid "Контакты"
 msgstr ""
@@ -285,10 +289,6 @@ msgstr ""
 #: .\templates\base.html:57 .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Зарегистрироваться"
-
-#: .\templates\base.html:76
-msgid "О нас"
-msgstr ""
 
 #: .\templates\base.html:78
 msgid "Помощь"
@@ -377,29 +377,25 @@ msgid "Забыли пароль?"
 msgstr ""
 
 #: .\templates\main_page.html:14
-msgid "Чемпионаты и турниры — время побеждать и удивлять!"
+msgid "Чемпионаты и турниры — время побеждать!"
 msgstr ""
 
 #: .\templates\main_page.html:17
 msgid ""
-"Тебя ждут захватывающие турниры, где ты можешь проявить свои спортивные "
-"навыки. Прими участие в чемпионатах, узнай расписание и зарегистрируйся, "
-"чтобы не упустить шанс стать лучшим!"
+"Тебя ждут захватывающие турниры, где ты можешь проявить свои навыки в "
+"программировании. Прими участие в чемпионатах, узнай расписание и "
+"зарегистрируйся, чтобы не упустить шанс стать лучшим!"
 msgstr ""
 
-#: .\templates\main_page.html:24 .\templates\main_page.html:77
+#: .\templates\main_page.html:24 .\templates\main_page.html:76
 msgid "Узнать больше"
 msgstr ""
 
 #: .\templates\main_page.html:38
-msgid "Что нужно знать о чемпионате CPFED?"
-msgstr ""
-
-#: .\templates\main_page.html:39
 msgid "Федерация спортивного программирования Казахстана CPFED"
 msgstr ""
 
-#: .\templates\main_page.html:41
+#: .\templates\main_page.html:40
 msgid ""
 "Наша основная цель - развивать человеческий потенциал нашей страны и всего "
 "мира через спортивное программирование. На данном сайте вы можете "
@@ -407,27 +403,27 @@ msgid ""
 "спортивного программирования в Казахстане."
 msgstr ""
 
-#: .\templates\main_page.html:50
+#: .\templates\main_page.html:49
 msgid "Чемпионаты и конкурсы"
 msgstr ""
 
-#: .\templates\main_page.html:60
+#: .\templates\main_page.html:59
 msgid "Дата"
 msgstr ""
 
-#: .\templates\main_page.html:61
+#: .\templates\main_page.html:60
 msgid "Время"
 msgstr ""
 
-#: .\templates\main_page.html:66
+#: .\templates\main_page.html:65
 msgid "Вы уже зарегистрированы"
 msgstr ""
 
-#: .\templates\main_page.html:71
+#: .\templates\main_page.html:70
 msgid "Зарегистрироваться на контест"
 msgstr ""
 
-#: .\templates\main_page.html:85
+#: .\templates\main_page.html:84
 #, python-format
 msgid "Остался %(days)s день"
 msgid_plural "Осталось %(days)s дней"
