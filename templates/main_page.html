@@ -49,11 +49,11 @@
         <div class="my-8 text-center">
             <p class="text-blue-900 text-4xl my-4">{% translate "Чемпионаты и конкурсы" %}</p>
             {% for contest, is_reg in contests.items %}
-            <div class="flex items-center justify-between bg-gray-100 p-8 rounded-xl h-72">
-                <div class="flex space-x-6 h-full">
+            <div class="flex items-center justify-between bg-gray-100 p-8 rounded-xl">
+                <div class="flex space-x-6 h-min">
                     <img src="{% static 'capybara.png' %}" alt="" class="rounded-lg object-cover" height="271"
                          width="235"/>
-                    <div class="flex flex-col justify-between text-left">
+                    <div class="flex flex-col justify-between text-left h-min">
                         <div class="mx-2">
                             <div class="text-2xl font-semibold mb-2">{{ contest.get_name }}</div>
                             <div class="text-l font-normal mb-4">{{ contest.get_desc }}</div>
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="h-full">
+                <div class="h-full self-start">
                     <p class="bg-white rounded-full px-4 py-2 text-nowrap">
                         {% blocktranslate count days=contest.remaining_days %}Остался {{days}} день{% plural %}Осталось {{days}} дней{% endblocktranslate %}
                     </p>
