@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-06 15:23+0500\n"
+"POT-Creation-Date: 2024-12-06 16:23+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -197,27 +197,35 @@ msgstr "Аккаунтқа кіру"
 msgid "Профиль"
 msgstr ""
 
-#: .\contest\models.py:13
+#: .\contest\models.py:15 .\contest\models.py:19 .\contest\models.py:23
 msgid "Название контеста"
 msgstr "Сайыстың аты"
 
-#: .\contest\models.py:33
+#: .\contest\models.py:42 .\contest\models.py:45 .\contest\models.py:48
+msgid "Описание контеста: "
+msgstr "Сайыстың сипаттамасы"
+
+#: .\contest\models.py:52
+msgid "Дата контеста"
+msgstr "Сайыстың күні"
+
+#: .\contest\models.py:56
 msgid "Контест"
 msgstr "Сайыс"
 
-#: .\contest\models.py:34 .\templates\base.html:26
+#: .\contest\models.py:57 .\templates\base.html:26
 msgid "Контесты"
 msgstr "Сайыстар"
 
-#: .\contest\models.py:49
+#: .\contest\models.py:98
 msgid "ID пользователя"
 msgstr "Пайдалануштың ID"
 
-#: .\contest\models.py:54
+#: .\contest\models.py:103
 msgid "ID контеста"
 msgstr "Сайыстың ID"
 
-#: .\contest\models.py:61 .\contest\models.py:62
+#: .\contest\models.py:110 .\contest\models.py:111
 msgid "Данные пользователей к контестам"
 msgstr "Сайыстарға арналған пайдаланушы деректері"
 

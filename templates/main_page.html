@@ -50,13 +50,13 @@
             <p class="text-blue-900 text-4xl my-4">{% translate "Чемпионаты и конкурсы" %}</p>
             {% for contest, is_reg in contests.items %}
             <div class="flex items-center justify-between bg-gray-100 p-8 rounded-xl h-72">
-                <div class="flex space-x-6">
+                <div class="flex space-x-6 h-full">
                     <img src="{% static 'capybara.png' %}" alt="" class="rounded-lg object-cover" height="271"
                          width="235"/>
                     <div class="flex flex-col justify-between text-left">
                         <div class="mx-2">
-                            <div class="text-2xl font-semibold mb-2">{{ contest.name }}</div>
-                            <div class="text-l font-normal mb-4">{{ contest.playing_desc }}</div>
+                            <div class="text-2xl font-semibold mb-2">{{ contest.get_name }}</div>
+                            <div class="text-l font-normal mb-4">{{ contest.get_desc }}</div>
                             <div class="mb-2">{% translate "Дата" %}: {{ contest.date | date:'d.m.Y' }}</div>
 <!--                            <div class="mb-8">{% translate "Время" %}: {{ contest.date | date:'H:i' }} </div>-->
                         </div>

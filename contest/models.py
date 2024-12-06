@@ -4,14 +4,23 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
 from django import forms
+from django.utils.translation import get_language
+
 
 # Create your models here.
 
 class Contest(models.Model):
     name = models.CharField(
         max_length=128,
-        unique=True,
-        verbose_name=_("Название контеста")
+        verbose_name=_("Название контеста") + 'ru'
+    )
+    name_kk = models.CharField(
+        max_length=128,
+        verbose_name=_("Название контеста") + 'kk'
+    )
+    name_en = models.CharField(
+        max_length=128,
+        verbose_name=_("Название контеста") + 'en'
     )
     # next_contest = models.ForeignKey(
     #     "self",
@@ -29,7 +38,16 @@ class Contest(models.Model):
     required_fields = ArrayField(
         models.CharField(max_length=100)
     )
-    playing_desc = models.TextField()
+    playing_desc = models.TextField(
+        verbose_name=_("Описание контеста: ") + 'ru'
+    )
+    playing_desc_kk = models.TextField(
+        verbose_name=_("Описание контеста: ") + 'kk'
+    )
+    playing_desc_en = models.TextField(
+        verbose_name=_("Описание контеста: ") + 'en'
+    )
+
     date = models.DateTimeField(
         verbose_name=_('Дата контеста')
     )
@@ -46,9 +64,31 @@ class Contest(models.Model):
     def remaining_days(self):
         return (self.date - timezone.now()).days
 
+    @property
+    def get_name(self):
+        match get_language():
+            case 'en':
+                return self.name_en
+            case 'kk':
+                return self.name_kk
+            case _:
+                return self.name
+
+    @property
+    def get_desc(self):
+        match get_language():
+            case 'en':
+                return self.playing_desc_en
+            case 'kk':
+                return self.playing_desc_kk
+            case _:
+                return self.playing_desc
+
+
 class Championship():
     # date, contests
     pass
+
 
 class UserContest(models.Model):
     # contest url
