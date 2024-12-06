@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Adil aka Lidacain Talgatuly <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-05 18:10+0500\n"
+"POT-Creation-Date: 2024-12-06 14:15+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,10 @@ msgstr ""
 #: .\authentication\forms.py:19 .\authentication\forms.py:38
 msgid "Пароли не совпадают"
 msgstr "Құпия сөздер бірдей емес"
+
+#: .\authentication\forms.py:23
+msgid "Хэндл/Email"
+msgstr "Хэндл/Email"
 
 #: .\authentication\forms.py:28 .\authentication\models.py:58
 #: .\authentication\models.py:209
@@ -261,7 +265,7 @@ msgstr "Шығу"
 msgid "Войти"
 msgstr "Кіру"
 
-#: .\templates\base.html:52
+#: .\templates\base.html:52 .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Тіркеу"
 
@@ -370,6 +374,72 @@ msgstr ""
 #: .\templates\login.html:8 .\templates\new_user.html:7
 msgid "Забыли пароль?"
 msgstr "Құпия сөзіңізді ұмыттыңыз ба?"
+
+#: .\templates\main_page.html:14
+msgid "Чемпионаты и турниры — время побеждать и удивлять!"
+msgstr ""
+"Чемпионаттар мен турнирлер — жеңіске жететін және таң қалдыратын уақыт!"
+
+#: .\templates\main_page.html:17
+msgid ""
+"Тебя ждут захватывающие турниры, где ты можешь проявить свои спортивные "
+"навыки. Прими участие в чемпионатах, узнай расписание и зарегистрируйся, "
+"чтобы не упустить шанс стать лучшим!"
+msgstr ""
+"Сізді спорттық дағдыларыңызды көрсете алатын қызықты турнирлер күтеді. "
+"Чемпионаттарға қатысыңыз, кестені біліңіз және ең жақсы болу мүмкіндігін "
+"жіберіп алмау үшін тіркеліңіз!"
+
+#: .\templates\main_page.html:24 .\templates\main_page.html:77
+msgid "Узнать больше"
+msgstr "Көбірек біліңіз"
+
+#: .\templates\main_page.html:38
+msgid "Что нужно знать о чемпионате CPFED?"
+msgstr "CPFED чемпионаты туралы не білуіңіз керек?"
+
+#: .\templates\main_page.html:39
+msgid "Федерация спортивного программирования Казахстана CPFED"
+msgstr "Қазақстанның спорттық бағдарламалау федерациясы CPFED"
+
+#: .\templates\main_page.html:41
+msgid ""
+"Наша основная цель - развивать человеческий потенциал нашей страны и всего "
+"мира через спортивное программирование. На данном сайте вы можете "
+"зарегистрироваться на все наши соревнования и стать частью сообщества "
+"спортивного программирования в Казахстане."
+msgstr ""
+"Біздің басты мақсатымыз - спорттық бағдарламалау арқылы еліміздің және бүкіл "
+"әлемнің адами әлеуетін дамыту. Осы сайтта сіз біздің барлық жарыстарымызға "
+"тіркеліп, Қазақстандағы спорттық бағдарламалау қоғамдастығының бір бөлігі "
+"бола аласыз."
+
+#: .\templates\main_page.html:50
+msgid "Чемпионаты и конкурсы"
+msgstr "Чемпионаттар мен сайыстар"
+
+#: .\templates\main_page.html:60
+msgid "Дата"
+msgstr "Күні"
+
+#: .\templates\main_page.html:61
+msgid "Время"
+msgstr "Уақыт"
+
+#: .\templates\main_page.html:66
+msgid "Вы уже зарегистрированы"
+msgstr "Сіз қазірдің өзінде тіркелдіңіз!"
+
+#: .\templates\main_page.html:71
+msgid "Зарегистрироваться на контест"
+msgstr "Сайысқа тіркелу"
+
+#: .\templates\main_page.html:85
+#, python-format
+msgid "Остался %(days)s день"
+msgid_plural "Осталось %(days)s дней"
+msgstr[0] "%(days)s күн қалды"
+msgstr[1] "%(days)s күн қалды"
 
 #: .\utils\constants.py:46
 msgid "Мужской"

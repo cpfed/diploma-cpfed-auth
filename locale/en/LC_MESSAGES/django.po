@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-05 18:10+0500\n"
+"POT-Creation-Date: 2024-12-06 14:15+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,10 @@ msgstr ""
 #: .\authentication\forms.py:19 .\authentication\forms.py:38
 msgid "Пароли не совпадают"
 msgstr "The passwords do not match"
+
+#: .\authentication\forms.py:23
+msgid "Хэндл/Email"
+msgstr "Handle/Email"
 
 #: .\authentication\forms.py:28 .\authentication\models.py:58
 #: .\authentication\models.py:209
@@ -260,7 +264,7 @@ msgstr "Logout"
 msgid "Войти"
 msgstr "Enter"
 
-#: .\templates\base.html:52
+#: .\templates\base.html:52 .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Registration"
 
@@ -371,6 +375,71 @@ msgstr ""
 #: .\templates\login.html:8 .\templates\new_user.html:7
 msgid "Забыли пароль?"
 msgstr "Forgot your password?"
+
+#: .\templates\main_page.html:14
+msgid "Чемпионаты и турниры — время побеждать и удивлять!"
+msgstr "Championships and tournaments - time to win and surprise!"
+
+#: .\templates\main_page.html:17
+msgid ""
+"Тебя ждут захватывающие турниры, где ты можешь проявить свои спортивные "
+"навыки. Прими участие в чемпионатах, узнай расписание и зарегистрируйся, "
+"чтобы не упустить шанс стать лучшим!"
+msgstr ""
+"Exciting tournaments await you where you can demonstrate your sports skills. "
+"Take part in the championships, find out the schedule and register so as not "
+"to miss the chance to become the best!"
+
+#: .\templates\main_page.html:24 .\templates\main_page.html:77
+msgid "Узнать больше"
+msgstr "Find out more"
+
+#: .\templates\main_page.html:38
+msgid "Что нужно знать о чемпионате CPFED?"
+msgstr "What do you need to know about the CPFED Championship?"
+
+#: .\templates\main_page.html:39
+msgid "Федерация спортивного программирования Казахстана CPFED"
+msgstr "Federation of Sports Programming of Kazakhstan CPFED"
+
+#: .\templates\main_page.html:41
+msgid ""
+"Наша основная цель - развивать человеческий потенциал нашей страны и всего "
+"мира через спортивное программирование. На данном сайте вы можете "
+"зарегистрироваться на все наши соревнования и стать частью сообщества "
+"спортивного программирования в Казахстане."
+msgstr ""
+"Our main goal is to develop human potential of our country and the world "
+"through sports programming. On this site you can register for all our "
+"competitions and become a part of the sports programming community in "
+"Kazakhstan."
+
+#: .\templates\main_page.html:50
+msgid "Чемпионаты и конкурсы"
+msgstr "Competitions"
+
+#: .\templates\main_page.html:60
+msgid "Дата"
+msgstr "Date"
+
+#: .\templates\main_page.html:61
+msgid "Время"
+msgstr "Time"
+
+#: .\templates\main_page.html:66
+msgid "Вы уже зарегистрированы"
+msgstr "You already registered"
+
+#: .\templates\main_page.html:71
+msgid "Зарегистрироваться на контест"
+msgstr "Registration on contest"
+
+#: .\templates\main_page.html:85
+#, python-format
+msgid "Остался %(days)s день"
+msgid_plural "Осталось %(days)s дней"
+msgstr[0] "Until closing %(days)s day"
+msgstr[1] "Until closing %(days)s days"
 
 #: .\utils\constants.py:46
 msgid "Мужской"

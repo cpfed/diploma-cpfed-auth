@@ -20,7 +20,7 @@ class UserCreateForm(forms.ModelForm):
 
 
 class UserLoginForm(forms.Form):
-    handle_or_email = forms.CharField(label='Хэндл/Email')
+    handle_or_email = forms.CharField(label=_('Хэндл/Email'))
     password = forms.CharField(widget=forms.PasswordInput, label='Пароль')
 
 

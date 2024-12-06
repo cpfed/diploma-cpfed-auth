@@ -4,13 +4,90 @@
 
 {% block content %}
 
-{% for contest, is_reg in contests.items %}
 
-{% if is_reg %}
-<p>Вы уже зарегистрированы</p>
-{% endif %}
-<a href="{% url 'contestRegistration' contest_id=contest.id %}">Зарегистрироваться на контест </a>
+<div class="m-4">
+    <div class="mx-auto max-w-5xl">
+        <div class="flex items-center justify-between mt-8 mb-12">
+            <div class="flex flex-col justify-between space-y-4 max-w-md">
+                <p class="text-blue-600 text-xl font-semibold">CPFED</p>
+                <p class="text-blue-900 text-4xl font-bold">
+                    {% translate "Чемпионаты и турниры — время побеждать и удивлять!" %}
+                </p>
+                <p class="text-gray-700">
+                    {% blocktranslate trimmed %}
+                    Тебя ждут захватывающие турниры, где ты можешь проявить свои спортивные навыки. Прими участие в
+                    чемпионатах, узнай расписание и зарегистрируйся, чтобы не упустить шанс стать лучшим!
+                    {% endblocktranslate %}
+                </p>
+                <div class="flex space-x-6 py-2">
+                    <a href="#">
+                        <div class="bg-blue-600 py-2 px-6 text-gray-100 rounded-lg">{% translate "Узнать больше" %}
+                        </div>
+                    </a>
+                    <a href="{% url 'register' %}">
+                        <div class="border-blue-600 border py-2 px-6 text-blue-600 rounded-lg">
+                            {% translate "Регистрация" %}
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <img src="{% static 'capybara.png' %}" alt="" class="rounded-lg object-cover h-96 w-96" height="494"
+                 width="490"/>
+        </div>
+        <div class="my-8 text-center text-xl font-semibold">
+            <p class="text-blue-900 text-4xl my-4">{% translate "Что нужно знать о чемпионате CPFED?" %}</p>
+            <p>{% translate "Федерация спортивного программирования Казахстана CPFED" %}</p>
+            <p class="font-normal">
+                {% blocktranslate trimmed %}
+                Наша основная цель - развивать человеческий потенциал нашей страны и всего мира через
+                спортивное программирование. На данном сайте вы можете зарегистрироваться на все наши соревнования и
+                стать частью сообщества спортивного программирования в Казахстане.
+                {% endblocktranslate %}
+            </p>
+        </div>
 
-{% endfor %}
-
+        <div class="my-8 text-center">
+            <p class="text-blue-900 text-4xl my-4">{% translate "Чемпионаты и конкурсы" %}</p>
+            {% for contest, is_reg in contests.items %}
+            <div class="flex items-center justify-between bg-gray-100 p-8 round-lg h-72">
+                <div class="flex space-x-6">
+                    <img src="{% static 'capybara.png' %}" alt="" class="rounded-lg object-cover" height="271"
+                         width="235"/>
+                    <div class="flex flex-col justify-between text-left">
+                        <div>
+                            <div class="text-2xl font-semibold mb-2">{{ contest.name }}</div>
+                            <div class="text-xl font-medium mb-6">{{ contest.name }}</div>
+                            <div class="mb-2">{% translate "Дата" %}:</div>
+                            <div class="mb-8">{% translate "Время" %}:</div>
+                        </div>
+                        <div class="flex space-x-4">
+                            {% if is_reg %}
+                            <div class="bg-blue-600 py-2 px-6 text-gray-100 rounded-lg">
+                                {% translate "Вы уже зарегистрированы" %}
+                            </div>
+                            {% else %}
+                            <a href="{% url 'contestRegistration' contest_id=contest.id %}">
+                                <div class="bg-blue-600 py-2 px-6 text-gray-100 rounded-lg">
+                                    {% translate "Зарегистрироваться на контест" %}
+                                </div>
+                            </a>
+                            {% endif %}
+                            <a href="{% url 'register' %}">
+                                <div class="border-blue-600 border py-2 px-6 text-blue-600 rounded-lg">
+                                    {% translate "Узнать больше" %}
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-full">
+                    <p class="bg-white rounded-full p-2">
+                        {% blocktranslate count days=1 %}Остался {{days}} день{% plural %}Осталось {{days}} дней{% endblocktranslate %}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}
