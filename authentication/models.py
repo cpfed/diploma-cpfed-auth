@@ -14,8 +14,10 @@ from utils import constants
 from mixins.models import TimestampMixin
 from locations.models import Region
 
-handle_validator = RegexValidator(regex=re.compile(r'^[a-zA-z_0-9]+$'), message=_('Хэндл может состоять только из латинских букв, цифр и _'))
+handle_validator = RegexValidator(regex=re.compile(r'^[a-zA-z_0-9]+$'),
+                                  message=_('Хэндл может состоять только из латинских букв, цифр и _'))
 uin_validator = RegexValidator(regex=re.compile(r'^[0-9]{12}$'), message=_('ИИН может состоять только из 12 цифр'))
+
 
 class MainUserManager(BaseUserManager):
     DELETE_FIELD = "is_deleted"
@@ -154,6 +156,15 @@ class MainUser(AbstractBaseUser, PermissionsMixin, TimestampMixin):
         if self.employment_status != constants.EMPLOYMENT_STATUS[2][0] and self.place_of_study_of_work is None:
             raise ValidationError({'place_of_study_of_work': _('Поле не может быть пустым')})
 
+    @property
+    def get_fields(self):
+        return {f.name for f in self._meta.get_fields()}
+
+    def get_user_data_by_fields(self, need_fields):
+        if 'password' in need_fields:
+            raise Exception('Нельзя экспортировать пароль')
+        return {f: getattr(self, f) for f in self.get_fields if f in need_fields}
+
 
 def _password_default_exp_date():
     return timezone.now() + timezone.timedelta(minutes=30)
@@ -239,10 +250,10 @@ class UserActivation(TimestampMixin):
     def validate_unique(self, *args, **kwargs):
         super().validate_unique(*args, **kwargs)
         if self._check_unique_email_or_handle(handle=self.handle):
-            raise ValidationError({'handle': _('Хэндл уже занят') })
+            raise ValidationError({'handle': _('Хэндл уже занят')})
 
         if self._check_unique_email_or_handle(email=self.email):
-            raise ValidationError({'email': _('Email уже занят') })
+            raise ValidationError({'email': _('Email уже занят')})
 
     def __str__(self):
         return f"Ссылка {self.id} для {self.handle} {'еще активна' if self.is_still_valid else ('использована' if self.is_used else 'не была использована')}"

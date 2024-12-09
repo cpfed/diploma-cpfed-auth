@@ -39,7 +39,7 @@ class UserPasswordRecovery(forms.Form):
 
 
 def get_user_form(req_fields: list[str]):
-    # if any(f in req_fields for f in ('handle', 'email', 'password')):
+    # if any(f in req_fields for f in ('handle', 'email', 'password')): # TODO
     #     raise Exception('Хэндл, email или пароль не могут быть в форме регистрации')
     user_fields = {x.name for x in MainUser._meta.get_fields()}
 

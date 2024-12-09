@@ -114,3 +114,9 @@ class UserContest(models.Model):
 
     def __str__(self):
         return f"{self.user} - {self.contest}"
+
+    @property
+    def get_full_reg(self) -> dict:
+        res = self.additional_fields
+        res.update(self.user.get_user_data_by_fields(self.contest.required_fields))
+        return res
