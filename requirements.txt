@@ -9,3 +9,4 @@ django-phonenumber-field[phonenumberslite]==8.0.0
 requests==2.32.3
 gunicorn==22.0.0
 openpyxl==3.1.5
+facebook_business==21.0.5

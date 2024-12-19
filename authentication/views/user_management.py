@@ -12,6 +12,7 @@ from authentication.models import UserActivation, MainUser
 from .services.send_email import send_email
 from utils.cloudflare import check_turnstile_captcha
 from utils.funcs import get_next_urlenc
+from utils.pixel_events import send_registration
 
 # Create your views here.
 
@@ -52,6 +53,9 @@ def user_activate(request: HttpResponse, token: uuid):
         error = _("Ссылка для активации аккаунта устарела")
     if error is None:
         user = MainUser(handle=user_act.handle, email=user_act.email, password=user_act.password)
+
+        send_registration(user.email)
+
         user.save()
         login(request, user)
 
