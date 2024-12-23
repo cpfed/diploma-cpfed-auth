@@ -45,7 +45,7 @@ msgstr "UIN can only consist of 12 digits"
 
 #: .\authentication\models.py:52 .\authentication\models.py:204
 msgid "Хэндл"
-msgstr "Handle"
+msgstr "Handle (nickname)"
 
 #: .\authentication\models.py:64
 msgid "Имя"

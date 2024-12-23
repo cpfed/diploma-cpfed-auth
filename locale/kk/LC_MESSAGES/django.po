@@ -45,7 +45,7 @@ msgstr "ЖСН тек 12 саннан тұру керек"
 
 #: .\authentication\models.py:52 .\authentication\models.py:204
 msgid "Хэндл"
-msgstr "Хэндл"
+msgstr "Хэндл (никнейм)"
 
 #: .\authentication\models.py:64
 msgid "Имя"

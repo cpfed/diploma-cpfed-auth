@@ -47,7 +47,7 @@ msgstr ""
 
 #: .\authentication\models.py:52 .\authentication\models.py:204
 msgid "Хэндл"
-msgstr ""
+msgstr "Хэндл (никнейм)"
 
 #: .\authentication\models.py:64
 msgid "Имя"
