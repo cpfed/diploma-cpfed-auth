@@ -12,15 +12,15 @@ from django.utils.translation import get_language
 class Contest(models.Model):
     name = models.CharField(
         max_length=128,
-        verbose_name=_("Название контеста") + 'ru'
+        verbose_name=_("Название контеста") + ' ru'
     )
     name_kk = models.CharField(
         max_length=128,
-        verbose_name=_("Название контеста") + 'kk'
+        verbose_name=_("Название контеста") + ' kk'
     )
     name_en = models.CharField(
         max_length=128,
-        verbose_name=_("Название контеста") + 'en'
+        verbose_name=_("Название контеста") + ' en'
     )
     # next_contest = models.ForeignKey(
     #     "self",
@@ -95,7 +95,8 @@ class UserContest(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        verbose_name=_("ID пользователя")
+        verbose_name=_("ID пользователя"),
+        related_name="contests"
     )
     contest = models.ForeignKey(
         Contest,
