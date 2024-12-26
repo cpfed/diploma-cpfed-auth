@@ -179,3 +179,5 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Meta Pixel settings
 META_PIXEL_ACCESS_TOKEN = os.getenv("META_PIXEL_ACCESS_TOKEN", None)
 META_PIXEL_ID = os.getenv("META_PIXEL_ID", None)
+
+JWT_SECRET = os.getenv("JWT_SECRET", '')

@@ -13,7 +13,7 @@ from .services.send_email import send_email_with_context
 from utils.cloudflare import check_turnstile_captcha
 from utils.funcs import get_next_urlenc
 from utils.pixel_events import send_registration
-
+import jwt
 
 # Create your views here.
 
@@ -97,3 +97,29 @@ def user_profile(request: HttpResponse):
     if not request.user.is_authenticated:
         return redirect('login')
     return render(request, 'profile.html', {'form': get_user_form_with_data(request.user), 'form_name': _('Профиль')})
+
+
+
+
+def esep_login(request: HttpResponse):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    
+    jwt_token = jwt.encode({"username": request.user.handle, "email": request.user.email}, settings.JWT_SECRET, algorithm="HS256")
+
+
+
+    response = redirect("https://esep.cpfed.kz")
+
+    response.set_cookie(
+        key="cpfed_auth",
+        value=jwt_token,
+        domain=".cpfed.kz",  # Allow cookie sharing across subdomains
+        secure=True,         # Use True if HTTPS is enabled
+        httponly=True,       # Prevent access via JavaScript
+        samesite='None'      # Allow cross-domain cookies
+    )
+
+
+    return response
