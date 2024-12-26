@@ -1,5 +1,5 @@
 from django.urls import path
-from authentication.views import user_management, password_recovery
+from authentication.views import user_management, password_recovery, admin_actions
 
 urlpatterns = [
     path('login/', user_management.user_login, name='login'),
@@ -10,4 +10,6 @@ urlpatterns = [
 
     path('passwordRecovery/', password_recovery.password_recovery_request, name='pass_rec'),
     path('passwordRecovery/<uuid:token>', password_recovery.password_recovery),
+
+    path('send_emails', admin_actions.custom_emails_view, name='send_emails')
 ]

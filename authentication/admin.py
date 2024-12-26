@@ -1,5 +1,8 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from .models import MainUser, PasswordRecovery, UserActivation
 from contest.models import Contest, UserContest
@@ -29,3 +32,17 @@ class ExcludeRegisteredFilter(admin.SimpleListFilter):
 @admin.register(MainUser)
 class MainUserAdmin(admin.ModelAdmin):
     list_filter = ["contests__contest__name", ExcludeRegisteredFilter]
+    actions = ["send_email"]
+
+    @admin.action(description=_("Отправить письмо на почту"))
+    def send_email(self, request, queryset):
+        if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
+            raise PermissionDenied()
+        selected = queryset.values_list("pk", flat=True)
+        return HttpResponseRedirect(reverse("send_emails") + '?ids=' + ','.join(str(x) for x in selected))
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        if "delete_selected" in actions:
+            del actions["delete_selected"]
+        return actions

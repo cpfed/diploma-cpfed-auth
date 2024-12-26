@@ -2,25 +2,26 @@ from smtplib import SMTPException
 
 from django.contrib.auth import get_user_model
 from django.template.loader import render_to_string
-from django.core.mail import send_mail
+import django.core.mail
 
 
-def send_email(email: str, link: str, subject: str, template_name: str, username: str):
-    context = {
-        "username": username,
-        "link": link
-    }
+def send_emails(emails: list[str], subject: str, html_message: str):
     try:
-        send_mail(
+        django.core.mail.send_mail(
             subject=subject,
-            message=str(context),
-            html_message=render_to_string(
-                template_name=template_name,
-                context=context
-            ),
+            message="",
+            html_message=html_message,
             from_email=None,
-            recipient_list=[email]
+            recipient_list=emails
         )
     except SMTPException as e:
         print("ERROR sending email", str(e))
+        return e
         # logger.error(str(e))
+
+
+def send_email_with_context(email: str, subject: str, template_name: str, context: dict):
+    return send_emails([email], subject, render_to_string(
+        template_name=template_name,
+        context=context
+    ))

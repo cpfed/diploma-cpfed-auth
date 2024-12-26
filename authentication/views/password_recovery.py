@@ -11,7 +11,7 @@ from django.urls import reverse
 
 from authentication.forms import UserPasswordRecovery, UserPasswordRecoveryRequest
 from authentication.models import MainUser, PasswordRecovery
-from .services.send_email import send_email
+from .services.send_email import send_email_with_context
 from utils.cloudflare import check_turnstile_captcha
 from utils.funcs import get_next_urlenc
 
@@ -31,19 +31,18 @@ def password_recovery_request(request: HttpResponse):
             else:
                 rec = PasswordRecovery(user=user)
                 rec.save()
-                try:
-                    send_email(email=user.email,
-                               link=request.build_absolute_uri(reverse("pass_rec")) + str(rec.id) + get_next_urlenc(request),
-                               subject="Восстановление пароля Cpfed",
-                               template_name="emails/recovery_password.html",
-                               username=user.handle)
-                except Exception as e:
-                    print("ERROR sending email", str(e))
+                send_email_with_context(email=user.email,
+                                        subject="Восстановление пароля Cpfed",
+                                        template_name="emails/recovery_password.html",
+                                        context={"username": user.handle,
+                                                 "link": request.build_absolute_uri(reverse("pass_rec")) + str(rec.id)
+                                                         + get_next_urlenc(request)})
                 return render(request, 'result_message.html',
                               {'message': _('Ссылка для восстановления пароля отправлена на почту.')})
         error = str(form.errors)
     return render(request, 'base_form.html',
                   {'form': form, 'form_name': _('Восстановление пароля'), 'enable_captcha': not settings.DEBUG})
+
 
 def password_recovery(request: HttpResponse, token: uuid):
     error = None
