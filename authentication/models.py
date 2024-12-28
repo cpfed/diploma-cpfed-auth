@@ -14,7 +14,7 @@ from utils import constants
 from mixins.models import TimestampMixin
 from locations.models import Region
 
-handle_validator = RegexValidator(regex=re.compile(r'^[a-zA-z_0-9]+$'),
+handle_validator = RegexValidator(regex=re.compile(r'^[a-z_0-9]+$'),
                                   message=_('Хэндл может состоять только из латинских букв, цифр и _'))
 uin_validator = RegexValidator(regex=re.compile(r'^[0-9]{12}$'), message=_('ИИН может состоять только из 12 цифр'))
 

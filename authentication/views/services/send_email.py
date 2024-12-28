@@ -18,6 +18,8 @@ def send_emails(emails: list[str], subject: str, html_message: str):
         print("ERROR sending email", str(e))
         return e
         # logger.error(str(e))
+    except Exception as e:
+        print("ERROR sending email", str(e))
 
 
 def send_email_with_context(email: str, subject: str, template_name: str, context: dict):

@@ -22,7 +22,10 @@ from utils.pixel_events import send_registration
 def user_new(request: HttpResponse):
     form = UserCreateForm()
     if request.method == 'POST':
-        form = UserCreateForm(request.POST)
+        data = {k: request.POST[k] for k in request.POST}
+        if 'handle' in data:
+            data['handle'] = data['handle'].lower()
+        form = UserCreateForm(data)
         if form.is_valid():
             check_turnstile_captcha(request)
 
@@ -80,6 +83,7 @@ def user_login(request: HttpResponse):
             handle = user.handle
         except ObjectDoesNotExist:
             handle = handle_or_email
+        handle = handle.lower()
         user = authenticate(request, handle=handle, password=password)
         if user is not None:
             login(request, user)

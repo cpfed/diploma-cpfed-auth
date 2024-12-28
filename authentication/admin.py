@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
@@ -16,6 +17,7 @@ admin.site.register(UserActivation)
 class ExcludeRegisteredFilter(admin.SimpleListFilter):
     title = _("Убрать зарегистрированных")
     parameter_name = "excludereg"
+
     def lookups(self, request, model_admin):
         contests = Contest.objects.all()
         return [(str(c.id), c.name) for c in contests]
@@ -32,7 +34,7 @@ class ExcludeRegisteredFilter(admin.SimpleListFilter):
 @admin.register(MainUser)
 class MainUserAdmin(admin.ModelAdmin):
     list_filter = ["contests__contest__name", ExcludeRegisteredFilter]
-    actions = ["send_email"]
+    actions = ["send_email", "tolower"]
 
     @admin.action(description=_("Отправить письмо на почту"))
     def send_email(self, request, queryset):
@@ -40,6 +42,17 @@ class MainUserAdmin(admin.ModelAdmin):
             raise PermissionDenied()
         selected = queryset.values_list("pk", flat=True)
         return HttpResponseRedirect(reverse("send_emails") + '?ids=' + ','.join(str(x) for x in selected))
+
+    @admin.action(description=_("tolower"))
+    def tolower(self, request, queryset):
+        us = MainUser.objects.all().values_list("handle", flat=True)
+        us = list(x.lower() for x in us)
+        if len(set(us)) == len(us):
+            render(request, 'admin/result_message.html', {'message': 'OK'})
+        wrong = {u:0 for u in us}
+        for u in us:
+            wrong[u] = wrong[u]+1
+        return render(request, 'admin/result_message.html', {'message': list(u for u in wrong if wrong[u] > 1)})
 
     def get_actions(self, request):
         actions = super().get_actions(request)
