@@ -56,7 +56,7 @@
                         <div class="mx-2">
                             <div class="text-2xl font-semibold mb-2">{{ contest.get_name }}</div>
                             <div class="text-l font-normal mb-4">{{ contest.get_desc }}</div>
-                            <div class="mb-2">{% translate "Дата" %}: {{ contest.date | date:'d.m.Y' }}</div>
+                            <div class="mb-2">{% translate "Дата" %}: {{ contest.date | date:'d.m.Y H:i' }}</div>
 <!--                            <div class="mb-8">{% translate "Время" %}: {{ contest.date | date:'H:i' }} </div>-->
                         </div>
                         <div class="flex space-x-4">

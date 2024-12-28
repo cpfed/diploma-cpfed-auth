@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-28 18:11+0500\n"
+"POT-Creation-Date: 2024-12-28 19:09+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -455,7 +455,7 @@ msgstr ""
 msgid "Зарегистрироваться на контест"
 msgstr ""
 
-#: .\templates\main_page.html:92
+#: .\templates\main_page.html:93
 #, python-format
 msgid "Остался %(days)s день"
 msgid_plural "Осталось %(days)s дней"
