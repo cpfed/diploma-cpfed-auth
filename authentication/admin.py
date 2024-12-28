@@ -46,14 +46,22 @@ class MainUserAdmin(admin.ModelAdmin):
 
     @admin.action(description=_("tolower"))
     def tolower(self, request, queryset):
-        us = MainUser.objects.all().values_list("handle", flat=True)
-        us = list(x.lower() for x in us)
-        if len(set(us)) == len(us):
-            render(request, 'admin/result_message.html', {'message': 'OK'})
-        wrong = {u:0 for u in us}
-        for u in us:
-            wrong[u] = wrong[u]+1
-        return render(request, 'admin/result_message.html', {'message': list(u for u in wrong if wrong[u] > 1)})
+        for u in MainUser.objects.all().order_by('id'):
+            try:
+                u.handle = u.handle.lower()
+                u.save()
+            except:
+                i = 2
+                while i < 1000:
+                    try:
+                        u.handle = f'{u.handle.lower()}_{i}'
+                        u.save()
+                        break
+                    except:
+                        i += 1
+                if i >= 1000:
+                    return render(request, 'admin/result_message.html', {'message': u.handle})
+        return render(request, 'admin/result_message.html', {'message': 'OK'})
 
     def get_actions(self, request):
         actions = super().get_actions(request)
