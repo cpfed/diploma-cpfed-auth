@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-06 19:45+0500\n"
+"POT-Creation-Date: 2024-12-28 18:11+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
+#: .\authentication\admin.py:18
+msgid "Убрать зарегистрированных"
+msgstr ""
+
+#: .\authentication\admin.py:40
+msgid "Отправить письмо на почту"
+msgstr ""
+
+#: .\authentication\admin.py:47
+msgid "tolower"
+msgstr ""
+
 #: .\authentication\forms.py:19 .\authentication\forms.py:38
 msgid "Пароли не совпадают"
 msgstr "Құпия сөздер бірдей емес"
@@ -26,8 +38,8 @@ msgstr "Құпия сөздер бірдей емес"
 msgid "Хэндл/Email"
 msgstr "Хэндл/Email"
 
-#: .\authentication\forms.py:28 .\authentication\models.py:58
-#: .\authentication\models.py:209
+#: .\authentication\forms.py:28 .\authentication\models.py:60
+#: .\authentication\models.py:220
 msgid "Электронная почта"
 msgstr "Электрондық пошта"
 
@@ -35,165 +47,177 @@ msgstr "Электрондық пошта"
 msgid "Подтвердите пароль"
 msgstr "Құпия сөзді растаңыз"
 
-#: .\authentication\models.py:17
+#: .\authentication\models.py:18
 msgid "Хэндл может состоять только из латинских букв, цифр и _"
 msgstr "Хэндл тек латын әріптерінен, сандардан және _ тұру керек"
 
-#: .\authentication\models.py:18
+#: .\authentication\models.py:19
 msgid "ИИН может состоять только из 12 цифр"
 msgstr "ЖСН тек 12 саннан тұру керек"
 
-#: .\authentication\models.py:52 .\authentication\models.py:204
+#: .\authentication\models.py:54 .\authentication\models.py:215
 msgid "Хэндл"
 msgstr "Хэндл (никнейм)"
 
-#: .\authentication\models.py:64
+#: .\authentication\models.py:66
 msgid "Имя"
 msgstr "Есімі"
 
-#: .\authentication\models.py:70
+#: .\authentication\models.py:72
 msgid "Фамилия"
 msgstr "Тегі"
 
-#: .\authentication\models.py:77
+#: .\authentication\models.py:79
 msgid "Телефонный номер"
 msgstr "Телефон нөмірі"
 
-#: .\authentication\models.py:84
+#: .\authentication\models.py:86
 msgid "Пол"
 msgstr "Жынысы"
 
-#: .\authentication\models.py:91
+#: .\authentication\models.py:93
 msgid "ИИН"
 msgstr "ЖСН"
 
-#: .\authentication\models.py:99
+#: .\authentication\models.py:101
 msgid "Размер футболки"
 msgstr "Футболка өлшемі"
 
-#: .\authentication\models.py:106
+#: .\authentication\models.py:108
 msgid "Статус занятости"
 msgstr "Жұмыспен қамту мәртебесі"
 
-#: .\authentication\models.py:112
+#: .\authentication\models.py:114
 msgid "Место учебы или работы"
 msgstr "Оқу немесе жұмыс орны"
 
-#: .\authentication\models.py:119 .\locations\models.py:14
+#: .\authentication\models.py:121 .\locations\models.py:14
 msgid "Регион"
 msgstr "Аймағы"
 
-#: .\authentication\models.py:122
+#: .\authentication\models.py:124
 msgid "Гражданин РК?"
 msgstr "ҚР азаматы??"
 
-#: .\authentication\models.py:126
+#: .\authentication\models.py:128
 msgid "Админ?"
 msgstr "Админ?"
 
-#: .\authentication\models.py:127
+#: .\authentication\models.py:129
 msgid "Модератор?"
 msgstr "Модератор?"
 
-#: .\authentication\models.py:128
+#: .\authentication\models.py:130
 msgid "Аккаунт удален?"
 msgstr "Аккаунт жойылды ма?"
 
-#: .\authentication\models.py:129
+#: .\authentication\models.py:131
 msgid "Аккаунт активен?"
 msgstr "Аккаунт белсенді ме?"
 
-#: .\authentication\models.py:137 .\authentication\models.py:172
+#: .\authentication\models.py:139 .\authentication\models.py:183
 msgid "Пользователь"
 msgstr "Пайдаланушы"
 
-#: .\authentication\models.py:138
+#: .\authentication\models.py:140
 msgid "Пользователи"
 msgstr "Пайдаланушылар"
 
-#: .\authentication\models.py:155
+#: .\authentication\models.py:157
 msgid "Поле не может быть пустым"
 msgstr "Өріс бос болмауы керек"
 
-#: .\authentication\models.py:176 .\authentication\models.py:217
+#: .\authentication\models.py:187 .\authentication\models.py:228
 msgid "Ссылка использована?"
 msgstr "Сілтеме пайдаланылды ма?"
 
-#: .\authentication\models.py:180 .\authentication\models.py:221
+#: .\authentication\models.py:191 .\authentication\models.py:232
 msgid "Срок годности"
 msgstr "Жарамдылық мерзімі"
 
-#: .\authentication\models.py:191 .\authentication\models.py:192
-#: .\authentication\views\password_recovery.py:46
+#: .\authentication\models.py:202 .\authentication\models.py:203
+#: .\authentication\views\password_recovery.py:44
 msgid "Восстановление пароля"
 msgstr "Құпия сөзді қалпына келтіру"
 
-#: .\authentication\models.py:213
+#: .\authentication\models.py:224
 msgid "Пароль"
 msgstr "Құпиясөз"
 
-#: .\authentication\models.py:242
+#: .\authentication\models.py:253
 msgid "Хэндл уже занят"
 msgstr "Хэндл бос емес"
 
-#: .\authentication\models.py:245
+#: .\authentication\models.py:256
 msgid "Email уже занят"
 msgstr "Электрондық пошта бос емес"
 
-#: .\authentication\models.py:251 .\authentication\models.py:252
+#: .\authentication\models.py:262 .\authentication\models.py:263
 msgid "Активация аккаунта"
 msgstr "Аккаунтты белсендіру"
+
+#: .\authentication\views\admin_actions.py:16
+msgid "Тема письма"
+msgstr ""
+
+#: .\authentication\views\admin_actions.py:27
+msgid "Письма успешно отправлены"
+msgstr ""
+
+#: .\authentication\views\admin_actions.py:29
+msgid "Выберите шаблон HTML для отправки"
+msgstr ""
 
 #: .\authentication\views\password_recovery.py:30
 msgid "Указанный для восстановления пароля email не найден"
 msgstr ""
 "Құпиясөзді қалпына келтіру үшін көрсетілген электрондық пошта табылмады"
 
-#: .\authentication\views\password_recovery.py:43
+#: .\authentication\views\password_recovery.py:41
 msgid "Ссылка для восстановления пароля отправлена на почту."
 msgstr "Құпиясөзді қалпына келтіру сілтемесі поштаға жіберіледі."
 
-#: .\authentication\views\password_recovery.py:52
+#: .\authentication\views\password_recovery.py:51
 msgid "Ссылка уже использована."
 msgstr "Сілтеме пайдаланылды."
 
-#: .\authentication\views\password_recovery.py:55
+#: .\authentication\views\password_recovery.py:54
 msgid "Ссылка для восстановления пароля уже устарела. Попробуйте заново."
 msgstr "Таңдалған қалпына келтіру сілтемесі ескірген. Қайтадан көріңіз."
 
-#: .\authentication\views\password_recovery.py:71
+#: .\authentication\views\password_recovery.py:70
 msgid "Пароль успешно изменен!"
 msgstr "Құпиясөз сәтті өзгертілді!"
 
-#: .\authentication\views\password_recovery.py:73
+#: .\authentication\views\password_recovery.py:72
 msgid "Введите новый пароль"
 msgstr "Жаңа құпиясөзді енгізіңіз"
 
-#: .\authentication\views\user_management.py:42
+#: .\authentication\views\user_management.py:46
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr "Аккаунтты белсендіру үшін поштаға хат жіберілді"
 
-#: .\authentication\views\user_management.py:43
+#: .\authentication\views\user_management.py:48
 msgid "Зарегистрироваться"
 msgstr "Тіркелу"
 
-#: .\authentication\views\user_management.py:50
+#: .\authentication\views\user_management.py:55
 msgid "Ссылка уже использована"
 msgstr "Сілтеме пайдаланылды"
 
-#: .\authentication\views\user_management.py:52
+#: .\authentication\views\user_management.py:57
 msgid "Ссылка для активации аккаунта устарела"
 msgstr "Аккаунтты белсендіру сілтемесі ескірген"
 
-#: .\authentication\views\user_management.py:84
+#: .\authentication\views\user_management.py:93
 msgid "Некорректный хэндл/email или пароль"
 msgstr "Қате хэндл/электрондық пошта немесе құпиясөз"
 
-#: .\authentication\views\user_management.py:85
+#: .\authentication\views\user_management.py:94
 msgid "Войти в аккаунт"
 msgstr "Аккаунтқа кіру"
 
-#: .\authentication\views\user_management.py:95
+#: .\authentication\views\user_management.py:105
 msgid "Профиль"
 msgstr ""
 
@@ -209,23 +233,27 @@ msgstr "Сайыстың сипаттамасы"
 msgid "Дата контеста"
 msgstr "Сайыстың күні"
 
-#: .\contest\models.py:56
+#: .\contest\models.py:54
+msgid "Ссылка на контест"
+msgstr "Сайыстың сілтеме"
+
+#: .\contest\models.py:57
 msgid "Контест"
 msgstr "Сайыс"
 
-#: .\contest\models.py:57
+#: .\contest\models.py:58
 msgid "Контесты"
 msgstr "Сайыстар"
 
-#: .\contest\models.py:98
+#: .\contest\models.py:104
 msgid "ID пользователя"
 msgstr "Пайдалануштың ID"
 
-#: .\contest\models.py:103
+#: .\contest\models.py:110
 msgid "ID контеста"
 msgstr "Сайыстың ID"
 
-#: .\contest\models.py:110 .\contest\models.py:111
+#: .\contest\models.py:117 .\contest\models.py:118
 msgid "Данные пользователей к контестам"
 msgstr "Сайыстарға арналған пайдаланушы деректері"
 
@@ -393,8 +421,7 @@ msgstr "Құпия сөзіңізді ұмыттыңыз ба?"
 
 #: .\templates\main_page.html:14
 msgid "Чемпионаты и турниры — время побеждать!"
-msgstr ""
-"Чемпионаттар мен турнирлер — жеңіске жететін уақыт!"
+msgstr "Чемпионаттар мен турнирлер — жеңіске жететін уақыт!"
 
 #: .\templates\main_page.html:17
 msgid ""
@@ -402,11 +429,11 @@ msgid ""
 "программировании. Прими участие в чемпионатах, узнай расписание и "
 "зарегистрируйся, чтобы не упустить шанс стать лучшим!"
 msgstr ""
-"Сізді қызықты турнирлер күтеді, онда сіз бағдарламалау дағдыларын көрсете аласыз. "
-"Чемпионаттарға қатысыңыз, кестені біліңіз және ең жақсы болу мүмкіндігін "
-"жіберіп алмау үшін тіркеліңіз!"
+"Сізді қызықты турнирлер күтеді, онда сіз бағдарламалау дағдыларын көрсете "
+"аласыз. Чемпионаттарға қатысыңыз, кестені біліңіз және ең жақсы болу "
+"мүмкіндігін жіберіп алмау үшін тіркеліңіз!"
 
-#: .\templates\main_page.html:24 .\templates\main_page.html:76
+#: .\templates\main_page.html:24 .\templates\main_page.html:84
 msgid "Узнать больше"
 msgstr "Көбірек біліңіз"
 
@@ -438,15 +465,19 @@ msgstr "Күні"
 msgid "Время"
 msgstr "Уақыт"
 
-#: .\templates\main_page.html:65
+#: .\templates\main_page.html:67
+msgid "Войти на контест"
+msgstr "Сайыстың күні"
+
+#: .\templates\main_page.html:72
 msgid "Вы уже зарегистрированы"
 msgstr "Сіз қазірдің өзінде тіркелдіңіз!"
 
-#: .\templates\main_page.html:70
+#: .\templates\main_page.html:78
 msgid "Зарегистрироваться на контест"
-msgstr "Сайысқа тіркелу"
+msgstr "Сайысқа қатысу"
 
-#: .\templates\main_page.html:84
+#: .\templates\main_page.html:92
 #, python-format
 msgid "Остался %(days)s день"
 msgid_plural "Осталось %(days)s дней"

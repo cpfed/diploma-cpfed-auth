@@ -61,9 +61,17 @@
                         </div>
                         <div class="flex space-x-4">
                             {% if is_reg %}
-                            <div class="bg-gray-500 py-2 px-6 text-gray-100 rounded-lg">
-                                {% translate "Вы уже зарегистрированы" %}
-                            </div>
+                                {% if contest.link %}
+                                <a href="{{ contest.get_link }}">
+                                    <div class="bg-blue-600 py-2 px-6 text-gray-100 rounded-lg">
+                                        {% translate "Войти на контест" %}
+                                    </div>
+                                </a>
+                                {% else %}
+                                <div class="bg-gray-500 py-2 px-6 text-gray-100 rounded-lg">
+                                    {% translate "Вы уже зарегистрированы" %}
+                                </div>
+                                {% endif %}
                             {% else %}
                             <a href="{% url 'contestRegistration' contest_id=contest.id %}">
                                 <div class="bg-blue-600 py-2 px-6 text-gray-100 rounded-lg">
@@ -79,11 +87,13 @@
                         </div>
                     </div>
                 </div>
+                {% if contest.remaining_days >= 0 %}
                 <div class="h-full self-start">
                     <p class="bg-white rounded-full px-4 py-2 text-nowrap">
                         {% blocktranslate count days=contest.remaining_days %}Остался {{days}} день{% plural %}Осталось {{days}} дней{% endblocktranslate %}
                     </p>
                 </div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>

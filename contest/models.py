@@ -5,7 +5,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
 from django import forms
 from django.utils.translation import get_language
-
+from django.urls import reverse
 
 # Create your models here.
 
@@ -51,6 +51,7 @@ class Contest(models.Model):
     date = models.DateTimeField(
         verbose_name=_('Дата контеста')
     )
+    link = models.CharField(max_length=300, verbose_name=_("Ссылка на контест"), blank=True, null=True)
 
     class Meta:
         verbose_name = _("Контест")
@@ -62,7 +63,8 @@ class Contest(models.Model):
 
     @property
     def remaining_days(self):
-        return (self.date - timezone.now()).days
+        rem = (self.date - timezone.now() + timezone.timedelta(days=0.99999)).days
+        return rem
 
     @property
     def get_name(self):
@@ -83,6 +85,10 @@ class Contest(models.Model):
                 return self.playing_desc_kk
             case _:
                 return self.playing_desc
+
+    @property
+    def get_link(self):
+        return f'{reverse("esep_login")}?next={self.link}'
 
 
 class Championship():

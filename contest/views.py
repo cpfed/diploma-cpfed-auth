@@ -53,8 +53,6 @@ def contest_reg(request: HttpResponse, contest_id: int):
 
 
 def main_page(request: HttpResponse):
-    # if settings.HOME_PAGE_URL != './':
-    #     return redirect(settings.HOME_PAGE_URL)
     contests = {x: False for x in Contest.objects.all().order_by('-id')}
     if request.user.is_authenticated:
         for contets_reg in UserContest.objects.filter(user=request.user):

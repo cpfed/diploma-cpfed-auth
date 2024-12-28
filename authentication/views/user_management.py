@@ -111,7 +111,7 @@ def esep_login(request: HttpResponse):
 
     jwt_token = jwt.encode({"username": request.user.handle, "email": request.user.email}, settings.JWT_SECRET, algorithm="HS256")
 
-    response = redirect("https://esep.cpfed.kz")
+    response = redirect(request.GET['next'] if 'next' in request.GET else "https://esep.cpfed.kz")
 
     response.set_cookie(
         max_age=datetime.timedelta(minutes=1),
