@@ -8,9 +8,11 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
+import django.utils.datastructures
 
 from authentication.forms import UserCreateForm, UserPasswordRecovery, UserLoginForm, get_user_form_with_data
 from authentication.models import UserActivation, MainUser
+from contest.models import Contest
 from .services.send_email import send_email_with_context
 from utils.cloudflare import check_turnstile_captcha
 from utils.funcs import get_next_urlenc
@@ -110,9 +112,12 @@ def esep_login(request: HttpResponse):
         return redirect('login')
 
     jwt_token = jwt.encode({"username": request.user.handle, "email": request.user.email}, settings.JWT_SECRET, algorithm="HS256")
-
-    response = redirect(request.GET['next'] if 'next' in request.GET else "https://esep.cpfed.kz")
-
+    try:
+        contest_pk = int(request.GET['contest'])
+        link = Contest.objects.get(pk=contest_pk).link
+        response = redirect(link)
+    except (django.utils.datastructures.MultiValueDictKeyError, ValueError, Contest.DoesNotExist):
+        response = redirect("https://esep.cpfed.kz")
     response.set_cookie(
         max_age=datetime.timedelta(minutes=1),
         key="cpfed_auth",

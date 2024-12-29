@@ -88,7 +88,7 @@ class Contest(models.Model):
 
     @property
     def get_link(self):
-        return f'{reverse("esep_login")}?next={self.link}'
+        return f'{reverse("esep_login")}?contest={self.pk}'
 
 
 class Championship():
