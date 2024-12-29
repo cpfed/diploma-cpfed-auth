@@ -53,16 +53,21 @@ def user_new(request: HttpResponse):
 
 
 def _redirect_after_login(request: HttpResponse):
-    if 'next' in request.GET:
-        response = redirect(request.GET['next'])
-    else:
+    def get_response():
+        if 'next' in request.GET:
+            return redirect(request.GET['next'])
         try:
             contest_pk = int(request.GET['contest'])
             link = Contest.objects.get(pk=contest_pk).link
-            response = redirect(link)
+            return redirect(link)
         except (django.utils.datastructures.MultiValueDictKeyError, ValueError, Contest.DoesNotExist):
-            response = redirect(settings.AFTER_LOGIN_URL)
+            pass
+        pos = request.META.get('HTTP_REFERER', '')
+        if pos.startswith('https://esep.cpfed.kz'):
+            return redirect(request.META.get('https://esep.cpfed.kz'))
+        return redirect(settings.AFTER_LOGIN_URL)
 
+    response = get_response()
     jwt_token = jwt.encode({"username": request.user.handle, "email": request.user.email}, settings.JWT_SECRET, algorithm="HS256")
     response.set_cookie(
             max_age=datetime.timedelta(minutes=1),
