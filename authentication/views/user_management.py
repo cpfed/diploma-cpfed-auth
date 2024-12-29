@@ -63,7 +63,7 @@ def _redirect_after_login(request: HttpResponse):
         except (django.utils.datastructures.MultiValueDictKeyError, ValueError, Contest.DoesNotExist):
             pass
         pos = request.META.get('HTTP_REFERER', '')
-        if pos.startswith('https://esep.cpfed.kz'):
+        if 'esep.cpfed.kz' in pos:
             return redirect(request.META.get('https://esep.cpfed.kz'))
         return redirect(settings.AFTER_LOGIN_URL)
 
