@@ -35,7 +35,7 @@ class ExcludeRegisteredFilter(admin.SimpleListFilter):
 class MainUserAdmin(admin.ModelAdmin):
     list_filter = ["contests__contest__name", ExcludeRegisteredFilter]
     actions = ["send_email", "tolower"]
-    search_fields = ["handle"]
+    search_fields = ["handle", "first_name", "last_name"]
 
     @admin.action(description=_("Отправить письмо на почту"))
     def send_email(self, request, queryset):
@@ -46,22 +46,11 @@ class MainUserAdmin(admin.ModelAdmin):
 
     @admin.action(description=_("tolower"))
     def tolower(self, request, queryset):
+        us = []
         for u in MainUser.objects.all().order_by('id'):
-            try:
-                u.handle = u.handle.lower()
-                u.save()
-            except:
-                i = 2
-                while i < 1000:
-                    try:
-                        u.handle = f'{u.handle.lower()}_{i}'
-                        u.save()
-                        break
-                    except:
-                        i += 1
-                if i >= 1000:
-                    return render(request, 'admin/result_message.html', {'message': u.handle})
-        return render(request, 'admin/result_message.html', {'message': 'OK'})
+            if u.handle.endswith('_2') or u.handle.endswith('_3'):
+                us.append(u.email)
+        return render(request, 'admin/result_message.html', {'message': us})
 
     def get_actions(self, request):
         actions = super().get_actions(request)
