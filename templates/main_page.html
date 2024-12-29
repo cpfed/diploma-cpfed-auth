@@ -87,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-                {% if contest.remaining_days >= 0 %}
+                {% if contest.remaining_days > 0 %}
                 <div class="h-full self-start">
                     <p class="bg-white rounded-full px-4 py-2 text-nowrap">
                         {% blocktranslate count days=contest.remaining_days %}Остался {{days}} день{% plural %}Осталось {{days}} дней{% endblocktranslate %}
