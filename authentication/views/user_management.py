@@ -64,7 +64,7 @@ def _redirect_after_login(request: HttpResponse):
             pass
         pos = request.META.get('HTTP_REFERER', '')
         if 'esep.cpfed.kz' in pos:
-            return redirect(request.META.get('https://esep.cpfed.kz'))
+            return redirect('https://esep.cpfed.kz')
         return redirect(settings.AFTER_LOGIN_URL)
 
     response = get_response()
