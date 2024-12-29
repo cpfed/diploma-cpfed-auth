@@ -3,12 +3,14 @@ import jwt
 import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, response
+from django.http import HttpResponse, response, HttpResponseRedirect
+from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
 import django.utils.datastructures
+from django.utils.http import urlencode
 
 from authentication.forms import UserCreateForm, UserPasswordRecovery, UserLoginForm, get_user_form_with_data
 from authentication.models import UserActivation, MainUser
@@ -109,7 +111,7 @@ def user_profile(request: HttpResponse):
 
 def esep_login(request: HttpResponse):
     if not request.user.is_authenticated:
-        return redirect('login')
+        return HttpResponseRedirect(f"{reverse('login')}?{urlencode({'next': 'esep_login'})}")
 
     jwt_token = jwt.encode({"username": request.user.handle, "email": request.user.email}, settings.JWT_SECRET, algorithm="HS256")
     try:
