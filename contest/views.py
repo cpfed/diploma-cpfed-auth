@@ -111,7 +111,7 @@ def api_contest_results(request: HttpResponse):
         total_points=Sum("contests__result__points"),
         fullname=Concat("first_name", Value(" "), "last_name"),
         rank=Window(expression=RowNumber(), order_by="-total_points")
-    )
+    ).order_by("rank")
 
     page = int(request.GET.get("page", 1))
     limit = int(request.GET.get("limit", 20))
