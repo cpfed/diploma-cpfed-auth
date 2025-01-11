@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
     'widget_tweaks',
     'phonenumber_field',
+    'corsheaders',
 
     'authentication',
     'contest',
@@ -62,6 +63,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -181,3 +183,8 @@ META_PIXEL_ACCESS_TOKEN = os.getenv("META_PIXEL_ACCESS_TOKEN", None)
 META_PIXEL_ID = os.getenv("META_PIXEL_ID", None)
 
 JWT_SECRET = os.getenv("JWT_SECRET", '')
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'https://contest.cpfed.kz'
+]

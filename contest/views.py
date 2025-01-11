@@ -3,17 +3,16 @@ from django.http import HttpResponse, HttpResponseRedirect, response
 from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.forms.models import fields_for_model
 from django.utils.translation import gettext_lazy as _
 from django.utils.http import urlencode
 from django.db.utils import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
+from django import forms
 
-from .models import Contest, UserContest
+from .models import Contest, UserContest, ContestResult
 from .forms import ContestRegistrationForm
+from .utils import contest_parser, gp100
 from authentication.forms import get_user_form
-
-
-# Create your views here.
 
 
 def contest_reg(request: HttpResponse, contest_id: int):
@@ -58,3 +57,50 @@ def main_page(request: HttpResponse):
         for contets_reg in UserContest.objects.filter(user=request.user):
             contests[contets_reg.contest] = True
     return render(request, 'main_page.html', {'contests': contests})
+
+
+def upload_contest_results(request: HttpResponse):
+    if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
+        raise PermissionDenied()
+
+    class HTMLForm(forms.Form):
+        link = forms.CharField(max_length=1000, label=_('Ссылка на API с результатами контеста'))
+        need_gp = forms.BooleanField(label=_('Добавить очки по GP100?'))
+
+    if request.method == 'POST':
+        form = HTMLForm(request.POST)
+        cnt_skipped = 0
+        if form.is_valid():
+            contest = get_object_or_404(Contest, pk=int(request.GET['id']))
+            ContestResult.objects.filter(user_reg__contest__pk=contest.pk).delete()
+
+            try:
+                results = contest_parser.fetch_contest_results(form.cleaned_data['link'])
+            except Exception as err:
+                return render(request, 'admin/result_message.html', {'message': 'Ошибка: ' + str(err)})
+
+            for rank, res in enumerate(results, start=1):
+                try:
+                    user = get_user_model().objects.get(handle=res.user)
+                except ObjectDoesNotExist:
+                    cnt_skipped += 1
+                    continue
+                    # return render(request, 'admin/result_message.html',
+                    #               {'message': f'Не найден пользователь с хэндлом: {res.user}'})
+                try:
+                    user_reg = UserContest.objects.get(user=user, contest=contest)
+                except ObjectDoesNotExist:
+                    cnt_skipped += 1
+                    continue
+                cr = ContestResult(user_reg=user_reg, rank=rank)
+                if form.cleaned_data['need_gp']:
+                    cr.points = gp100.estimate_point_gp100(rank, res.score, results[0].score, len(results))
+                cr.save()
+            return render(request, 'admin/result_message.html', {
+                'message': f'Успешно загружены результаты контеста, регистрации нет у {cnt_skipped} пользователей: '})
+    form = HTMLForm()
+    return render(request, 'admin/form.html', {'form': form, 'form_name': _('Загрузить результаты контеста')})
+
+
+def api_contest_results(request: HttpResponse):
+    pass

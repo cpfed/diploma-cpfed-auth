@@ -34,7 +34,7 @@ class ExcludeRegisteredFilter(admin.SimpleListFilter):
 @admin.register(MainUser)
 class MainUserAdmin(admin.ModelAdmin):
     list_filter = ["contests__contest__name", ExcludeRegisteredFilter]
-    actions = ["send_email", "tolower"]
+    actions = ["send_email"]
     search_fields = ["handle", "first_name", "last_name"]
 
     @admin.action(description=_("Отправить письмо на почту"))
@@ -43,14 +43,6 @@ class MainUserAdmin(admin.ModelAdmin):
             raise PermissionDenied()
         selected = queryset.values_list("pk", flat=True)
         return HttpResponseRedirect(reverse("send_emails") + '?ids=' + ','.join(str(x) for x in selected))
-
-    @admin.action(description=_("tolower"))
-    def tolower(self, request, queryset):
-        us = []
-        for u in MainUser.objects.all().order_by('id'):
-            if u.handle.endswith('_2') or u.handle.endswith('_3'):
-                us.append(u.email)
-        return render(request, 'admin/result_message.html', {'message': us})
 
     def get_actions(self, request):
         actions = super().get_actions(request)

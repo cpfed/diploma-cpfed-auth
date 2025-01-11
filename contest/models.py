@@ -7,6 +7,7 @@ from django import forms
 from django.utils.translation import get_language
 from django.urls import reverse
 
+
 # Create your models here.
 
 class Contest(models.Model):
@@ -127,3 +128,17 @@ class UserContest(models.Model):
         res = self.additional_fields
         res.update(self.user.get_user_data_by_fields(self.contest.required_fields))
         return res
+
+
+class ContestResult(models.Model):
+    user_reg = models.OneToOneField(
+        UserContest,
+        on_delete=models.CASCADE,
+        verbose_name=_("Регистрация"),
+        related_name="result"
+    )
+    rank = models.IntegerField(verbose_name=_("Ранг"))
+    points = models.FloatField(verbose_name=_("Очки"), default=0)
+
+    def __str__(self):
+        return f"{self.user_reg}: #{self.rank}"
