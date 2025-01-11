@@ -1,13 +1,16 @@
+from django import forms
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect, response
+from django.http import HttpResponse, HttpResponseRedirect, response, JsonResponse
 from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 from django.utils.http import urlencode
 from django.db.utils import IntegrityError
+from django.db.models.functions import Concat, RowNumber
+from django.db.models import Q, Sum, Value, Window
+from django.contrib.postgres.aggregates import ArrayAgg
 from django.core.exceptions import ObjectDoesNotExist
-from django import forms
 
 from .models import Contest, UserContest, ContestResult
 from .forms import ContestRegistrationForm
@@ -103,4 +106,35 @@ def upload_contest_results(request: HttpResponse):
 
 
 def api_contest_results(request: HttpResponse):
-    pass
+    data = get_user_model().objects.select_related("region").filter(contests__contest=1).annotate(
+        points=ArrayAgg("contests__result__points"),
+        total_points=Sum("contests__result__points"),
+        fullname=Concat("first_name", Value(" "), "last_name"),
+        rank=Window(expression=RowNumber(), order_by="-total_points")
+    )
+
+    page = int(request.GET.get("page", 1))
+    limit = int(request.GET.get("limit", 20))
+    fullname = request.GET.get("fullname", "")
+    region_id = request.GET.get("region_id", None)
+    if fullname:
+        data = data.filter(Q(fullname__icontains=fullname))
+    if region_id:
+        data = data.filter(Q(region_id=int(region_id)))
+    res = [{
+        "points": x.points,
+        "total_points": x.total_points,
+        "fullname": x.fullname,
+        "rank": x.rank,
+        "region": {
+            "id": x.region.id,
+            "name": x.region.name
+        }
+    } for x in data[(page - 1)*limit:page*limit]]
+
+    return JsonResponse({
+        "count": len(data),
+        "next": None,
+        "previous": None,
+        "results": res
+    })
