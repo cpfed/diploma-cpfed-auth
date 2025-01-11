@@ -106,7 +106,7 @@ def upload_contest_results(request: HttpResponse):
 
 
 def api_contest_results(request: HttpResponse):
-    data = get_user_model().objects.select_related("region").filter(contests__contest=1).annotate(
+    data = get_user_model().objects.select_related("region").filter(contests__contest=1).filter(contests__result__isnull=False).annotate(
         points=ArrayAgg("contests__result__points"),
         total_points=Sum("contests__result__points"),
         fullname=Concat("first_name", Value(" "), "last_name"),
