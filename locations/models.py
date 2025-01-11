@@ -1,9 +1,13 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+from django_cte import CTEManager
+
 from mixins.models import TimestampMixin
 
 
 class Region(TimestampMixin):
+    objects = CTEManager()
     name = models.CharField(
         max_length=128,
         unique=True,

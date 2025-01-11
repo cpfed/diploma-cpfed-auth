@@ -12,10 +12,13 @@ from django.db.models import Q, Sum, Value, Window
 from django.contrib.postgres.aggregates import ArrayAgg
 from django.core.exceptions import ObjectDoesNotExist
 
+from django_cte import With
+
 from .models import Contest, UserContest, ContestResult
 from .forms import ContestRegistrationForm
 from .utils import contest_parser, gp100
 from authentication.forms import get_user_form
+from locations.models import Region
 
 
 def contest_reg(request: HttpResponse, contest_id: int):
@@ -106,11 +109,23 @@ def upload_contest_results(request: HttpResponse):
 
 
 def api_contest_results(request: HttpResponse):
-    data = get_user_model().objects.select_related("region").filter(contests__contest=1).filter(contests__result__isnull=False).annotate(
-        points=ArrayAgg("contests__result__points"),
-        total_points=Sum("contests__result__points"),
-        fullname=Concat("first_name", Value(" "), "last_name"),
-        rank=Window(expression=RowNumber(), order_by="-total_points")
+    cte = With(
+        get_user_model().objects.select_related("region")
+        .filter(contests__contest=1)
+        .filter(contests__result__isnull=False)
+        .annotate(
+            points=ArrayAgg("contests__result__points"),
+            total_points=Sum("contests__result__points"),
+            fullname=Concat("first_name", Value(" "), "last_name"),
+            rank=Window(expression=RowNumber(), order_by="-total_points")
+        )
+        .values("fullname", "points", "total_points", "rank", "region_id")
+    )
+    data = cte.join(Region, id=cte.col.region_id).with_cte(cte).annotate(
+        points=cte.col.points,
+        total_points=cte.col.total_points,
+        fullname=cte.col.fullname,
+        rank=cte.col.rank,
     ).order_by("rank")
 
     page = int(request.GET.get("page", 1))
@@ -120,15 +135,15 @@ def api_contest_results(request: HttpResponse):
     if fullname:
         data = data.filter(Q(fullname__icontains=fullname))
     if region_id:
-        data = data.filter(Q(region_id=int(region_id)))
+        data = data.filter(Q(id=int(region_id)))
     res = [{
-        "points": x.points,
-        "total_points": x.total_points,
+        "points": [round(f, 3) for f in x.points],
+        "total_points": round(x.total_points, 3),
         "fullname": x.fullname,
         "rank": x.rank,
         "region": {
-            "id": x.region.id,
-            "name": x.region.name
+            "id": x.id,
+            "name": x.name
         }
     } for x in data[(page - 1)*limit:page*limit]]
 

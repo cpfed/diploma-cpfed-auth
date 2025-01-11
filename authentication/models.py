@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.core.validators import ValidationError, RegexValidator
 
 from phonenumber_field.modelfields import PhoneNumberField
+from django_cte import CTEManager
 
 from utils import constants
 from mixins.models import TimestampMixin
@@ -19,7 +20,7 @@ handle_validator = RegexValidator(regex=re.compile(r'^[a-z_0-9]+$'),
 uin_validator = RegexValidator(regex=re.compile(r'^[0-9]{12}$'), message=_('ИИН может состоять только из 12 цифр'))
 
 
-class MainUserManager(BaseUserManager):
+class MainUserManager(BaseUserManager, CTEManager):
     DELETE_FIELD = "is_deleted"
 
     def create_user(self, handle, email, password):
