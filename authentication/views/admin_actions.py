@@ -1,3 +1,5 @@
+import time
+
 from django import forms
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
@@ -68,14 +70,18 @@ def register_users_from_list(request: HttpResponse):
                                 if not MainUser.objects.filter(handle=h).exists():
                                     handle = h
                                 handle_ind += 1
-                            user = MainUser(handle=handle, email=email, first_name=first_name, last_name=last_name, phone_number=pn)
-                            user.set_password(password)
-                            user.save()
-
-                            err = send_emails([email], form.cleaned_data['subject'], None, for_new.format(login=handle, password=password))
+                            try:
+                                user = MainUser(handle=handle, email=email, first_name=first_name, last_name=last_name, phone_number=pn)
+                                user.set_password(password)
+                                user.save()
+                                err = send_emails([email], form.cleaned_data['subject'], None, for_new.format(login=handle, password=password))
+                            except: # phone number error
+                                MainUser.objects.get(email=email)
+                                err = send_emails([email], form.cleaned_data['subject'], None, for_was)
                     except Exception as e:
                         err = str(e)
                     result.append(f"{email}: {'OK' if err is None else err}")
+                    time.sleep(1)
                 return render(request, 'admin/result_message.html', {'message': '\n'.join(result)})
             except Exception as e:
                 return render(request, 'admin/result_message.html', {'message': str(e)})
