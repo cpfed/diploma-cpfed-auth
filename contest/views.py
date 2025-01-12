@@ -108,6 +108,28 @@ def upload_contest_results(request: HttpResponse):
     return render(request, 'admin/form.html', {'form': form, 'form_name': _('Загрузить результаты контеста')})
 
 
+def register_on_contest(request: HttpResponse):
+    if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
+        raise PermissionDenied()
+
+    class Form(forms.Form):
+        userlist = forms.FileField(widget=forms.ClearableFileInput(), label='Cписок пользователей')
+
+    if request.method == 'POST':
+        form = Form(request.POST, request.FILES)
+        if form.is_valid():
+            result = []
+            userlist = form.cleaned_data['userlist'].read().decode(encoding='utf-8')
+            for email in userlist.split(','):
+                try:
+                    get_user_model().objects.get(email=email)
+                except ObjectDoesNotExist:
+                    result.append(email)
+            return render(request, 'admin/result_message.html', {'message': ', '.join(result)})
+    form = Form()
+    return render(request, 'admin/form.html', {'form': form, 'form_name': 'Зарегистрировать пользователей'})
+
+
 def api_contest_results(request: HttpResponse):
     cte = With(
         get_user_model().objects.select_related("region")
@@ -145,7 +167,7 @@ def api_contest_results(request: HttpResponse):
             "id": x.id,
             "name": x.name
         }
-    } for x in data[(page - 1)*limit:page*limit]]
+    } for x in data[(page - 1) * limit:page * limit]]
 
     return JsonResponse({
         "count": len(data),
