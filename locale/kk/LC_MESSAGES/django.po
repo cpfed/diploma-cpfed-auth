@@ -291,7 +291,7 @@ msgstr "Негізгі бет"
 
 #: .\templates\base.html:25
 msgid "О ЧРК"
-msgstr "ЧРК тұралы"
+msgstr "ҚРЧ туралы"
 
 #: .\templates\base.html:26 .\templates\base.html:76
 msgid "О нас"
