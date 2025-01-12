@@ -56,23 +56,25 @@ def register_users_from_list(request: HttpResponse):
                 email = row[0]
                 pn = row[1]
                 last_name, first_name, *a = map(lambda s: ' '.join(s.capitalize().split('_')), row[2].split())
-
                 try:
-                    MainUser.objects.get(email=email)
-                    err = send_emails([email], form.cleaned_data['subject'], None, for_was)
-                except ObjectDoesNotExist:
-                    password = get_random_string(10)
-                    handle = None
-                    while handle is None:
-                        h = f'teacher_{handle_ind}'
-                        if not MainUser.objects.filter(handle=h).exists():
-                            handle = h
-                        handle_ind += 1
-                    user = MainUser(handle=handle, email=email, first_name=first_name, last_name=last_name, phone_number=pn)
-                    user.set_password(password)
-                    user.save()
+                    try:
+                        MainUser.objects.get(email=email)
+                        err = send_emails([email], form.cleaned_data['subject'], None, for_was)
+                    except ObjectDoesNotExist:
+                        password = get_random_string(10)
+                        handle = None
+                        while handle is None:
+                            h = f'teacher_{handle_ind}'
+                            if not MainUser.objects.filter(handle=h).exists():
+                                handle = h
+                            handle_ind += 1
+                        user = MainUser(handle=handle, email=email, first_name=first_name, last_name=last_name, phone_number=pn)
+                        user.set_password(password)
+                        user.save()
 
-                    err = send_emails([email], form.cleaned_data['subject'], None, for_new.format(login=handle, password=password))
+                        err = send_emails([email], form.cleaned_data['subject'], None, for_new.format(login=handle, password=password))
+                except Exception as e:
+                    err = str(e)
                 result.append(f"{email}: {'OK' if err is None else err}")
             return render(request, 'admin/result_message.html', {'message': '\n'.join(result)})
     form = Form()
