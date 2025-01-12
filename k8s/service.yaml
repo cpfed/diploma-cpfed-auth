@@ -11,3 +11,15 @@ spec:
     port: 31746
     targetPort: auth-svc
   type: LoadBalancer
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-redis
+spec:
+  selector:
+    app.kubernetes.io/name: auth-redis
+  ports:
+  - port: 6379
+    targetPort: auth-redis-svc

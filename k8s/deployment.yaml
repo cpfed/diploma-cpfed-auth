@@ -33,4 +33,21 @@ spec:
           envFrom:
             - configMapRef:
                 name: auth-configmap
+          env:
+            - name: REDIS_HOST
+              value: $(AUTH_REDIS_SERVICE_HOST)
       restartPolicy: Always
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: auth-redis
+  labels:
+    app.kubernetes.io/name: auth-redis
+spec:
+  containers:
+  - name: auth-redis
+    image: "docker.io/redis:6.0.5"
+    ports:
+      - containerPort: 6379
+        name: auth-redis-svc
