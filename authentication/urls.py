@@ -11,5 +11,6 @@ urlpatterns = [
     path('passwordRecovery/', password_recovery.password_recovery_request, name='pass_rec'),
     path('passwordRecovery/<uuid:token>', password_recovery.password_recovery),
 
-    path('send_emails', admin_actions.custom_emails_view, name='send_emails')
+    path('send_emails', admin_actions.custom_emails_view, name='send_emails'),
+    path('register_users_from_list', admin_actions.register_users_from_list, name='register_users_from_list'),
 ]

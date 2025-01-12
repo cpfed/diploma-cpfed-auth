@@ -34,7 +34,7 @@ class ExcludeRegisteredFilter(admin.SimpleListFilter):
 @admin.register(MainUser)
 class MainUserAdmin(admin.ModelAdmin):
     list_filter = ["contests__contest__name", ExcludeRegisteredFilter]
-    actions = ["send_email"]
+    actions = ["send_email", "register_users"]
     search_fields = ["handle", "first_name", "last_name"]
 
     @admin.action(description=_("Отправить письмо на почту"))
@@ -44,8 +44,14 @@ class MainUserAdmin(admin.ModelAdmin):
         selected = queryset.values_list("pk", flat=True)
         return HttpResponseRedirect(reverse("send_emails") + '?ids=' + ','.join(str(x) for x in selected))
 
-    def get_actions(self, request):
-        actions = super().get_actions(request)
-        if "delete_selected" in actions:
-            del actions["delete_selected"]
-        return actions
+    @admin.action(description=_("Зарегистрировать новых пользователей"))
+    def register_users(self, request, queryset):
+        if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
+            raise PermissionDenied()
+        return HttpResponseRedirect(reverse("register_users_from_list"))
+
+    # def get_actions(self, request):
+    #     actions = super().get_actions(request)
+    #     if "delete_selected" in actions:
+    #         del actions["delete_selected"]
+    #     return actions

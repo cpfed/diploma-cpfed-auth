@@ -5,11 +5,11 @@ from django.template.loader import render_to_string
 import django.core.mail
 
 
-def send_emails(emails: list[str], subject: str, html_message: str):
+def send_emails(emails: list[str], subject: str, html_message: str, message=""):
     try:
         django.core.mail.send_mail(
             subject=subject,
-            message="",
+            message=message,
             html_message=html_message,
             from_email=None,
             recipient_list=emails
