@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 from django.utils.http import urlencode
+from django.utils.crypto import get_random_string
 from django.db.utils import IntegrityError
 from django.db.models.functions import Concat, RowNumber
 from django.db.models import Q, Sum, Value, Window
@@ -114,6 +115,8 @@ def register_on_contest(request: HttpResponse):
 
     class Form(forms.Form):
         userlist = forms.FileField(widget=forms.ClearableFileInput(), label='Cписок пользователей')
+        need_reg = forms.BooleanField(label='Регистрировать на контест?', required=False)
+        need_ch_pass = forms.BooleanField(label='Изменить пароль?', required=False)
 
     if request.method == 'POST':
         form = Form(request.POST, request.FILES)
@@ -127,10 +130,16 @@ def register_on_contest(request: HttpResponse):
                 try:
                     user = get_user_model().objects.get(email=email)
                 except ObjectDoesNotExist:
-                    result.append(email)
+                    result.append(f"{email}: not exist")
                 else:
-                    UserContest.objects.get_or_create(user=user, contest=contest)
-            return render(request, 'admin/result_message.html', {'message': ', '.join(result)})
+                    if form.cleaned_data['need_reg']:
+                        UserContest.objects.get_or_create(user=user, contest=contest)
+                    if form.cleaned_data['need_ch_pass']:
+                        password = get_random_string(10)
+                        user.set_password(password)
+                        user.save()
+                        result.append(f"{email}: {password}")
+            return render(request, 'admin/result_message.html', {'message': ';'.join(result)})
     form = Form()
     return render(request, 'admin/form.html', {'form': form, 'form_name': 'Зарегистрировать пользователей'})
 
