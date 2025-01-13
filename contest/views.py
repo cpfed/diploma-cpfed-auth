@@ -120,11 +120,16 @@ def register_on_contest(request: HttpResponse):
         if form.is_valid():
             result = []
             userlist = form.cleaned_data['userlist'].read().decode(encoding='utf-8')
+
+            contest = Contest.objects.get(id=int(request.GET['id']))
+
             for email in userlist.split(','):
                 try:
-                    get_user_model().objects.get(email=email)
+                    user = get_user_model().objects.get(email=email)
                 except ObjectDoesNotExist:
                     result.append(email)
+                else:
+                    UserContest.objects.get_or_create(user=user, contest=contest)
             return render(request, 'admin/result_message.html', {'message': ', '.join(result)})
     form = Form()
     return render(request, 'admin/form.html', {'form': form, 'form_name': 'Зарегистрировать пользователей'})
