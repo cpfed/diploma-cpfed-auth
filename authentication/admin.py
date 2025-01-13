@@ -35,7 +35,7 @@ class ExcludeRegisteredFilter(admin.SimpleListFilter):
 class MainUserAdmin(admin.ModelAdmin):
     list_filter = ["contests__contest__name", ExcludeRegisteredFilter]
     actions = ["send_email", "register_users"]
-    search_fields = ["handle", "first_name", "last_name"]
+    search_fields = ["handle", "first_name", "last_name", "phone_number"]
 
     @admin.action(description=_("Отправить письмо на почту"))
     def send_email(self, request, queryset):

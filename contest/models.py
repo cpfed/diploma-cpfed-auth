@@ -54,6 +54,8 @@ class Contest(models.Model):
     )
     link = models.CharField(max_length=300, verbose_name=_("Ссылка на контест"), blank=True, null=True)
 
+    show_on_main_page = models.BooleanField(default=True)
+
     class Meta:
         verbose_name = _("Контест")
         verbose_name_plural = _("Контесты")
