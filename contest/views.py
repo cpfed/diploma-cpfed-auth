@@ -117,6 +117,8 @@ def register_on_contest(request: HttpResponse):
         userlist = forms.FileField(widget=forms.ClearableFileInput(), label='Cписок пользователей')
         need_reg = forms.BooleanField(label='Регистрировать на контест?', required=False)
         need_ch_pass = forms.BooleanField(label='Изменить пароль?', required=False)
+        show_info = forms.BooleanField(label='Показать информацию о пользователе', required=False)
+        by_handle = forms.BooleanField(label='Искать по хэндлу?', required=False)
 
     if request.method == 'POST':
         form = Form(request.POST, request.FILES)
@@ -128,7 +130,7 @@ def register_on_contest(request: HttpResponse):
 
             for email in userlist.split(','):
                 try:
-                    user = get_user_model().objects.get(email=email)
+                    user = get_user_model().objects.get(**{('handle' if form.cleaned_data['by_handle'] else 'email'): email})
                 except ObjectDoesNotExist:
                     result.append(f"{email}: not exist")
                 else:
@@ -139,6 +141,8 @@ def register_on_contest(request: HttpResponse):
                         user.set_password(password)
                         user.save()
                         result.append(f"{email}: {password}")
+                    if form.cleaned_data['show_info']:
+                        result.append(f"{user.handle},{user.email}")
             return render(request, 'admin/result_message.html', {'message': ';'.join(result)})
     form = Form()
     return render(request, 'admin/form.html', {'form': form, 'form_name': 'Зарегистрировать пользователей'})
