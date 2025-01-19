@@ -9,21 +9,24 @@ const region_select = document.getElementById('id_region');
 const district_select = document.getElementById('id_district');
 
 function update_districts() {
-  const selected = region_select.value - 1;
   district_select.innerHTML = '<option value="">---------</option>';
-  if (regions[selected] && regions[selected]['districts']) {
-      regions[selected]['districts'].forEach(state => {
-      const option = document.createElement('option');
-      option.value = state;
-      {% if widget.value %}
-      if ("{{ widget.value }}" == state){
-        option.selected = true
+  let region = region_select.options[region_select.selectedIndex].text;
+  console.log(region);
+  regions.forEach((reg) => {
+      if (region == reg['name'] && reg['districts']){
+        reg['districts'].forEach(state => {
+          const option = document.createElement('option');
+          option.value = state;
+          {% if widget.value %}
+          if ("{{ widget.value }}" == state){
+            option.selected = true
+          }
+          {% endif %}
+          option.textContent = state;
+          district_select.appendChild(option);
+        })
       }
-      {% endif %}
-      option.textContent = state;
-      district_select.appendChild(option);
-    });
-  }
+  });
 };
 update_districts();
 region_select.addEventListener('change', update_districts);
