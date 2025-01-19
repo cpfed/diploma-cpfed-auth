@@ -28,16 +28,18 @@ def contest_reg(request: HttpResponse, contest_id: int):
 
     contest = get_object_or_404(Contest, id=contest_id)
 
-    form = ContestRegistrationForm(contest, request.user)
+    user_reg = UserContest.objects.filter(user=request.user, contest=contest)
+    user_reg = (user_reg[0] if len(user_reg) else None)
+
+    form = ContestRegistrationForm(contest, request.user, user_reg)
     if request.method == 'POST':
-        form = ContestRegistrationForm(contest, request.user, request.POST)
+        form = ContestRegistrationForm(contest, request.user, user_reg, request.POST)
         # to update user data from registration
-        user_form = get_user_form(contest.required_fields)(request.POST, instance=request.user)
+        user_form = get_user_form(contest.user_fields)(request.POST, instance=request.user)
         if form.is_valid() and user_form.is_valid():
-            mem_fields = {x.name for x in get_user_model()._meta.get_fields()}
             contest_data = dict()
             for field, value in form.cleaned_data.items():
-                if field not in mem_fields:
+                if field not in contest.user_fields:
                     contest_data[field] = value
 
             user_reg, created = UserContest.objects.get_or_create(user=request.user, contest=contest)
@@ -130,7 +132,8 @@ def register_on_contest(request: HttpResponse):
 
             for email in userlist.split(','):
                 try:
-                    user = get_user_model().objects.get(**{('handle' if form.cleaned_data['by_handle'] else 'email'): email})
+                    user = get_user_model().objects.get(
+                        **{('handle' if form.cleaned_data['by_handle'] else 'email'): email})
                 except ObjectDoesNotExist:
                     result.append(f"{email}: not exist")
                 else:

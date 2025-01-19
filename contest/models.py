@@ -39,6 +39,10 @@ class Contest(models.Model):
     required_fields = ArrayField(
         models.CharField(max_length=100)
     )
+    fields = models.JSONField(
+        null=True,
+        blank=True
+    )
     playing_desc = models.TextField(
         verbose_name=_("Описание контеста: ") + 'ru'
     )
@@ -48,7 +52,6 @@ class Contest(models.Model):
     playing_desc_en = models.TextField(
         verbose_name=_("Описание контеста: ") + 'en'
     )
-
     date = models.DateTimeField(
         verbose_name=_('Дата контеста')
     )
@@ -93,6 +96,13 @@ class Contest(models.Model):
     def get_link(self):
         return f'{reverse("login")}?contest={self.pk}'
 
+    @property
+    def user_fields(self):
+        return self.fields.get("user_fields", [])
+
+    @property
+    def custom_fields(self):
+        return self.fields.get("additional", [])
 
 class Championship():
     # date, contests
@@ -127,8 +137,8 @@ class UserContest(models.Model):
 
     @property
     def get_full_reg(self) -> dict:
-        res = self.additional_fields
-        res.update(self.user.get_user_data_by_fields(self.contest.required_fields))
+        res = self.additional_fields or dict()
+        res.update(self.user.get_user_data_by_fields(self.contest.fields.get("user_fields", [])))
         return res
 
 

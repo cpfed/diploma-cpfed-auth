@@ -1,69 +1,12 @@
+import json
+
 from django.core.management.base import BaseCommand
+from django.conf import settings
+
 from locations.models import Region
 
-regions = [
-    {
-        "name": "Астана"
-    },
-    {
-        "name": "Алматы"
-    },
-    {
-        "name": "Шымкент"
-    },
-    {
-        "name": "Алматинская область"
-    },
-    {
-        "name": "Акмолинская область"
-    },
-    {
-        "name": "Атырауская область"
-    },
-    {
-        "name": "Актюбинская область"
-    },
-    {
-        "name": "Восточно-Казахстанская область"
-    },
-    {
-        "name": "Жамбылская область"
-    },
-    {
-        "name": "Западно-Казахстанская область"
-    },
-    {
-        "name": "Карагандинская область"
-    },
-    {
-        "name": "Костанайская область"
-    },
-    {
-        "name": "Кызылординская область"
-    },
-    {
-        "name": "Мангистауская область"
-    },
-    {
-        "name": "Павлодарская область"
-    },
-    {
-        "name": "Северо-Казахстанская область"
-    },
-    {
-        "name": "Туркестанская область"
-    },
-    {
-        "name": "Абайская область"
-    },
-    {
-        "name": "Жетысуйская область"
-    },
-    {
-        "name": "Улытауская область"
-    },
-]
-
+with open(settings.BASE_DIR/'locations'/'regions.json', 'r', encoding='utf-8') as f:
+    regions = json.load(f)
 
 class Command(BaseCommand):
     help = "Create regions"

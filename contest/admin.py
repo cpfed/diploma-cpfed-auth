@@ -28,8 +28,7 @@ class ContestAdmin(admin.ModelAdmin):
             wc = wb.create_sheet(title=contest.name)
             wc.append(contest.required_fields)
             for uc in UserContest.objects.filter(contest=contest):
-                data = uc.get_full_reg
-                wc.append(tuple(str(data[f]) for f in uc.contest.required_fields))
+                wc.append(tuple(uc.get_full_reg.values()))
         wb.remove(wb[wb.sheetnames[0]])  # remove default empty sheet
         with NamedTemporaryFile() as tmp:
             wb.save(tmp)

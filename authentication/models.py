@@ -154,8 +154,9 @@ class MainUser(AbstractBaseUser, PermissionsMixin, TimestampMixin):
 
     def clean(self):
         super().clean()
-        if self.employment_status != constants.EMPLOYMENT_STATUS[2][0] and self.place_of_study_of_work is None:
-            raise ValidationError({'place_of_study_of_work': _('Поле не может быть пустым')})
+        if self.employment_status != constants.EMPLOYMENT_STATUS[2][0] and self.employment_status is not None:
+            if self.place_of_study_of_work is None:
+                raise ValidationError({'place_of_study_of_work': _('Поле не может быть пустым')})
 
     @property
     def get_fields(self):
