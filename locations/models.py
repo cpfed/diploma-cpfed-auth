@@ -20,4 +20,4 @@ class Region(TimestampMixin):
         ordering = ["name"]
 
     def __str__(self):
-        return f"{self.name}"
+        return str(_(self.name))

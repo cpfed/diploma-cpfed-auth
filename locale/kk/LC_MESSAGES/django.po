@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-28 19:09+0500\n"
+"POT-Creation-Date: 2025-01-21 18:34+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,8 +27,10 @@ msgid "Отправить письмо на почту"
 msgstr ""
 
 #: .\authentication\admin.py:47
-msgid "tolower"
-msgstr ""
+#, fuzzy
+#| msgid "Зарегистрироваться на контест"
+msgid "Зарегистрировать новых пользователей"
+msgstr "Сайысқа қатысу"
 
 #: .\authentication\forms.py:19 .\authentication\forms.py:38
 msgid "Пароли не совпадают"
@@ -38,8 +40,8 @@ msgstr "Құпия сөздер бірдей емес"
 msgid "Хэндл/Email"
 msgstr "Хэндл/Email"
 
-#: .\authentication\forms.py:28 .\authentication\models.py:60
-#: .\authentication\models.py:220
+#: .\authentication\forms.py:28 .\authentication\models.py:61
+#: .\authentication\models.py:222
 msgid "Электронная почта"
 msgstr "Электрондық пошта"
 
@@ -47,124 +49,125 @@ msgstr "Электрондық пошта"
 msgid "Подтвердите пароль"
 msgstr "Құпия сөзді растаңыз"
 
-#: .\authentication\models.py:18
+#: .\authentication\models.py:19
 msgid "Хэндл может состоять только из латинских букв, цифр и _"
 msgstr "Хэндл тек латын әріптерінен, сандардан және _ тұру керек"
 
-#: .\authentication\models.py:19
+#: .\authentication\models.py:20
 msgid "ИИН может состоять только из 12 цифр"
 msgstr "ЖСН тек 12 саннан тұру керек"
 
-#: .\authentication\models.py:54 .\authentication\models.py:215
+#: .\authentication\models.py:55 .\authentication\models.py:217
 msgid "Хэндл"
 msgstr "Хэндл (никнейм)"
 
-#: .\authentication\models.py:66
+#: .\authentication\models.py:67
 msgid "Имя"
 msgstr "Есімі"
 
-#: .\authentication\models.py:72
+#: .\authentication\models.py:73
 msgid "Фамилия"
 msgstr "Тегі"
 
-#: .\authentication\models.py:79
+#: .\authentication\models.py:80
 msgid "Телефонный номер"
 msgstr "Телефон нөмірі"
 
-#: .\authentication\models.py:86
+#: .\authentication\models.py:87
 msgid "Пол"
 msgstr "Жынысы"
 
-#: .\authentication\models.py:93
+#: .\authentication\models.py:94
 msgid "ИИН"
 msgstr "ЖСН"
 
-#: .\authentication\models.py:101
+#: .\authentication\models.py:102
 msgid "Размер футболки"
 msgstr "Футболка өлшемі"
 
-#: .\authentication\models.py:108
+#: .\authentication\models.py:109
 msgid "Статус занятости"
 msgstr "Жұмыспен қамту мәртебесі"
 
-#: .\authentication\models.py:114
+#: .\authentication\models.py:115
 msgid "Место учебы или работы"
 msgstr "Оқу немесе жұмыс орны"
 
-#: .\authentication\models.py:121 .\locations\models.py:14
+#: .\authentication\models.py:122 .\locations\models.py:18
 msgid "Регион"
 msgstr "Аймағы"
 
-#: .\authentication\models.py:124
+#: .\authentication\models.py:125
 msgid "Гражданин РК?"
 msgstr "ҚР азаматы??"
 
-#: .\authentication\models.py:128
+#: .\authentication\models.py:129
 msgid "Админ?"
 msgstr "Админ?"
 
-#: .\authentication\models.py:129
+#: .\authentication\models.py:130
 msgid "Модератор?"
 msgstr "Модератор?"
 
-#: .\authentication\models.py:130
+#: .\authentication\models.py:131
 msgid "Аккаунт удален?"
 msgstr "Аккаунт жойылды ма?"
 
-#: .\authentication\models.py:131
+#: .\authentication\models.py:132
 msgid "Аккаунт активен?"
 msgstr "Аккаунт белсенді ме?"
 
-#: .\authentication\models.py:139 .\authentication\models.py:183
+#: .\authentication\models.py:140 .\authentication\models.py:185
 msgid "Пользователь"
 msgstr "Пайдаланушы"
 
-#: .\authentication\models.py:140
+#: .\authentication\models.py:141
 msgid "Пользователи"
 msgstr "Пайдаланушылар"
 
-#: .\authentication\models.py:157
+#: .\authentication\models.py:159
 msgid "Поле не может быть пустым"
 msgstr "Өріс бос болмауы керек"
 
-#: .\authentication\models.py:187 .\authentication\models.py:228
+#: .\authentication\models.py:189 .\authentication\models.py:230
 msgid "Ссылка использована?"
 msgstr "Сілтеме пайдаланылды ма?"
 
-#: .\authentication\models.py:191 .\authentication\models.py:232
+#: .\authentication\models.py:193 .\authentication\models.py:234
 msgid "Срок годности"
 msgstr "Жарамдылық мерзімі"
 
-#: .\authentication\models.py:202 .\authentication\models.py:203
+#: .\authentication\models.py:204 .\authentication\models.py:205
 #: .\authentication\views\password_recovery.py:44
 msgid "Восстановление пароля"
 msgstr "Құпия сөзді қалпына келтіру"
 
-#: .\authentication\models.py:224
+#: .\authentication\models.py:226
 msgid "Пароль"
 msgstr "Құпиясөз"
 
-#: .\authentication\models.py:253
+#: .\authentication\models.py:255
 msgid "Хэндл уже занят"
 msgstr "Хэндл бос емес"
 
-#: .\authentication\models.py:256
+#: .\authentication\models.py:258
 msgid "Email уже занят"
 msgstr "Электрондық пошта бос емес"
 
-#: .\authentication\models.py:262 .\authentication\models.py:263
+#: .\authentication\models.py:264 .\authentication\models.py:265
 msgid "Активация аккаунта"
 msgstr "Аккаунтты белсендіру"
 
-#: .\authentication\views\admin_actions.py:16
+#: .\authentication\views\admin_actions.py:20
+#: .\authentication\views\admin_actions.py:42
 msgid "Тема письма"
 msgstr ""
 
-#: .\authentication\views\admin_actions.py:27
+#: .\authentication\views\admin_actions.py:31
 msgid "Письма успешно отправлены"
 msgstr ""
 
-#: .\authentication\views\admin_actions.py:29
+#: .\authentication\views\admin_actions.py:33
 msgid "Выберите шаблон HTML для отправки"
 msgstr ""
 
@@ -193,87 +196,353 @@ msgstr "Құпиясөз сәтті өзгертілді!"
 msgid "Введите новый пароль"
 msgstr "Жаңа құпиясөзді енгізіңіз"
 
-#: .\authentication\views\user_management.py:46
+#: .\authentication\views\user_management.py:50
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr "Аккаунтты белсендіру үшін поштаға хат жіберілді"
 
-#: .\authentication\views\user_management.py:48
+#: .\authentication\views\user_management.py:52
 msgid "Зарегистрироваться"
 msgstr "Тіркелу"
 
-#: .\authentication\views\user_management.py:55
+#: .\authentication\views\user_management.py:87
 msgid "Ссылка уже использована"
 msgstr "Сілтеме пайдаланылды"
 
-#: .\authentication\views\user_management.py:57
+#: .\authentication\views\user_management.py:89
 msgid "Ссылка для активации аккаунта устарела"
 msgstr "Аккаунтты белсендіру сілтемесі ескірген"
 
-#: .\authentication\views\user_management.py:93
+#: .\authentication\views\user_management.py:124
 msgid "Некорректный хэндл/email или пароль"
 msgstr "Қате хэндл/электрондық пошта немесе құпиясөз"
 
-#: .\authentication\views\user_management.py:94
+#: .\authentication\views\user_management.py:125
 msgid "Войти в аккаунт"
 msgstr "Аккаунтқа кіру"
 
-#: .\authentication\views\user_management.py:105
+#: .\authentication\views\user_management.py:136
 msgid "Профиль"
 msgstr ""
 
-#: .\contest\models.py:15 .\contest\models.py:19 .\contest\models.py:23
+#: .\contest\models.py:16 .\contest\models.py:20 .\contest\models.py:24
 msgid "Название контеста"
 msgstr "Сайыстың аты"
 
-#: .\contest\models.py:42 .\contest\models.py:45 .\contest\models.py:48
+#: .\contest\models.py:47 .\contest\models.py:50 .\contest\models.py:53
 msgid "Описание контеста: "
 msgstr "Сайыстың сипаттамасы"
 
-#: .\contest\models.py:52
+#: .\contest\models.py:56
 msgid "Дата контеста"
 msgstr "Сайыстың күні"
 
-#: .\contest\models.py:54
+#: .\contest\models.py:58
 msgid "Ссылка на контест"
 msgstr "Сайыстың сілтеме"
 
-#: .\contest\models.py:57
+#: .\contest\models.py:63
 msgid "Контест"
 msgstr "Сайыс"
 
-#: .\contest\models.py:58
+#: .\contest\models.py:64
 msgid "Контесты"
 msgstr "Сайыстар"
 
-#: .\contest\models.py:104
+#: .\contest\models.py:117
 msgid "ID пользователя"
 msgstr "Пайдалануштың ID"
 
-#: .\contest\models.py:110
+#: .\contest\models.py:123
 msgid "ID контеста"
 msgstr "Сайыстың ID"
 
-#: .\contest\models.py:117 .\contest\models.py:118
+#: .\contest\models.py:130 .\contest\models.py:131
 msgid "Данные пользователей к контестам"
 msgstr "Сайыстарға арналған пайдаланушы деректері"
 
-#: .\contest\views.py:42
+#: .\contest\models.py:149 .\templates\base.html:58
+#: .\templates\main_page.html:29
+msgid "Регистрация"
+msgstr "Тіркеу"
+
+#: .\contest\models.py:152
+msgid "Ранг"
+msgstr ""
+
+#: .\contest\models.py:153
+msgid "Очки"
+msgstr ""
+
+#: .\contest\views.py:50
 msgid "Вы успешно зарегистрированы!"
 msgstr "Сіз сәтті тіркелдіңіз!"
 
-#: .\contest\views.py:51
+#: .\contest\views.py:59
 msgid "Регистрация на чемпионат"
 msgstr "Чемпионатқа тіркелу"
 
-#: .\contest\views.py:51
+#: .\contest\views.py:59
 msgid "Изменить регистрацию"
 msgstr "Тіркеуді өзгерту"
 
-#: .\locations\models.py:10
+#: .\contest\views.py:76
+#, fuzzy
+#| msgid "Ссылка на контест"
+msgid "Ссылка на API с результатами контеста"
+msgstr "Сайыстың сілтеме"
+
+#: .\contest\views.py:77
+msgid "Добавить очки по GP100?"
+msgstr ""
+
+#: .\contest\views.py:111
+#, fuzzy
+#| msgid "Зарегистрироваться на контест"
+msgid "Загрузить результаты контеста"
+msgstr "Сайысқа қатысу"
+
+#: .\custom_widgets\fields.py:7
+msgid "Район"
+msgstr ""
+
+#: .\locations\management\commands\create_regions.py:10
+msgid "Акмолинская область"
+msgstr "Ақмола облысы"
+
+#: .\locations\management\commands\create_regions.py:12
+msgid ""
+"Аккольский, Аршалынский, Астраханский, Атбасарский, Буландынский, "
+"Егиндыкольский, Ерейментауский, Жаксынский, Жаркаинский, Зерендинский, "
+"Коргалжынский, Сандыктауский, Целиноградский, Шортандинский, Кокшетау, "
+"Степногорск"
+msgstr ""
+"Ақкөл, Аршалы, Астрахан, Атбасар, Бұланды, Егіндікөл, Ерейментау, Жақсы, "
+"Жарқайың, Зеренді, Қорғалжын, Сандықтау, Целиноград, Шортанды, Көкшетау, "
+"Степногорск"
+
+#: .\locations\management\commands\create_regions.py:13
+msgid "Актюбинская область"
+msgstr "Ақтөбе облысы"
+
+#: .\locations\management\commands\create_regions.py:15
+msgid ""
+"Алгинский, Байганинский, Каргалинский, Хромтауский, Мугалжарский,  "
+"Шалкарский, Темирский,  Ыргызский, Актобе,  Алга,  Кандыагаш,  Эмба"
+msgstr ""
+"Алға, Байғанин, Қарғалы, Хромтау, Мұғалжар, Шалқар, Темір, Ырғыз, Ақтөбе, "
+"Алға, Қандыағаш, Ембі"
+
+#: .\locations\management\commands\create_regions.py:16
+msgid "Алматинская область"
+msgstr "Алматы облысы"
+
+#: .\locations\management\commands\create_regions.py:18
+msgid ""
+"Балхашский, Енбекшиказахский, Жамбылский, Илийский, Карасайский, "
+"Кербулакский, Коксуский, Панфиловский, Талгарский, Уйгурский, Талдыкорган, "
+"Капшагай, Текели"
+msgstr ""
+"Балқаш, Еңбекшіқазақ, Жамбыл, Іле, Қарасай, Кербұлақ, Көксу, Панфилов, "
+"Талғар, Ұйғыр, Талдықорған, Қапшағай, Текелі"
+
+#: .\locations\management\commands\create_regions.py:19
+msgid "Атырауская область"
+msgstr "Атырау облысы"
+
+#: .\locations\management\commands\create_regions.py:21
+msgid ""
+"Жылыойский, Индерский, Исатайский, Курмангазинский, Кызылкогинский, "
+"Макатский, Махамбетский, Атырау, Кульсары"
+msgstr ""
+"Жылыой, Индер, Исатай, Құрманғазы, Қызылқоға, Мақат, Махамбет, Атырау, "
+"Құлсары"
+
+#: .\locations\management\commands\create_regions.py:22
+msgid "Восточно-Казахстанская область"
+msgstr "Шығыс Қазақстан облысы"
+
+#: .\locations\management\commands\create_regions.py:24
+msgid ""
+"Абайский, Бескарагайский, Бородулихинский, Глубоковский, Жарминский,  Катон-"
+"Карагайский, Кокпектинский, Курчумский,  Шемонаихинский,  Уланский,  "
+"Урджарский, Усть-Каменогорск, Семей, Риддер,  Курчатов"
+msgstr ""
+"Абай, Бесқарағай, Бородулиха, Глубокое, Жарма, Катонқарағай, Көкпекті, "
+"Күршім, Шемонаиха, Ұлан, Үржар, Өскемен, Семей, Риддер, Күрчатов"
+
+#: .\locations\management\commands\create_regions.py:25
+msgid "Жамбылская область"
+msgstr "Жамбыл облысы"
+
+#: .\locations\management\commands\create_regions.py:27
+msgid ""
+"Байзакский, Жамбылский, Жуалынский, Кордайский, Меркенский, Мойынкумский, "
+"Рыскуловский, Сарысуский, Таласский, Шуский, Тараз, Каратау, Шу"
+msgstr ""
+"Байзақ, Жамбыл, Жуалы, Қордай, Меркі, Мойынқұм, Рысқұлов, Сарысу, Талас, Шу, "
+"Тараз, Қаратау, Шу"
+
+#: .\locations\management\commands\create_regions.py:28
+msgid "Западно-Казахстанская область"
+msgstr "Батыс Қазақстан облысы"
+
+#: .\locations\management\commands\create_regions.py:30
+msgid ""
+"Акжаикский, Байтерекский, Бокейординский, Жанибекский, Казталовский, "
+"Каратобинский, Сырымский, Таскалинский, Чингирлауский, Уральск, Аксай"
+msgstr ""
+"Ақжайық, Бәйтерек, Бөкейорда, Жәнібек, Қазталов, Қаратөбе, Сырым, Тасқала, "
+"Шыңғырлау, Орал, Ақсай"
+
+#: .\locations\management\commands\create_regions.py:31
+msgid "Карагандинская область"
+msgstr "Қарағанды облысы"
+
+#: .\locations\management\commands\create_regions.py:33
+msgid ""
+"Абайский,  Актогайский, Бухар-Жырауский,  Жанааркинский,  Каркаралинский, "
+"Нуринский, Осакаровский,  Шетский,  Улытауский, Караганда, Темиртау, Балхаш, "
+"Жезказган, Сарань, Шахтинск"
+msgstr ""
+"Абай, Ақтоғай, Бұқар жырау, Жаңаарқа, Қарқаралы, Нұра, Осакаров, Шет, "
+"Ұлытау, Қарағанды, Теміртау, Балқаш, Жезқазған, Саран, Шахтинск"
+
+#: .\locations\management\commands\create_regions.py:34
+msgid "Костанайская область"
+msgstr "Қостанай облысы"
+
+#: .\locations\management\commands\create_regions.py:36
+msgid ""
+"Алтынсаринский, Амангельдинский, Аулиекольский, Денисовский, Жангельдинский, "
+"Карабалыкский, Карасуский, Костанайский, Мендыкаринский, Наурзумский, "
+"Сарыкольский, Тарановский, Узункольский, Федоровский, 1  Костанай, Рудный, "
+"Лисаковск, Житикара"
+msgstr ""
+"Алтынсарин, Аманкелді, Әулиекөл, Денисов, Жангелді, Қарабалық, Қарасу, "
+"Қостанай, Меңдіқара, Науырзым, Сарыкөл, Таранов, Ұзынкөл, Федоров, Қостанай, "
+"Рудный, Лисаковск, Жітіқара"
+
+#: .\locations\management\commands\create_regions.py:37
+msgid "Кызылординская область"
+msgstr "Қызылорда облысы"
+
+#: .\locations\management\commands\create_regions.py:39
+msgid ""
+"Аральский,  Жалагашский,  Жанакорганский,  Кармакшинский,  Казалинский,  "
+"Сырдарьинский,  Шиелийский, Кызылорда, Байконыр, Аральск"
+msgstr ""
+"Арал, Жалағаш, Жаңақорған, Қармақшы, Қазалы, Сырдария, Шиелі, Қызылорда, "
+"Байқоңыр, Арал"
+
+#: .\locations\management\commands\create_regions.py:40
+msgid "Мангистауская область"
+msgstr "Маңғыстау облысы"
+
+#: .\locations\management\commands\create_regions.py:41
+msgid ""
+"Бейнеуский, Каракиянский, Мангистауский, Мунайлинский, Тупкараганский, "
+"Актау, Жанаозен"
+msgstr "Бейнеу, Қарақия, Маңғыстау, Мұнайлы, Түпқараған, Ақтау, Жаңаөзен"
+
+#: .\locations\management\commands\create_regions.py:42
+msgid "Павлодарская область"
+msgstr "Павлодар облысы"
+
+#: .\locations\management\commands\create_regions.py:44
+msgid ""
+"Аккулынский, Баянаульский, Железинский,  Иртышский,  Качирский,  Майский,  "
+"Павлодарский,  Успенский,  Щербактинский, Павлодар, Аксу, Экибастуз"
+msgstr ""
+"Аққулы, Баянауыл, Железинка, Ертіс, Қашыр, Май, Павлодар, Успен, Шарбақты, "
+"Павлодар, Ақсу, Екібастұз"
+
+#: .\locations\management\commands\create_regions.py:45
+msgid "Северо-Казахстанская область"
+msgstr "Солтүстік Қазақстан облысы"
+
+#: .\locations\management\commands\create_regions.py:47
+msgid ""
+"Айыртауский, Акжарский,  Есильский,  Жамбылский,  Кызылжарский,  Магжана  "
+"Жумабаева,  Мамлютский,  Тайыншинский,  Тимирязевский,  Уалихановский,  "
+"Шал акына, Петропавловск, Булаево, Сергеевка"
+msgstr ""
+"Айыртау, Ақжар, Есіл, Жамбыл, Қызылжар, Мағжан Жұмабаев, Мамлют, Тайынша, "
+"Тимирязев, Уәлиханов, Шал ақын, Петропавл, Булаев, Сергеев"
+
+#: .\locations\management\commands\create_regions.py:48
+msgid "Туркестанская область"
+msgstr "Түркістан облысы"
+
+#: .\locations\management\commands\create_regions.py:50
+msgid ""
+"Байдибекский,  Жетысайский,  Казыгуртский,  Келесский,  Мактааральский,  "
+"Ордабасынский,  Отырарский,  Сайрамский,  Сарыагашский,  Толебийский,  "
+"Тюлькубасский,  Шардаринский, Туркестан, Кентау, Арыс, Шымкент"
+msgstr ""
+"Байдібек, Жетісай, Қазығұрт, Келес, Мақтаарал, Ордабасы, Отырар, Сайрам, "
+"Сарыағаш, Төле би, Түлкібас, Шардара, Түркістан, Кентау, Арыс, Шымкент"
+
+#: .\locations\management\commands\create_regions.py:51
+msgid "Астана"
+msgstr "Астана қаласы"
+
+#: .\locations\management\commands\create_regions.py:52
+msgid "Алматинский, Байконырский, Есильский, Сарыаркинский"
+msgstr "Алматы, Байқоңыр, Есіл, Сарыарқа"
+
+#: .\locations\management\commands\create_regions.py:53
+msgid "Алматы"
+msgstr "Алматы қаласы"
+
+#: .\locations\management\commands\create_regions.py:55
+msgid ""
+"Алмалинский, Ауэзовский, Бостандыкский, Жетысуский, Медеуский, "
+"Наурызбайский, Турксибский"
+msgstr "Алмалы, Әуезов, Бостандық, Жетісу, Медеу, Наурызбай, Түрксіб"
+
+#: .\locations\management\commands\create_regions.py:56
+msgid "Шымкент"
+msgstr "Шымкент қаласы"
+
+#: .\locations\management\commands\create_regions.py:57
+msgid "Абайский, Аль-Фарабийский, Енбекшинский, Каратауский"
+msgstr "Абай, Әл-Фараби, Еңбекші, Қаратау"
+
+#: .\locations\management\commands\create_regions.py:58
+msgid "Абайская область"
+msgstr "Абай облысы"
+
+#: .\locations\management\commands\create_regions.py:59
+msgid ""
+"Абайский, Бескарагайский, Бородулихинский, Жарминский, Кокпектинский,  "
+"Уланский,  Семей"
+msgstr "Абай, Бесқарағай, Бородулиха, Жарма, Көкпекті, Ұлан, Семей"
+
+#: .\locations\management\commands\create_regions.py:60
+msgid "Жетысуйская область"
+msgstr "Жетісу облысы"
+
+#: .\locations\management\commands\create_regions.py:62
+msgid ""
+"Аксуский, Алакольский, Ескельдинский, Каратальский, Кербулакский, Коксуский, "
+"Панфиловский, Сарканский, Талдыкорган, Текели"
+msgstr ""
+"Ақсу, Алакөл, Ескелді, Қаратал, Кербұлақ, Көксу, Панфилов, Сарқан, "
+"Талдықорған, Текелі"
+
+#: .\locations\management\commands\create_regions.py:63
+msgid "Улытауская область"
+msgstr "Ұлытау облысы"
+
+#: .\locations\management\commands\create_regions.py:64
+msgid "Жанааркинский,  Улытауский,  Жезказган"
+msgstr "Жаңаарқа, Ұлытау, Жезқазған"
+
+#: .\locations\models.py:14
 msgid "Название региона"
 msgstr "Аймақ атауы"
 
-#: .\locations\models.py:15
+#: .\locations\models.py:19
 msgid "Регионы"
 msgstr "Аймақтар"
 
@@ -285,43 +554,39 @@ msgstr "Құру уақыты"
 msgid "Время последнего изменения"
 msgstr "Соңғы өзгеріс уақыты"
 
-#: .\templates\base.html:24 .\templates\base.html:75
+#: .\templates\base.html:25 .\templates\base.html:76
 msgid "Главная"
 msgstr "Негізгі бет"
 
-#: .\templates\base.html:25
+#: .\templates\base.html:26
 msgid "О ЧРК"
 msgstr "ҚРЧ туралы"
 
-#: .\templates\base.html:26 .\templates\base.html:76
+#: .\templates\base.html:27 .\templates\base.html:77
 msgid "О нас"
 msgstr "Біз туралы"
 
-#: .\templates\base.html:27 .\templates\base.html:77
+#: .\templates\base.html:28 .\templates\base.html:78
 msgid "Контакты"
 msgstr "Контактілер"
 
-#: .\templates\base.html:48
+#: .\templates\base.html:49
 msgid "Привет"
 msgstr "Сәлем"
 
-#: .\templates\base.html:50
+#: .\templates\base.html:51
 msgid "Выйти"
 msgstr "Шығу"
 
-#: .\templates\base.html:54
+#: .\templates\base.html:55
 msgid "Войти"
 msgstr "Кіру"
 
-#: .\templates\base.html:57 .\templates\main_page.html:29
-msgid "Регистрация"
-msgstr "Тіркеу"
-
-#: .\templates\base.html:78
+#: .\templates\base.html:79
 msgid "Помощь"
 msgstr "Көмек"
 
-#: .\templates\base.html:82
+#: .\templates\base.html:83
 msgid "Все права защищены."
 msgstr "Барлық құқықтар қорғалған."
 
@@ -333,9 +598,9 @@ msgstr "Жіберу"
 msgid ""
 "Отмечая место расположения учебного заведения или работы, Вы можете "
 "претендовать на региональную квоту при прохождении в финал Чемпионата. Более "
-"подробная информация в <a href=\"https://drive.google.com/file/"
-"d/1SUViRvUiOa_Onpq32CLzRaLuU73YDXfq/view\" class=\"text-"
-"blue-600\">регламенте</a>"
+"подробная информация в <a href=\"https://drive.google.com/file/d/"
+"1SUViRvUiOa_Onpq32CLzRaLuU73YDXfq/view\" class=\"text-blue-600\">регламенте</"
+"a>"
 msgstr ""
 "Оқу орнының немесе жұмыстың орналасқан жерін белгілей отырып, сіз Чемпионат "
 "финалына өту кезінде аймақтық квотаға ие бола аласыз. <a href=\"https://"
@@ -353,8 +618,8 @@ msgstr ""
 
 #: .\templates\crk_reg.html:13
 msgid ""
-"Согласен с политикой <a href=\"https://drive.google.com/file/"
-"d/1ReERKx_HgGimV-pp5n_DEMfB6-axesku/view\" class=\"text-"
+"Согласен с политикой <a href=\"https://drive.google.com/file/d/"
+"1ReERKx_HgGimV-pp5n_DEMfB6-axesku/view\" class=\"text-"
 "blue-600\">конфиденциальности</a>"
 msgstr ""
 "<a href=\"https://drive.google.com/file/d/1ReERKx_HgGimV-pp5n_DEMfB6-axesku/"
@@ -533,6 +798,3 @@ msgstr ""
 #: .\utils\error_list.py:11
 msgid "Пользователь с таким Телефонный номер уже существует."
 msgstr "Бұндай телефон нөмірі бар пайдаланушы бар."
-
-#~ msgid "Что нужно знать о чемпионате CPFED?"
-#~ msgstr "CPFED чемпионаты туралы не білуіңіз керек?"
