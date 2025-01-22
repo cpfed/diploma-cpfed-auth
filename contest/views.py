@@ -66,7 +66,7 @@ def contest_reg(request: HttpResponse, contest_id: int):
 
     return render(request, form_path, {
         'form': form,
-        'form_name': (_('Регистрация на чемпионат') if not was_reg else _('Изменить регистрацию')),
+        'form_name': (contest.get_name if not was_reg else _('Изменить регистрацию')),
     })
 
 
