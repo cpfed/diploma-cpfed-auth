@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-21 18:40+0500\n"
+"POT-Creation-Date: 2025-01-22 19:27+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -239,60 +239,66 @@ msgstr ""
 msgid "Ссылка на контест"
 msgstr ""
 
-#: .\contest\models.py:63
+#: .\contest\models.py:64
 msgid "Контест"
 msgstr ""
 
-#: .\contest\models.py:64
+#: .\contest\models.py:65
 msgid "Контесты"
 msgstr ""
 
-#: .\contest\models.py:117
+#: .\contest\models.py:118
 msgid "ID пользователя"
 msgstr ""
 
-#: .\contest\models.py:123
+#: .\contest\models.py:124
 msgid "ID контеста"
 msgstr ""
 
-#: .\contest\models.py:130 .\contest\models.py:131
+#: .\contest\models.py:131 .\contest\models.py:132
 msgid "Данные пользователей к контестам"
 msgstr ""
 
-#: .\contest\models.py:149 .\templates\base.html:58
+#: .\contest\models.py:150 .\templates\base.html:58
 #: .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Зарегистрироваться"
 
-#: .\contest\models.py:152
+#: .\contest\models.py:153
 msgid "Ранг"
 msgstr ""
 
-#: .\contest\models.py:153
+#: .\contest\models.py:154
 msgid "Очки"
 msgstr ""
 
-#: .\contest\views.py:50
+#: .\contest\views.py:32
+#, fuzzy
+#| msgid "Регистрация"
+msgid "Регистрация закрыта"
+msgstr "Зарегистрироваться"
+
+#: .\contest\views.py:53
 msgid "Вы успешно зарегистрированы!"
 msgstr ""
 
-#: .\contest\views.py:59
+#: .\contest\views.py:69
 msgid "Регистрация на чемпионат"
 msgstr ""
 
-#: .\contest\views.py:59
+#: .\contest\views.py:69
 msgid "Изменить регистрацию"
 msgstr ""
 
-#: .\contest\views.py:76
+#: .\contest\views.py:86
 msgid "Ссылка на API с результатами контеста"
 msgstr ""
 
-#: .\contest\views.py:77
+#: .\contest\views.py:87
 msgid "Добавить очки по GP100?"
 msgstr ""
 
-#: .\contest\views.py:111
+#: .\contest\views.py:121
 msgid "Загрузить результаты контеста"
 msgstr ""
 
@@ -575,7 +581,7 @@ msgid ""
 "олимпиады."
 msgstr ""
 
-#: .\templates\crk_reg.html:13
+#: .\templates\crk_reg.html:13 .\templates\uzdik_reg.html:11
 msgid ""
 "Согласен с политикой <a href=\"https://drive.google.com/file/d/"
 "1ReERKx_HgGimV-pp5n_DEMfB6-axesku/view\" class=\"text-"
@@ -692,6 +698,14 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
+
+#: .\templates\uzdik_reg.html:7
+msgid ""
+"Обратите внимание, что, согласно <a href=\"https://drive.google.com/file/d/"
+"1Aa2p0vTdZ8o-5jiIjvhJBB_VSETSpWcy/view\" class=\"text-blue-600\">положению</"
+"a>, может возникнуть необходимость предоставления справки с места работы по "
+"требованию организаторов Турнира."
+msgstr ""
 
 #: .\utils\constants.py:46
 msgid "Мужской"

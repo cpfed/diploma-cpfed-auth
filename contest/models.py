@@ -36,9 +36,9 @@ class Contest(models.Model):
     #     verbose_name=_("Контест активен?"),
     #     default=True,
     # )
-    required_fields = ArrayField(
-        models.CharField(max_length=100)
-    )
+    # required_fields = ArrayField(
+    #     models.CharField(max_length=100)
+    # )
     fields = models.JSONField(
         null=True,
         blank=True
@@ -58,6 +58,7 @@ class Contest(models.Model):
     link = models.CharField(max_length=300, verbose_name=_("Ссылка на контест"), blank=True, null=True)
 
     show_on_main_page = models.BooleanField(default=True)
+    registration_open = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = _("Контест")

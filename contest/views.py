@@ -28,6 +28,9 @@ def contest_reg(request: HttpResponse, contest_id: int):
 
     contest = get_object_or_404(Contest, id=contest_id)
 
+    if not contest.registration_open and not (request.user.is_staff or request.user.is_superuser):
+        return render(request, 'result_message.html', {'message': _('Регистрация закрыта')})
+
     user_reg = UserContest.objects.filter(user=request.user, contest=contest)
     user_reg = (user_reg[0] if len(user_reg) else None)
 
@@ -54,7 +57,14 @@ def contest_reg(request: HttpResponse, contest_id: int):
                 if err not in form.errors.get(field, []):
                     form.add_error(field, err)
     was_reg = UserContest.objects.filter(user=request.user, contest=contest).exists()
-    return render(request, 'crk_reg.html', {
+
+    form_path = 'base_form.html'
+    if contest_id == 1:
+        form_path = 'crk_reg.html'
+    elif contest_id == 3:
+        form_path = 'uzdik_reg.html'
+
+    return render(request, form_path, {
         'form': form,
         'form_name': (_('Регистрация на чемпионат') if not was_reg else _('Изменить регистрацию')),
     })

@@ -1,0 +1,14 @@
+{% extends 'base_form.html' %}
+{% load i18n %}
+
+{% block form_addition_before_button %}
+<div>
+    <p class="text-sm mb-2">
+        {% blocktranslate %}Обратите внимание, что, согласно <a href="https://drive.google.com/file/d/1Aa2p0vTdZ8o-5jiIjvhJBB_VSETSpWcy/view" class="text-blue-600">положению</a>, может возникнуть необходимость предоставления справки с места работы по требованию организаторов Турнира.{% endblocktranslate %}
+    </p>
+    <input type="checkbox" checked="true" id="polycy_conf" onchange="document.getElementById('form_submit_button').disabled = !this.checked;" />
+    <label for="polycy_conf">
+        {% blocktranslate %}Согласен с политикой <a href="https://drive.google.com/file/d/1ReERKx_HgGimV-pp5n_DEMfB6-axesku/view" class="text-blue-600">конфиденциальности</a>{% endblocktranslate %}
+    </label>
+</div>
+{% endblock %}
