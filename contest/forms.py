@@ -22,7 +22,7 @@ class ContestRegistrationForm(forms.Form):
 
         for field in contest.custom_fields:
             name = field['name']
-            self.fields[name] = get_field(field.get('field', ''), name)
+            self.fields[name] = get_field(field)
             self.fields[name].required = True
             if user_reg is not None and user_reg.additional_fields is not None:
                 self.initial[name] = user_reg.additional_fields.get(name, None)

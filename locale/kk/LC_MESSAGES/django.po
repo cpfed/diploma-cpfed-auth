@@ -309,7 +309,7 @@ msgstr "Сайысқа қатысу"
 
 #: .\custom_widgets\fields.py:7
 msgid "Район"
-msgstr ""
+msgstr "Ауданы"
 
 #: .\locations\management\commands\create_regions.py:10
 msgid "Акмолинская область"

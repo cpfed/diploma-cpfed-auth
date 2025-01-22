@@ -11,9 +11,11 @@ from .models import Contest, UserContest, ContestResult
 
 # Register your models here.
 
-admin.site.register(UserContest)
 admin.site.register(ContestResult)
 
+@admin.register(UserContest)
+class UserContestAdmin(admin.ModelAdmin):
+    list_filter = ["contest__name"]
 
 @admin.register(Contest)
 class ContestAdmin(admin.ModelAdmin):
