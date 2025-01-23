@@ -59,6 +59,8 @@ class Contest(models.Model):
 
     show_on_main_page = models.BooleanField(default=True)
     registration_open = models.BooleanField(default=True)
+    level_on_main_page = models.IntegerField(default=1)
+    image_url = models.CharField(default="capybara.png")
 
     class Meta:
         verbose_name = _("Контест")
@@ -130,7 +132,7 @@ class UserContest(models.Model):
     class Meta:
         verbose_name = _("Данные пользователей к контестам")
         verbose_name_plural = _("Данные пользователей к контестам")
-        ordering = ["user__id"]
+        ordering = ["id"]
         models.UniqueConstraint(fields=['user', 'contest'], name='unique_user_registration')
 
     def __str__(self):

@@ -48,10 +48,9 @@
         <div class="my-8 text-center">
             <p class="text-blue-900 text-4xl my-4">{% translate "Чемпионаты и конкурсы" %}</p>
             {% for contest, is_reg in contests.items %}
-            <div class="flex items-center justify-between bg-gray-100 p-8 rounded-xl">
+            <div class="flex items-center justify-between bg-gray-100 p-8 pr-4 rounded-xl m-8">
                 <div class="flex space-x-6 h-min">
-                    <img src="{% static 'capybara.png' %}" alt="" class="rounded-lg object-cover" height="271"
-                         width="235"/>
+                    <img src="{% static contest.image_url %}" alt="" class="rounded-lg object-cover w-40"/>
                     <div class="flex flex-col justify-between text-left h-min">
                         <div class="mx-2">
                             <div class="text-2xl font-semibold mb-2">{{ contest.get_name }}</div>
