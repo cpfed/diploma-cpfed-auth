@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-22 19:27+0500\n"
+"POT-Creation-Date: 2025-01-24 19:00+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -239,36 +239,36 @@ msgstr "Contest date"
 msgid "Ссылка на контест"
 msgstr "Link to the contest"
 
-#: .\contest\models.py:64
+#: .\contest\models.py:66
 msgid "Контест"
 msgstr "Contest"
 
-#: .\contest\models.py:65
+#: .\contest\models.py:67
 msgid "Контесты"
 msgstr "Contests"
 
-#: .\contest\models.py:118
+#: .\contest\models.py:120
 msgid "ID пользователя"
 msgstr "User ID"
 
-#: .\contest\models.py:124
+#: .\contest\models.py:126
 msgid "ID контеста"
 msgstr "Contest ID"
 
-#: .\contest\models.py:131 .\contest\models.py:132
+#: .\contest\models.py:133 .\contest\models.py:134
 msgid "Данные пользователей к контестам"
 msgstr "User data for contests"
 
-#: .\contest\models.py:150 .\templates\base.html:58
+#: .\contest\models.py:152 .\templates\base.html:58
 #: .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Register"
 
-#: .\contest\models.py:153
+#: .\contest\models.py:155
 msgid "Ранг"
 msgstr ""
 
-#: .\contest\models.py:154
+#: .\contest\models.py:156
 msgid "Очки"
 msgstr ""
 
@@ -281,10 +281,6 @@ msgstr "Register"
 #: .\contest\views.py:53
 msgid "Вы успешно зарегистрированы!"
 msgstr "You have registered successfully!"
-
-#: .\contest\views.py:69
-msgid "Регистрация на чемпионат"
-msgstr "Register for the championship"
 
 #: .\contest\views.py:69
 msgid "Изменить регистрацию"
@@ -306,7 +302,7 @@ msgstr ""
 msgid "Загрузить результаты контеста"
 msgstr "Register on contest"
 
-#: .\custom_widgets\fields.py:7
+#: .\custom_widgets\fields.py:8
 msgid "Район"
 msgstr "District"
 
@@ -317,9 +313,9 @@ msgstr ""
 #: .\locations\management\commands\create_regions.py:12
 msgid ""
 "Аккольский, Аршалынский, Астраханский, Атбасарский, Буландынский, "
-"Егиндыкольский, Ерейментауский, Жаксынский, Жаркаинский, Зерендинский, "
-"Коргалжынский, Сандыктауский, Целиноградский, Шортандинский, Кокшетау, "
-"Степногорск"
+"Бурабайский, Егиндыкольский, Ерейментауский, Жаксынский, Жаркаинский, "
+"Зерендинский, Коргалжынский, Сандыктауский, Целиноградский, Шортандинский, "
+"Кокшетау, Степногорск"
 msgstr ""
 
 #: .\locations\management\commands\create_regions.py:13
@@ -675,7 +671,7 @@ msgstr ""
 "skills. Take part in the championships, find out the schedule and register "
 "so as not to miss the chance to become the best!"
 
-#: .\templates\main_page.html:24 .\templates\main_page.html:84
+#: .\templates\main_page.html:24 .\templates\main_page.html:83
 msgid "Узнать больше"
 msgstr "Find out more"
 
@@ -699,27 +695,27 @@ msgstr ""
 msgid "Чемпионаты и конкурсы"
 msgstr "Competitions"
 
-#: .\templates\main_page.html:59
+#: .\templates\main_page.html:58
 msgid "Дата"
 msgstr "Date"
 
-#: .\templates\main_page.html:60
+#: .\templates\main_page.html:59
 msgid "Время"
 msgstr "Time"
 
-#: .\templates\main_page.html:67
+#: .\templates\main_page.html:66
 msgid "Войти на контест"
 msgstr "Go to the contest"
 
-#: .\templates\main_page.html:72
+#: .\templates\main_page.html:71
 msgid "Вы уже зарегистрированы"
 msgstr "You already registered"
 
-#: .\templates\main_page.html:78
+#: .\templates\main_page.html:77
 msgid "Зарегистрироваться на контест"
 msgstr "Register on contest"
 
-#: .\templates\main_page.html:93
+#: .\templates\main_page.html:92
 #, python-format
 msgid "Остался %(days)s день"
 msgid_plural "Осталось %(days)s дней"
@@ -791,6 +787,9 @@ msgstr ""
 #: .\utils\error_list.py:11
 msgid "Пользователь с таким Телефонный номер уже существует."
 msgstr "A user with this phone number already exists."
+
+#~ msgid "Регистрация на чемпионат"
+#~ msgstr "Register for the championship"
 
 #~ msgid "Что нужно знать о чемпионате CPFED?"
 #~ msgstr "What do you need to know about the CPFED Championship?"
