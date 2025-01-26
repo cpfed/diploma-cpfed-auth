@@ -73,8 +73,8 @@ def contest_reg(request: HttpResponse, contest_id: int):
 def main_page(request: HttpResponse):
     contests = {x: False for x in Contest.objects.filter(show_on_main_page=True).order_by('level_on_main_page', '-id')}
     if request.user.is_authenticated:
-        for contets_reg in UserContest.objects.filter(user=request.user):
-            contests[contets_reg.contest] = True
+        for contests_reg in UserContest.objects.filter(user=request.user, contest__show_on_main_page=True):
+            contests[contests_reg.contest] = True
     return render(request, 'main_page.html', {'contests': contests})
 
 
