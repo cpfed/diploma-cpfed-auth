@@ -126,7 +126,7 @@ class UserContest(models.Model):
         verbose_name=_("ID контеста")
     )
     additional_fields = models.JSONField(
-        null=True
+        default=dict
     )
 
     class Meta:

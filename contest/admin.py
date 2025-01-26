@@ -6,6 +6,7 @@ from django.contrib import admin
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse
+from django.shortcuts import render
 
 from .models import Contest, UserContest, ContestResult
 
@@ -19,7 +20,7 @@ class UserContestAdmin(admin.ModelAdmin):
 
 @admin.register(Contest)
 class ContestAdmin(admin.ModelAdmin):
-    actions = ['get_registrations', 'upload_contest_results', 'register_on_contest']
+    actions = ['get_registrations', 'upload_contest_results', 'register_on_contest', 'add_bulk_reg']
 
     @admin.action(description="Экспортировать данные зарегистрированных пользователей")
     def get_registrations(self, request, queryset):
@@ -58,6 +59,19 @@ class ContestAdmin(admin.ModelAdmin):
         if len(selected) != 1:
             return render(request, 'admin/result_message.html', {'message': "Должен быть выбран только один контест"})
         return HttpResponseRedirect(reverse("register_on_contest") + '?id=' + str(selected[0]))
+
+    @admin.action(description="Добавить регистрации со старого контеста на новый")
+    def add_bulk_reg(self, request, queryset):
+        if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
+            raise PermissionDenied()
+        selected = queryset.values_list("pk", flat=True)
+        if len(selected) != 2:
+            return render(request, 'admin/result_message.html', {'message': "Должены быть выбраны ровно два контеста"})
+        fr, to = sorted(selected)
+        contest = Contest.objects.get(id=to)
+        for uc in UserContest.objects.filter(contest__id=fr):
+            UserContest.objects.get_or_create(user=uc.user, contest=contest, defaults={"additional_fields": uc.additional_fields})
+        return render(request, 'admin/result_message.html', {'message': "ok"})
 
     def get_actions(self, request):
         actions = super().get_actions(request)
