@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-27 14:55+0500\n"
+"POT-Creation-Date: 2025-01-27 15:17+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -265,7 +265,7 @@ msgstr "Contest ID"
 msgid "Данные пользователей к контестам"
 msgstr "User data for contests"
 
-#: .\contest\models.py:159 .\templates\base.html:58
+#: .\contest\models.py:159 .\templates\base.html:59
 #: .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Register"
@@ -531,39 +531,43 @@ msgstr "Creation time"
 msgid "Время последнего изменения"
 msgstr "Last modified time"
 
-#: .\templates\base.html:25 .\templates\base.html:76
+#: .\templates\base.html:25 .\templates\base.html:77
 msgid "Главная"
 msgstr "Main page"
 
 #: .\templates\base.html:26
+msgid "Соревнования"
+msgstr "Competitions"
+
+#: .\templates\base.html:27
 msgid "О ЧРК"
 msgstr "About ЧРК"
 
-#: .\templates\base.html:27 .\templates\base.html:77
+#: .\templates\base.html:28 .\templates\base.html:78
 msgid "О нас"
 msgstr "About us"
 
-#: .\templates\base.html:28 .\templates\base.html:78
+#: .\templates\base.html:29 .\templates\base.html:79
 msgid "Контакты"
 msgstr "Contacts"
 
-#: .\templates\base.html:49
+#: .\templates\base.html:50
 msgid "Привет"
 msgstr "Hello"
 
-#: .\templates\base.html:51
+#: .\templates\base.html:52
 msgid "Выйти"
 msgstr "Logout"
 
-#: .\templates\base.html:55
+#: .\templates\base.html:56
 msgid "Войти"
 msgstr "Enter"
 
-#: .\templates\base.html:79
+#: .\templates\base.html:80
 msgid "Помощь"
 msgstr "Help"
 
-#: .\templates\base.html:83
+#: .\templates\base.html:84
 msgid "Все права защищены."
 msgstr "All rights reserved."
 
