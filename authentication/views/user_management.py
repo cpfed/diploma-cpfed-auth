@@ -58,8 +58,13 @@ def _redirect_after_login(request: HttpResponse):
             return redirect(request.GET['next'])
         try:
             contest_pk = int(request.GET['contest'])
-            link = Contest.objects.get(pk=contest_pk).link
-            return redirect(link)
+            contest = Contest.objects.get(pk=contest_pk)
+            if 'trial' in request.GET:
+                link = contest.trial_contest_link
+            else:
+                link = contest.link
+            if link is not None:
+                return redirect(link)
         except (django.utils.datastructures.MultiValueDictKeyError, ValueError, Contest.DoesNotExist):
             pass
         if 'to_esep' in request.GET:

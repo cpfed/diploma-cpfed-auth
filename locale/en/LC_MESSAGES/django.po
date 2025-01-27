@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-24 19:00+0500\n"
+"POT-Creation-Date: 2025-01-27 14:55+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -203,23 +203,23 @@ msgstr "Email has been sent to activate your account."
 msgid "Зарегистрироваться"
 msgstr "Register"
 
-#: .\authentication\views\user_management.py:87
+#: .\authentication\views\user_management.py:92
 msgid "Ссылка уже использована"
 msgstr "Link used?"
 
-#: .\authentication\views\user_management.py:89
+#: .\authentication\views\user_management.py:94
 msgid "Ссылка для активации аккаунта устарела"
 msgstr "The account activation link expired"
 
-#: .\authentication\views\user_management.py:124
+#: .\authentication\views\user_management.py:129
 msgid "Некорректный хэндл/email или пароль"
 msgstr "Incorrect handle/email or password"
 
-#: .\authentication\views\user_management.py:125
+#: .\authentication\views\user_management.py:130
 msgid "Войти в аккаунт"
 msgstr "Login"
 
-#: .\authentication\views\user_management.py:136
+#: .\authentication\views\user_management.py:141
 msgid "Профиль"
 msgstr ""
 
@@ -239,36 +239,42 @@ msgstr "Contest date"
 msgid "Ссылка на контест"
 msgstr "Link to the contest"
 
-#: .\contest\models.py:66
+#: .\contest\models.py:59
+#, fuzzy
+#| msgid "Ссылка на контест"
+msgid "Ссылка на пробный тур"
+msgstr "Link to the contest"
+
+#: .\contest\models.py:68
 msgid "Контест"
 msgstr "Contest"
 
-#: .\contest\models.py:67
+#: .\contest\models.py:69
 msgid "Контесты"
 msgstr "Contests"
 
-#: .\contest\models.py:120
+#: .\contest\models.py:127
 msgid "ID пользователя"
 msgstr "User ID"
 
-#: .\contest\models.py:126
+#: .\contest\models.py:133
 msgid "ID контеста"
 msgstr "Contest ID"
 
-#: .\contest\models.py:133 .\contest\models.py:134
+#: .\contest\models.py:140 .\contest\models.py:141
 msgid "Данные пользователей к контестам"
 msgstr "User data for contests"
 
-#: .\contest\models.py:152 .\templates\base.html:58
+#: .\contest\models.py:159 .\templates\base.html:58
 #: .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Register"
 
-#: .\contest\models.py:155
+#: .\contest\models.py:162
 msgid "Ранг"
 msgstr ""
 
-#: .\contest\models.py:156
+#: .\contest\models.py:163
 msgid "Очки"
 msgstr ""
 
@@ -671,7 +677,7 @@ msgstr ""
 "skills. Take part in the championships, find out the schedule and register "
 "so as not to miss the chance to become the best!"
 
-#: .\templates\main_page.html:24 .\templates\main_page.html:83
+#: .\templates\main_page.html:24 .\templates\main_page.html:88
 msgid "Узнать больше"
 msgstr "Find out more"
 
@@ -703,19 +709,23 @@ msgstr "Date"
 msgid "Время"
 msgstr "Time"
 
-#: .\templates\main_page.html:66
-msgid "Войти на контест"
-msgstr "Go to the contest"
-
-#: .\templates\main_page.html:71
+#: .\templates\main_page.html:64
 msgid "Вы уже зарегистрированы"
 msgstr "You already registered"
 
-#: .\templates\main_page.html:77
+#: .\templates\main_page.html:69
+msgid "Войти на контест"
+msgstr "Go to the contest"
+
+#: .\templates\main_page.html:75
+msgid "Войти на пробный тур"
+msgstr "Go to the trial round"
+
+#: .\templates\main_page.html:82
 msgid "Зарегистрироваться на контест"
 msgstr "Register on contest"
 
-#: .\templates\main_page.html:92
+#: .\templates\main_page.html:97
 #, python-format
 msgid "Остался %(days)s день"
 msgid_plural "Осталось %(days)s дней"

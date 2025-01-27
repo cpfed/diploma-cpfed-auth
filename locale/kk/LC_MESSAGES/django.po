@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-24 19:00+0500\n"
+"POT-Creation-Date: 2025-01-27 14:55+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -204,23 +204,23 @@ msgstr "Аккаунтты белсендіру үшін поштаға хат �
 msgid "Зарегистрироваться"
 msgstr "Тіркелу"
 
-#: .\authentication\views\user_management.py:87
+#: .\authentication\views\user_management.py:92
 msgid "Ссылка уже использована"
 msgstr "Сілтеме пайдаланылды"
 
-#: .\authentication\views\user_management.py:89
+#: .\authentication\views\user_management.py:94
 msgid "Ссылка для активации аккаунта устарела"
 msgstr "Аккаунтты белсендіру сілтемесі ескірген"
 
-#: .\authentication\views\user_management.py:124
+#: .\authentication\views\user_management.py:129
 msgid "Некорректный хэндл/email или пароль"
 msgstr "Қате хэндл/электрондық пошта немесе құпиясөз"
 
-#: .\authentication\views\user_management.py:125
+#: .\authentication\views\user_management.py:130
 msgid "Войти в аккаунт"
 msgstr "Аккаунтқа кіру"
 
-#: .\authentication\views\user_management.py:136
+#: .\authentication\views\user_management.py:141
 msgid "Профиль"
 msgstr ""
 
@@ -240,36 +240,42 @@ msgstr "Сайыстың күні"
 msgid "Ссылка на контест"
 msgstr "Сайыстың сілтеме"
 
-#: .\contest\models.py:66
+#: .\contest\models.py:59
+#, fuzzy
+#| msgid "Ссылка на контест"
+msgid "Ссылка на пробный тур"
+msgstr "Сайыстың сілтеме"
+
+#: .\contest\models.py:68
 msgid "Контест"
 msgstr "Сайыс"
 
-#: .\contest\models.py:67
+#: .\contest\models.py:69
 msgid "Контесты"
 msgstr "Сайыстар"
 
-#: .\contest\models.py:120
+#: .\contest\models.py:127
 msgid "ID пользователя"
 msgstr "Пайдалануштың ID"
 
-#: .\contest\models.py:126
+#: .\contest\models.py:133
 msgid "ID контеста"
 msgstr "Сайыстың ID"
 
-#: .\contest\models.py:133 .\contest\models.py:134
+#: .\contest\models.py:140 .\contest\models.py:141
 msgid "Данные пользователей к контестам"
 msgstr "Сайыстарға арналған пайдаланушы деректері"
 
-#: .\contest\models.py:152 .\templates\base.html:58
+#: .\contest\models.py:159 .\templates\base.html:58
 #: .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Тіркеу"
 
-#: .\contest\models.py:155
+#: .\contest\models.py:162
 msgid "Ранг"
 msgstr ""
 
-#: .\contest\models.py:156
+#: .\contest\models.py:163
 msgid "Очки"
 msgstr ""
 
@@ -318,9 +324,9 @@ msgid ""
 "Зерендинский, Коргалжынский, Сандыктауский, Целиноградский, Шортандинский, "
 "Кокшетау, Степногорск"
 msgstr ""
-"Ақкөл, Аршалы, Астрахан, Атбасар, Бұланды, Бурабай, Егіндікөл, Ерейментау, Жақсы, "
-"Жарқайың, Зеренді, Қорғалжын, Сандықтау, Целиноград, Шортанды, Көкшетау, "
-"Степногорск"
+"Ақкөл, Аршалы, Астрахан, Атбасар, Бұланды, Бурабай, Егіндікөл, Ерейментау, "
+"Жақсы, Жарқайың, Зеренді, Қорғалжын, Сандықтау, Целиноград, Шортанды, "
+"Көкшетау, Степногорск"
 
 #: .\locations\management\commands\create_regions.py:13
 msgid "Актюбинская область"
@@ -700,7 +706,7 @@ msgstr ""
 "аласыз. Чемпионаттарға қатысыңыз, кестені біліңіз және ең жақсы болу "
 "мүмкіндігін жіберіп алмау үшін тіркеліңіз!"
 
-#: .\templates\main_page.html:24 .\templates\main_page.html:83
+#: .\templates\main_page.html:24 .\templates\main_page.html:88
 msgid "Узнать больше"
 msgstr "Көбірек біліңіз"
 
@@ -732,19 +738,23 @@ msgstr "Күні"
 msgid "Время"
 msgstr "Уақыт"
 
-#: .\templates\main_page.html:66
-msgid "Войти на контест"
-msgstr "Сайыстың күні"
-
-#: .\templates\main_page.html:71
+#: .\templates\main_page.html:64
 msgid "Вы уже зарегистрированы"
 msgstr "Сіз қазірдің өзінде тіркелдіңіз!"
 
-#: .\templates\main_page.html:77
+#: .\templates\main_page.html:69
+msgid "Войти на контест"
+msgstr "Сайыстың күні"
+
+#: .\templates\main_page.html:75
+msgid "Войти на пробный тур"
+msgstr "Танысу кезеңде кіру"
+
+#: .\templates\main_page.html:82
 msgid "Зарегистрироваться на контест"
 msgstr "Сайысқа қатысу"
 
-#: .\templates\main_page.html:92
+#: .\templates\main_page.html:97
 #, python-format
 msgid "Остался %(days)s день"
 msgid_plural "Осталось %(days)s дней"

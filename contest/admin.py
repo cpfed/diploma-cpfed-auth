@@ -28,10 +28,15 @@ class ContestAdmin(admin.ModelAdmin):
             raise PermissionDenied()
         wb = Workbook()
         for contest in queryset:
-            wc = wb.create_sheet(title=contest.name)
-            wc.append(contest.required_fields)
+            wc = wb.create_sheet(title=contest.name[:30])
+
+            data = {x['name']:None for x in contest.custom_fields}
+            data.update({x:None for x in contest.user_fields})
+            wc.append(tuple(data.keys()))
             for uc in UserContest.objects.filter(contest=contest):
-                wc.append(tuple(uc.get_full_reg.values()))
+                uc_reg = uc.get_full_reg
+                data = {x: str(uc_reg[x]) for x in data}
+                wc.append(tuple(data.values()))
         wb.remove(wb[wb.sheetnames[0]])  # remove default empty sheet
         with NamedTemporaryFile() as tmp:
             wb.save(tmp)

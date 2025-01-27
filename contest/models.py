@@ -56,6 +56,8 @@ class Contest(models.Model):
         verbose_name=_('Дата контеста')
     )
     link = models.CharField(max_length=300, verbose_name=_("Ссылка на контест"), blank=True, null=True)
+    trial_contest_link = models.CharField(max_length=300, verbose_name=_("Ссылка на пробный тур"), blank=True,
+                                          null=True)
 
     show_on_main_page = models.BooleanField(default=True)
     registration_open = models.BooleanField(default=True)
@@ -100,12 +102,17 @@ class Contest(models.Model):
         return f'{reverse("login")}?contest={self.pk}'
 
     @property
+    def get_trial_link(self):
+        return f'{reverse("login")}?contest={self.pk}&trial'
+
+    @property
     def user_fields(self):
         return self.fields.get("user_fields", [])
 
     @property
     def custom_fields(self):
         return self.fields.get("additional", [])
+
 
 class Championship():
     # date, contests
@@ -141,7 +148,7 @@ class UserContest(models.Model):
     @property
     def get_full_reg(self) -> dict:
         res = self.additional_fields or dict()
-        res.update(self.user.get_user_data_by_fields(self.contest.fields.get("user_fields", [])))
+        res.update(self.user.get_user_data_by_fields(self.contest.user_fields))
         return res
 
 
