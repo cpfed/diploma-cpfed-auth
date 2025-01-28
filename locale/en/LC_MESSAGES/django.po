@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-27 15:17+0500\n"
+"POT-Creation-Date: 2025-01-28 17:01+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -284,25 +284,27 @@ msgstr ""
 msgid "Регистрация закрыта"
 msgstr "Register"
 
-#: .\contest\views.py:53
+#: .\contest\views.py:37
+msgid "Вы уже зарегистрированы!"
+msgstr "You already registered"
+
+#: .\contest\views.py:55
 msgid "Вы успешно зарегистрированы!"
 msgstr "You have registered successfully!"
 
-#: .\contest\views.py:69
+#: .\contest\views.py:71
 msgid "Изменить регистрацию"
 msgstr "Change registration"
 
-#: .\contest\views.py:86
-#, fuzzy
-#| msgid "Ссылка на контест"
+#: .\contest\views.py:88
 msgid "Ссылка на API с результатами контеста"
-msgstr "Link to the contest"
+msgstr ""
 
-#: .\contest\views.py:87
+#: .\contest\views.py:89
 msgid "Добавить очки по GP100?"
 msgstr ""
 
-#: .\contest\views.py:121
+#: .\contest\views.py:123
 #, fuzzy
 #| msgid "Зарегистрироваться на контест"
 msgid "Загрузить результаты контеста"

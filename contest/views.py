@@ -33,6 +33,8 @@ def contest_reg(request: HttpResponse, contest_id: int):
 
     user_reg = UserContest.objects.filter(user=request.user, contest=contest)
     user_reg = (user_reg[0] if len(user_reg) else None)
+    if user_reg is not None:
+        return render(request, 'result_message.html', {'message': _('Вы уже зарегистрированы!')})
 
     form = ContestRegistrationForm(contest, request.user, user_reg)
     if request.method == 'POST':
