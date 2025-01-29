@@ -1,7 +1,3 @@
-from tempfile import NamedTemporaryFile
-
-from openpyxl import Workbook
-
 from django.contrib import admin
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import PermissionDenied
@@ -9,43 +5,71 @@ from django.urls import reverse
 from django.shortcuts import render
 
 from .models import Contest, UserContest, ContestResult
+from .utils import contest_parser, xlsx_response
 
 # Register your models here.
 
 admin.site.register(ContestResult)
 
+
 @admin.register(UserContest)
 class UserContestAdmin(admin.ModelAdmin):
     list_filter = ["contest__name"]
 
+
 @admin.register(Contest)
 class ContestAdmin(admin.ModelAdmin):
-    actions = ['get_registrations', 'upload_contest_results', 'register_on_contest', 'add_bulk_reg']
+    actions = ['get_registrations', 'upload_contest_results', 'register_on_contest', 'add_bulk_reg', 'contest_results']
 
     @admin.action(description="Экспортировать данные зарегистрированных пользователей")
     def get_registrations(self, request, queryset):
         if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
             raise PermissionDenied()
-        wb = Workbook()
+        result = []
         for contest in queryset:
-            wc = wb.create_sheet(title=contest.name[:30])
-
-            data = {x['name']:None for x in contest.custom_fields}
-            data.update({x:None for x in contest.user_fields})
-            wc.append(tuple(data.keys()))
+            curres = []
+            data = None
             for uc in UserContest.objects.filter(contest=contest):
                 uc_reg = uc.get_full_reg
-                data = {x: str(uc_reg[x]) for x in data}
-                wc.append(tuple(data.values()))
-        wb.remove(wb[wb.sheetnames[0]])  # remove default empty sheet
-        with NamedTemporaryFile() as tmp:
-            wb.save(tmp)
-            tmp.seek(0)
-            stream = tmp.read()
-            return HttpResponse(stream, headers={
-                "Content-Type": "application/vnd.ms-excel",
-                "Content-Disposition": 'attachment; filename="foo.xlsx"',
-            })
+                if data is None:
+                    data = {x: str(y) for x, y in data.values()}
+                else:
+                    data = {x: str(uc_reg[x]) for x in data}
+                curres.append(tuple(data.values()))
+            curres = [contest.name, tuple(data.keys())] + curres
+            result.append(curres)
+        return xlsx_response(result)
+
+    @admin.action(description="Экспортировать результаты контеста")
+    def contest_results(self, request, queryset):
+        if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
+            raise PermissionDenied()
+        result = []
+        for contest in queryset:
+
+            link = 'api/v2/contest'.join(contest.link.split('contest'))
+            try:
+                results = contest_parser.fetch_contest_results(link)
+            except Exception as err:
+                return render(request, 'admin/result_message.html', {'message': 'Ошибка: ' + str(err)})
+            user_ranks = {r.user: i for i, r in enumerate(results)}
+
+            user_regs = UserContest.objects.filter(contest=contest).select_related('user', 'contest').all()
+            user_regs = sorted(user_regs, key=lambda ur: user_ranks.get(ur.user.handle, len(user_regs)))
+
+            curres = []
+            data = None
+            for rank, uc in enumerate(user_regs):
+                uc_reg = uc.get_full_reg_with_additional_data
+                if data is None:
+                    data = {x: str(y) for x, y in uc_reg.items()}
+                else:
+                    data = {x: str(uc_reg[x]) for x in data}
+                curres.append([rank+1] + list(data.values()))
+
+            curres = [contest.name, ['place'] + list(data.keys())] + curres
+            result.append(curres)
+        return xlsx_response.xlsx_response(result)
 
     @admin.action(description="Загрузить результаты контеста")
     def upload_contest_results(self, request, queryset):
@@ -75,7 +99,8 @@ class ContestAdmin(admin.ModelAdmin):
         fr, to = sorted(selected)
         contest = Contest.objects.get(id=to)
         for uc in UserContest.objects.filter(contest__id=fr):
-            UserContest.objects.get_or_create(user=uc.user, contest=contest, defaults={"additional_fields": uc.additional_fields})
+            UserContest.objects.get_or_create(user=uc.user, contest=contest,
+                                              defaults={"additional_fields": uc.additional_fields})
         return render(request, 'admin/result_message.html', {'message': "ok"})
 
     def get_actions(self, request):
