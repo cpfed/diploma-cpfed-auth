@@ -52,20 +52,21 @@ class ContestAdmin(admin.ModelAdmin):
                 results = contest_parser.fetch_contest_results(link)
             except Exception as err:
                 return render(request, 'admin/result_message.html', {'message': 'Ошибка: ' + str(err)})
-            user_ranks = {r.user: i for i, r in enumerate(results)}
+            user_ranks = {r.user: r.rank for r in results}
 
             user_regs = UserContest.objects.filter(contest=contest).select_related('user', 'contest').all()
-            user_regs = sorted(user_regs, key=lambda ur: user_ranks.get(ur.user.handle, len(user_regs)))
+            user_regs = sorted(user_regs, key=lambda ur: user_ranks.get(ur.user.handle, len(user_regs)+1))
 
             curres = []
             data = None
-            for rank, uc in enumerate(user_regs):
+            for uc in user_regs:
                 uc_reg = uc.get_full_reg_with_additional_data
                 if data is None:
                     data = {x: str(y) for x, y in uc_reg.items()}
                 else:
                     data = {x: str(uc_reg[x]) for x in data}
-                curres.append([rank+1] + list(data.values()))
+                handle = uc_reg['handle']
+                curres.append([str(user_ranks[handle]) if handle in user_ranks else "Не участвовал"] + list(data.values()))
 
             curres = [contest.name, ['place'] + list(data.keys())] + curres
             result.append(curres)
