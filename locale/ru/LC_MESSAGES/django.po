@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-29 14:12+0500\n"
+"POT-Creation-Date: 2025-01-31 11:35+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -263,20 +263,20 @@ msgstr ""
 msgid "Данные пользователей к контестам"
 msgstr ""
 
-#: .\contest\models.py:159 .\templates\base.html:59
+#: .\contest\models.py:165 .\templates\base.html:59
 #: .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Зарегистрироваться"
 
-#: .\contest\models.py:162
+#: .\contest\models.py:168
 msgid "Ранг"
 msgstr ""
 
-#: .\contest\models.py:163
+#: .\contest\models.py:169
 msgid "Очки"
 msgstr ""
 
-#: .\contest\views.py:32
+#: .\contest\views.py:32 .\templates\main_page.html:87
 #, fuzzy
 #| msgid "Регистрация"
 msgid "Регистрация закрыта"
@@ -658,7 +658,7 @@ msgid ""
 "зарегистрируйся, чтобы не упустить шанс стать лучшим!"
 msgstr ""
 
-#: .\templates\main_page.html:24 .\templates\main_page.html:88
+#: .\templates\main_page.html:24 .\templates\main_page.html:92
 msgid "Узнать больше"
 msgstr ""
 
@@ -702,7 +702,7 @@ msgstr ""
 msgid "Зарегистрироваться на контест"
 msgstr ""
 
-#: .\templates\main_page.html:97
+#: .\templates\main_page.html:101
 #, python-format
 msgid "Остался %(days)s день"
 msgid_plural "Осталось %(days)s дней"

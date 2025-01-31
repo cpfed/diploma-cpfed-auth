@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-29 14:12+0500\n"
+"POT-Creation-Date: 2025-01-31 11:35+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -266,24 +266,22 @@ msgstr "Сайыстың ID"
 msgid "Данные пользователей к контестам"
 msgstr "Сайыстарға арналған пайдаланушы деректері"
 
-#: .\contest\models.py:159 .\templates\base.html:59
+#: .\contest\models.py:165 .\templates\base.html:59
 #: .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Тіркеу"
 
-#: .\contest\models.py:162
+#: .\contest\models.py:168
 msgid "Ранг"
 msgstr ""
 
-#: .\contest\models.py:163
+#: .\contest\models.py:169
 msgid "Очки"
 msgstr ""
 
-#: .\contest\views.py:32
-#, fuzzy
-#| msgid "Регистрация"
+#: .\contest\views.py:32 .\templates\main_page.html:87
 msgid "Регистрация закрыта"
-msgstr "Тіркеу"
+msgstr "Тіркеу жабық"
 
 #: .\contest\views.py:37
 msgid "Вы уже зарегистрированы!"
@@ -495,7 +493,8 @@ msgid ""
 "Тюлькубасский,  Шардаринский, Туркестан, Кентау, Арыс, Шымкент, Сауран"
 msgstr ""
 "Байдібек, Жетісай, Қазығұрт, Келес, Мақтаарал, Ордабасы, Отырар, Сайрам, "
-"Сарыағаш, Төле би, Түлкібас, Шардара, Түркістан, Кентау, Арыс, Шымкент, Сауран"
+"Сарыағаш, Төле би, Түлкібас, Шардара, Түркістан, Кентау, Арыс, Шымкент, "
+"Сауран"
 
 #: .\locations\management\commands\create_regions.py:51
 msgid "Астана"
@@ -717,7 +716,7 @@ msgstr ""
 "аласыз. Чемпионаттарға қатысыңыз, кестені біліңіз және ең жақсы болу "
 "мүмкіндігін жіберіп алмау үшін тіркеліңіз!"
 
-#: .\templates\main_page.html:24 .\templates\main_page.html:88
+#: .\templates\main_page.html:24 .\templates\main_page.html:92
 msgid "Узнать больше"
 msgstr "Көбірек біліңіз"
 
@@ -765,7 +764,7 @@ msgstr "Танысу кезеңде кіру"
 msgid "Зарегистрироваться на контест"
 msgstr "Сайысқа қатысу"
 
-#: .\templates\main_page.html:97
+#: .\templates\main_page.html:101
 #, python-format
 msgid "Остался %(days)s день"
 msgid_plural "Осталось %(days)s дней"
