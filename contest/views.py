@@ -60,15 +60,10 @@ def contest_reg(request: HttpResponse, contest_id: int):
                     form.add_error(field, err)
     was_reg = UserContest.objects.filter(user=request.user, contest=contest).exists()
 
-    form_path = 'base_form.html'
-    if contest_id == 1:
-        form_path = 'crk_reg.html'
-    elif contest_id == 3:
-        form_path = 'uzdik_reg.html'
-
-    return render(request, form_path, {
+    return render(request, 'contest_registration.html', {
         'form': form,
         'form_name': (contest.get_name if not was_reg else _('Изменить регистрацию')),
+        'contest': contest
     })
 
 

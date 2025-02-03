@@ -165,10 +165,8 @@ AFTER_LOGIN_URL = 'main_page'
 LOGOUT_REDIRECT_URL = 'main_page'
 HOME_PAGE_URL = os.getenv("HOME_PAGE_URL", './')
 
-
 # phone validation
 PHONENUMBER_DEFAULT_REGION = 'KZ'
-
 
 STORAGES = {
     "staticfiles": {

@@ -64,6 +64,10 @@ class Contest(models.Model):
     level_on_main_page = models.IntegerField(default=1)
     image_url = models.CharField(default="capybara.png")
 
+    text_above_submit_button = models.TextField(null=True, blank=True)
+    text_above_submit_button_kk = models.TextField(null=True, blank=True)
+    text_above_submit_button_en = models.TextField(null=True, blank=True)
+
     class Meta:
         verbose_name = _("Контест")
         verbose_name_plural = _("Контесты")
@@ -112,6 +116,14 @@ class Contest(models.Model):
     @property
     def custom_fields(self):
         return self.fields.get("additional", [])
+
+    @property
+    def get_text_above_submit_button(self):
+        if get_language() == 'en' and self.text_above_submit_button_en is not None:
+            return self.text_above_submit_button_en
+        if get_language() == 'kk' and self.text_above_submit_button_kk is not None:
+            return self.text_above_submit_button_kk
+        return self.text_above_submit_button or ''
 
 
 class Championship():

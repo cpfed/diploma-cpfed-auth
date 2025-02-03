@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 11:35+0500\n"
+"POT-Creation-Date: 2025-02-03 21:44+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -243,36 +243,36 @@ msgstr ""
 msgid "Ссылка на пробный тур"
 msgstr ""
 
-#: .\contest\models.py:68
+#: .\contest\models.py:72
 msgid "Контест"
 msgstr ""
 
-#: .\contest\models.py:69
+#: .\contest\models.py:73
 msgid "Контесты"
 msgstr ""
 
-#: .\contest\models.py:127
+#: .\contest\models.py:139
 msgid "ID пользователя"
 msgstr ""
 
-#: .\contest\models.py:133
+#: .\contest\models.py:145
 msgid "ID контеста"
 msgstr ""
 
-#: .\contest\models.py:140 .\contest\models.py:141
+#: .\contest\models.py:152 .\contest\models.py:153
 msgid "Данные пользователей к контестам"
 msgstr ""
 
-#: .\contest\models.py:165 .\templates\base.html:59
+#: .\contest\models.py:177 .\templates\base.html:59
 #: .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Зарегистрироваться"
 
-#: .\contest\models.py:168
+#: .\contest\models.py:180
 msgid "Ранг"
 msgstr ""
 
-#: .\contest\models.py:169
+#: .\contest\models.py:181
 msgid "Очки"
 msgstr ""
 
@@ -290,19 +290,19 @@ msgstr ""
 msgid "Вы успешно зарегистрированы!"
 msgstr ""
 
-#: .\contest\views.py:71
+#: .\contest\views.py:65
 msgid "Изменить регистрацию"
 msgstr ""
 
-#: .\contest\views.py:88
+#: .\contest\views.py:83
 msgid "Ссылка на API с результатами контеста"
 msgstr ""
 
-#: .\contest\views.py:89
+#: .\contest\views.py:84
 msgid "Добавить очки по GP100?"
 msgstr ""
 
-#: .\contest\views.py:123
+#: .\contest\views.py:118
 msgid "Загрузить результаты контеста"
 msgstr ""
 
@@ -573,23 +573,7 @@ msgstr ""
 msgid "Отправить"
 msgstr ""
 
-#: .\templates\crk_reg.html:7
-msgid ""
-"Отмечая место расположения учебного заведения или работы, Вы можете "
-"претендовать на региональную квоту при прохождении в финал Чемпионата. Более "
-"подробная информация в <a href=\"https://drive.google.com/file/d/"
-"1SUViRvUiOa_Onpq32CLzRaLuU73YDXfq/view\" class=\"text-blue-600\">регламенте</"
-"a>"
-msgstr ""
-
-#: .\templates\crk_reg.html:9
-msgid ""
-"Обратите внимание, что для верификации принадлежности к региону необходимо "
-"будет предоставить справку со школы/ВУЗа/ работы по запросу организаторов "
-"олимпиады."
-msgstr ""
-
-#: .\templates\crk_reg.html:13 .\templates\uzdik_reg.html:11
+#: .\templates\contest_registration.html:11 .\templates\uzdik_reg.html:11
 msgid ""
 "Согласен с политикой <a href=\"https://drive.google.com/file/d/"
 "1ReERKx_HgGimV-pp5n_DEMfB6-axesku/view\" class=\"text-"

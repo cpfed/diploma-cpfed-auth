@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-31 11:35+0500\n"
+"POT-Creation-Date: 2025-02-03 21:44+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -245,36 +245,36 @@ msgstr "Link to the contest"
 msgid "Ссылка на пробный тур"
 msgstr "Link to the contest"
 
-#: .\contest\models.py:68
+#: .\contest\models.py:72
 msgid "Контест"
 msgstr "Contest"
 
-#: .\contest\models.py:69
+#: .\contest\models.py:73
 msgid "Контесты"
 msgstr "Contests"
 
-#: .\contest\models.py:127
+#: .\contest\models.py:139
 msgid "ID пользователя"
 msgstr "User ID"
 
-#: .\contest\models.py:133
+#: .\contest\models.py:145
 msgid "ID контеста"
 msgstr "Contest ID"
 
-#: .\contest\models.py:140 .\contest\models.py:141
+#: .\contest\models.py:152 .\contest\models.py:153
 msgid "Данные пользователей к контестам"
 msgstr "User data for contests"
 
-#: .\contest\models.py:165 .\templates\base.html:59
+#: .\contest\models.py:177 .\templates\base.html:59
 #: .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Register"
 
-#: .\contest\models.py:168
+#: .\contest\models.py:180
 msgid "Ранг"
 msgstr ""
 
-#: .\contest\models.py:169
+#: .\contest\models.py:181
 msgid "Очки"
 msgstr ""
 
@@ -290,19 +290,19 @@ msgstr "You already registered"
 msgid "Вы успешно зарегистрированы!"
 msgstr "You have registered successfully!"
 
-#: .\contest\views.py:71
+#: .\contest\views.py:65
 msgid "Изменить регистрацию"
 msgstr "Change registration"
 
-#: .\contest\views.py:88
+#: .\contest\views.py:83
 msgid "Ссылка на API с результатами контеста"
 msgstr ""
 
-#: .\contest\views.py:89
+#: .\contest\views.py:84
 msgid "Добавить очки по GP100?"
 msgstr ""
 
-#: .\contest\views.py:123
+#: .\contest\views.py:118
 #, fuzzy
 #| msgid "Зарегистрироваться на контест"
 msgid "Загрузить результаты контеста"
@@ -575,31 +575,7 @@ msgstr "All rights reserved."
 msgid "Отправить"
 msgstr "Submit"
 
-#: .\templates\crk_reg.html:7
-msgid ""
-"Отмечая место расположения учебного заведения или работы, Вы можете "
-"претендовать на региональную квоту при прохождении в финал Чемпионата. Более "
-"подробная информация в <a href=\"https://drive.google.com/file/d/"
-"1SUViRvUiOa_Onpq32CLzRaLuU73YDXfq/view\" class=\"text-blue-600\">регламенте</"
-"a>"
-msgstr ""
-"By indicating the location of your educational institution or work, you can "
-"apply for a regional quota when passing to the Championship final. More "
-"detailed information in the <a href=\"https://drive.google.com/file/d/"
-"1SUViRvUiOa_Onpq32CLzRaLuU73YDXfq/view\" class=\"text-"
-"blue-600\">regulations</a>"
-
-#: .\templates\crk_reg.html:9
-msgid ""
-"Обратите внимание, что для верификации принадлежности к региону необходимо "
-"будет предоставить справку со школы/ВУЗа/ работы по запросу организаторов "
-"олимпиады."
-msgstr ""
-"Please note that to verify your regional affiliation, you will need to "
-"provide a certificate from your school/university/work at the request of the "
-"Olympiad organizers."
-
-#: .\templates\crk_reg.html:13 .\templates\uzdik_reg.html:11
+#: .\templates\contest_registration.html:11 .\templates\uzdik_reg.html:11
 msgid ""
 "Согласен с политикой <a href=\"https://drive.google.com/file/d/"
 "1ReERKx_HgGimV-pp5n_DEMfB6-axesku/view\" class=\"text-"
@@ -801,6 +777,28 @@ msgstr ""
 #: .\utils\error_list.py:11
 msgid "Пользователь с таким Телефонный номер уже существует."
 msgstr "A user with this phone number already exists."
+
+#~ msgid ""
+#~ "Отмечая место расположения учебного заведения или работы, Вы можете "
+#~ "претендовать на региональную квоту при прохождении в финал Чемпионата. "
+#~ "Более подробная информация в <a href=\"https://drive.google.com/file/d/"
+#~ "1SUViRvUiOa_Onpq32CLzRaLuU73YDXfq/view\" class=\"text-"
+#~ "blue-600\">регламенте</a>"
+#~ msgstr ""
+#~ "By indicating the location of your educational institution or work, you "
+#~ "can apply for a regional quota when passing to the Championship final. "
+#~ "More detailed information in the <a href=\"https://drive.google.com/file/"
+#~ "d/1SUViRvUiOa_Onpq32CLzRaLuU73YDXfq/view\" class=\"text-"
+#~ "blue-600\">regulations</a>"
+
+#~ msgid ""
+#~ "Обратите внимание, что для верификации принадлежности к региону "
+#~ "необходимо будет предоставить справку со школы/ВУЗа/ работы по запросу "
+#~ "организаторов олимпиады."
+#~ msgstr ""
+#~ "Please note that to verify your regional affiliation, you will need to "
+#~ "provide a certificate from your school/university/work at the request of "
+#~ "the Olympiad organizers."
 
 #~ msgid "Регистрация на чемпионат"
 #~ msgstr "Register for the championship"
