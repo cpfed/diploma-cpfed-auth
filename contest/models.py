@@ -35,20 +35,16 @@ class Contest(models.Model):
         null=True,
         blank=True
     )
-    playing_desc = models.TextField(
-        verbose_name=_("Описание контеста: ")
-    )
-    date = models.DateTimeField(
-        verbose_name=_('Дата контеста')
-    )
+    playing_desc = models.TextField(verbose_name=_("Описание контеста"))
+    date = models.DateTimeField(verbose_name=_('Дата контеста'))
     link = models.CharField(max_length=300, verbose_name=_("Ссылка на контест"), blank=True, null=True)
-    trial_contest_link = models.CharField(max_length=300, verbose_name=_("Ссылка на пробный тур"), blank=True,
-                                          null=True)
+    trial_contest_link = models.CharField(max_length=300, verbose_name="Ссылка на пробный тур", blank=True, null=True)
 
     show_on_main_page = models.BooleanField(default=True)
     registration_open = models.BooleanField(default=True)
     level_on_main_page = models.IntegerField(default=1)
     image_url = models.CharField(default="capybara.png")
+    is_contest = models.BooleanField(default=True)
 
     text_above_submit_button = models.TextField(null=True, blank=True)
     text_after_submit = models.TextField(null=True, blank=True)
