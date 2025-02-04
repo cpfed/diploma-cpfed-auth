@@ -7,7 +7,7 @@ from django import forms
 from django.utils.translation import get_language
 from django.urls import reverse
 
-
+from .utils.CustomJSONEncoder import CustomJSONEncoder
 # Create your models here.
 
 class Contest(models.Model):
@@ -98,7 +98,8 @@ class UserContest(models.Model):
         verbose_name=_("ID контеста")
     )
     additional_fields = models.JSONField(
-        default=dict
+        default=dict,
+        encoder=CustomJSONEncoder
     )
 
     class Meta:
