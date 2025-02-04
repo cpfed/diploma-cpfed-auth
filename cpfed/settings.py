@@ -43,6 +43,8 @@ CLOUDFLARE_SECRET_KEY = os.getenv("CLOUDFLARE_SECRET_KEY", None)
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -70,7 +72,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-
 ]
 
 ROOT_URLCONF = 'cpfed.urls'
@@ -139,10 +140,11 @@ TIME_ZONE = 'Asia/Almaty'
 USE_I18N = True
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 LANGUAGES = [
-    ('en', 'English'),
     ('ru', 'Русский'),
+    ('en', 'English'),
     ('kk', 'Қазақ'),
 ]
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
 
 USE_TZ = True
 

@@ -3,9 +3,11 @@
 
 {% block form_addition_before_button %}
 <div>
-    {% autoescape off %}
-        {{ contest.get_text_above_submit_button }}
-    {% endautoescape %}
+    {% if contest.text_above_submit_button %}
+        {% autoescape off %}
+            {{ contest.text_above_submit_button }}
+        {% endautoescape %}
+    {% endif %}
     <input type="checkbox" checked="true" id="polycy_conf" onchange="document.getElementById('form_submit_button').disabled = !this.checked;" />
     <label for="polycy_conf">
         {% blocktranslate %}Согласен с политикой <a href="https://drive.google.com/file/d/1ReERKx_HgGimV-pp5n_DEMfB6-axesku/view" class="text-blue-600">конфиденциальности</a>{% endblocktranslate %}

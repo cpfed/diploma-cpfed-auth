@@ -11,8 +11,16 @@ fields = {
 def get_field(field):
     label = field['name']
 
-    if get_language() == 'en' and 'name_en' in field: label = field.get('name_en', label)
-    elif get_language() == 'kk' and 'name_kk' in field: label = field['name_kk']
-    elif 'name_ru' in field: label = field['name_ru']
+    if get_language() == 'en' and 'name_en' in field:
+        label = field.get('name_en', label)
+    elif get_language() == 'kk' and 'name_kk' in field:
+        label = field['name_kk']
+    elif 'name_ru' in field:
+        label = field['name_ru']
 
-    return fields.get(field.get('field', ''), forms.CharField(label=label))
+    res = fields.get(field.get('field', ''), forms.CharField(label=label))
+
+    if "not_required" not in field:
+        res.required = True
+
+    return res

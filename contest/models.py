@@ -13,15 +13,7 @@ from django.urls import reverse
 class Contest(models.Model):
     name = models.CharField(
         max_length=128,
-        verbose_name=_("Название контеста") + ' ru'
-    )
-    name_kk = models.CharField(
-        max_length=128,
-        verbose_name=_("Название контеста") + ' kk'
-    )
-    name_en = models.CharField(
-        max_length=128,
-        verbose_name=_("Название контеста") + ' en'
+        verbose_name=_("Название контеста")
     )
     # next_contest = models.ForeignKey(
     #     "self",
@@ -44,13 +36,7 @@ class Contest(models.Model):
         blank=True
     )
     playing_desc = models.TextField(
-        verbose_name=_("Описание контеста: ") + 'ru'
-    )
-    playing_desc_kk = models.TextField(
-        verbose_name=_("Описание контеста: ") + 'kk'
-    )
-    playing_desc_en = models.TextField(
-        verbose_name=_("Описание контеста: ") + 'en'
+        verbose_name=_("Описание контеста: ")
     )
     date = models.DateTimeField(
         verbose_name=_('Дата контеста')
@@ -65,8 +51,7 @@ class Contest(models.Model):
     image_url = models.CharField(default="capybara.png")
 
     text_above_submit_button = models.TextField(null=True, blank=True)
-    text_above_submit_button_kk = models.TextField(null=True, blank=True)
-    text_above_submit_button_en = models.TextField(null=True, blank=True)
+    text_after_submit = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name = _("Контест")
@@ -80,26 +65,6 @@ class Contest(models.Model):
     def remaining_days(self):
         rem = (self.date - timezone.now() + timezone.timedelta(days=0.99999)).days
         return rem
-
-    @property
-    def get_name(self):
-        match get_language():
-            case 'en':
-                return self.name_en
-            case 'kk':
-                return self.name_kk
-            case _:
-                return self.name
-
-    @property
-    def get_desc(self):
-        match get_language():
-            case 'en':
-                return self.playing_desc_en
-            case 'kk':
-                return self.playing_desc_kk
-            case _:
-                return self.playing_desc
 
     @property
     def get_link(self):
@@ -116,14 +81,6 @@ class Contest(models.Model):
     @property
     def custom_fields(self):
         return self.fields.get("additional", [])
-
-    @property
-    def get_text_above_submit_button(self):
-        if get_language() == 'en' and self.text_above_submit_button_en is not None:
-            return self.text_above_submit_button_en
-        if get_language() == 'kk' and self.text_above_submit_button_kk is not None:
-            return self.text_above_submit_button_kk
-        return self.text_above_submit_button or ''
 
 
 class Championship():
