@@ -118,7 +118,9 @@
                     <div class="flex flex-col justify-between text-left h-min">
                         <div class="mx-2">
                             <div class="text-2xl font-semibold mb-2">{{ contest.name }}</div>
+                            {% autoescape off %}
                             <div class="text-l font-normal mb-4">{{ contest.playing_desc }}</div>
+                            {% endautoescape %}
                             <div class="mb-2">{% translate "Дата" %}: {{ contest.date | date:'d.m.Y H:i' }}</div>
 <!--                            <div class="mb-8">{% translate "Время" %}: {{ contest.date | date:'H:i' }} </div>-->
                         </div>
