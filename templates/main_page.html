@@ -55,7 +55,9 @@
                     <div class="flex flex-col justify-between text-left h-min">
                         <div class="mx-2">
                             <div class="text-2xl font-semibold mb-2">{{ contest.name }}</div>
+                            {% autoescape off %}
                             <div class="text-l font-normal mb-4">{{ contest.playing_desc }}</div>
+                            {% endautoescape %}
                             <div class="mb-2">{% translate "Дата" %}: {{ contest.date | date:'d.m.Y H:i' }}</div>
 <!--                            <div class="mb-8">{% translate "Время" %}: {{ contest.date | date:'H:i' }} </div>-->
                         </div>
@@ -81,58 +83,6 @@
                             <a href="{% url 'contestRegistration' contest_id=contest.id %}">
                                 <div class="bg-blue-600 py-2 px-6 text-gray-100 rounded-lg">
                                     {% translate "Зарегистрироваться на контест" %}
-                                </div>
-                            </a>
-                            {% else %}
-                            <div class="bg-gray-500 py-2 px-6 text-gray-100 rounded-lg">
-                                {% translate "Регистрация закрыта" %}
-                            </div>
-                            {% endif %}
-<!--                            <a href="{% url 'register' %}">-->
-<!--                                <div class="border-blue-600 border py-2 px-6 text-blue-600 rounded-lg">-->
-<!--                                    {% translate "Узнать больше" %}-->
-<!--                                </div>-->
-<!--                            </a>-->
-                        </div>
-                    </div>
-                </div>
-                {% if contest.remaining_days > 0 %}
-                <div class="h-full self-start">
-                    <p class="bg-white rounded-full px-4 py-2 text-nowrap">
-                        {% blocktranslate count days=contest.remaining_days %}Остался {{days}} день{% plural %}Осталось {{days}} дней{% endblocktranslate %}
-                    </p>
-                </div>
-                {% endif %}
-            </div>
-            {% endif %}
-            {% endfor %}
-        </div>
-
-        <div class="my-8 text-center">
-            <p class="text-blue-900 text-4xl my-4">{% translate "Обучение" %}</p>
-            {% for contest, is_reg in contests.items %}
-            {% if not contest.is_contest %}
-            <div class="flex items-center justify-between bg-gray-100 p-8 pr-4 rounded-xl m-8">
-                <div class="flex space-x-6 h-min">
-                    <img src="{% static contest.image_url %}" alt="" class="rounded-lg object-cover w-40"/>
-                    <div class="flex flex-col justify-between text-left h-min">
-                        <div class="mx-2">
-                            <div class="text-2xl font-semibold mb-2">{{ contest.name }}</div>
-                            {% autoescape off %}
-                            <div class="text-l font-normal mb-4">{{ contest.playing_desc }}</div>
-                            {% endautoescape %}
-                            <div class="mb-2">{% translate "Дата" %}: {{ contest.date | date:'d.m.Y H:i' }}</div>
-<!--                            <div class="mb-8">{% translate "Время" %}: {{ contest.date | date:'H:i' }} </div>-->
-                        </div>
-                        <div class="flex space-x-4">
-                            {% if is_reg %}
-                                <div class="bg-gray-500 py-2 px-6 text-gray-100 rounded-lg">
-                                    {% translate "Вы уже зарегистрированы" %}
-                                </div>
-                            {% elif contest.registration_open %}
-                            <a href="{% url 'contestRegistration' contest_id=contest.id %}">
-                                <div class="bg-blue-600 py-2 px-6 text-gray-100 rounded-lg">
-                                    {% translate "Зарегистрироваться" %}
                                 </div>
                             </a>
                             {% else %}

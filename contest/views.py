@@ -52,8 +52,12 @@ def contest_reg(request: HttpResponse, contest_id: int):
             user_reg.save()
 
             user_form.save()
-            return render(request, 'result_message.html',
-                          {'message': _('Вы успешно зарегистрированы!') + "<br/>" + contest.text_after_submit})
+
+            res = _('Вы успешно зарегистрированы!')
+            if contest.text_after_submit:
+                res += "<br/>" + contest.text_after_submit
+
+            return render(request, 'result_message.html', {'message': res})
         # add all errors for user fields
         for field, errs in user_form.errors.items():
             for err in errs:
