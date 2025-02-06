@@ -7,7 +7,7 @@ from django import forms
 from django.utils.translation import get_language
 from django.urls import reverse
 
-from .utils.CustomJSONEncoder import CustomJSONEncoder
+from .utils.json_encoder import CustomJSONEncoder
 # Create your models here.
 
 class Contest(models.Model):

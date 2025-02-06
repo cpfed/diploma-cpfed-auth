@@ -25,17 +25,29 @@ class ExcludeRegisteredFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         if self.value() == None:
             return queryset
-        contest = Contest.objects.get(id=self.value())
-        registered_users = UserContest.objects.filter(contest=contest)
-        q = queryset.exclude(id__in=registered_users.values_list("user__id", flat=True))
+        q = queryset.exclude(contests__contest__id=self.value())
+        return q
+
+class OnlyRegisteredFilter(admin.SimpleListFilter):
+    title = _("Только зарегистрированные")
+    parameter_name = "onlyreg"
+
+    def lookups(self, request, model_admin):
+        contests = Contest.objects.all()
+        return [(str(c.id), c.name) for c in contests]
+
+    def queryset(self, request, queryset):
+        if self.value() == None:
+            return queryset
+        q = queryset.filter(contests__contest__id=self.value())
         return q
 
 
 @admin.register(MainUser)
 class MainUserAdmin(admin.ModelAdmin):
-    list_filter = ["contests__contest__name", ExcludeRegisteredFilter]
+    list_filter = [OnlyRegisteredFilter, ExcludeRegisteredFilter]
     actions = ["send_email", "register_users"]
-    search_fields = ["handle", "first_name", "last_name", "phone_number"]
+    search_fields = ["handle", "first_name", "last_name", "phone_number", "email"]
 
     @admin.action(description=_("Отправить письмо на почту"))
     def send_email(self, request, queryset):

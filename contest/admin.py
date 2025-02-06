@@ -15,6 +15,7 @@ admin.site.register(ContestResult)
 @admin.register(UserContest)
 class UserContestAdmin(admin.ModelAdmin):
     list_filter = ["contest__name"]
+    search_fields = ["user_handle"]
 
 
 @admin.register(Contest)
