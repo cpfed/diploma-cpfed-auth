@@ -43,7 +43,7 @@ class Contest(models.Model):
     show_on_main_page = models.BooleanField(default=True)
     registration_open = models.BooleanField(default=True)
     level_on_main_page = models.IntegerField(default=1)
-    image_url = models.CharField(default="capybara.png")
+    image_url = models.CharField(default="https://i.ibb.co.com/7tSBNdmf/capybara.png")
     is_contest = models.BooleanField(default=True)
 
     text_above_submit_button = models.TextField(null=True, blank=True)
