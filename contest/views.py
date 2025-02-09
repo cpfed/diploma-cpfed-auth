@@ -17,7 +17,7 @@ from django_cte import With
 
 from .models import Contest, UserContest, ContestResult
 from .forms import ContestRegistrationForm
-from .utils import contest_parser, gp100
+from .utils import contest_parser, gp100, esep
 from authentication.forms import get_user_form
 from locations.models import Region
 
@@ -52,6 +52,8 @@ def contest_reg(request: HttpResponse, contest_id: int):
             user_reg.save()
 
             user_form.save()
+
+            esep.reg_users_to_esep_organization(contest, request.user.email)
 
             res = _('Вы успешно зарегистрированы!')
             if contest.text_after_submit:

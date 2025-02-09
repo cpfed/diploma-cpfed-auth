@@ -3,9 +3,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from django.shortcuts import render
+from django.conf import settings
 
 from .models import Contest, UserContest, ContestResult
-from .utils import contest_parser, xlsx_response
+from .utils import contest_parser, xlsx_response, esep
 
 # Register your models here.
 
@@ -20,7 +21,8 @@ class UserContestAdmin(admin.ModelAdmin):
 
 @admin.register(Contest)
 class ContestAdmin(admin.ModelAdmin):
-    actions = ['get_registrations', 'upload_contest_results', 'register_on_contest', 'add_bulk_reg', 'contest_results']
+    actions = ['get_registrations', 'upload_contest_results', 'register_on_contest', 'add_bulk_reg', 'contest_results',
+               'sync_user_reg_with_esep']
 
     @admin.action(description="Экспортировать данные зарегистрированных пользователей")
     def get_registrations(self, request, queryset):
@@ -56,7 +58,7 @@ class ContestAdmin(admin.ModelAdmin):
             user_ranks = {r.user: r.rank for r in results}
 
             user_regs = UserContest.objects.filter(contest=contest).select_related('user', 'contest').all()
-            user_regs = sorted(user_regs, key=lambda ur: user_ranks.get(ur.user.handle, len(user_regs)+1))
+            user_regs = sorted(user_regs, key=lambda ur: user_ranks.get(ur.user.handle, len(user_regs) + 1))
 
             curres = []
             data = None
@@ -67,7 +69,8 @@ class ContestAdmin(admin.ModelAdmin):
                 else:
                     data = {x: str(uc_reg[x]) for x in data}
                 handle = uc_reg['handle']
-                curres.append([str(user_ranks[handle]) if handle in user_ranks else "Не участвовал"] + list(data.values()))
+                curres.append(
+                    [str(user_ranks[handle]) if handle in user_ranks else "Не участвовал"] + list(data.values()))
 
             curres = [contest.name, ['place'] + list(data.keys())] + curres
             result.append(curres)
@@ -103,6 +106,17 @@ class ContestAdmin(admin.ModelAdmin):
         for uc in UserContest.objects.filter(contest__id=fr):
             UserContest.objects.get_or_create(user=uc.user, contest=contest,
                                               defaults={"additional_fields": uc.additional_fields})
+        return render(request, 'admin/result_message.html', {'message': "ok"})
+
+    @admin.action(description="Синхронизировать регистрaции с есепом")
+    def sync_user_reg_with_esep(self, request, queryset):
+        if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
+            raise PermissionDenied()
+        for contest in queryset:
+            err = esep.reg_users_to_esep_organization(contest)
+            if err is not None:
+                return render(request, 'admin/result_message.html',
+                              {'message': f"contest: {contest}, error: {str(err)}"})
         return render(request, 'admin/result_message.html', {'message': "ok"})
 
     def get_actions(self, request):

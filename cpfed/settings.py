@@ -25,6 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY", None)
+CPFED_TOKEN = os.getenv("CPFED_TOKEN", None)
 CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "http://localhost:8000,https://auth.cpfed.kz,https://esep.pages.dev,https://app.oqylyq.kz").split(",")
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
