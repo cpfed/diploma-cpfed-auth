@@ -39,7 +39,8 @@ class Contest(models.Model):
     date = models.DateTimeField(verbose_name=_('Дата контеста'))
     link = models.CharField(max_length=300, verbose_name=_("Ссылка на контест"), blank=True, null=True)
     # TODO: automate creation of organization
-    esep_org = models.IntegerField(verbose_name="ID огранизации в esep", blank=True, null=True) 
+    esep_org = models.IntegerField(verbose_name="ID огранизации в esep", blank=True, null=True)
+    tmp_cpfed_token = models.CharField(max_length=300, blank=True, null=True)
     trial_contest_link = models.CharField(max_length=300, verbose_name="Ссылка на пробный тур", blank=True, null=True)
 
     show_on_main_page = models.BooleanField(default=True)
