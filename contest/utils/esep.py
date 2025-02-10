@@ -16,10 +16,14 @@ def reg_users_to_esep_organization(contest: Contest, user_email=None):
                              "org_id": contest.esep_org,
                              "emails": user_emails
                          }))
-
+    err = ""
     try:
         resp.raise_for_status()
     except Exception as e:
-        return str(e)
+        err += str(e)
     if resp.status_code != 201:
-        return resp.json().get('detail')
+        try:
+            err += "; " + resp.json().get('detail')
+        except:
+            pass
+    return err if err else None
