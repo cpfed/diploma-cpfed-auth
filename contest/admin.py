@@ -52,7 +52,7 @@ class ContestAdmin(admin.ModelAdmin):
         result = []
         for contest in queryset:
 
-            link = 'api/v2/contest'.join(contest.link.split('contest'))
+            link = '/api/v2/contest/'.join(contest.link.split('/contest/'))
             try:
                 results = contest_parser.fetch_contest_results(link)
             except Exception as err:
