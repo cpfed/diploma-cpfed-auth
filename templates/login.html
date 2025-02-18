@@ -2,7 +2,12 @@
 {% load i18n %}
 
 {% block form_addition_bottom %}
-<div>
+<div class="flex flex-wrap justify-between">
+    <p class="text-blue-800 text-right my-4">
+        <a href="{% url 'register' %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">
+        {% translate "Регистрация" %}
+        </a>
+    </p>
     <p class="text-blue-800 text-right my-4">
         <a href="{% url 'pass_rec'%}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">
         {% translate "Забыли пароль?" %}

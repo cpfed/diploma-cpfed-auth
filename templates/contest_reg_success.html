@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load translate_url %}
+{% load static %}
+
+{% block content %}
+
+<div class="text-3xl font-semibold text-gray-700 mt-20 mx-auto text-center max-w-3xl">
+    <p> {% translate "Вы успешно зарегистрированы!" %} </p>
+    {% if message %}
+        {% autoescape off %}
+            <p> {{ message }} </p>
+        {% endautoescape %}
+    {% else %}
+    <p class="text-xl font-normal my-4">{% translate "Вся подробная информация будет выходить в наших социальных сетях, а также в виде смс и звонков. Просим следить за звонками с незнакомых номеров." %}</p>
+    <p class="text-xl font-normal">{% translate "Подпишитесь на нас в социальных сетях:" %}</p>
+    <div class="flex flex-wrap justify-center">
+        <a href="https://www.instagram.com/cpfed.kz/" target="_blank" rel="noopener noreferrer" class="p-2">
+            <img src="{% static 'Instagram_icon.png' %}" alt="" width=40/>
+        </a>
+        <a href="https://t.me/cpfed" target="_blank" rel="noopener noreferrer" class="p-2">
+            <img src="{% static 'Telegram_logo.svg' %}" alt="" width=40/>
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

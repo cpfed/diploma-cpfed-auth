@@ -55,11 +55,7 @@ def contest_reg(request: HttpResponse, contest_id: int):
 
             esep.reg_users_to_esep_organization(contest, request.user.email)
 
-            res = _('Вы успешно зарегистрированы!')
-            if contest.text_after_submit:
-                res += "<br/>" + contest.text_after_submit
-
-            return render(request, 'result_message.html', {'message': res})
+            return render(request, 'contest_reg_success.html', {'message': contest.text_after_submit})
         # add all errors for user fields
         for field, errs in user_form.errors.items():
             for err in errs:
@@ -72,6 +68,11 @@ def contest_reg(request: HttpResponse, contest_id: int):
         'form_name': (contest.name if not was_reg else _('Изменить регистрацию')),
         'contest': contest
     })
+
+
+def contest_reg_guide(request: HttpResponse, contest_id: int):
+    return render(request, 'contest_reg_guide.html',
+                  {'contest_reg_link': reverse('contestRegistration', args=[contest_id])})
 
 
 def main_page(request: HttpResponse):

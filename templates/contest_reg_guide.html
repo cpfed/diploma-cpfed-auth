@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+
+<div class="m-4 text-gray-700">
+	<div class="mx-auto max-w-5xl">
+		<div class="flex flex-col items-center justify-between space-y-4 mt-8 mb-12">
+			<p class="text-3xl font-semibold text-center"> {% translate "Как зарегистрироваться на контест?" %} </p>
+			<p class="text-xl font-semibold"> {% translate "Следуйте простым шагам, чтобы принять участие в соревнованиях:" %} </p>
+			<div>
+				<p class="font-semibold"> {% translate "1️⃣ Нажмите кнопку ниже «Зарегистрироваться на контест»" %} </p>
+				<p> {% translate "Вы будете перенаправлены на страницу регистрации на платформе." %} </p>
+				<p class="font-semibold"> {% translate "2️⃣ Создайте аккаунт и подтвердите email" %} </p>
+				<p> {% translate "Заполните форму регистрации и подтвердите свою почту – на email придёт письмо с ссылкой для активации." %} </p>
+				<p class="font-semibold"> {% translate "3️⃣ Вернитесь на страницу контеста и зарегистрируйтесь" %} </p>
+				<p> {% translate "После подтверждения почты снова зайдите на страницу регистрации контеста и завершите процесс." %} </p>
+				<p class="font-semibold mt-4"> {% translate "Поздравляем! Вы успешно зарегистрированы!" %} </p>
+				<p> {% translate "Ожидайте уведомления с подробностями и готовьтесь к соревнованию!" %} </p>
+			</div>
+			<div>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/JSI7_XMIkhc?si=iFvBrNeUCSFFk1k8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+			</div>
+			<a href="{{ contest_reg_link }}" class="bg-blue-600 py-2 px-6 text-gray-100 rounded-lg"> {% translate "Зарегистрироваться на контест" %} </a>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

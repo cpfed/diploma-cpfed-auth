@@ -80,11 +80,19 @@
                                 </a>
                                 {% endif %}
                             {% elif contest.registration_open %}
-                            <a href="{% url 'contestRegistration' contest_id=contest.id %}">
-                                <div class="bg-blue-600 py-2 px-6 text-gray-100 rounded-lg">
-                                    {% translate "Зарегистрироваться на контест" %}
-                                </div>
-                            </a>
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'contestRegistration' contest_id=contest.id %}">
+                                    <div class="bg-blue-600 py-2 px-6 text-gray-100 rounded-lg">
+                                        {% translate "Зарегистрироваться на контест" %}
+                                    </div>
+                                </a>
+                                {% else %}
+                                <a href="{% url 'contest_registration_guide' contest_id=contest.id %}">
+                                    <div class="bg-blue-600 py-2 px-6 text-gray-100 rounded-lg">
+                                        {% translate "Зарегистрироваться на контест" %}
+                                    </div>
+                                </a>
+                                {% endif %}
                             {% else %}
                             <div class="bg-gray-500 py-2 px-6 text-gray-100 rounded-lg">
                                 {% translate "Регистрация закрыта" %}

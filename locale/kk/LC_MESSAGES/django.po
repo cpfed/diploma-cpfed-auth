@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-05 01:22+0500\n"
+"POT-Creation-Date: 2025-02-18 16:32+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,11 +22,17 @@ msgstr ""
 msgid "Убрать зарегистрированных"
 msgstr ""
 
-#: .\authentication\admin.py:40
+#: .\authentication\admin.py:32
+#, fuzzy
+#| msgid "Вы уже зарегистрированы"
+msgid "Только зарегистрированные"
+msgstr "Сіз қазірдің өзінде тіркелдіңіз!"
+
+#: .\authentication\admin.py:52
 msgid "Отправить письмо на почту"
 msgstr ""
 
-#: .\authentication\admin.py:47
+#: .\authentication\admin.py:59
 msgid "Зарегистрировать новых пользователей"
 msgstr ""
 
@@ -198,7 +204,7 @@ msgstr "Жаңа құпиясөзді енгізіңіз"
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr "Аккаунтты белсендіру үшін поштаға хат жіберілді"
 
-#: .\authentication\views\user_management.py:52 .\templates\main_page.html:133
+#: .\authentication\views\user_management.py:52
 msgid "Зарегистрироваться"
 msgstr "Тіркелу"
 
@@ -238,41 +244,40 @@ msgstr "Сайыстың күні"
 msgid "Ссылка на контест"
 msgstr "Сайыстың сілтеме"
 
-#: .\contest\models.py:53
+#: .\contest\models.py:56
 msgid "Контест"
 msgstr "Сайыс"
 
-#: .\contest\models.py:54
+#: .\contest\models.py:57
 msgid "Контесты"
 msgstr "Сайыстар"
 
-#: .\contest\models.py:92
+#: .\contest\models.py:95
 msgid "ID пользователя"
 msgstr "Пайдалануштың ID"
 
-#: .\contest\models.py:98
+#: .\contest\models.py:101
 msgid "ID контеста"
 msgstr "Сайыстың ID"
 
-#: .\contest\models.py:105 .\contest\models.py:106
+#: .\contest\models.py:109 .\contest\models.py:110
 msgid "Данные пользователей к контестам"
 msgstr "Сайыстарға арналған пайдаланушы деректері"
 
-#: .\contest\models.py:130 .\templates\base.html:59
+#: .\contest\models.py:134 .\templates\base.html:59 .\templates\login.html:8
 #: .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Тіркеу"
 
-#: .\contest\models.py:133
+#: .\contest\models.py:137
 msgid "Ранг"
 msgstr ""
 
-#: .\contest\models.py:134
+#: .\contest\models.py:138
 msgid "Очки"
 msgstr ""
 
-#: .\contest\views.py:32 .\templates\main_page.html:88
-#: .\templates\main_page.html:138
+#: .\contest\views.py:32 .\templates\main_page.html:98
 msgid "Регистрация закрыта"
 msgstr "Тіркеу жабық"
 
@@ -280,23 +285,19 @@ msgstr "Тіркеу жабық"
 msgid "Вы уже зарегистрированы!"
 msgstr "Сіз қазірдің өзінде тіркелдіңіз!"
 
-#: .\contest\views.py:56
-msgid "Вы успешно зарегистрированы!"
-msgstr "Сіз сәтті тіркелдіңіз!"
-
-#: .\contest\views.py:66
+#: .\contest\views.py:68
 msgid "Изменить регистрацию"
 msgstr "Тіркеуді өзгерту"
 
-#: .\contest\views.py:84
+#: .\contest\views.py:91
 msgid "Ссылка на API с результатами контеста"
 msgstr "Сайыстың сілтеме"
 
-#: .\contest\views.py:85
+#: .\contest\views.py:92
 msgid "Добавить очки по GP100?"
 msgstr ""
 
-#: .\contest\views.py:119
+#: .\contest\views.py:126
 msgid "Загрузить результаты контеста"
 msgstr ""
 
@@ -627,6 +628,70 @@ msgstr "Барлық құқықтар қорғалған."
 msgid "Отправить"
 msgstr "Жіберу"
 
+#: .\templates\contest_reg_guide.html:10
+msgid "Как зарегистрироваться на контест?"
+msgstr "Контестке қалай тіркелуге болады?"
+
+#: .\templates\contest_reg_guide.html:11
+msgid "Следуйте простым шагам, чтобы принять участие в соревнованиях:"
+msgstr "Қатысу үшін келесі қарапайым қадамдарды орындаңыз:"
+
+#: .\templates\contest_reg_guide.html:13
+msgid "1️⃣ Нажмите кнопку ниже «Зарегистрироваться на контест»"
+msgstr "1️⃣ «Контестке тіркелу» батырмасын басыңыз"
+
+#: .\templates\contest_reg_guide.html:14
+msgid "Вы будете перенаправлены на страницу регистрации на платформе."
+msgstr "Сіз платформадағы тіркеу бетіне өтесіз."
+
+#: .\templates\contest_reg_guide.html:15
+msgid "2️⃣ Аккаунт құрыңыз және email-ді растаңыз"
+msgstr ""
+
+#: .\templates\contest_reg_guide.html:16
+msgid ""
+"Заполните форму регистрации и подтвердите свою почту – на email придёт "
+"письмо с ссылкой для активации."
+msgstr "Тіркеу формасын толтырыңыз және поштаңызды растаңыз – email-ге сілтеме бар хат келеді."
+
+#: .\templates\contest_reg_guide.html:17
+msgid "3️⃣ Вернитесь на страницу контеста и зарегистрируйтесь"
+msgstr "3️⃣ Контест бетіне қайта оралып, тіркеліңіз"
+
+#: .\templates\contest_reg_guide.html:18
+msgid ""
+"После подтверждения почты снова зайдите на страницу регистрации контеста и "
+"завершите процесс."
+msgstr ""
+"Поштаңызды растағаннан кейін контест тіркеу бетіне қайта кіріп, тіркеуді аяқтаңыз."
+
+#: .\templates\contest_reg_guide.html:19
+msgid "Поздравляем! Вы успешно зарегистрированы!"
+msgstr "Құттықтаймыз! Сіз сәтті тіркелдіңіз!"
+
+#: .\templates\contest_reg_guide.html:20
+msgid "Ожидайте уведомления с подробностями и готовьтесь к соревнованию!"
+msgstr "Толық ақпаратты күтіңіз және жарысқа дайындалыңыз!"
+
+#: .\templates\contest_reg_guide.html:25 .\templates\main_page.html:86
+#: .\templates\main_page.html:92
+msgid "Зарегистрироваться на контест"
+msgstr "Сайысқа қатысу"
+
+#: .\templates\contest_reg_success.html:10
+msgid "Вы успешно зарегистрированы!"
+msgstr "Сіз сәтті тіркелдіңіз!"
+
+#: .\templates\contest_reg_success.html:16
+msgid ""
+"Вся подробная информация будет выходить в наших социальных сетях, а также в "
+"виде смс и звонков. Просим следить за звонками с незнакомых номеров."
+msgstr "Барлық маңызды ақпарат біздің әлеуметтік желілерімізде, сондай-ақ SMS хабарламалар мен қоңыраулар арқылы жіберіледі. Сондықтан бейтаныс нөмірлерден келетін қоңырауларға назар аударуды сұраймыз."
+
+#: .\templates\contest_reg_success.html:17
+msgid "Подпишитесь на нас в социальных сетях:"
+msgstr "Біздің парақшаларымызға жазылыңыз"
+
 #: .\templates\contest_registration.html:13
 msgid ""
 "Согласен с политикой <a href=\"https://drive.google.com/file/d/"
@@ -691,7 +756,7 @@ msgstr ""
 "Егер сіз бұл электрондық поштаны қате алсаңыз, оны елемеңіз. Сілтеме келесі "
 "30 минут ішінде ғана жарамды."
 
-#: .\templates\login.html:8 .\templates\new_user.html:7
+#: .\templates\login.html:13 .\templates\new_user.html:7
 msgid "Забыли пароль?"
 msgstr "Құпия сөзіңізді ұмыттыңыз ба?"
 
@@ -709,8 +774,7 @@ msgstr ""
 "аласыз. Чемпионаттарға қатысыңыз, кестені біліңіз және ең жақсы болу "
 "мүмкіндігін жіберіп алмау үшін тіркеліңіз!"
 
-#: .\templates\main_page.html:24 .\templates\main_page.html:93
-#: .\templates\main_page.html:143
+#: .\templates\main_page.html:24 .\templates\main_page.html:103
 msgid "Узнать больше"
 msgstr "Көбірек біліңіз"
 
@@ -734,40 +798,32 @@ msgstr ""
 msgid "Чемпионаты и конкурсы"
 msgstr "Чемпионаттар мен сайыстар"
 
-#: .\templates\main_page.html:59 .\templates\main_page.html:122
+#: .\templates\main_page.html:61
 msgid "Дата"
 msgstr "Күні"
 
-#: .\templates\main_page.html:60 .\templates\main_page.html:123
+#: .\templates\main_page.html:62
 msgid "Время"
 msgstr "Уақыт"
 
-#: .\templates\main_page.html:65 .\templates\main_page.html:128
+#: .\templates\main_page.html:67
 msgid "Вы уже зарегистрированы"
 msgstr "Сіз қазірдің өзінде тіркелдіңіз!"
 
-#: .\templates\main_page.html:70
+#: .\templates\main_page.html:72
 msgid "Войти на контест"
 msgstr "Сайыстың күні"
 
-#: .\templates\main_page.html:76
+#: .\templates\main_page.html:78
 msgid "Войти на пробный тур"
 msgstr "Танысу кезеңде кіру"
 
-#: .\templates\main_page.html:83
-msgid "Зарегистрироваться на контест"
-msgstr "Сайысқа қатысу"
-
-#: .\templates\main_page.html:102 .\templates\main_page.html:152
+#: .\templates\main_page.html:112
 #, python-format
 msgid "Остался %(days)s день"
 msgid_plural "Осталось %(days)s дней"
 msgstr[0] "%(days)s күн қалды"
 msgstr[1] "%(days)s күн қалды"
-
-#: .\templates\main_page.html:112
-msgid "Обучение"
-msgstr "Білім"
 
 #: .\utils\constants.py:46
 msgid "Мужской"
@@ -818,3 +874,6 @@ msgstr ""
 #: .\utils\error_list.py:11
 msgid "Пользователь с таким Телефонный номер уже существует."
 msgstr "Бұндай телефон нөмірі бар пайдаланушы бар."
+
+#~ msgid "Обучение"
+#~ msgstr "Білім"
