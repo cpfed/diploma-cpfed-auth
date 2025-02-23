@@ -123,7 +123,7 @@ class UserContest(models.Model):
     @property
     def get_full_reg_with_additional_data(self) -> dict:
         res = self.get_full_reg
-        res.update(self.user.get_user_data_by_fields(['handle', 'first_name', 'last_name']))
+        res.update(self.user.get_user_data_by_fields(['handle', 'first_name', 'last_name', 'email']))
         return res
 
 
