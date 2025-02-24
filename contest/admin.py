@@ -1,3 +1,4 @@
+from django.db import models
 from django.contrib import admin
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import PermissionDenied
@@ -7,6 +8,7 @@ from django.conf import settings
 
 from .models import Contest, UserContest, ContestResult
 from .utils import contest_parser, xlsx_response, esep
+from .forms import AdminTextAreaWidget
 
 # Register your models here.
 
@@ -23,6 +25,9 @@ class UserContestAdmin(admin.ModelAdmin):
 class ContestAdmin(admin.ModelAdmin):
     actions = ['get_registrations', 'upload_contest_results', 'register_on_contest', 'add_bulk_reg', 'contest_results',
                'sync_user_reg_with_esep']
+    formfield_overrides = {
+        models.TextField: {'widget': AdminTextAreaWidget},
+    }
 
     @admin.action(description="Экспортировать данные зарегистрированных пользователей")
     def get_registrations(self, request, queryset):

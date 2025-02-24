@@ -25,3 +25,10 @@ class ContestRegistrationForm(forms.Form):
             self.fields[name] = get_field(field)
             if user_reg is not None and user_reg.additional_fields is not None:
                 self.initial[name] = user_reg.additional_fields.get(name, None)
+
+class AdminTextAreaWidget(forms.Textarea):
+    def __init__(self, *args, **kwargs):
+        attrs = kwargs.setdefault('attrs', {})
+        attrs.setdefault('cols', 60)
+        attrs.setdefault('rows', 1)
+        super().__init__(*args, **kwargs)

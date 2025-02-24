@@ -37,6 +37,7 @@ class Contest(models.Model):
     )
     playing_desc = models.TextField(verbose_name=_("Описание контеста"))
     date = models.DateTimeField(verbose_name=_('Дата контеста'))
+    text_instead_of_date = models.TextField(null=True, blank=True)
     link = models.CharField(max_length=300, verbose_name=_("Ссылка на контест"), blank=True, null=True)
     # TODO: automate creation of organization
     esep_org = models.IntegerField(verbose_name="ID огранизации в esep", blank=True, null=True)
@@ -64,10 +65,6 @@ class Contest(models.Model):
     def remaining_days(self):
         rem = (self.date - timezone.now() + timezone.timedelta(days=0.99999)).days
         return rem
-
-    @property
-    def show_date(self):
-        return self.remaining_days < 365
 
     @property
     def get_link(self):

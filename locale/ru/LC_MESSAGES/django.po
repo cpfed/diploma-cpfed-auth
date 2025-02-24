@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-24 17:44+0500\n"
+"POT-Creation-Date: 2025-02-24 18:23+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -238,40 +238,40 @@ msgstr ""
 msgid "Дата контеста"
 msgstr ""
 
-#: .\contest\models.py:40
+#: .\contest\models.py:41
 msgid "Ссылка на контест"
 msgstr ""
 
-#: .\contest\models.py:56
+#: .\contest\models.py:57
 msgid "Контест"
 msgstr ""
 
-#: .\contest\models.py:57
+#: .\contest\models.py:58
 msgid "Контесты"
 msgstr ""
 
-#: .\contest\models.py:99
+#: .\contest\models.py:96
 msgid "ID пользователя"
 msgstr ""
 
-#: .\contest\models.py:105
+#: .\contest\models.py:102
 msgid "ID контеста"
 msgstr ""
 
-#: .\contest\models.py:113 .\contest\models.py:114
+#: .\contest\models.py:110 .\contest\models.py:111
 msgid "Данные пользователей к контестам"
 msgstr ""
 
-#: .\contest\models.py:138 .\templates\base.html:59 .\templates\login.html:8
+#: .\contest\models.py:135 .\templates\base.html:59 .\templates\login.html:8
 #: .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Зарегистрироваться"
 
-#: .\contest\models.py:141
+#: .\contest\models.py:138
 msgid "Ранг"
 msgstr ""
 
-#: .\contest\models.py:142
+#: .\contest\models.py:139
 msgid "Очки"
 msgstr ""
 
@@ -744,12 +744,8 @@ msgstr ""
 msgid "Чемпионаты и конкурсы"
 msgstr ""
 
-#: .\templates\main_page.html:63
-msgid "Дата"
-msgstr ""
-
 #: .\templates\main_page.html:65
-msgid "Дата будет объявлена позже"
+msgid "Дата"
 msgstr ""
 
 #: .\templates\main_page.html:68
