@@ -58,8 +58,14 @@
                             {% autoescape off %}
                             <div class="text-l font-normal mb-4">{{ contest.playing_desc }}</div>
                             {% endautoescape %}
-                            <div class="mb-2">{% translate "Дата" %}: {{ contest.date | date:'d.m.Y H:i' }}</div>
-<!--                            <div class="mb-8">{% translate "Время" %}: {{ contest.date | date:'H:i' }} </div>-->
+                            <div class="mb-2">
+                                {% if contest.show_date %}
+                                    {% translate "Дата" %}: {{ contest.date | date:'d.m.Y H:i' }}
+                                {% else %}
+                                    {% translate "Дата будет объявлена позже" %}
+                                {% endif %}
+                            </div>
+<!--                            <div class="mb-8">{% translate "Время" %}: {{ conёtest.date | date:'H:i' }} </div>-->
                         </div>
                         <div class="flex space-x-4">
                             {% if is_reg %}
@@ -106,7 +112,7 @@
                         </div>
                     </div>
                 </div>
-                {% if contest.remaining_days > 0 %}
+                {% if contest.remaining_days > 0 and contest.show_date %}
                 <div class="h-full self-start">
                     <p class="bg-white rounded-full px-4 py-2 text-nowrap">
                         {% blocktranslate count days=contest.remaining_days %}Остался {{days}} день{% plural %}Осталось {{days}} дней{% endblocktranslate %}

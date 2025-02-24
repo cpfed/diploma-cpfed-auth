@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-18 16:32+0500\n"
+"POT-Creation-Date: 2025-02-24 17:44+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -251,32 +251,32 @@ msgstr "Contest"
 msgid "Контесты"
 msgstr "Contests"
 
-#: .\contest\models.py:95
+#: .\contest\models.py:99
 msgid "ID пользователя"
 msgstr "User ID"
 
-#: .\contest\models.py:101
+#: .\contest\models.py:105
 msgid "ID контеста"
 msgstr "Contest ID"
 
-#: .\contest\models.py:109 .\contest\models.py:110
+#: .\contest\models.py:113 .\contest\models.py:114
 msgid "Данные пользователей к контестам"
 msgstr "User data for contests"
 
-#: .\contest\models.py:134 .\templates\base.html:59 .\templates\login.html:8
+#: .\contest\models.py:138 .\templates\base.html:59 .\templates\login.html:8
 #: .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Register"
 
-#: .\contest\models.py:137
+#: .\contest\models.py:141
 msgid "Ранг"
 msgstr ""
 
-#: .\contest\models.py:138
+#: .\contest\models.py:142
 msgid "Очки"
 msgstr ""
 
-#: .\contest\views.py:32 .\templates\main_page.html:98
+#: .\contest\views.py:32 .\templates\main_page.html:104
 msgid "Регистрация закрыта"
 msgstr "Registration is closed"
 
@@ -619,7 +619,9 @@ msgstr "2️⃣ Create an account and confirm your email"
 msgid ""
 "Заполните форму регистрации и подтвердите свою почту – на email придёт "
 "письмо с ссылкой для активации."
-msgstr "Fill out the registration form and verify your email – you will receive an activation link via email."
+msgstr ""
+"Fill out the registration form and verify your email – you will receive an "
+"activation link via email."
 
 #: .\templates\contest_reg_guide.html:17
 msgid "3️⃣ Вернитесь на страницу контеста и зарегистрируйтесь"
@@ -630,7 +632,8 @@ msgid ""
 "После подтверждения почты снова зайдите на страницу регистрации контеста и "
 "завершите процесс."
 msgstr ""
-"After confirming your email, go back to the contest registration page and finalize the process."
+"After confirming your email, go back to the contest registration page and "
+"finalize the process."
 
 #: .\templates\contest_reg_guide.html:19
 msgid "Поздравляем! Вы успешно зарегистрированы!"
@@ -640,8 +643,8 @@ msgstr "Congratulations! You are successfully registered!"
 msgid "Ожидайте уведомления с подробностями и готовьтесь к соревнованию!"
 msgstr "Stay tuned for further details and get ready for the competition!"
 
-#: .\templates\contest_reg_guide.html:25 .\templates\main_page.html:86
-#: .\templates\main_page.html:92
+#: .\templates\contest_reg_guide.html:25 .\templates\main_page.html:92
+#: .\templates\main_page.html:98
 msgid "Зарегистрироваться на контест"
 msgstr "Register on contest"
 
@@ -653,7 +656,9 @@ msgstr "You have registered successfully!"
 msgid ""
 "Вся подробная информация будет выходить в наших социальных сетях, а также в "
 "виде смс и звонков. Просим следить за звонками с незнакомых номеров."
-msgstr "All important information will be shared on our social media, as well as via SMS and phone calls. Please pay attention to calls from unknown numbers."
+msgstr ""
+"All important information will be shared on our social media, as well as via "
+"SMS and phone calls. Please pay attention to calls from unknown numbers."
 
 #: .\templates\contest_reg_success.html:17
 msgid "Подпишитесь на нас в социальных сетях:"
@@ -741,7 +746,7 @@ msgstr ""
 "skills. Take part in the championships, find out the schedule and register "
 "so as not to miss the chance to become the best!"
 
-#: .\templates\main_page.html:24 .\templates\main_page.html:103
+#: .\templates\main_page.html:24 .\templates\main_page.html:109
 msgid "Узнать больше"
 msgstr "Find out more"
 
@@ -765,27 +770,31 @@ msgstr ""
 msgid "Чемпионаты и конкурсы"
 msgstr "Competitions"
 
-#: .\templates\main_page.html:61
+#: .\templates\main_page.html:63
 msgid "Дата"
 msgstr "Date"
 
-#: .\templates\main_page.html:62
+#: .\templates\main_page.html:65
+msgid "Дата будет объявлена позже"
+msgstr "The date will be announced later"
+
+#: .\templates\main_page.html:68
 msgid "Время"
 msgstr "Time"
 
-#: .\templates\main_page.html:67
+#: .\templates\main_page.html:73
 msgid "Вы уже зарегистрированы"
 msgstr "You already registered"
 
-#: .\templates\main_page.html:72
+#: .\templates\main_page.html:78
 msgid "Войти на контест"
 msgstr "Go to the contest"
 
-#: .\templates\main_page.html:78
+#: .\templates\main_page.html:84
 msgid "Войти на пробный тур"
 msgstr "Go to the trial round"
 
-#: .\templates\main_page.html:112
+#: .\templates\main_page.html:118
 #, python-format
 msgid "Остался %(days)s день"
 msgid_plural "Осталось %(days)s дней"

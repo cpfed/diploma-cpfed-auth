@@ -66,6 +66,10 @@ class Contest(models.Model):
         return rem
 
     @property
+    def show_date(self):
+        return self.remaining_days < 365
+
+    @property
     def get_link(self):
         return f'{reverse("login")}?contest={self.pk}'
 
