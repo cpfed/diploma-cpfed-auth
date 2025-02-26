@@ -21,13 +21,18 @@ work_type_choice = (
     ('офис', _('Работаю в офисе'))
 )
 
+
+class DateInput(forms.widgets.DateInput):
+    input_type = 'date'
+
+
 fields = {
     'SelectDistrictField': forms.CharField(widget=SelectDistrictWidget, label=_('Район')),
     'SelectGradeField': forms.ChoiceField(choices=grades_choice, label=_('Класс обучения')),
     'SelectEduLangField': forms.ChoiceField(choices=lang_choice, label=_('Язык обучения')),
     'WorkTypeField': forms.ChoiceField(choices=work_type_choice, label=_('Формат работы')),
     'ParentPhoneNumberField': PhoneNumberField(label=_('Телефон одного из родителей ')),
-    'BirthDateField': forms.DateField(label=_('Дата рождения')),
+    'BirthDateField': forms.DateField(widget=DateInput(), label=_('Дата рождения')),
 }
 
 

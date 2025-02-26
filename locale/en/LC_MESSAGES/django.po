@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-24 18:23+0500\n"
+"POT-Creation-Date: 2025-02-26 20:50+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -276,7 +276,7 @@ msgstr ""
 msgid "Очки"
 msgstr ""
 
-#: .\contest\views.py:32 .\templates\main_page.html:104
+#: .\contest\views.py:32 .\templates\main_page.html:105
 msgid "Регистрация закрыта"
 msgstr "Registration is closed"
 
@@ -312,25 +312,47 @@ msgstr ""
 msgid "Другое"
 msgstr ""
 
+#: .\custom_widgets\fields.py:20
+msgid "Фриланс"
+msgstr ""
+
 #: .\custom_widgets\fields.py:21
+#, fuzzy
+#| msgid "Работаю"
+msgid "Работаю в офисе"
+msgstr "Working"
+
+#: .\custom_widgets\fields.py:30
 msgid "Район"
 msgstr "District"
 
-#: .\custom_widgets\fields.py:22
+#: .\custom_widgets\fields.py:31
 #, fuzzy
 #| msgid "Обучение"
 msgid "Класс обучения"
 msgstr "Education"
 
-#: .\custom_widgets\fields.py:23
+#: .\custom_widgets\fields.py:32
 #, fuzzy
 #| msgid "Обучение"
 msgid "Язык обучения"
 msgstr "Education"
 
-#: .\custom_widgets\fields.py:24
+#: .\custom_widgets\fields.py:33
+#, fuzzy
+#| msgid "Место учебы или работы"
+msgid "Формат работы"
+msgstr "Place of study or work"
+
+#: .\custom_widgets\fields.py:34
 msgid "Телефон одного из родителей "
 msgstr ""
+
+#: .\custom_widgets\fields.py:35
+#, fuzzy
+#| msgid "Обучение"
+msgid "Дата рождения"
+msgstr "Education"
 
 #: .\locations\management\commands\create_regions.py:10
 msgid "Акмолинская область"
@@ -643,8 +665,8 @@ msgstr "Congratulations! You are successfully registered!"
 msgid "Ожидайте уведомления с подробностями и готовьтесь к соревнованию!"
 msgstr "Stay tuned for further details and get ready for the competition!"
 
-#: .\templates\contest_reg_guide.html:25 .\templates\main_page.html:92
-#: .\templates\main_page.html:98
+#: .\templates\contest_reg_guide.html:25 .\templates\main_page.html:93
+#: .\templates\main_page.html:99
 msgid "Зарегистрироваться на контест"
 msgstr "Register on contest"
 
@@ -746,7 +768,7 @@ msgstr ""
 "skills. Take part in the championships, find out the schedule and register "
 "so as not to miss the chance to become the best!"
 
-#: .\templates\main_page.html:24 .\templates\main_page.html:109
+#: .\templates\main_page.html:24 .\templates\main_page.html:110
 msgid "Узнать больше"
 msgstr "Find out more"
 
@@ -770,27 +792,27 @@ msgstr ""
 msgid "Чемпионаты и конкурсы"
 msgstr "Competitions"
 
-#: .\templates\main_page.html:65
+#: .\templates\main_page.html:62
 msgid "Дата"
 msgstr "Date"
 
-#: .\templates\main_page.html:68
+#: .\templates\main_page.html:69
 msgid "Время"
 msgstr "Time"
 
-#: .\templates\main_page.html:73
+#: .\templates\main_page.html:74
 msgid "Вы уже зарегистрированы"
 msgstr "You already registered"
 
-#: .\templates\main_page.html:78
+#: .\templates\main_page.html:79
 msgid "Войти на контест"
 msgstr "Go to the contest"
 
-#: .\templates\main_page.html:84
+#: .\templates\main_page.html:85
 msgid "Войти на пробный тур"
 msgstr "Go to the trial round"
 
-#: .\templates\main_page.html:118
+#: .\templates\main_page.html:119
 #, python-format
 msgid "Остался %(days)s день"
 msgid_plural "Осталось %(days)s дней"
