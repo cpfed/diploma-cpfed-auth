@@ -20,6 +20,10 @@ work_type_choice = (
     ('фриланс', _('Фриланс')),
     ('офис', _('Работаю в офисе'))
 )
+yes_no_choice = (
+    ('yes', _('Да')),
+    ('no', _('Нет'))
+)
 
 
 class DateInput(forms.widgets.DateInput):
@@ -33,20 +37,26 @@ fields = {
     'WorkTypeField': forms.ChoiceField(choices=work_type_choice, label=_('Формат работы')),
     'ParentPhoneNumberField': PhoneNumberField(label=_('Телефон одного из родителей ')),
     'BirthDateField': forms.DateField(widget=DateInput(), label=_('Дата рождения')),
+    'YesNoField': forms.ChoiceField(choices=yes_no_choice)
 }
 
 
 def get_field(field):
-    label = field['name']
+    label = None
 
     if get_language() == 'en' and 'name_en' in field:
-        label = field.get('name_en', label)
+        label = field['name_en']
     elif get_language() == 'kk' and 'name_kk' in field:
         label = field['name_kk']
     elif 'name_ru' in field:
         label = field['name_ru']
 
-    res = fields.get(field.get('field', ''), forms.CharField(label=label))
+    if field.get('field', None) in fields:
+        res = fields[field['field']]
+        if label is not None:
+            res.label = label
+    else:
+        res = forms.CharField(label=label or field['name'])
 
     if "not_required" in field:
         res.required = False

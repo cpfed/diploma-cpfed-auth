@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-26 20:50+0500\n"
+"POT-Creation-Date: 2025-02-26 22:37+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -321,27 +321,35 @@ msgstr ""
 msgid "Работаю в офисе"
 msgstr ""
 
-#: .\custom_widgets\fields.py:30
-msgid "Район"
+#: .\custom_widgets\fields.py:24
+msgid "Да"
 msgstr ""
 
-#: .\custom_widgets\fields.py:31
-msgid "Класс обучения"
-msgstr ""
-
-#: .\custom_widgets\fields.py:32
-msgid "Язык обучения"
-msgstr ""
-
-#: .\custom_widgets\fields.py:33
-msgid "Формат работы"
+#: .\custom_widgets\fields.py:25
+msgid "Нет"
 msgstr ""
 
 #: .\custom_widgets\fields.py:34
-msgid "Телефон одного из родителей "
+msgid "Район"
 msgstr ""
 
 #: .\custom_widgets\fields.py:35
+msgid "Класс обучения"
+msgstr ""
+
+#: .\custom_widgets\fields.py:36
+msgid "Язык обучения"
+msgstr ""
+
+#: .\custom_widgets\fields.py:37
+msgid "Формат работы"
+msgstr ""
+
+#: .\custom_widgets\fields.py:38
+msgid "Телефон одного из родителей "
+msgstr ""
+
+#: .\custom_widgets\fields.py:39
 msgid "Дата рождения"
 msgstr ""
 
