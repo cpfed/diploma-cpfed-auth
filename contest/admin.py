@@ -36,14 +36,10 @@ class ContestAdmin(admin.ModelAdmin):
         result = []
         for contest in queryset:
             curres = []
-            data = None
+            data = {f: None for f in contest.fields_name_list}
             for uc in UserContest.objects.filter(contest=contest):
                 uc_reg = uc.get_full_reg
-                print(type(uc_reg), uc_reg)
-                if data is None:
-                    data = {x: str(y) for x, y in uc_reg.items()}
-                else:
-                    data = {x: str(uc_reg[x]) for x in data}
+                data = {x: str(uc_reg.get(x, '')) for x in data}
                 curres.append(tuple(data.values()))
             if data is not None:
                 curres = [contest.name, tuple(data.keys())] + curres

@@ -82,6 +82,10 @@ class Contest(models.Model):
     def custom_fields(self):
         return self.fields.get("additional", [])
 
+    @property
+    def fields_name_list(self):
+        return self.user_fields + [f['name'] for f in self.custom_fields]
+
 
 class Championship():
     # date, contests

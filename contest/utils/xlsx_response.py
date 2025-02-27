@@ -17,5 +17,5 @@ def xlsx_response(data: list):
         stream = tmp.read()
         return HttpResponse(stream, headers={
             "Content-Type": "application/vnd.ms-excel",
-            "Content-Disposition": 'attachment; filename="foo.xlsx"',
+            "Content-Disposition": 'attachment; filename="reg.xlsx"',
         })
