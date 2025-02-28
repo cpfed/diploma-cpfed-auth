@@ -1,3 +1,5 @@
+import copy
+
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import get_language
@@ -52,7 +54,7 @@ def get_field(field):
         label = field['name_ru']
 
     if field.get('field', None) in fields:
-        res = fields[field['field']]
+        res = copy.copy(fields[field['field']])
         if label is not None:
             res.label = label
     else:
