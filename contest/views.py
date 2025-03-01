@@ -1,3 +1,5 @@
+import json
+
 from django import forms
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, response, JsonResponse
@@ -17,7 +19,7 @@ from django_cte import With
 
 from .models import Contest, UserContest, ContestResult
 from .forms import ContestRegistrationForm
-from .utils import contest_parser, gp100, esep
+from .utils import contest_parser, gp100, esep, json_encoder
 from authentication.forms import get_user_form
 from locations.models import Region
 
@@ -47,8 +49,7 @@ def contest_reg(request: HttpResponse, contest_id: int):
                 if field not in contest.user_fields:
                     contest_data[field] = value
 
-            user_reg, created = UserContest.objects.get_or_create(user=request.user, contest=contest)
-            user_reg.additional_fields = contest_data
+            user_reg = UserContest(user=request.user, contest=contest, additional_fields=contest_data)
             user_reg.save()
 
             user_form.save()

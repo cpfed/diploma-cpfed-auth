@@ -15,9 +15,24 @@ from .forms import AdminTextAreaWidget
 admin.site.register(ContestResult)
 
 
+class OnlyRegisteredFilter(admin.SimpleListFilter):
+    title = "Только зарегистрированные"
+    parameter_name = "onlyreg"
+
+    def lookups(self, request, model_admin):
+        contests = Contest.objects.all()
+        return [(str(c.id), c.name) for c in contests]
+
+    def queryset(self, request, queryset):
+        if self.value() == None:
+            return queryset
+        q = queryset.filter(contest__id=self.value())
+        return q
+
+
 @admin.register(UserContest)
 class UserContestAdmin(admin.ModelAdmin):
-    list_filter = ["contest__name"]
+    list_filter = [OnlyRegisteredFilter]
     search_fields = ["user__handle"]
 
 
