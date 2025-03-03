@@ -26,6 +26,10 @@ yes_no_choice = (
     ('yes', _('Да')),
     ('no', _('Нет'))
 )
+division_choice = (
+    ('div1', _('Дивизион 1 – ученики гимназий, лицеев, областных, частных и специализированных школ.')),
+    ('div2', _('Дивизион 2 – ученики городских, районных и сельских общеобразовательных школ.'))
+)
 
 
 class DateInput(forms.widgets.DateInput):
@@ -39,7 +43,8 @@ fields = {
     'WorkTypeField': forms.ChoiceField(choices=work_type_choice, label=_('Формат работы')),
     'ParentPhoneNumberField': PhoneNumberField(label=_('Телефон одного из родителей ')),
     'BirthDateField': forms.DateField(widget=DateInput(), label=_('Дата рождения')),
-    'YesNoField': forms.ChoiceField(choices=yes_no_choice)
+    'YesNoField': forms.ChoiceField(choices=yes_no_choice),
+    'DivisionChoiceField': forms.ChoiceField(choices=division_choice),
 }
 
 

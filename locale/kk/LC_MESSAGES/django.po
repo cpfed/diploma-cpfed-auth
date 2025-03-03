@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-26 22:37+0500\n"
+"POT-Creation-Date: 2025-03-03 14:50+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -252,104 +252,115 @@ msgstr "Сайыс"
 msgid "Контесты"
 msgstr "Сайыстар"
 
-#: .\contest\models.py:96
+#: .\contest\models.py:100
 msgid "ID пользователя"
 msgstr "Пайдалануштың ID"
 
-#: .\contest\models.py:102
+#: .\contest\models.py:106
 msgid "ID контеста"
 msgstr "Сайыстың ID"
 
-#: .\contest\models.py:110 .\contest\models.py:111
+#: .\contest\models.py:114 .\contest\models.py:115
 msgid "Данные пользователей к контестам"
 msgstr "Сайыстарға арналған пайдаланушы деректері"
 
-#: .\contest\models.py:135 .\templates\base.html:59 .\templates\login.html:8
+#: .\contest\models.py:139 .\templates\base.html:59 .\templates\login.html:8
 #: .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Тіркеу"
 
-#: .\contest\models.py:138
+#: .\contest\models.py:142
 msgid "Ранг"
 msgstr ""
 
-#: .\contest\models.py:139
+#: .\contest\models.py:143
 msgid "Очки"
 msgstr ""
 
-#: .\contest\views.py:32 .\templates\main_page.html:105
+#: .\contest\views.py:34 .\templates\main_page.html:105
 msgid "Регистрация закрыта"
 msgstr "Тіркеу жабық"
 
-#: .\contest\views.py:37
+#: .\contest\views.py:39
 msgid "Вы уже зарегистрированы!"
 msgstr "Сіз қазірдің өзінде тіркелдіңіз!"
 
-#: .\contest\views.py:68
+#: .\contest\views.py:69
 msgid "Изменить регистрацию"
 msgstr "Тіркеуді өзгерту"
 
-#: .\contest\views.py:91
+#: .\contest\views.py:92
 msgid "Ссылка на API с результатами контеста"
 msgstr "Сайыстың сілтеме"
 
-#: .\contest\views.py:92
+#: .\contest\views.py:93
 msgid "Добавить очки по GP100?"
 msgstr ""
 
-#: .\contest\views.py:126
+#: .\contest\views.py:127
 msgid "Загрузить результаты контеста"
 msgstr ""
 
-#: .\custom_widgets\fields.py:10
+#: .\custom_widgets\fields.py:12
 msgid "7 класс"
 msgstr ""
 
-#: .\custom_widgets\fields.py:11
+#: .\custom_widgets\fields.py:13
 msgid "8 класс"
 msgstr ""
 
-#: .\custom_widgets\fields.py:12 .\custom_widgets\fields.py:17
+#: .\custom_widgets\fields.py:14 .\custom_widgets\fields.py:19
 msgid "Другое"
 msgstr ""
 
-#: .\custom_widgets\fields.py:20
+#: .\custom_widgets\fields.py:22
 msgid "Фриланс"
 msgstr ""
 
-#: .\custom_widgets\fields.py:21
+#: .\custom_widgets\fields.py:23
 msgid "Работаю в офисе"
 msgstr "Кеңседе жұмыс істеймін"
 
-#: .\custom_widgets\fields.py:24
+#: .\custom_widgets\fields.py:26
 msgid "Да"
 msgstr "Иә"
 
-#: .\custom_widgets\fields.py:25
+#: .\custom_widgets\fields.py:27
 msgid "Нет"
 msgstr "Жоқ"
 
-#: .\custom_widgets\fields.py:34
+#: .\custom_widgets\fields.py:30
+msgid ""
+"Дивизион 1 – ученики гимназий, лицеев, областных, частных и "
+"специализированных школ."
+msgstr "1-дивизион – гимназия, лицей, облыстық, жекеменшік және мамандандырылған мектеп оқушылары."
+
+#: .\custom_widgets\fields.py:31
+msgid ""
+"Дивизион 2 – ученики городских, районных и сельских общеобразовательных школ."
+msgstr "2-дивизион – қалалық, аудандық және ауылдық жалпы білім беретін мектеп оқушылары."
+
+#: .\custom_widgets\fields.py:40
 msgid "Район"
 msgstr "Ауданы"
 
-#: .\custom_widgets\fields.py:35
+#: .\custom_widgets\fields.py:41
 msgid "Класс обучения"
 msgstr "Оқу сыныбы"
 
-#: .\custom_widgets\fields.py:36
+#: .\custom_widgets\fields.py:42
 msgid "Язык обучения"
 msgstr "Оқу тілі "
 
-#: .\custom_widgets\fields.py:37
+#: .\custom_widgets\fields.py:43
 msgid "Формат работы"
 msgstr "Жұмыс форматы"
 
-#: .\custom_widgets\fields.py:38
+#: .\custom_widgets\fields.py:44
 msgid "Телефон одного из родителей "
 msgstr "Ата-аналардың бірінің телефоны"
 
-#: .\custom_widgets\fields.py:39
+#: .\custom_widgets\fields.py:45
 msgid "Дата рождения"
 msgstr "Туған жылы"
 
