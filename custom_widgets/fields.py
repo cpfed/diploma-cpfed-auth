@@ -67,5 +67,6 @@ def get_field(field):
 
     if "not_required" in field:
         res.required = False
-
+    else:
+        res.widget.attrs['required'] = 'required'
     return res

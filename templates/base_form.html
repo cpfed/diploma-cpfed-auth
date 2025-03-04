@@ -17,7 +17,7 @@
 
                 {% for fld in form %}
                 <div {% if fld.errors %} class="text-red-500 border-red-500" {% endif %}>
-                    <label>{% translate fld.label %}</label>
+                    <label {% if fld.field.required %} class="required" {% endif %}>{% translate fld.label %}</label>
                     {% render_field fld class+="rounded-lg w-full text-black border-inherit px-4 py-2 border focus:outline-none focus:border-2 focus:border-blue-500" %}
                     {% for error in fld.errors %}<p class="text-xs">{% translate error %}</p>{% endfor %}
                 </div>

@@ -17,6 +17,7 @@ class ContestRegistrationForm(forms.Form):
             self.fields[field] = user_fields[field]
             if field != 'place_of_study_of_work':  # require will be checked on server side
                 self.fields[field].required = True
+                self.fields[field].widget.attrs['required'] = 'required'
             if (user is not None):
                 self.initial[field] = getattr(user, field)
 

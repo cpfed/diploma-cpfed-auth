@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 14:50+0500\n"
+"POT-Creation-Date: 2025-03-04 14:35+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -838,27 +838,27 @@ msgid_plural "Осталось %(days)s дней"
 msgstr[0] "Until closing %(days)s day"
 msgstr[1] "Until closing %(days)s days"
 
-#: .\utils\constants.py:46
+#: .\utils\constants.py:48
 msgid "Мужской"
 msgstr "Male"
 
-#: .\utils\constants.py:47
+#: .\utils\constants.py:49
 msgid "Женский"
 msgstr "Female"
 
-#: .\utils\constants.py:48
+#: .\utils\constants.py:50
 msgid "Небинарный"
 msgstr "Non-binary"
 
-#: .\utils\constants.py:57
+#: .\utils\constants.py:59
 msgid "Работаю"
 msgstr "Working"
 
-#: .\utils\constants.py:58
+#: .\utils\constants.py:60
 msgid "Учусь"
 msgstr "Studying"
 
-#: .\utils\constants.py:59
+#: .\utils\constants.py:61
 msgid "Не учусь и не работаю"
 msgstr "Not studying and not working"
 
@@ -887,6 +887,11 @@ msgstr ""
 #: .\utils\error_list.py:11
 msgid "Пользователь с таким Телефонный номер уже существует."
 msgstr "A user with this phone number already exists."
+
+#, fuzzy
+#~| msgid "Размер футболки"
+#~ msgid "Укажите размер своей футболки"
+#~ msgstr "T-shirt size"
 
 #~ msgid "Дата будет объявлена позже"
 #~ msgstr "The date will be announced later"

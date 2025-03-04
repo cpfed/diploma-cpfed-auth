@@ -5,12 +5,14 @@ SMALL = "S"
 MEDIUM = "M"
 LARGE = "L"
 EXTRA_LARGE = "XL"
+EXTRA_EXTRA_LARGE = "XXL"
 
 T_SHIRT_SIZES = (
     (SMALL, SMALL),
     (MEDIUM, MEDIUM),
     (LARGE, LARGE),
     (EXTRA_LARGE, EXTRA_LARGE),
+    (EXTRA_EXTRA_LARGE, EXTRA_EXTRA_LARGE),
 )
 
 # # Olympiad Achievements

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 14:50+0500\n"
+"POT-Creation-Date: 2025-03-04 14:35+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -333,12 +333,16 @@ msgstr "Жоқ"
 msgid ""
 "Дивизион 1 – ученики гимназий, лицеев, областных, частных и "
 "специализированных школ."
-msgstr "1-дивизион – гимназия, лицей, облыстық, жекеменшік және мамандандырылған мектеп оқушылары."
+msgstr ""
+"1-дивизион – гимназия, лицей, облыстық, жекеменшік және мамандандырылған "
+"мектеп оқушылары."
 
 #: .\custom_widgets\fields.py:31
 msgid ""
 "Дивизион 2 – ученики городских, районных и сельских общеобразовательных школ."
-msgstr "2-дивизион – қалалық, аудандық және ауылдық жалпы білім беретін мектеп оқушылары."
+msgstr ""
+"2-дивизион – қалалық, аудандық және ауылдық жалпы білім беретін мектеп "
+"оқушылары."
 
 #: .\custom_widgets\fields.py:40
 msgid "Район"
@@ -861,27 +865,27 @@ msgid_plural "Осталось %(days)s дней"
 msgstr[0] "%(days)s күн қалды"
 msgstr[1] "%(days)s күн қалды"
 
-#: .\utils\constants.py:46
+#: .\utils\constants.py:48
 msgid "Мужской"
 msgstr "Еркек"
 
-#: .\utils\constants.py:47
+#: .\utils\constants.py:49
 msgid "Женский"
 msgstr "Әйел"
 
-#: .\utils\constants.py:48
+#: .\utils\constants.py:50
 msgid "Небинарный"
 msgstr "Небинарлық"
 
-#: .\utils\constants.py:57
+#: .\utils\constants.py:59
 msgid "Работаю"
 msgstr "Жұмыс істеймін"
 
-#: .\utils\constants.py:58
+#: .\utils\constants.py:60
 msgid "Учусь"
 msgstr "Оқимын"
 
-#: .\utils\constants.py:59
+#: .\utils\constants.py:61
 msgid "Не учусь и не работаю"
 msgstr "Оқымаймын және жұмыс істемеймін"
 
@@ -910,9 +914,3 @@ msgstr ""
 #: .\utils\error_list.py:11
 msgid "Пользователь с таким Телефонный номер уже существует."
 msgstr "Бұндай телефон нөмірі бар пайдаланушы бар."
-
-#~ msgid "Дата будет объявлена позже"
-#~ msgstr "Күні кейінірек жарияланады"
-
-#~ msgid "Обучение"
-#~ msgstr "Білім"

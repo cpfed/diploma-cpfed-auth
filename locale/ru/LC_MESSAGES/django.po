@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 14:50+0500\n"
+"POT-Creation-Date: 2025-03-04 14:35+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -807,27 +807,27 @@ msgstr[0] "Остался %(days)s день"
 msgstr[1] "Осталось %(days)s дня"
 msgstr[2] "Осталось %(days)s дней"
 
-#: .\utils\constants.py:46
+#: .\utils\constants.py:48
 msgid "Мужской"
 msgstr ""
 
-#: .\utils\constants.py:47
+#: .\utils\constants.py:49
 msgid "Женский"
 msgstr ""
 
-#: .\utils\constants.py:48
+#: .\utils\constants.py:50
 msgid "Небинарный"
 msgstr ""
 
-#: .\utils\constants.py:57
+#: .\utils\constants.py:59
 msgid "Работаю"
 msgstr ""
 
-#: .\utils\constants.py:58
+#: .\utils\constants.py:60
 msgid "Учусь"
 msgstr ""
 
-#: .\utils\constants.py:59
+#: .\utils\constants.py:61
 msgid "Не учусь и не работаю"
 msgstr ""
 
