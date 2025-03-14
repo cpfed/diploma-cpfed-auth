@@ -24,3 +24,7 @@ urlpatterns = i18n_patterns(
     path('', include('contest.urls')),
     path('', include('locations.urls')),
 )
+
+urlpatterns += [
+    path('telegram/', include('telegram_bot.urls'))
+]
