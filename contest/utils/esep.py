@@ -11,7 +11,7 @@ def reg_users_to_esep_organization(contest: Contest, user_email=None):
     user_emails = [user_email]
     if user_email is None:
         user_emails = list(UserContest.objects.filter(contest=contest).values_list("user__email", flat=True))
-    resp = requests.post(url=f"https://esep.cpfed.kz/api/add_users_to_org/{contest.tmp_cpfed_token}/",
+    resp = requests.post(url=f"https://esep.cpfed.kz/api/add_users_to_org/{settings.CPFED_TOKEN}/",
                          data=json.dumps({
                              "org_id": contest.esep_org,
                              "emails": user_emails
