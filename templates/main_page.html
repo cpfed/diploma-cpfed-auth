@@ -48,7 +48,6 @@
         <div class="my-8 text-center" id="competitions">
             <p class="text-blue-900 text-4xl my-4">{% translate "Чемпионаты и конкурсы" %}</p>
             {% for contest, is_reg in contests.items %}
-            {% if contest.is_contest %}
             <div class="flex items-center justify-between bg-gray-100 p-8 pr-4 rounded-xl m-8">
                 <div class="flex space-x-6 h-min">
                     <img src="{{ contest.image_url }}" alt="" class="rounded-lg object-cover w-40 m-auto"/>
@@ -121,7 +120,6 @@
                 </div>
                 {% endif %}
             </div>
-            {% endif %}
             {% endfor %}
         </div>
     </div>
