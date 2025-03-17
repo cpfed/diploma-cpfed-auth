@@ -167,8 +167,8 @@ def api_contest_results(request: HttpResponse):
         .filter(contests__contest=8)
         .filter(contests__result__isnull=False)
         .annotate(
-            points=ArrayAgg("contests__result__points", ordering="id"),
-            total_points=Sum("contests__result__points"),
+            points=ArrayAgg("contests__result__points", ordering="contests__id"),
+            total_points=Sum("contests__result__points", default=0),
             fullname=Concat("first_name", Value(" "), "last_name"),
             rank=Window(expression=RowNumber(), order_by="-total_points")
         )
