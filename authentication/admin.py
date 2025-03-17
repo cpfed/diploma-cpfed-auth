@@ -28,6 +28,7 @@ class ExcludeRegisteredFilter(admin.SimpleListFilter):
         q = queryset.exclude(contests__contest__id=self.value())
         return q
 
+
 class OnlyRegisteredFilter(admin.SimpleListFilter):
     title = _("Только зарегистрированные")
     parameter_name = "onlyreg"
@@ -48,6 +49,7 @@ class MainUserAdmin(admin.ModelAdmin):
     list_filter = [OnlyRegisteredFilter, ExcludeRegisteredFilter]
     actions = ["send_email", "register_users"]
     search_fields = ["handle", "first_name", "last_name", "phone_number", "email"]
+    exclude = ["groups", "user_permissions"]
 
     @admin.action(description=_("Отправить письмо на почту"))
     def send_email(self, request, queryset):

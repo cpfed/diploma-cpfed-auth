@@ -20,6 +20,10 @@ handle_validator = RegexValidator(regex=re.compile(r'^[a-z_0-9]+$'),
 uin_validator = RegexValidator(regex=re.compile(r'^[0-9]{12}$'), message=_('ИИН может состоять только из 12 цифр'))
 
 
+def _password_default_exp_date():
+    return timezone.now() + timezone.timedelta(minutes=30)
+
+
 class MainUserManager(BaseUserManager, CTEManager):
     DELETE_FIELD = "is_deleted"
 
@@ -168,10 +172,6 @@ class MainUser(AbstractBaseUser, PermissionsMixin, TimestampMixin):
         return {f: getattr(self, f) for f in self.get_fields if f in need_fields}
 
 
-def _password_default_exp_date():
-    return timezone.now() + timezone.timedelta(minutes=30)
-
-
 class PasswordRecovery(TimestampMixin):
     id = models.UUIDField(
         primary_key=True,
@@ -264,3 +264,43 @@ class UserActivation(TimestampMixin):
         verbose_name = _("Активация аккаунта")
         verbose_name_plural = _("Активация аккаунта")
         ordering = ["-expiration_date"]
+
+
+class OnsiteLogin(models.Model):
+    user = models.ForeignKey(
+        MainUser,
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Пользователь")
+    )
+    contest = models.ForeignKey(
+        Contest,
+        on_delete=models.SET_NULL,
+        verbose_name=_("Контест"),
+        null=True
+    )
+    expiration_date = models.DateTimeField(
+        verbose_name=_("Срок годности")
+    )
+    secret_code = models.CharField(
+        verbose_name=_("Секретный код"),
+        unique=True
+    )
+    is_used = models.BooleanField(
+        default=False,
+        verbose_name=_("Код использован?")
+    )
+
+    @property
+    def is_still_valid(self):
+        return not self.is_used and self.expiration_date > timezone.now()
+
+class OnsiteLoginLogs(models.Model):
+    onsite_login = models.ForeignKey(
+        OnsiteLogin,
+        on_delete=models.DO_NOTHING,
+        verbose_name=_("Использованный код")
+    )
+    ip_address = models.CharField(
+        max_length=100,
+        verbose_name=_("IP адрес")
+    )
