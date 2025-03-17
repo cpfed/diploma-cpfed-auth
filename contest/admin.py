@@ -10,9 +10,8 @@ from .models import Contest, UserContest, ContestResult
 from .utils import contest_parser, xlsx_response, esep
 from .forms import AdminTextAreaWidget
 
-# Register your models here.
 
-admin.site.register(ContestResult)
+# Register your models here.
 
 
 class OnlyRegisteredFilter(admin.SimpleListFilter):
@@ -142,3 +141,32 @@ class ContestAdmin(admin.ModelAdmin):
         if "delete_selected" in actions:
             del actions["delete_selected"]
         return actions
+
+
+class ContestResultByContestFilter(admin.SimpleListFilter):
+    title = "By contest"
+    parameter_name = "contest_filter"
+
+    def lookups(self, request, model_admin):
+        contests = Contest.objects.all()
+        return [(str(c.id), c.name) for c in contests]
+
+    def queryset(self, request, queryset):
+        if self.value() == None:
+            return queryset
+        q = queryset.filter(user_reg__contest__id=self.value())
+        return q
+
+
+@admin.register(ContestResult)
+class ContestResultAdmin(admin.ModelAdmin):
+    list_filter = [ContestResultByContestFilter]
+    search_fields = ["user_reg__user__handle"]
+    # actions = ["delete_all"]
+
+    # @admin.action(description="Delete all")
+    # def delete_all(self, request, queryset):
+    #     if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
+    #         raise PermissionDenied()
+    #     ContestResult.objects.all().delete()
+    #     return render(request, 'admin/result_message.html', {'message': "ok"})

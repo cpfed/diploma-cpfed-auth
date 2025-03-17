@@ -94,7 +94,7 @@ def upload_contest_results(request: HttpResponse):
 
     if request.method == 'POST':
         form = HTMLForm(request.POST)
-        cnt_skipped = 0
+        list_skipped = []
         if form.is_valid():
             contest = get_object_or_404(Contest, pk=int(request.GET['id']))
             ContestResult.objects.filter(user_reg__contest__pk=contest.pk).delete()
@@ -107,22 +107,16 @@ def upload_contest_results(request: HttpResponse):
             for rank, res in enumerate(results, start=1):
                 try:
                     user = get_user_model().objects.get(handle=res.user)
-                except ObjectDoesNotExist:
-                    cnt_skipped += 1
-                    continue
-                    # return render(request, 'admin/result_message.html',
-                    #               {'message': f'Не найден пользователь с хэндлом: {res.user}'})
-                try:
                     user_reg = UserContest.objects.get(user=user, contest=contest)
                 except ObjectDoesNotExist:
-                    cnt_skipped += 1
+                    list_skipped.append(res.user)
                     continue
                 cr = ContestResult(user_reg=user_reg, rank=rank)
                 if form.cleaned_data['need_gp']:
                     cr.points = gp100.estimate_point_gp100(rank, res.score, results[0].score, len(results))
                 cr.save()
             return render(request, 'admin/result_message.html', {
-                'message': f'Успешно загружены результаты контеста, регистрации нет у {cnt_skipped} пользователей: '})
+                'message': f'Успешно загружены результаты контеста, регистрации нет у {len(list_skipped)} пользователей: {", ".join(list_skipped)}'})
     form = HTMLForm()
     return render(request, 'admin/form.html', {'form': form, 'form_name': _('Загрузить результаты контеста')})
 
@@ -170,10 +164,10 @@ def register_on_contest(request: HttpResponse):
 def api_contest_results(request: HttpResponse):
     cte = With(
         get_user_model().objects.select_related("region")
-        .filter(contests__contest=1)
+        .filter(contests__contest=8)
         .filter(contests__result__isnull=False)
         .annotate(
-            points=ArrayAgg("contests__result__points"),
+            points=ArrayAgg("contests__result__points", ordering="id"),
             total_points=Sum("contests__result__points"),
             fullname=Concat("first_name", Value(" "), "last_name"),
             rank=Window(expression=RowNumber(), order_by="-total_points")
