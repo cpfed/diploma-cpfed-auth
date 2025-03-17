@@ -18,7 +18,8 @@ class ContestResult:
 def fetch_contest_results(link: str):
     response = requests.get(link)
     response.raise_for_status()
-    res = sorted((ContestResult(x) for x in response.json()["data"]["object"]["rankings"]),
+    res = (ContestResult(x) for x in response.json()["data"]["object"]["rankings"])
+    res = sorted((x for x in res if x.score >= 0),
                  key=lambda x: (-x.score, x.cumulative_time, x.tiebreaker))
     if len(res):
         res[0].rank = 1
