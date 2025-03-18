@@ -11,6 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
 import django.utils.datastructures
 from django.utils.http import urlencode
+from django.utils import timezone
 
 from authentication.forms import UserCreateForm, UserPasswordRecovery, UserLoginForm, get_user_form_with_data
 from authentication.models import UserActivation, MainUser
@@ -124,6 +125,8 @@ def user_login(request: HttpResponse):
         handle = handle.lower()
         user = authenticate(request, handle=handle, password=password)
         if user is not None:
+            if user.onsite_login.filter(expiration_date__gt=timezone.now()).exists():
+                return render(request, 'result_message.html', {'message': _("Вы участвуете в оффлайн соревновании. Ждите секретный код для входа")})
             login(request, user)
             return _redirect_after_login(request)
         form.add_error('password', _('Некорректный хэндл/email или пароль'))

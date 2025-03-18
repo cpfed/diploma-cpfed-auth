@@ -38,7 +38,7 @@ class UserContestAdmin(admin.ModelAdmin):
 @admin.register(Contest)
 class ContestAdmin(admin.ModelAdmin):
     actions = ['contest_results', 'upload_contest_results', 'register_on_contest', 'add_bulk_reg',
-               'sync_user_reg_with_esep']
+               'sync_user_reg_with_esep', 'create_onsite_login']
     formfield_overrides = {
         models.TextField: {'widget': AdminTextAreaWidget},
     }
@@ -79,6 +79,7 @@ class ContestAdmin(admin.ModelAdmin):
         except Exception as err:
             # return render(request, 'admin/result_message.html', {'message': f"Ошибка: {err}"})
             raise err
+
     @admin.action(description="Загрузить результаты контеста")
     def upload_contest_results(self, request, queryset):
         if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
@@ -122,6 +123,15 @@ class ContestAdmin(admin.ModelAdmin):
                               {'message': f"contest: {contest}, error: {str(err)}"})
         return render(request, 'admin/result_message.html', {'message': "ok"})
 
+    @admin.action(description="Сделать onsite login")
+    def create_onsite_login(self, request, queryset):
+        if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
+            raise PermissionDenied()
+        selected = queryset.values_list("pk", flat=True)
+        if len(selected) != 1:
+            return render(request, 'admin/result_message.html', {'message': "Должен быть выбран только один контест"})
+        return HttpResponseRedirect(reverse("create_onsite_login") + '?id=' + str(selected[0]))
+
     def get_actions(self, request):
         actions = super().get_actions(request)
         if "delete_selected" in actions:
@@ -148,11 +158,3 @@ class ContestResultByContestFilter(admin.SimpleListFilter):
 class ContestResultAdmin(admin.ModelAdmin):
     list_filter = [ContestResultByContestFilter]
     search_fields = ["user_reg__user__handle"]
-    # actions = ["delete_all"]
-
-    # @admin.action(description="Delete all")
-    # def delete_all(self, request, queryset):
-    #     if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
-    #         raise PermissionDenied()
-    #     ContestResult.objects.all().delete()
-    #     return render(request, 'admin/result_message.html', {'message': "ok"})

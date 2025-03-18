@@ -15,13 +15,16 @@ from django.db.models import Q, Sum, Value, Window
 from django.contrib.postgres.aggregates import ArrayAgg
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.cache import cache_page
+from django.utils import timezone
 
 from django_cte import With
 
 from .models import Contest, UserContest, ContestResult
 from .forms import ContestRegistrationForm
 from .utils import contest_parser, gp100, esep, json_encoder
+from utils.funcs import gen_unambiguous_random_string
 from authentication.forms import get_user_form
+from authentication.models import OnsiteLogin
 from locations.models import Region
 
 
@@ -161,7 +164,8 @@ def register_on_contest(request: HttpResponse):
     form = Form()
     return render(request, 'admin/form.html', {'form': form, 'form_name': 'Зарегистрировать пользователей'})
 
-@cache_page(60*60)
+
+@cache_page(60 * 60)
 def api_contest_results(request: HttpResponse):
     cte = With(
         get_user_model().objects.select_related("region")
@@ -207,3 +211,38 @@ def api_contest_results(request: HttpResponse):
         "previous": None,
         "results": res
     })
+
+
+def create_onsite_login(request: HttpResponse):
+    if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
+        raise PermissionDenied()
+
+    class HTMLForm(forms.Form):
+        exp_date = forms.DateTimeField(label=_('Expiration date'))  # "%Y-%m-%d %H:%M:%S"
+        secret_code_prefix = forms.CharField(max_length=100, label=_('Secret code prefix'))
+
+    if request.method == 'POST':
+        form = HTMLForm(request.POST)
+        if form.is_valid():
+            contest = get_object_or_404(Contest, pk=int(request.GET['id']))
+            res = []
+            for user in get_user_model().objects.filter(contests__contest=contest):
+                user.is_onsite = True
+                user.save()
+                try:
+                    ol = OnsiteLogin.objects.filter(user=user, contest=contest, expiration_date__gt=timezone.now(),
+                                                    log__isnull=True).get()
+                    res.append((user.handle, user.email, ol.secret_code))
+                except ObjectDoesNotExist:
+                    pass
+                else:
+                    continue
+                code = form.data["secret_code_prefix"] + gen_unambiguous_random_string()
+                ol = OnsiteLogin(user=user, contest=contest, expiration_date=form.cleaned_data["exp_date"],
+                                 secret_code=code)
+                ol.save()
+                res.append((user.handle, user.email, code))
+            return render(request, 'admin/result_message.html', {
+                'message': f'Успешно загружены onsite login, codes: {res}'})
+    form = HTMLForm()
+    return render(request, 'admin/form.html', {'form': form, 'form_name': _('Fill pls')})

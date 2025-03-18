@@ -105,7 +105,8 @@ class UserContest(models.Model):
     )
     additional_fields = models.JSONField(
         default=dict,
-        encoder=CustomJSONEncoder
+        encoder=CustomJSONEncoder,
+        blank=True
     )
 
     class Meta:

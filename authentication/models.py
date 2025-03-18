@@ -14,6 +14,7 @@ from django_cte import CTEManager
 from utils import constants
 from mixins.models import TimestampMixin
 from locations.models import Region
+from contest.models import Contest
 
 handle_validator = RegexValidator(regex=re.compile(r'^[a-z_0-9]+$'),
                                   message=_('Хэндл может состоять только из латинских букв, цифр и _'))
@@ -129,7 +130,6 @@ class MainUser(AbstractBaseUser, PermissionsMixin, TimestampMixin):
         verbose_name=_("Гражданин РК?"),
         default=True
     )
-
     is_admin = models.BooleanField(verbose_name=_("Админ?"), default=False)
     is_moderator = models.BooleanField(verbose_name=_("Модератор?"), default=False)
     is_deleted = models.BooleanField(verbose_name=_("Аккаунт удален?"), default=False)
@@ -270,13 +270,16 @@ class OnsiteLogin(models.Model):
     user = models.ForeignKey(
         MainUser,
         on_delete=models.DO_NOTHING,
-        verbose_name=_("Пользователь")
+        verbose_name=_("Пользователь"),
+        db_index=True,
+        related_name="onsite_login"
     )
     contest = models.ForeignKey(
         Contest,
         on_delete=models.SET_NULL,
         verbose_name=_("Контест"),
-        null=True
+        null=True,
+        db_index=True
     )
     expiration_date = models.DateTimeField(
         verbose_name=_("Срок годности")
@@ -285,22 +288,30 @@ class OnsiteLogin(models.Model):
         verbose_name=_("Секретный код"),
         unique=True
     )
-    is_used = models.BooleanField(
-        default=False,
-        verbose_name=_("Код использован?")
-    )
+
+    def __str__(self):
+        return f"User: {self.user}, contest: {self.contest}, valid: {self.is_still_valid}"
 
     @property
     def is_still_valid(self):
-        return not self.is_used and self.expiration_date > timezone.now()
+        return not hasattr(self, "log") and self.expiration_date > timezone.now()
+
 
 class OnsiteLoginLogs(models.Model):
-    onsite_login = models.ForeignKey(
+    onsite_login = models.OneToOneField(
         OnsiteLogin,
         on_delete=models.DO_NOTHING,
-        verbose_name=_("Использованный код")
+        verbose_name=_("Использованный код"),
+        related_name="log"
     )
     ip_address = models.CharField(
         max_length=100,
         verbose_name=_("IP адрес")
     )
+    created_time = models.DateTimeField(
+        verbose_name=_("Время использования"),
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return f"User: {self.onsite_login.user}, contest: {self.onsite_login.contest}, valid: {self.ip_address}, used at {self.created_time}"

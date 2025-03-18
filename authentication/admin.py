@@ -5,13 +5,15 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .models import MainUser, PasswordRecovery, UserActivation
+from .models import MainUser, PasswordRecovery, UserActivation,  OnsiteLogin, OnsiteLoginLogs
 from contest.models import Contest, UserContest
 
 # Register your models here.
 
 admin.site.register(PasswordRecovery)
 admin.site.register(UserActivation)
+admin.site.register(OnsiteLogin)
+admin.site.register(OnsiteLoginLogs)
 
 
 class ExcludeRegisteredFilter(admin.SimpleListFilter):
