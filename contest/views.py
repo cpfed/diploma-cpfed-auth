@@ -14,6 +14,7 @@ from django.db.models.functions import Concat, RowNumber
 from django.db.models import Q, Sum, Value, Window
 from django.contrib.postgres.aggregates import ArrayAgg
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.decorators.cache import cache_page
 
 from django_cte import With
 
@@ -160,7 +161,7 @@ def register_on_contest(request: HttpResponse):
     form = Form()
     return render(request, 'admin/form.html', {'form': form, 'form_name': 'Зарегистрировать пользователей'})
 
-
+@cache_page(60*60)
 def api_contest_results(request: HttpResponse):
     cte = With(
         get_user_model().objects.select_related("region")
