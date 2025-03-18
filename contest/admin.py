@@ -37,28 +37,11 @@ class UserContestAdmin(admin.ModelAdmin):
 
 @admin.register(Contest)
 class ContestAdmin(admin.ModelAdmin):
-    actions = ['get_registrations', 'upload_contest_results', 'register_on_contest', 'add_bulk_reg', 'contest_results',
+    actions = ['contest_results', 'upload_contest_results', 'register_on_contest', 'add_bulk_reg',
                'sync_user_reg_with_esep']
     formfield_overrides = {
         models.TextField: {'widget': AdminTextAreaWidget},
     }
-
-    @admin.action(description="Экспортировать данные зарегистрированных пользователей")
-    def get_registrations(self, request, queryset):
-        if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
-            raise PermissionDenied()
-        result = []
-        for contest in queryset:
-            curres = []
-            data = {f: None for f in contest.fields_name_list}
-            for uc in UserContest.objects.filter(contest=contest):
-                uc_reg = uc.get_full_reg
-                data = {x: str(uc_reg.get(x, '')) for x in data}
-                curres.append(tuple(data.values()))
-            if data is not None:
-                curres = [contest.name, tuple(data.keys())] + curres
-                result.append(curres)
-        return xlsx_response.xlsx_response(result)
 
     @admin.action(description="Экспортировать результаты контеста")
     def contest_results(self, request, queryset):
@@ -67,35 +50,35 @@ class ContestAdmin(admin.ModelAdmin):
         try:
             result = []
             for contest in queryset:
-
-                link = '/api/v2/contest/'.join(contest.link.split('/contest/'))
-                try:
-                    results = contest_parser.fetch_contest_results(link)
-                except Exception as err:
-                    return render(request, 'admin/result_message.html', {'message': 'Ошибка: ' + str(err)})
-                user_ranks = {r.user: r.rank for r in results}
-
                 user_regs = UserContest.objects.filter(contest=contest).select_related('user', 'contest').all()
-                user_regs = sorted(user_regs, key=lambda ur: user_ranks.get(ur.user.handle, len(user_regs) + 1))
+
+                sort_by_place = (contest.link is not None)
+                if sort_by_place:
+                    link = '/api/v2/contest/'.join(contest.link.split('/contest/'))
+                    results = contest_parser.fetch_contest_results(link)
+                    user_ranks = {r.user: r.rank for r in results}
+                    user_regs = sorted(user_regs, key=lambda ur: user_ranks.get(ur.user.handle, len(user_regs) + 1))
 
                 curres = []
-                data = None
+                data = {f: None for f in contest.fields_name_list}
+                data["email"] = None
+                data["handle"] = None
+
                 for uc in user_regs:
                     uc_reg = uc.get_full_reg_with_additional_data
-                    if data is None:
-                        data = {x: str(y) for x, y in uc_reg.items()}
-                    else:
-                        data = {x: str(uc_reg[x]) for x in data}
-                    handle = uc_reg['handle']
-                    curres.append(
-                        [str(user_ranks[handle]) if handle in user_ranks else "Не участвовал"] + list(data.values()))
+                    data = {x: str(uc_reg.get(x, '')) for x in data}
+                    cur_list = list(data.values())
+                    if sort_by_place:
+                        handle = uc_reg['handle']
+                        cur_list.insert(0, str(user_ranks[handle]) if handle in user_ranks else "Не участвовал")
+                    curres.append(cur_list)
 
-                curres = [contest.name, ['place'] + list(data.keys())] + curres
+                curres = [contest.name, (['place'] if sort_by_place else []) + list(data.keys())] + curres
                 result.append(curres)
             return xlsx_response.xlsx_response(result)
-        except Exception as e:
-            return render(request, 'admin/result_message.html', {'message': 'Ошибка: ' + str(err)})
-
+        except Exception as err:
+            # return render(request, 'admin/result_message.html', {'message': f"Ошибка: {err}"})
+            raise err
     @admin.action(description="Загрузить результаты контеста")
     def upload_contest_results(self, request, queryset):
         if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
