@@ -92,7 +92,7 @@ def main_page(request: HttpResponse):
                 ol = OnsiteLogin.objects.get(secret_code=secret_code)
                 if ol.is_still_valid:
                     client_ip, _ = get_client_ip(request)
-                    OnsiteLoginLogs(onsite_login=ol, ip_address=client_ip).save()
+                    # OnsiteLoginLogs(onsite_login=ol, ip_address=client_ip).save()
                     login(request, ol.user)
         except (jwt.ExpiredSignatureError, jwt.InvalidTokenError):
             pass
