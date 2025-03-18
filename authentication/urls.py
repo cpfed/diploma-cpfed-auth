@@ -1,5 +1,5 @@
 from django.urls import path
-from authentication.views import user_management, password_recovery, admin_actions
+from authentication.views import user_management, password_recovery, admin_actions, oqylyk
 
 urlpatterns = [
     path('login/', user_management.user_login, name='login'),
@@ -13,4 +13,6 @@ urlpatterns = [
 
     path('send_emails', admin_actions.custom_emails_view, name='send_emails'),
     path('register_users_from_list', admin_actions.register_users_from_list, name='register_users_from_list'),
+
+    path('okylyk_token/', oqylyk.oqylyk_get_token)
 ]

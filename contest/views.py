@@ -1,11 +1,12 @@
 import json
+import jwt
 
 from django import forms
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, response, JsonResponse
 from django.urls import reverse
 from django.conf import settings
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, login
 from django.utils.translation import gettext_lazy as _
 from django.utils.http import urlencode
 from django.utils.crypto import get_random_string
@@ -18,13 +19,14 @@ from django.views.decorators.cache import cache_page
 from django.utils import timezone
 
 from django_cte import With
+from ipware import get_client_ip
 
 from .models import Contest, UserContest, ContestResult
 from .forms import ContestRegistrationForm
 from .utils import contest_parser, gp100, esep, json_encoder
 from utils.funcs import gen_unambiguous_random_string
 from authentication.forms import get_user_form
-from authentication.models import OnsiteLogin
+from authentication.models import OnsiteLogin, OnsiteLoginLogs
 from locations.models import Region
 
 
@@ -81,6 +83,22 @@ def contest_reg_guide(request: HttpResponse, contest_id: int):
 
 
 def main_page(request: HttpResponse):
+    if 'token' in request.GET and settings.OQYLYK_JWT_SECRET != '':
+        token = request.GET['token']
+        try:
+            payload = jwt.decode(token, settings.OQYLYK_JWT_SECRET, algorithms=['HS256'])
+            secret_code = payload.get("secret_code")
+            if secret_code:
+                ol = OnsiteLogin.objects.get(secret_code=secret_code)
+                if ol.is_still_valid:
+                    client_ip, _ = get_client_ip(request)
+                    OnsiteLoginLogs(onsite_login=ol, ip_address=client_ip).save()
+                    login(request, ol.user)
+        except (jwt.ExpiredSignatureError, jwt.InvalidTokenError):
+            pass
+        except (KeyError, UnicodeDecodeError, ValueError, ObjectDoesNotExist):
+            pass
+
     contests = {x: False for x in Contest.objects.filter(show_on_main_page=True).order_by('level_on_main_page', '-id')}
     if request.user.is_authenticated:
         for contests_reg in UserContest.objects.filter(user=request.user, contest__show_on_main_page=True):
