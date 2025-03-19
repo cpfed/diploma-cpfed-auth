@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_exempt
 import http
 import json
 import jwt
@@ -8,6 +9,7 @@ from django.conf import settings
 from authentication.models import OnsiteLogin
 
 
+@csrf_exempt
 def oqylyk_get_token(request: HttpResponse):
     if request.method == 'POST':
         try:
