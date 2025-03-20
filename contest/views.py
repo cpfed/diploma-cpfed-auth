@@ -87,8 +87,9 @@ def main_page(request: HttpResponse):
         token = request.GET['token']
         try:
             payload = jwt.decode(token, settings.OQYLYK_JWT_SECRET, algorithms=['HS256'])
-            secret_code = payload.get("secret_code", '')
-            ol = OnsiteLogin.objects.get(secret_code=secret_code)
+            handle = payload.get('handle', '')
+            secret_code = payload.get('secret_code', '')
+            ol = OnsiteLogin.objects.get(user__handle=handle, secret_code=secret_code)
             if ol.is_still_valid:
                 client_ip, _ = get_client_ip(request)
                 # OnsiteLoginLogs(onsite_login=ol, ip_address=client_ip).save()
