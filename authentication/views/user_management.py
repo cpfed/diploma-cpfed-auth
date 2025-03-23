@@ -13,8 +13,8 @@ import django.utils.datastructures
 from django.utils.http import urlencode
 from django.utils import timezone
 
-from authentication.forms import UserCreateForm, UserPasswordRecovery, UserLoginForm, get_user_form_with_data
-from authentication.models import UserActivation, MainUser
+from authentication.forms import UserCreateForm, UserPasswordRecovery, UserLoginForm, get_user_form_with_data, UserSecretCodeLoginForm
+from authentication.models import UserActivation, MainUser, OnsiteLogin
 from contest.models import Contest
 from .services.send_email import send_email_with_context
 from utils.cloudflare import check_turnstile_captcha
@@ -130,6 +130,21 @@ def user_login(request: HttpResponse):
             login(request, user)
             return _redirect_after_login(request)
         form.add_error('password', _('Некорректный хэндл/email или пароль'))
+    return render(request, 'login.html', {'form': form, 'form_name': _('Войти в аккаунт')})
+
+def user_secret_code_login(request: HttpResponse):
+    form = UserSecretCodeLoginForm()
+    if request.method == 'POST':
+        form = UserSecretCodeLoginForm(request.POST)
+        code = request.POST['code']
+        try:
+            ol = OnsiteLogin.objects.get(secret_code=code)
+        except ObjectDoesNotExist:
+            pass
+        else:
+            login(request, ol.user)
+            return HttpResponseRedirect(f'{reverse("login")}?contest={ol.contest.pk}')
+        form.add_error('password', _('Некорректный код'))
     return render(request, 'login.html', {'form': form, 'form_name': _('Войти в аккаунт')})
 
 

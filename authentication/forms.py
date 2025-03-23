@@ -24,6 +24,10 @@ class UserLoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput, label='Пароль')
 
 
+class UserSecretCodeLoginForm(forms.Form):
+    code = forms.CharField(label=_('Код'))
+
+
 class UserPasswordRecoveryRequest(forms.Form):
     email = forms.EmailField(label=_('Электронная почта'))
 

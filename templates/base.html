@@ -58,6 +58,9 @@
                 <a href="{%url 'login' %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">
                     <div class="text-blue-600 underline">{% translate "Войти" %}</div>
                 </a>
+                <a href="{%url 'login' %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">
+                    <div class="text-blue-600 underline">{% translate "Войти по коду" %}</div>
+                </a>
                 <a href="{%url 'register' %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">
                     <div class="text-blue-600 underline">{% translate "Регистрация" %}</div>
                 </a>
