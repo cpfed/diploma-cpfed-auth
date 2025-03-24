@@ -10,7 +10,7 @@ spec:
     protocol: TCP
     port: 31746
     targetPort: auth-svc
-  type: LoadBalancer
+  type: ClusterIP
 
 ---
 apiVersion: v1
@@ -23,3 +23,28 @@ spec:
   ports:
   - port: 6379
     targetPort: auth-redis-svc
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: auth-nginx-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - auth.cpfed.kz
+    secretName: auth-tls-secret
+  rules:
+  - host: auth.cpfed.kz
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: auth-cpfed
+              port:
+                number: 31746
