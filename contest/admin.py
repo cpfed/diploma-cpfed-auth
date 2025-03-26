@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.conf import settings
 
-from .models import Contest, UserContest, ContestResult
+from .models import Contest, UserContest, ContestResult, ContestChangeLog
 from .utils import contest_parser, xlsx_response, esep
 from .forms import AdminTextAreaWidget
 
@@ -158,3 +158,5 @@ class ContestResultByContestFilter(admin.SimpleListFilter):
 class ContestResultAdmin(admin.ModelAdmin):
     list_filter = [ContestResultByContestFilter]
     search_fields = ["user_reg__user__handle"]
+
+admin.site.register(ContestChangeLog)

@@ -8,6 +8,7 @@ from django.utils.translation import get_language
 from django.urls import reverse
 
 from .utils.json_encoder import CustomJSONEncoder
+from mixins.models import TimestampMixin
 # Create your models here.
 
 class Contest(models.Model):
@@ -23,13 +24,6 @@ class Contest(models.Model):
     #     related_name="next_contest_id+",
     #     default=None,
     #     verbose_name=_("ID следующего контеста")
-    # )
-    # is_active = models.BooleanField(
-    #     verbose_name=_("Контест активен?"),
-    #     default=True,
-    # )
-    # required_fields = ArrayField(
-    #     models.CharField(max_length=100)
     # )
     fields = models.JSONField(
         null=True,
@@ -55,6 +49,10 @@ class Contest(models.Model):
         verbose_name = _("Контест")
         verbose_name_plural = _("Контесты")
         ordering = ["id"]
+
+    def save(self, *args, **kwargs):
+        ContestChangeLog.objects.create(contest=self, fields=self.fields, full_data=forms.model_to_dict(self))
+        super().save(**kwargs)
 
     def __str__(self):
         return f"ID: {self.id}. Контест {self.name}"
@@ -83,6 +81,25 @@ class Contest(models.Model):
     @property
     def fields_name_list(self):
         return self.user_fields + [f['name'] for f in self.custom_fields]
+
+
+class ContestChangeLog(TimestampMixin):
+    contest = models.ForeignKey(
+        Contest,
+        on_delete=models.DO_NOTHING
+    )
+    fields = models.JSONField(
+        null=True,
+        blank=True
+    )
+    full_data = models.JSONField(
+        null=True,
+        blank=True,
+        encoder=CustomJSONEncoder
+    )
+
+    def __str__(self):
+        return f"{self.contest}: {self.created_at}"
 
 
 class Championship():
