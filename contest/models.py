@@ -6,9 +6,12 @@ from django.utils import timezone
 from django import forms
 from django.utils.translation import get_language
 from django.urls import reverse
+from django.core.exceptions import ObjectDoesNotExist
 
 from .utils.json_encoder import CustomJSONEncoder
 from mixins.models import TimestampMixin
+
+
 # Create your models here.
 
 class Contest(models.Model):
@@ -51,7 +54,12 @@ class Contest(models.Model):
         ordering = ["id"]
 
     def save(self, *args, **kwargs):
-        ContestChangeLog.objects.create(contest=self, fields=self.fields, full_data=forms.model_to_dict(self))
+        try:
+            old_contest = Contest.objects.get(id=self.id)
+            ContestChangeLog.objects.create(contest=old_contest, fields=old_contest.fields,
+                                            full_data=forms.model_to_dict(old_contest))
+        except ObjectDoesNotExist:
+            pass
         super().save(**kwargs)
 
     def __str__(self):
