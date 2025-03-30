@@ -20,10 +20,5 @@ class Migration(migrations.Migration):
             model_name='mainuser',
             name='telegram_token',
             field=models.CharField(default=uuid.uuid4, max_length=128, verbose_name='Telegram TOKEN'),
-        ),
-        migrations.AlterField(
-            model_name='mainuser',
-            name='t_shirt_size',
-            field=models.CharField(blank=True, choices=[('S', 'S'), ('M', 'M'), ('L', 'L'), ('XL', 'XL'), ('XXL', 'XXL')], max_length=5, null=True, verbose_name='Размер футболки'),
-        ),
+        )
     ]
