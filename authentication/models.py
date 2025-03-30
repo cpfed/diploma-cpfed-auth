@@ -130,6 +130,18 @@ class MainUser(AbstractBaseUser, PermissionsMixin, TimestampMixin):
         verbose_name=_("Гражданин РК?"),
         default=True
     )
+    telegram_id = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+        verbose_name="Telegram ID"
+    )
+    telegram_token = models.CharField(
+        max_length=128,
+        default=uuid.uuid4,
+        verbose_name="Telegram TOKEN"
+    )
+
     is_admin = models.BooleanField(verbose_name=_("Админ?"), default=False)
     is_moderator = models.BooleanField(verbose_name=_("Модератор?"), default=False)
     is_deleted = models.BooleanField(verbose_name=_("Аккаунт удален?"), default=False)

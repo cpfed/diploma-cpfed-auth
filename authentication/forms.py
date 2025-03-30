@@ -51,12 +51,20 @@ def get_user_form(req_fields: list[str]):
     return UserForm
 
 
-UserFullForm = get_user_form(
-    ['handle', 'email', 'first_name', 'last_name', 'phone_number', 'uin', 't_shirt_size', 'employment_status',
-     'place_of_study_of_work', 'region'])
+# UserFullForm = get_user_form(
+#     ['handle', 'email', 'first_name', 'last_name', 'phone_number', 'uin', 't_shirt_size', 'employment_status',
+#      'place_of_study_of_work', 'region', 'telegram_id', 'telegram_token'])
 
 
 def get_user_form_with_data(user: MainUser):
+    fields_to_include = ['handle', 'email', 'first_name', 'last_name', 'phone_number', 'uin', 't_shirt_size', 'employment_status',
+                         'place_of_study_of_work', 'region']
+    if not user.telegram_id:
+        fields_to_include.append('telegram_token')
+    else:
+        fields_to_include.append('telegram_id')
+    UserFullForm = get_user_form(fields_to_include)
+
     data = dict()
     for f in UserFullForm().fields:
         data[f] = getattr(user, f)

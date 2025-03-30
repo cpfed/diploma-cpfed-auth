@@ -27,13 +27,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY", None)
 CPFED_TOKEN = os.getenv("CPFED_TOKEN", None)
 CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "http://localhost:8000,https://auth.cpfed.kz,https://esep.pages.dev,https://app.oqylyq.kz").split(",")
-
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = os.getenv("EMAIL_HOST", None)
 EMAIL_PORT = os.getenv("EMAIL_PORT", None)
 EMAIL_USE_TLS = (os.getenv("EMAIL_USE_TLS", None) == "True")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", None)
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", None)
+
+TELEGRAM_BOT_NAME = os.getenv("TELEGRAM_BOT_NAME", None)
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", None)
+TELEGRAM_WEBHOOK_DOMAIN = os.getenv("TELEGRAM_WEBHOOK_DOMAIN", None)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = (os.getenv("DEBUG", None) == "True")
@@ -60,6 +63,7 @@ INSTALLED_APPS = [
     'authentication',
     'contest',
     'locations',
+    'telegram_bot',
 ]
 
 MIDDLEWARE = [
@@ -90,6 +94,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'authentication.telegram.telegram_context_processor',
             ],
         },
     },
