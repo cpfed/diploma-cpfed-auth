@@ -22,14 +22,14 @@
                 </div>
                 {% endfor %}
 
-<!--                {% if not form.telegram_id.value %}-->
-<!--                    <div>-->
-<!--                        <label>Please link your telegram ID to receive notifications.</label>-->
-<!--                        <div style="margin-top: 5px;margin-bottom:5px;">-->
-<!--                            <script async src="https://telegram.org/js/telegram-widget.js?23" data-telegram-login="cpfedBot" data-size="large" data-auth-url="{{ TELEGRAM_WEBHOOK_DOMAIN }}/telegram/login" data-request-access="write"></script>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                {% endif %}-->
+                {% if not form.telegram_id.value %}
+                    <div>
+                        <label>Please link your telegram ID to receive notifications.</label>
+                        <div style="margin-top: 5px;margin-bottom:5px;">
+                            <script async src="https://telegram.org/js/telegram-widget.js?23" data-telegram-login="cpfedBot" data-size="large" data-auth-url="{{ TELEGRAM_WEBHOOK_DOMAIN }}/telegram/login" data-request-access="write"></script>
+                        </div>
+                    </div>
+                {% endif %}
                 <div>Изменить данные можно <a href="{% url 'contestRegistration' contest_id=1 %}" class="text-blue-500">здесь</a></div>
             </div>
 
