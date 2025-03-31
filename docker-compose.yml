@@ -30,11 +30,49 @@ services:
     volumes:
       - .:/app
     ports:
-      - "8000:8000"
+      - "8008:8000"
     depends_on:
       - db
     #  - rabbitmq
     restart: on-failure
+
+  celery:
+    build:
+      context: .
+      dockerfile: docker/local.Dockerfile
+    command: celery -A cpfed worker -l info
+    volumes:
+      - .:/app
+    depends_on:
+      - django
+      - redis
+    environment:
+      - DEBUG=1
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/cpfed_auth_db
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/1
+      - DJANGO_SETTINGS_MODULE=cpfed.settings
+
+  redis:
+    image: redis:6-alpine
+    ports:
+      - "6379:6379"
+
+  celery-beat:
+    build:
+      context: .
+      dockerfile: docker/local.Dockerfile
+    command: celery -A cpfed beat -l info
+    volumes:
+      - .:/app
+    depends_on:
+      - django
+      - redis
+    environment:
+      - DEBUG=1
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/cpfed_auth_db
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/1
 
   # celery:
   #   build:

@@ -44,6 +44,7 @@ class Contest(models.Model):
     registration_open = models.BooleanField(default=True)
     level_on_main_page = models.IntegerField(default=1)
     image_url = models.CharField(default="https://i.ibb.co.com/7tSBNdmf/capybara.png")
+    telegram_notifications_scheduled = models.BooleanField(default=False)
 
     text_above_submit_button = models.TextField(null=True, blank=True)
     text_after_submit = models.TextField(null=True, blank=True)
