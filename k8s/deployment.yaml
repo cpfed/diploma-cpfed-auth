@@ -16,6 +16,14 @@ spec:
         app.kubernetes.io/name: auth-cpfed
     spec:
       containers:
+        - name: nginx
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+              name: auth-nginx-svc
+          volumeMounts:
+            - name: config-vol
+              mountPath: "/etc/nginx/conf.d/"
         - name: auth-cpfed 
           image: zharaskhan/auth-cpfed-master
           imagePullPolicy: "Always"
@@ -37,6 +45,13 @@ spec:
             - name: REDIS_HOST
               value: $(AUTH_REDIS_SERVICE_HOST)
       restartPolicy: Always
+      volumes:
+      - name: config-vol
+        configMap:
+          name: nginx-config
+          items:
+            - key: nginx.conf
+              path: nginx.conf
 ---
 apiVersion: v1
 kind: Pod
