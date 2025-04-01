@@ -9,7 +9,7 @@ spec:
   - name: http
     protocol: TCP
     port: 31746
-    targetPort: auth-svc
+    targetPort: auth-nginx-svc
   type: ClusterIP
 
 ---
