@@ -248,6 +248,8 @@ def create_onsite_login(request: HttpResponse):
             contest = get_object_or_404(Contest, pk=int(request.GET['id']))
             res = []
             for user in get_user_model().objects.filter(contests__contest=contest):
+                if user.is_admin or user.is_moderator:
+                    continue
                 try:
                     filt = OnsiteLogin.objects.filter(user=user, contest=contest, log__isnull=True)
                     if not form.cleaned_data["update_date"]:
