@@ -37,7 +37,19 @@ spec:
           ports:
             - containerPort: 8000
               name: auth-svc
-          resources: {}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: auth-svc
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: auth-svc
+            initialDelaySeconds: 15
+            periodSeconds: 5
           envFrom:
             - configMapRef:
                 name: auth-configmap
