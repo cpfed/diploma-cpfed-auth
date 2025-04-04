@@ -240,6 +240,7 @@ def create_onsite_login(request: HttpResponse):
     class HTMLForm(forms.Form):
         exp_date = forms.DateTimeField(label=_('Expiration date'))  # "%Y-%m-%d %H:%M:%S"
         secret_code_prefix = forms.CharField(max_length=100, label=_('Secret code prefix'))
+        update_date = forms.BooleanField(label='Update date?', required=False)
 
     if request.method == 'POST':
         form = HTMLForm(request.POST)
@@ -247,15 +248,18 @@ def create_onsite_login(request: HttpResponse):
             contest = get_object_or_404(Contest, pk=int(request.GET['id']))
             res = []
             for user in get_user_model().objects.filter(contests__contest=contest):
-                user.is_onsite = True
-                user.save()
                 try:
-                    ol = OnsiteLogin.objects.filter(user=user, contest=contest, expiration_date__gt=timezone.now(),
-                                                    log__isnull=True).get()
+                    filt = OnsiteLogin.objects.filter(user=user, contest=contest, log__isnull=True)
+                    if not form.cleaned_data["update_date"]:
+                        filt.filter(expiration_date__gt=timezone.now())
+                    ol = filt.get()
                     res.append((user.handle, user.email, ol.secret_code))
                 except ObjectDoesNotExist:
                     pass
                 else:
+                    if form.cleaned_data["update_date"]:
+                        ol.expiration_date = form.cleaned_data["exp_date"]
+                        ol.save()
                     continue
                 code = form.data["secret_code_prefix"] + gen_unambiguous_random_string()
                 ol = OnsiteLogin(user=user, contest=contest, expiration_date=form.cleaned_data["exp_date"],
@@ -265,4 +269,4 @@ def create_onsite_login(request: HttpResponse):
             return render(request, 'admin/result_message.html', {
                 'message': f'Успешно загружены onsite login, codes: {res}'})
     form = HTMLForm()
-    return render(request, 'admin/form.html', {'form': form, 'form_name': _('Fill pls')})
+    return render(request, 'admin/form.html', {'form': form, 'form_name': 'Fill pls'})
