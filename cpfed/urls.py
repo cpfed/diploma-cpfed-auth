@@ -17,14 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
+from .views import health_check
 
-urlpatterns = i18n_patterns(
+# Non-localized URLs
+urlpatterns = [
+    path('health/', health_check, name='health_check'),
+    path('telegram/', include('telegram_bot.urls'))
+]
+
+# Localized URLs
+urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
     path('', include('contest.urls')),
     path('', include('locations.urls')),
 )
-
-urlpatterns += [
-    path('telegram/', include('telegram_bot.urls'))
-]
