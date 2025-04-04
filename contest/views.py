@@ -238,7 +238,7 @@ def create_onsite_login(request: HttpResponse):
         raise PermissionDenied()
 
     class HTMLForm(forms.Form):
-        exp_date = forms.DateTimeField(label=_('Expiration date'))  # "%Y-%m-%d %H:%M:%S"
+        exp_date = forms.DateTimeField(label=_('Expiration date'), initial=timezone.now())  # "%Y-%m-%d %H:%M:%S"
         secret_code_prefix = forms.CharField(max_length=100, label=_('Secret code prefix'))
         update_date = forms.BooleanField(label='Update date?', required=False)
 
