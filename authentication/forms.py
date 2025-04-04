@@ -59,7 +59,6 @@ def get_user_form(req_fields: list[str]):
 def get_user_form_with_data(user: MainUser):
     fields_to_include = ['handle', 'email', 'first_name', 'last_name', 'phone_number', 'uin', 't_shirt_size', 'employment_status',
                          'place_of_study_of_work', 'region']
-    fields_to_include.append('telegram_id')
     UserFullForm = get_user_form(fields_to_include)
 
     data = dict()

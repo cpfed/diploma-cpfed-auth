@@ -46,7 +46,8 @@ async def telegram_webhook(request, token):
             text = data['message'].get('text', '')
             parts = text.split()
             if text == '/start':
-                await start(chat_id)
+                pass
+                # await start(chat_id)
             elif text.startswith('/register') and len(parts) == 3:
                 # Format: is /register username token
                 username = parts[1]
@@ -137,9 +138,14 @@ async def telegram_login(request):
         raise ValidationError("Invalid hash")
 
     telegram_id = params.get('id')
-    user.telegram.chat_id = telegram_id
-    await sync_to_async(user.save)()
+
+    telegram_user = await get_telegram_user(telegram_id)
+    if not telegram_user.user:
+        telegram_user.user = user
+        await sync_to_async(telegram_user.save)()
+
     await send_telegram_message(telegram_id, f'Hello {user.first_name}, you successfully singed in your telegram account.')
+    await start(telegram_id)
 
     return redirect('profile')
 

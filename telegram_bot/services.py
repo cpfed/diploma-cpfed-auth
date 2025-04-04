@@ -71,9 +71,6 @@ async def start(chat_id):
     )
 
 
-
-
-
 async def start_menu(chat_id, language):
     keyboard = [
         [KeyboardButton(LANG_DICT[language]["CONTESTS"])],

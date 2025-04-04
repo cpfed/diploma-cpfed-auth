@@ -141,4 +141,9 @@ def user_logout(request: HttpResponse):
 def user_profile(request: HttpResponse):
     if not request.user.is_authenticated:
         return redirect('login')
-    return render(request, 'profile.html', {'form': get_user_form_with_data(request.user), 'form_name': _('Профиль')})
+    context = {
+        'form': get_user_form_with_data(request.user),
+        'form_name': _('Профиль'),
+        'telegram_integrated': hasattr(request.user, 'telegram')
+    }
+    return render(request, 'profile.html', context=context)
