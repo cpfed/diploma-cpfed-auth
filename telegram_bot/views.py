@@ -105,4 +105,4 @@ async def telegram_login(request):
     await sync_to_async(user.save)()
     await send_telegram_message(telegram_id, f'Hello {user.first_name}, you successfully singed in your telegram account.')
 
-    return HttpResponse(status=200)
+    return redirect('profile')
