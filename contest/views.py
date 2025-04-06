@@ -12,7 +12,7 @@ from django.utils.http import urlencode
 from django.utils.crypto import get_random_string
 from django.db.utils import IntegrityError
 from django.db.models.functions import Concat, RowNumber
-from django.db.models import Q, Sum, Value, Window
+from django.db.models import Q, Sum, Value, Window, OuterRef, Exists
 from django.contrib.postgres.aggregates import ArrayAgg
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.cache import cache_page
@@ -39,14 +39,12 @@ def contest_reg(request: HttpResponse, contest_id: int):
     if not contest.registration_open and not (request.user.is_staff or request.user.is_superuser):
         return render(request, 'result_message.html', {'message': _('Регистрация закрыта')})
 
-    user_reg = UserContest.objects.filter(user=request.user, contest=contest)
-    user_reg = (user_reg[0] if len(user_reg) else None)
-    if user_reg is not None:
+    if UserContest.objects.filter(user=request.user, contest=contest).exists():
         return render(request, 'result_message.html', {'message': _('Вы уже зарегистрированы!')})
 
-    form = ContestRegistrationForm(contest, request.user, user_reg)
+    form = ContestRegistrationForm(contest, request.user)
     if request.method == 'POST':
-        form = ContestRegistrationForm(contest, request.user, user_reg, request.POST)
+        form = ContestRegistrationForm(contest, request.user, None, request.POST)
         # to update user data from registration
         user_form = get_user_form(contest.user_fields)(request.POST, instance=request.user)
         if form.is_valid() and user_form.is_valid():
@@ -56,9 +54,11 @@ def contest_reg(request: HttpResponse, contest_id: int):
                     contest_data[field] = value
 
             user_reg = UserContest(user=request.user, contest=contest, additional_fields=contest_data)
-            user_reg.save()
+            # user_reg.save()
 
-            user_form.save()
+            # update fields only from form
+            user_form.save(commit=False)
+            request.user.save(update_fields=user_form.cleaned_data.keys())
 
             esep.reg_users_to_esep_organization(contest, request.user.email)
 
@@ -68,11 +68,9 @@ def contest_reg(request: HttpResponse, contest_id: int):
             for err in errs:
                 if err not in form.errors.get(field, []):
                     form.add_error(field, err)
-    was_reg = UserContest.objects.filter(user=request.user, contest=contest).exists()
-
     return render(request, 'contest_registration.html', {
         'form': form,
-        'form_name': (contest.name if not was_reg else _('Изменить регистрацию')),
+        'form_name': contest.name,
         'contest': contest
     })
 
@@ -101,10 +99,10 @@ def main_page(request: HttpResponse):
         except (KeyError, UnicodeDecodeError, ValueError, ObjectDoesNotExist):
             pass
 
-    contests = {x: False for x in Contest.objects.filter(show_on_main_page=True).order_by('level_on_main_page', '-id')}
+    contests = Contest.objects.filter(show_on_main_page=True).order_by('level_on_main_page', '-id')
     if request.user.is_authenticated:
-        for contests_reg in UserContest.objects.filter(user=request.user, contest__show_on_main_page=True):
-            contests[contests_reg.contest] = True
+        user_contest_exists = UserContest.objects.filter(user=request.user, contest=OuterRef('pk'))
+        contests = contests.annotate(is_registered=Exists(user_contest_exists))
     return render(request, 'main_page.html', {'contests': contests})
 
 

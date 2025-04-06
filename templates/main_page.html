@@ -47,7 +47,7 @@
 
         <div class="my-8 text-center" id="competitions">
             <p class="text-blue-900 text-4xl my-4">{% translate "Чемпионаты и конкурсы" %}</p>
-            {% for contest, is_reg in contests.items %}
+            {% for contest in contests %}
             <div class="flex items-center justify-between bg-gray-100 p-8 pr-4 rounded-xl m-8">
                 <div class="flex space-x-6 h-min">
                     <img src="{{ contest.image_url }}" alt="" class="rounded-lg object-cover w-40 m-auto"/>
@@ -68,7 +68,7 @@
 <!--                            <div class="mb-8">{% translate "Время" %}: {{ conёtest.date | date:'H:i' }} </div>-->
                         </div>
                         <div class="flex space-x-4">
-                            {% if is_reg %}
+                            {% if contest.is_registered %}
                                 <div class="bg-gray-500 py-2 px-6 text-gray-100 rounded-lg">
                                     {% translate "Вы уже зарегистрированы" %}
                                 </div>

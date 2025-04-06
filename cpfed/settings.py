@@ -79,6 +79,14 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
 ]
 
+if DEBUG:
+    INSTALLED_APPS.append('debug_toolbar')
+    MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
+    INTERNAL_IPS = [
+        "127.0.0.1",
+        "localhost",
+    ]
+
 ROOT_URLCONF = 'cpfed.urls'
 
 TEMPLATES = [

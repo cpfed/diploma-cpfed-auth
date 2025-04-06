@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from .views import health_check
 
@@ -32,3 +33,7 @@ urlpatterns += i18n_patterns(
     path('', include('contest.urls')),
     path('', include('locations.urls')),
 )
+
+if settings.DEBUG:
+    from debug_toolbar.toolbar import debug_toolbar_urls
+    urlpatterns += debug_toolbar_urls()
