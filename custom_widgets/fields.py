@@ -30,6 +30,7 @@ division_choice = (
     ('div1', _('Дивизион 1 – ученики гимназий, лицеев, областных, частных и специализированных школ.')),
     ('div2', _('Дивизион 2 – ученики городских, районных и сельских общеобразовательных школ.'))
 )
+prog_lang_choice = tuple((x, x) for x in ("PHP", "Go", "JavaScript", "Python", "C/C++/C", "Java"))
 
 
 class DateInput(forms.widgets.DateInput):
@@ -45,6 +46,7 @@ fields = {
     'BirthDateField': forms.DateField(widget=DateInput(), label=_('Дата рождения')),
     'YesNoField': forms.ChoiceField(choices=yes_no_choice),
     'DivisionChoiceField': forms.ChoiceField(choices=division_choice),
+    'ProgLangChoiceField': forms.ChoiceField(choices=prog_lang_choice),
 }
 
 
