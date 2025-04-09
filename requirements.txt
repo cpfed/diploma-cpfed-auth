@@ -19,3 +19,4 @@ redis==5.2.1
 python-telegram-bot[webhooks]==21.10
 celery==5.4.0
 redis==5.2.1
+django-debug-toolbar==5.1.0

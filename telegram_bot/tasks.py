@@ -4,7 +4,7 @@ from celery import shared_task
 from datetime import timedelta
 from django.utils import timezone
 
-from authentication.models import TelegramUser
+from .models import TelegramUser
 from contest.models import Contest
 from telegram_bot.services import send_telegram_message
 

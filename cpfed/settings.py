@@ -102,7 +102,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'authentication.telegram.telegram_context_processor',
+                'telegram_bot.context_processors.telegram_context_processor',
             ],
         },
     },

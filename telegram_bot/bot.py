@@ -3,6 +3,8 @@ from telegram import Bot
 
 from telegram.request import HTTPXRequest
 
+from .message_cache import MessageCache
+
 
 request = HTTPXRequest(
     connection_pool_size=16,     # Still increase this, but 16 should be enough for testing
@@ -15,3 +17,4 @@ request = HTTPXRequest(
 
 token = settings.TELEGRAM_BOT_TOKEN
 bot = Bot(token=settings.TELEGRAM_BOT_TOKEN, request=request)
+message_cache = MessageCache()

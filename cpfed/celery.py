@@ -12,8 +12,8 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cpfed.settings")
 app = Celery('cpfed')
 
 app.conf.update(
-    broker_url='redis://localhost:6379/0',
-    result_backend='redis://localhost:6379/1',
+    broker_url='redis://localhost:6379/1',
+    result_backend='redis://localhost:6379/2',
     broker_connection_retry_on_startup=True,
     task_serializer='json',
     accept_content=['json'],

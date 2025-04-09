@@ -10,16 +10,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
 from django.conf import settings
 
-from authentication.models import TelegramUser, MainUser
-from django.contrib.auth import get_user_model
+from .models import TelegramUser
+from .bot import message_cache
+from authentication.models import MainUser
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from asgiref.sync import sync_to_async
 from .services import send_telegram_message, send_telegram_photo, broadcast_telegram_message, start, start_menu, edit_telegram_message
 from .forms import BroadcastForm
 from contest.models import Contest
-from .utils import LANG_DICT
-
-from datetime import datetime
 
 
 async def get_telegram_user(chat_id):
@@ -45,10 +43,7 @@ async def telegram_webhook(request, token):
 
             text = data['message'].get('text', '')
             parts = text.split()
-            if text == '/start':
-                pass
-                # await start(chat_id)
-            elif text.startswith('/register') and len(parts) == 3:
+            if text.startswith('/register') and len(parts) == 3:
                 # Format: is /register username token
                 username = parts[1]
                 token = parts[2]
@@ -62,8 +57,10 @@ async def telegram_webhook(request, token):
                         user.telegram = telegram_user
                         await sync_to_async(user.save)()
 
-                    await send_telegram_message(chat_id, LANG_DICT[user.telegram.language]['HELLO'] + user.first_name + LANG_DICT[user.telegram.language]['TELEGRAM_INTEGRATION_SUCCESS'])
-            elif text.startswith('💻 Предстоящие контесты') or text.startswith('💻 Келесі сайыстар'):
+                    response = (message_cache.get_message(user.telegram.language, 'HELLO') + user.first_name +
+                                message_cache.get_message(user.telegram.language, 'TELEGRAM_INTEGRATION_SUCCESS'))
+                    await send_telegram_message(chat_id, response)
+            elif message_cache.matches(text, 'CONTESTS'):
                 get_names = sync_to_async(lambda: list(Contest.objects.filter(
                     show_on_main_page=True,
                     registration_open=True
@@ -77,11 +74,13 @@ async def telegram_webhook(request, token):
 
                 telegram_user = await get_telegram_user(chat_id)
                 reply_markup = InlineKeyboardMarkup(keyboard)
-                await send_telegram_message(chat_id, LANG_DICT[telegram_user.language]['CONTESTS_LIST'] + ':', reply_markup=reply_markup)
-            elif text.startswith('👥 Присоединяйтесь к сообществу') or text.startswith('👥 Қауымдастыққа қосылыңыз'):
-                url = 't.me/'
+
+                response = message_cache.get_message(telegram_user.language, 'CONTESTS_LIST')
+                await send_telegram_message(chat_id, response, reply_markup=reply_markup)
+            elif message_cache.matches(text, 'COMMUNITY'):
                 telegram_user = await get_telegram_user(chat_id)
-                await send_telegram_message(chat_id, LANG_DICT[telegram_user.language]['COMMUNITY_CHATS'] + f': {url}\n')
+                response = message_cache.get_message(telegram_user.language, 'COMMUNITY_CHATS')
+                await send_telegram_message(chat_id, response)
         elif 'callback_query' in data:
             choice = data['callback_query']['data']
             chat_id = data['callback_query']['message']['chat']['id']
@@ -95,9 +94,9 @@ async def telegram_webhook(request, token):
                 telegram_user = await get_telegram_user(chat_id)
                 caption = (f'{contest.name}\n'
                            f'{contest.playing_desc}\n'
-                           f'{LANG_DICT[telegram_user.language]['TIME']}: {contest_date}\n\n')
+                           f'{message_cache.get_message(telegram_user.language, 'TIME')}: {contest_date}\n\n')
                 if contest.link:
-                    caption += f'{LANG_DICT[telegram_user.language]['LINK']}: {contest.link}\n'
+                    caption += f'{message_cache.get_message(telegram_user.language, 'LINK')}: {contest.link}\n'
                 await send_telegram_photo(chat_id, photo=contest.image_url, caption=caption)
             elif choice in ['KAZ', 'RUS']:
                 language = ['KAZ', 'RUS'].index(choice)
