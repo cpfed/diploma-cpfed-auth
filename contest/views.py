@@ -54,7 +54,7 @@ def contest_reg(request: HttpResponse, contest_id: int):
                     contest_data[field] = value
 
             user_reg = UserContest(user=request.user, contest=contest, additional_fields=contest_data)
-            # user_reg.save()
+            user_reg.save()
 
             # update fields only from form
             user_form.save(commit=False)
