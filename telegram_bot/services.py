@@ -25,6 +25,8 @@ async def send_telegram_message(chat_id, message, max_retries=3, *args, **kwargs
         except TimedOut:
             # Connection pool timeout, wait a bit
             time.sleep(1)
+        except Exception as e:
+            time.sleep(1)
     return None  # Failed after max retries
 
 
