@@ -10,15 +10,18 @@ class MessageCache:
         return cls._instance
 
     def load_messages(self):
-        from .models import TelegramMessage
-        messages = TelegramMessage.objects.all()
+        try:
+            from .models import TelegramMessage
+            messages = TelegramMessage.objects.all()
 
-        for lang in self.languages:
-            self.messages[lang] = {}
-
-        for msg in messages.iterator():
             for lang in self.languages:
-                self.messages[lang][msg.code] = getattr(msg, f'data_{lang}')
+                self.messages[lang] = {}
+
+            for msg in messages.iterator():
+                for lang in self.languages:
+                    self.messages[lang][msg.code] = getattr(msg, f'data_{lang}')
+        except Exception as e:
+            pass
 
     def refresh(self):
         self.messages = {}
