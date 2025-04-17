@@ -18,16 +18,13 @@ async def send_telegram_message(chat_id, message, max_retries=3, *args, **kwargs
         try:
             return await bot.send_message(chat_id=chat_id, text=message, **kwargs)
         except RetryAfter as e:
-            # Telegram is asking us to slow down
-            print(f"Rate limited. Waiting for {e.retry_after} seconds")
-            # await asyncio.sleep(e.retry_after)
             time.sleep(e.retry_after)
         except TimedOut:
             # Connection pool timeout, wait a bit
             time.sleep(1)
         except Exception as e:
             time.sleep(1)
-    return None  # Failed after max retries
+    return None
 
 
 async def send_telegram_photo(chat_id, photo, caption, *args, **kwargs):

@@ -66,7 +66,6 @@ def schedule_contest_notifications():
 @shared_task
 def send_contest_notification(contest_id, notification_type):
     try:
-        print(f'sending contest notifications {contest_id} {notification_type}')
         from .bot import message_cache
 
         contest = Contest.objects.get(id=contest_id)

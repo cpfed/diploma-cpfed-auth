@@ -11,7 +11,6 @@ from django.views.decorators.http import require_POST, require_GET
 from django.conf import settings
 
 from .models import TelegramUser
-from .bot import message_cache
 from authentication.models import MainUser
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from asgiref.sync import sync_to_async
@@ -32,12 +31,12 @@ def get_telegram(user):
 @csrf_exempt
 @require_POST
 async def telegram_webhook(request, token):
-    print('received', token)
     if token != settings.TELEGRAM_BOT_TOKEN:
         return HttpResponse({"status": "error", "message": "Invalid token"}, status=403)
     try:
+        from .bot import message_cache
+
         data = json.loads(request.body)
-        print('data =', data)
         if 'message' in data:
             chat_id = data['message']['chat']['id']
 
