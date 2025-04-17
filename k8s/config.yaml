@@ -4,6 +4,11 @@ metadata:
   name: nginx-config
 data:
   nginx.conf: '
+map $http_origin $cors_allowed {
+  default "false";
+  "https://oauth.telegram.org" "true";
+  "https://esep.cpfed.kz" "true";
+}
 server {
     listen       80;
     listen       [::]:80;
@@ -15,7 +20,9 @@ server {
     add_header X-XSS-Protection "1; mode=block";
     add_header Content-Security-Policy "frame-ancestors app.oqylyq.kz";
    
-
+    add_header Cross-Origin-Opener-Policy same-origin-allow-popups;
+    add_header Access-Control-Allow-Origin "https://oauth.telegram.org" always;
+    
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header Host $host;
@@ -24,6 +31,23 @@ server {
     proxy_read_timeout 30;
 
     location / {
+        set $cors "";
+        if ($cors_allowed = "true") {
+          set $cors "origin_matched";
+        }
+        if ($request_method = "OPTIONS") {
+          set $cors "${cors} & preflight";
+        }
+        if ($cors = "origin_matched & preflight") {
+            add_header Access-Control-Allow-Origin "https://oauth.telegram.org";
+            add_header Access-Control-Allow-Methods "GET, POST, OPTIONS";
+            add_header Access-Control-Allow-Headers "Content-Type,Authorization,X-Requested-With";
+            add_header Access-Control-Allow-Credentials "true";
+            add_header Access-Control-Max-Age "1728000";
+            add_header Content-Type "text/plain charset=UTF-8";
+            add_header Content-Length "0";
+            return 204;
+        }
         proxy_pass http://127.0.0.1:8000;
     }
 }

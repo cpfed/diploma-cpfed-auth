@@ -38,6 +38,9 @@ TELEGRAM_BOT_NAME = os.getenv("TELEGRAM_BOT_NAME", None)
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", None)
 TELEGRAM_WEBHOOK_DOMAIN = os.getenv("TELEGRAM_WEBHOOK_DOMAIN", None)
 
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", None)
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND", None)
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = (os.getenv("DEBUG", None) == "True")
 
@@ -102,7 +105,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'authentication.telegram.telegram_context_processor',
+                'telegram_bot.context_processors.telegram_context_processor',
             ],
         },
     },

@@ -5,18 +5,28 @@ import json
 
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse, HttpRequest
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
 from django.conf import settings
 
+from .models import TelegramUser
+from .bot import message_cache
 from authentication.models import MainUser
-from django.contrib.auth import get_user_model
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from .bot import application
 from asgiref.sync import sync_to_async
-from .services import send_telegram_message, send_telegram_photo
+from .services import send_telegram_message, send_telegram_photo, broadcast_telegram_message, start, start_menu, edit_telegram_message
+from .forms import BroadcastForm
 from contest.models import Contest
+
+
+async def get_telegram_user(chat_id):
+    get_user = sync_to_async(lambda: TelegramUser.objects.get_or_create(chat_id=chat_id)[0])
+    return await get_user()
+
+
+def get_telegram(user):
+    return user.telegram if hasattr(user, 'telegram') else None
 
 
 @csrf_exempt
@@ -33,7 +43,6 @@ async def telegram_webhook(request, token):
 
             text = data['message'].get('text', '')
             parts = text.split()
-
             if text.startswith('/register') and len(parts) == 3:
                 # Format: is /register username token
                 username = parts[1]
@@ -42,11 +51,16 @@ async def telegram_webhook(request, token):
                 if token != user.telegram_token:
                     await send_telegram_message(chat_id, 'Incorrect token')
                 else:
-                    user.telegram_id = chat_id
-                    await sync_to_async(user.save)()
+                    telegram = await sync_to_async(get_telegram)(user)
+                    if not telegram:
+                        telegram_user = await get_telegram_user(chat_id)
+                        user.telegram = telegram_user
+                        await sync_to_async(user.save)()
 
-                    await send_telegram_message(chat_id, f'Hello {user.first_name}, you successfully singed in your telegram account.')
-            elif text.startswith('💻 Предстоящие контесты'):
+                    response = (message_cache.get_message(user.telegram.language, 'HELLO') + user.first_name +
+                                message_cache.get_message(user.telegram.language, 'TELEGRAM_INTEGRATION_SUCCESS'))
+                    await send_telegram_message(chat_id, response)
+            elif message_cache.matches(text, 'CONTESTS'):
                 get_names = sync_to_async(lambda: list(Contest.objects.filter(
                     show_on_main_page=True,
                     registration_open=True
@@ -58,21 +72,43 @@ async def telegram_webhook(request, token):
                 for i, name in contest_names:
                     keyboard.append([InlineKeyboardButton(name, callback_data=f"contest_{i}")])
 
+                telegram_user = await get_telegram_user(chat_id)
                 reply_markup = InlineKeyboardMarkup(keyboard)
-                await send_telegram_message(chat_id, 'List of contests:', reply_markup=reply_markup)
+
+                response = message_cache.get_message(telegram_user.language, 'CONTESTS_LIST')
+                await send_telegram_message(chat_id, response, reply_markup=reply_markup)
+            elif message_cache.matches(text, 'COMMUNITY'):
+                telegram_user = await get_telegram_user(chat_id)
+                response = message_cache.get_message(telegram_user.language, 'COMMUNITY_CHATS')
+                await send_telegram_message(chat_id, response)
         elif 'callback_query' in data:
             choice = data['callback_query']['data']
             chat_id = data['callback_query']['message']['chat']['id']
+            message_id = data['callback_query']['message']['message_id']
             if choice.startswith('contest'):
                 contest_id = int(choice.split('_')[1])
-                print('choice_id =', contest_id)
                 get_contest = sync_to_async(lambda: Contest.objects.get(pk=contest_id))
                 contest = await get_contest()
-                await send_telegram_photo(chat_id, photo=contest.image_url, caption=f'{contest.name}\n{contest.playing_desc}\n\nLink: {contest.link}\n')
+                contest_date = contest.date.strftime("%d/%m/%Y %H:%M")
+
+                telegram_user = await get_telegram_user(chat_id)
+                caption = (f'{contest.name}\n'
+                           f'{contest.playing_desc}\n'
+                           f'{message_cache.get_message(telegram_user.language, 'TIME')}: {contest_date}\n\n')
+                if contest.link:
+                    caption += f'{message_cache.get_message(telegram_user.language, 'LINK')}: {contest.link}\n'
+                await send_telegram_photo(chat_id, photo=contest.image_url, caption=caption)
+            elif choice in ['KAZ', 'RUS']:
+                language = ['KAZ', 'RUS'].index(choice)
+                await start_menu(chat_id, language)
+                # await send_telegram_message(chat_id, TelegramUser.LANGUAGE[language][1])
+
+                telegram_user = await get_telegram_user(chat_id)
+                telegram_user.language = language
+                await sync_to_async(telegram_user.save)()
     except Exception as e:
         print(e)
         #return HttpResponse({"status": "error", "message": str(e)}, status=500)
-    print('token is same')
     return HttpResponse(status=200)
 
 
@@ -101,8 +137,42 @@ async def telegram_login(request):
         raise ValidationError("Invalid hash")
 
     telegram_id = params.get('id')
-    user.telegram_id = telegram_id
-    await sync_to_async(user.save)()
+
+    telegram_user = await get_telegram_user(telegram_id)
+    if not telegram_user.user:
+        telegram_user.user = user
+        await sync_to_async(telegram_user.save)()
+
     await send_telegram_message(telegram_id, f'Hello {user.first_name}, you successfully singed in your telegram account.')
+    await start(telegram_id)
 
     return redirect('profile')
+
+
+async def telegram_broadcast(request):
+    async_user = sync_to_async(lambda: request.user)()
+    user = await async_user
+    is_authenticated = await sync_to_async(lambda u: u.is_authenticated)(user)
+    if not is_authenticated or not (user.is_staff or user.is_superuser):
+        return HttpResponse(status=403)
+
+    get_telegram_users = sync_to_async(lambda: TelegramUser.objects.count())
+    telegram_users_count = await get_telegram_users()
+
+    if request.method == 'POST':
+        form = BroadcastForm(request.POST)
+        if form.is_valid():
+            message = form.cleaned_data.get('message', None)
+            if message is None:
+                return HttpResponse(status=400)
+            await broadcast_telegram_message(telegram_users_count, message)
+            return HttpResponse(status=200, content={f'Success: {telegram_users_count} users broadcasted successfully'})
+        else:
+            return HttpResponse(status=400)
+    else:
+        form = BroadcastForm()
+
+    return render(request, 'telegram_bot/broadcast.html', {
+        'form': form,
+        'user_count': telegram_users_count
+    })

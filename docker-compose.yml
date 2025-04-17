@@ -26,7 +26,8 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db:5432/cpfed_auth_db
-      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+      - CELERY_BROKER_URL=redis://redis:6379/1
+      - CELERY_RESULT_BACKEND=redis://redis:6379/2
     volumes:
       - .:/app
     ports:
@@ -35,6 +36,42 @@ services:
       - db
     #  - rabbitmq
     restart: on-failure
+
+  celery:
+    build:
+      context: .
+      dockerfile: docker/local.Dockerfile
+    command: celery -A cpfed worker -l info
+    volumes:
+      - .:/app
+    depends_on:
+      - django
+      - redis
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/cpfed_auth_db
+      - CELERY_BROKER_URL=redis://redis:6379/1
+      - CELERY_RESULT_BACKEND=redis://redis:6379/2
+      - DJANGO_SETTINGS_MODULE=cpfed.settings
+
+  redis:
+    image: redis:6-alpine
+    ports:
+      - "6379:6379"
+
+  celery-beat:
+    build:
+      context: .
+      dockerfile: docker/local.Dockerfile
+    command: celery -A cpfed beat -l info
+    volumes:
+      - .:/app
+    depends_on:
+      - django
+      - redis
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/cpfed_auth_db
+      - CELERY_BROKER_URL=redis://redis:6379/1
+      - CELERY_RESULT_BACKEND=redis://redis:6379/2
 
   # celery:
   #   build:
