@@ -156,7 +156,7 @@ async def telegram_broadcast(request):
     if not is_authenticated or not (user.is_staff or user.is_superuser):
         return HttpResponse(status=403)
 
-    get_telegram_users = sync_to_async(lambda: MainUser.objects.filter(telegram_id__isnull=False).count())
+    get_telegram_users = sync_to_async(lambda: TelegramUser.objects.count())
     telegram_users_count = await get_telegram_users()
 
     if request.method == 'POST':

@@ -8,7 +8,7 @@ from django.conf import settings
 from asgiref.sync import sync_to_async
 from telegram.error import RetryAfter, TimedOut
 
-from authentication.models import MainUser
+from .models import TelegramUser
 from .bot import bot
 from .utils import LANG_DICT
 
@@ -46,14 +46,12 @@ async def broadcast_telegram_message(users_count, message):
 
     @sync_to_async
     def get_telegram_users(offset):
-        return MainUser.objects.filter(
-            telegram_id__isnull=False
-        ).values_list('first_name', 'telegram_id')[offset:offset+batch_size]
+        return TelegramUser.objects.values_list('user__first_name', 'chat_id')[offset:offset+batch_size]
 
     for offset in range(0, users_count, batch_size):
         users_with_telegram = await get_telegram_users(offset)
-        async for first_name, telegram_id in users_with_telegram:
-            await send_telegram_message(telegram_id, message)
+        async for first_name, chat_id in users_with_telegram:
+            await send_telegram_message(chat_id, message)
 
 
 async def start(chat_id):

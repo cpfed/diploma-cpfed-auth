@@ -1,4 +1,6 @@
 # tasks.py
+from telegram.constants import ParseMode
+
 from asgiref.sync import async_to_sync
 from celery import shared_task
 from datetime import timedelta
@@ -81,7 +83,7 @@ def send_contest_notification(contest_id, notification_type):
         for telegram_user in telegram_users.iterator():
             message = message_cache.get_message(telegram_user.language, notification_code).format(contest.name, contest.link)
             send_message_sync = async_to_sync(send_telegram_message)
-            send_message_sync(telegram_user.chat_id, message, max_retries=3)
+            send_message_sync(telegram_user.chat_id, message, max_retries=3, parse_mode=ParseMode.MARKDOWN_V2)
 
     except Contest.DoesNotExist:
         print(f"Contest with ID {contest_id} not found")
