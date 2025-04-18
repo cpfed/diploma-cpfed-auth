@@ -56,6 +56,10 @@ spec:
           env:
             - name: REDIS_HOST
               value: $(AUTH_REDIS_SERVICE_HOST)
+            - name: CELERY_BROKER_URL
+              value: "redis://auth-redis:6379/1"
+            - name: CELERY_RESULT_BACKEND
+              value: "redis://auth-redis:6379/2"
       restartPolicy: Always
       volumes:
       - name: config-vol
