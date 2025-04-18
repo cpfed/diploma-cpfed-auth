@@ -1,14 +1,13 @@
 # tasks.py
-from telegram.constants import ParseMode
+import time
 
-from asgiref.sync import async_to_sync
 from celery import shared_task
 from datetime import timedelta
 from django.utils import timezone
 
 from .models import TelegramUser, ContestNotification
 from contest.models import Contest
-from telegram_bot.services import send_telegram_message
+from telegram_bot.services import send_telegram_message, broadcast_telegram_message
 from celery.result import AsyncResult
 
 
@@ -66,10 +65,13 @@ def schedule_contest_notifications():
 @shared_task
 def send_contest_notification(contest_id, notification_type):
     try:
-        from .bot import message_cache
+        from telegram_bot.message_cache import message_cache
 
         contest = Contest.objects.get(id=contest_id)
-        telegram_users = TelegramUser.objects.all()
+        telegram_users = TelegramUser.objects.filter(user__isnull=False).values_list('user__first_name', 'chat_id', 'language')
+        telegram_users_count = telegram_users.count()
+
+        batch_size = 30
         notification_code = f'CONTEST_IN_{notification_type}'
 
         if notification_type == 'DAY':
@@ -79,10 +81,14 @@ def send_contest_notification(contest_id, notification_type):
             contest.telegram_notification.hour_before_sent = True
             contest.telegram_notification.save()
 
-        for telegram_user in telegram_users.iterator():
-            message = message_cache.get_message(telegram_user.language, notification_code).format(contest.name, contest.link)
-            send_message_sync = async_to_sync(send_telegram_message)
-            send_message_sync(telegram_user.chat_id, message, max_retries=3, parse_mode=ParseMode.MARKDOWN_V2)
+        for offset in range(0, telegram_users_count, batch_size):
+            batch = telegram_users[offset: offset+batch_size]
+            for first_name, chat_id, language in batch:
+                message = message_cache.get_message(language, notification_code).format(contest.name, contest.link)
+                send_telegram_message(chat_id, message, reply_markup=None, parse_mode='MarkdownV2')
+
+            # https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this
+            time.sleep(2)
 
     except Contest.DoesNotExist:
         print(f"Contest with ID {contest_id} not found")

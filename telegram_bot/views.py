@@ -11,17 +11,17 @@ from django.views.decorators.http import require_POST, require_GET
 from django.conf import settings
 
 from .models import TelegramUser
-from authentication.models import MainUser
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from asgiref.sync import sync_to_async
-from .services import send_telegram_message, send_telegram_photo, broadcast_telegram_message, start, start_menu, edit_telegram_message
+from .services import send_telegram_message, send_telegram_photo, broadcast_telegram_message, start, start_menu, \
+    edit_telegram_message
 from .forms import BroadcastForm
 from contest.models import Contest
 
 
-async def get_telegram_user(chat_id):
-    get_user = sync_to_async(lambda: TelegramUser.objects.get_or_create(chat_id=chat_id)[0])
-    return await get_user()
+user_categories = ['school', 'university', 'teacher', 'company']
+
+
+def get_telegram_user(chat_id):
+    return TelegramUser.objects.get_or_create(chat_id=chat_id)[0]
 
 
 def get_telegram(user):
@@ -30,11 +30,11 @@ def get_telegram(user):
 
 @csrf_exempt
 @require_POST
-async def telegram_webhook(request, token):
+def telegram_webhook(request, token):
     if token != settings.TELEGRAM_BOT_TOKEN:
         return HttpResponse({"status": "error", "message": "Invalid token"}, status=403)
     try:
-        from .bot import message_cache
+        from telegram_bot.message_cache import message_cache
 
         data = json.loads(request.body)
         if 'message' in data:
@@ -42,83 +42,86 @@ async def telegram_webhook(request, token):
 
             text = data['message'].get('text', '')
             parts = text.split()
-            if text.startswith('/register') and len(parts) == 3:
-                # Format: is /register username token
-                username = parts[1]
-                token = parts[2]
-                user = await sync_to_async(MainUser.objects.get)(handle=username)
-                if token != user.telegram_token:
-                    await send_telegram_message(chat_id, 'Incorrect token')
-                else:
-                    telegram = await sync_to_async(get_telegram)(user)
-                    if not telegram:
-                        telegram_user = await get_telegram_user(chat_id)
-                        user.telegram = telegram_user
-                        await sync_to_async(user.save)()
-
-                    response = (message_cache.get_message(user.telegram.language, 'HELLO') + user.first_name +
-                                message_cache.get_message(user.telegram.language, 'TELEGRAM_INTEGRATION_SUCCESS'))
-                    await send_telegram_message(chat_id, response)
+            if text.startswith('/start'):
+                start(chat_id)
             elif message_cache.matches(text, 'CONTESTS'):
-                get_names = sync_to_async(lambda: list(Contest.objects.filter(
+                contest_names = Contest.objects.filter(
                     show_on_main_page=True,
                     registration_open=True
-                ).values_list('id', 'name')))
-
-                # Execute the async operation
-                contest_names = await get_names()
+                ).values_list('id', 'name')
                 keyboard = []
-                for i, name in contest_names:
-                    keyboard.append([InlineKeyboardButton(name, callback_data=f"contest_{i}")])
+                for i, name in contest_names.iterator():
+                    keyboard.append([
+                        {
+                            'text': name,
+                            'callback_data': f"contest_{i}"
+                        }
+                    ])
 
-                telegram_user = await get_telegram_user(chat_id)
-                reply_markup = InlineKeyboardMarkup(keyboard)
+                telegram_user = get_telegram_user(chat_id)
+                reply_markup = {
+                    "inline_keyboard": keyboard
+                }
 
                 response = message_cache.get_message(telegram_user.language, 'CONTESTS_LIST')
-                await send_telegram_message(chat_id, response, reply_markup=reply_markup)
+                send_telegram_message(chat_id, response, reply_markup=reply_markup)
             elif message_cache.matches(text, 'COMMUNITY'):
-                telegram_user = await get_telegram_user(chat_id)
+                telegram_user = get_telegram_user(chat_id)
                 response = message_cache.get_message(telegram_user.language, 'COMMUNITY_CHATS')
-                await send_telegram_message(chat_id, response)
+                send_telegram_message(chat_id, response)
         elif 'callback_query' in data:
             choice = data['callback_query']['data']
             chat_id = data['callback_query']['message']['chat']['id']
             message_id = data['callback_query']['message']['message_id']
+            telegram_user = get_telegram_user(chat_id)
+
             if choice.startswith('contest'):
                 contest_id = int(choice.split('_')[1])
-                get_contest = sync_to_async(lambda: Contest.objects.get(pk=contest_id))
-                contest = await get_contest()
+                contest = Contest.objects.get(pk=contest_id)
                 contest_date = contest.date.strftime("%d/%m/%Y %H:%M")
-
-                telegram_user = await get_telegram_user(chat_id)
                 caption = (f'{contest.name}\n'
                            f'{contest.playing_desc}\n'
                            f'{message_cache.get_message(telegram_user.language, 'TIME')}: {contest_date}\n\n')
                 if contest.link:
                     caption += f'{message_cache.get_message(telegram_user.language, 'LINK')}: {contest.link}\n'
-                await send_telegram_photo(chat_id, photo=contest.image_url, caption=caption)
-            elif choice in ['KAZ', 'RUS']:
-                language = ['KAZ', 'RUS'].index(choice)
-                await start_menu(chat_id, language)
-                # await send_telegram_message(chat_id, TelegramUser.LANGUAGE[language][1])
+                send_telegram_photo(chat_id, photo=contest.image_url, caption=caption)
+            elif choice in ['kk', 'ru']:
+                edit_telegram_message(chat_id, message_id, '')
+                send_telegram_message(chat_id, message_cache.get_message(choice, 'LANG_CHOICE'))
 
-                telegram_user = await get_telegram_user(chat_id)
-                telegram_user.language = language
-                await sync_to_async(telegram_user.save)()
+                keyboard = []
+                for category in user_categories:
+                    keyboard.append([
+                        {
+                            'text': message_cache.get_message(telegram_user.language, category),
+                            'callback_data': category
+                        }
+                    ])
+                reply_markup = {
+                    "inline_keyboard": keyboard
+                }
+
+                response = message_cache.get_message(telegram_user.language, 'CHOOSE_CATEGORY')
+                send_telegram_message(chat_id, response, reply_markup=reply_markup)
+
+                telegram_user.language = choice
+                telegram_user.save()
+            elif choice in user_categories:
+                start_menu(chat_id, choice)
+
+                telegram_user.user_group = user_categories.index(choice)
+                telegram_user.save()
     except Exception as e:
-        print(e)
-        #return HttpResponse({"status": "error", "message": str(e)}, status=500)
+        return HttpResponse({"message": str(e)}, status=400)
     return HttpResponse(status=200)
 
 
 @require_GET
 @csrf_exempt
-async def telegram_login(request):
+def telegram_login(request):
     params = request.GET
-    async_user = sync_to_async(lambda: request.user)()
-    user = await async_user
-    is_authenticated = await sync_to_async(lambda u: u.is_authenticated)(user)
-    if not is_authenticated:
+    user = request.user
+    if not user.is_authenticated:
         return HttpResponse(status=403)
 
     bot_token = settings.TELEGRAM_BOT_TOKEN
@@ -135,28 +138,22 @@ async def telegram_login(request):
     if built_hash != params.get('hash'):
         raise ValidationError("Invalid hash")
 
-    telegram_id = params.get('id')
+    chat_id = params.get('id')
 
-    telegram_user = await get_telegram_user(telegram_id)
-    if not telegram_user.user:
-        telegram_user.user = user
-        await sync_to_async(telegram_user.save)()
+    telegram_user = TelegramUser.objects.get_or_create(chat_id=chat_id, user=user)[0]
 
-    await send_telegram_message(telegram_id, f'Hello {user.first_name}, you successfully singed in your telegram account.')
-    await start(telegram_id)
+    send_telegram_message(chat_id, f'Hello {user.first_name}, you successfully singed in your telegram account.')
+    start(chat_id)
 
     return redirect('profile')
 
 
-async def telegram_broadcast(request):
-    async_user = sync_to_async(lambda: request.user)()
-    user = await async_user
-    is_authenticated = await sync_to_async(lambda u: u.is_authenticated)(user)
-    if not is_authenticated or not (user.is_staff or user.is_superuser):
+def telegram_broadcast(request):
+    user = request.user
+    if not user.is_authenticated or not (user.is_staff or user.is_superuser):
         return HttpResponse(status=403)
 
-    get_telegram_users = sync_to_async(lambda: TelegramUser.objects.count())
-    telegram_users_count = await get_telegram_users()
+    telegram_users_count = TelegramUser.objects.filter(user__isnull=False).count()
 
     if request.method == 'POST':
         form = BroadcastForm(request.POST)
@@ -164,7 +161,7 @@ async def telegram_broadcast(request):
             message = form.cleaned_data.get('message', None)
             if message is None:
                 return HttpResponse(status=400)
-            await broadcast_telegram_message(telegram_users_count, message)
+            broadcast_telegram_message(telegram_users_count, message)
             return HttpResponse(status=200, content={f'Success: {telegram_users_count} users broadcasted successfully'})
         else:
             return HttpResponse(status=400)

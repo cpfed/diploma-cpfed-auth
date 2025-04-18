@@ -1,11 +1,11 @@
 class MessageCache:
     _instance = None
+    languages = ['kk', 'en', 'ru']
 
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(MessageCache, cls).__new__(cls)
-            cls._instance.messages = {}
-            cls._instance.languages = ['kk', 'en', 'ru']
+            cls._instance.messages = {lang: {} for lang in cls.languages}
             cls._instance.load_messages()
         return cls._instance
 
@@ -15,7 +15,7 @@ class MessageCache:
             messages = TelegramMessage.objects.all()
 
             for lang in self.languages:
-                self.messages[lang] = {}
+                self.messages[lang].clear()
 
             for msg in messages.iterator():
                 for lang in self.languages:
@@ -24,7 +24,6 @@ class MessageCache:
             pass
 
     def refresh(self):
-        self.messages = {}
         self.load_messages()
 
     def get_message(self, lang, code):
@@ -41,3 +40,6 @@ class MessageCache:
         for lang in self.languages:
             if text.startswith(self.messages[lang][code]):
                 return True
+
+
+message_cache = MessageCache()
