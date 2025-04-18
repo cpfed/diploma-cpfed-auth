@@ -1,8 +1,6 @@
 from django.core.management.base import BaseCommand
 import asyncio
 
-from telegram import Bot
-
 from django.conf import settings
 
 
