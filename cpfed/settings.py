@@ -213,7 +213,8 @@ OQYLYK_JWT_SECRET = os.getenv("OQYLYK_JWT_SECRET", '')
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'https://contest.cpfed.kz',
-    'https://app.oqylyq.kz'
+    'https://app.oqylyq.kz',
+    'https://oauth.telegram.org'
 ]
 
 X_FRAME_OPTIONS = 'ALLOW-FROM https://app.oqylyq.kz'
