@@ -3,15 +3,19 @@
 
 {% block form_addition_bottom %}
 <div class="flex flex-wrap justify-between">
-    <p class="text-blue-800 text-right my-4">
+    <p class="text-blue-800 text-right md-2 mt-4">
         <a href="{% url 'register' %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">
         {% translate "Регистрация" %}
         </a>
     </p>
-    <p class="text-blue-800 text-right my-4">
+    <p class="text-blue-800 text-right md-2 mt-4">
         <a href="{% url 'pass_rec'%}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">
         {% translate "Забыли пароль?" %}
         </a>
     </p>
 </div>
+
+<a href="{%url 'login_code' %}" class="text-blue-800">
+    {% translate "Войти в аккаунт по коду" %}
+</a>
 {% endblock %}

@@ -81,9 +81,9 @@ def telegram_webhook(request, token):
                 contest_date = contest.date.strftime("%d/%m/%Y %H:%M")
                 caption = (f'{contest.name}\n'
                            f'{contest.playing_desc}\n'
-                           f'{message_cache.get_message(telegram_user.language, 'TIME')}: {contest_date}\n\n')
+                           f'{message_cache.get_message(telegram_user.language, "TIME")}: {contest_date}\n\n')
                 if contest.link:
-                    caption += f'{message_cache.get_message(telegram_user.language, 'LINK')}: {contest.link}\n'
+                    caption += f'{message_cache.get_message(telegram_user.language, "LINK")}: {contest.link}\n'
                 send_telegram_photo(chat_id, photo=contest.image_url, caption=caption)
             elif choice in ['kk', 'ru']:
                 edit_telegram_message(chat_id, message_id, '')

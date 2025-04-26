@@ -49,7 +49,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         function toggle_lang_dropdown(){
                             document.getElementById("lang_dropdown").classList.toggle("hidden");
                         }
-
                     </script>
                     <button onclick="toggle_lang_dropdown()" class="lang_drop_btn">
                         <img src="{% static 'icon-globe-02.svg' %}" height="20" width="20"/></button>
@@ -68,9 +67,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 {% else %}
                 <a href="{%url 'login' %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">
                     <div class="text-blue-600 underline">{% translate "Войти" %}</div>
-                </a>
-                <a href="{%url 'login' %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">
-                    <div class="text-blue-600 underline">{% translate "Войти по коду" %}</div>
                 </a>
                 <a href="{%url 'register' %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">
                     <div class="text-blue-600 underline">{% translate "Регистрация" %}</div>

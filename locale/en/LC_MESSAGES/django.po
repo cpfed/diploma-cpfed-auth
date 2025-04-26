@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-04 14:35+0500\n"
+"POT-Creation-Date: 2025-04-26 13:13+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,21 +22,19 @@ msgstr ""
 msgid "Убрать зарегистрированных"
 msgstr "Exclude registered"
 
-#: .\authentication\admin.py:32
-#, fuzzy
-#| msgid "Убрать зарегистрированных"
+#: .\authentication\admin.py:33
 msgid "Только зарегистрированные"
-msgstr "Exclude registered"
+msgstr "Only registered"
 
-#: .\authentication\admin.py:52
+#: .\authentication\admin.py:54
 msgid "Отправить письмо на почту"
 msgstr ""
 
-#: .\authentication\admin.py:59
+#: .\authentication\admin.py:61
 msgid "Зарегистрировать новых пользователей"
 msgstr ""
 
-#: .\authentication\forms.py:19 .\authentication\forms.py:38
+#: .\authentication\forms.py:19 .\authentication\forms.py:42
 msgid "Пароли не совпадают"
 msgstr "The passwords do not match"
 
@@ -44,92 +42,97 @@ msgstr "The passwords do not match"
 msgid "Хэндл/Email"
 msgstr "Handle/Email"
 
-#: .\authentication\forms.py:28 .\authentication\models.py:61
+#: .\authentication\forms.py:28
+msgid "Код"
+msgstr "Code"
+
+#: .\authentication\forms.py:32 .\authentication\models.py:66
 #: .\authentication\models.py:222
 msgid "Электронная почта"
 msgstr "Email"
 
-#: .\authentication\forms.py:33
+#: .\authentication\forms.py:37
 msgid "Подтвердите пароль"
 msgstr "Confirm password"
 
-#: .\authentication\models.py:19
+#: .\authentication\models.py:20
 msgid "Хэндл может состоять только из латинских букв, цифр и _"
 msgstr "The handle can only consist of Latin letters, numbers and _"
 
-#: .\authentication\models.py:20
+#: .\authentication\models.py:21
 msgid "ИИН может состоять только из 12 цифр"
 msgstr "UIN can only consist of 12 digits"
 
-#: .\authentication\models.py:55 .\authentication\models.py:217
+#: .\authentication\models.py:60 .\authentication\models.py:217
 msgid "Хэндл"
 msgstr "Handle (nickname)"
 
-#: .\authentication\models.py:67
+#: .\authentication\models.py:72
 msgid "Имя"
 msgstr "First name"
 
-#: .\authentication\models.py:73
+#: .\authentication\models.py:78
 msgid "Фамилия"
 msgstr "Last name"
 
-#: .\authentication\models.py:80
+#: .\authentication\models.py:85
 msgid "Телефонный номер"
 msgstr "Phone number"
 
-#: .\authentication\models.py:87
+#: .\authentication\models.py:92
 msgid "Пол"
 msgstr "Gender"
 
-#: .\authentication\models.py:94
+#: .\authentication\models.py:99
 msgid "ИИН"
 msgstr "UIN"
 
-#: .\authentication\models.py:102
+#: .\authentication\models.py:107
 msgid "Размер футболки"
 msgstr "T-shirt size"
 
-#: .\authentication\models.py:109
+#: .\authentication\models.py:114
 msgid "Статус занятости"
 msgstr "Employment status"
 
-#: .\authentication\models.py:115
+#: .\authentication\models.py:120
 msgid "Место учебы или работы"
 msgstr "Place of study or work"
 
-#: .\authentication\models.py:122 .\locations\models.py:18
+#: .\authentication\models.py:127 .\locations\models.py:18
 msgid "Регион"
 msgstr "Region"
 
-#: .\authentication\models.py:125
+#: .\authentication\models.py:130
 msgid "Гражданин РК?"
 msgstr "Citizen of the Republic of Kazakhstan?"
 
-#: .\authentication\models.py:129
+#: .\authentication\models.py:133
 msgid "Админ?"
 msgstr "Admin?"
 
-#: .\authentication\models.py:130
+#: .\authentication\models.py:134
 msgid "Модератор?"
 msgstr "Moderator?"
 
-#: .\authentication\models.py:131
+#: .\authentication\models.py:135
 msgid "Аккаунт удален?"
 msgstr "Account deleted?"
 
-#: .\authentication\models.py:132
+#: .\authentication\models.py:136
 msgid "Аккаунт активен?"
 msgstr "Account active?"
 
-#: .\authentication\models.py:140 .\authentication\models.py:185
+#: .\authentication\models.py:144 .\authentication\models.py:185
+#: .\authentication\models.py:273
 msgid "Пользователь"
 msgstr "User"
 
-#: .\authentication\models.py:141
+#: .\authentication\models.py:145
 msgid "Пользователи"
 msgstr "Users"
 
-#: .\authentication\models.py:159
+#: .\authentication\models.py:163
 msgid "Поле не может быть пустым"
 msgstr "The field cannot be empty"
 
@@ -138,6 +141,7 @@ msgid "Ссылка использована?"
 msgstr "Link used?"
 
 #: .\authentication\models.py:193 .\authentication\models.py:234
+#: .\authentication\models.py:285
 msgid "Срок годности"
 msgstr "Expiration date"
 
@@ -161,6 +165,26 @@ msgstr "The email is already taken"
 #: .\authentication\models.py:264 .\authentication\models.py:265
 msgid "Активация аккаунта"
 msgstr "Account activation"
+
+#: .\authentication\models.py:280 .\contest\models.py:52
+msgid "Контест"
+msgstr "Contest"
+
+#: .\authentication\models.py:288
+msgid "Секретный код"
+msgstr "Secret code"
+
+#: .\authentication\models.py:304
+msgid "Использованный код"
+msgstr "Used code"
+
+#: .\authentication\models.py:309
+msgid "IP адрес"
+msgstr ""
+
+#: .\authentication\models.py:312
+msgid "Время использования"
+msgstr "Use time"
 
 #: .\authentication\views\admin_actions.py:20
 #: .\authentication\views\admin_actions.py:42
@@ -199,105 +223,117 @@ msgstr "Password changed successfully!"
 msgid "Введите новый пароль"
 msgstr "Enter new password"
 
-#: .\authentication\views\user_management.py:50
+#: .\authentication\views\user_management.py:51
 msgid "На почту отправлено письмо для активации аккаунта"
 msgstr "Email has been sent to activate your account."
 
-#: .\authentication\views\user_management.py:52
+#: .\authentication\views\user_management.py:53
 msgid "Зарегистрироваться"
 msgstr "Register"
 
-#: .\authentication\views\user_management.py:92
+#: .\authentication\views\user_management.py:93
 msgid "Ссылка уже использована"
 msgstr "Link used?"
 
-#: .\authentication\views\user_management.py:94
+#: .\authentication\views\user_management.py:95
 msgid "Ссылка для активации аккаунта устарела"
 msgstr "The account activation link expired"
 
 #: .\authentication\views\user_management.py:129
+msgid "Вы участвуете в оффлайн соревновании. Ждите секретный код для входа"
+msgstr ""
+
+#: .\authentication\views\user_management.py:132
 msgid "Некорректный хэндл/email или пароль"
 msgstr "Incorrect handle/email or password"
 
-#: .\authentication\views\user_management.py:130
+#: .\authentication\views\user_management.py:133
 msgid "Войти в аккаунт"
 msgstr "Login"
 
-#: .\authentication\views\user_management.py:141
-msgid "Профиль"
-msgstr ""
+#: .\authentication\views\user_management.py:151
+msgid "Некорректный код"
+msgstr "Incorrect code"
 
-#: .\contest\models.py:16
+#: .\authentication\views\user_management.py:152 .\templates\login.html:19
+msgid "Войти в аккаунт по коду"
+msgstr "Login by code"
+
+#: .\authentication\views\user_management.py:165
+msgid "Профиль"
+msgstr "Profile"
+
+#: .\contest\models.py:20
 msgid "Название контеста"
 msgstr "Name of the contest"
 
-#: .\contest\models.py:38
+#: .\contest\models.py:35
 msgid "Описание контеста"
 msgstr "Contest description"
 
-#: .\contest\models.py:39
+#: .\contest\models.py:36
 msgid "Дата контеста"
 msgstr "Contest date"
 
-#: .\contest\models.py:41
+#: .\contest\models.py:38
 msgid "Ссылка на контест"
 msgstr "Link to the contest"
 
-#: .\contest\models.py:57
-msgid "Контест"
-msgstr "Contest"
-
-#: .\contest\models.py:58
+#: .\contest\models.py:53
 msgid "Контесты"
 msgstr "Contests"
 
-#: .\contest\models.py:100
+#: .\contest\models.py:123
 msgid "ID пользователя"
 msgstr "User ID"
 
-#: .\contest\models.py:106
+#: .\contest\models.py:129
 msgid "ID контеста"
 msgstr "Contest ID"
 
-#: .\contest\models.py:114 .\contest\models.py:115
+#: .\contest\models.py:138 .\contest\models.py:139
 msgid "Данные пользователей к контестам"
 msgstr "User data for contests"
 
-#: .\contest\models.py:139 .\templates\base.html:59 .\templates\login.html:8
+#: .\contest\models.py:163 .\templates\base.html:72 .\templates\login.html:8
 #: .\templates\main_page.html:29
 msgid "Регистрация"
 msgstr "Register"
 
-#: .\contest\models.py:142
+#: .\contest\models.py:166
 msgid "Ранг"
 msgstr ""
 
-#: .\contest\models.py:143
+#: .\contest\models.py:167
 msgid "Очки"
 msgstr ""
 
-#: .\contest\views.py:34 .\templates\main_page.html:105
+#: .\contest\views.py:40 .\templates\main_page.html:104
 msgid "Регистрация закрыта"
 msgstr "Registration is closed"
 
-#: .\contest\views.py:39
+#: .\contest\views.py:43
 msgid "Вы уже зарегистрированы!"
 msgstr "You already registered"
 
-#: .\contest\views.py:69
-msgid "Изменить регистрацию"
-msgstr "Change registration"
-
-#: .\contest\views.py:92
+#: .\contest\views.py:114
 msgid "Ссылка на API с результатами контеста"
 msgstr ""
 
-#: .\contest\views.py:93
+#: .\contest\views.py:115
 msgid "Добавить очки по GP100?"
 msgstr ""
 
-#: .\contest\views.py:127
+#: .\contest\views.py:143
 msgid "Загрузить результаты контеста"
+msgstr ""
+
+#: .\contest\views.py:239
+msgid "Expiration date"
+msgstr ""
+
+#: .\contest\views.py:240
+msgid "Secret code prefix"
 msgstr ""
 
 #: .\custom_widgets\fields.py:12
@@ -317,10 +353,8 @@ msgid "Фриланс"
 msgstr ""
 
 #: .\custom_widgets\fields.py:23
-#, fuzzy
-#| msgid "Работаю"
 msgid "Работаю в офисе"
-msgstr "Working"
+msgstr "Working from office"
 
 #: .\custom_widgets\fields.py:26
 msgid "Да"
@@ -341,37 +375,29 @@ msgid ""
 "Дивизион 2 – ученики городских, районных и сельских общеобразовательных школ."
 msgstr ""
 
-#: .\custom_widgets\fields.py:40
+#: .\custom_widgets\fields.py:41
 msgid "Район"
 msgstr "District"
 
-#: .\custom_widgets\fields.py:41
-#, fuzzy
-#| msgid "Обучение"
-msgid "Класс обучения"
-msgstr "Education"
-
 #: .\custom_widgets\fields.py:42
-#, fuzzy
-#| msgid "Обучение"
-msgid "Язык обучения"
-msgstr "Education"
+msgid "Класс обучения"
+msgstr ""
 
 #: .\custom_widgets\fields.py:43
-#, fuzzy
-#| msgid "Место учебы или работы"
-msgid "Формат работы"
-msgstr "Place of study or work"
+msgid "Язык обучения"
+msgstr "Language of education"
 
 #: .\custom_widgets\fields.py:44
-msgid "Телефон одного из родителей "
+msgid "Формат работы"
 msgstr ""
 
 #: .\custom_widgets\fields.py:45
-#, fuzzy
-#| msgid "Обучение"
+msgid "Телефон одного из родителей "
+msgstr ""
+
+#: .\custom_widgets\fields.py:46
 msgid "Дата рождения"
-msgstr "Education"
+msgstr "Date of birth"
 
 #: .\locations\management\commands\create_regions.py:10
 msgid "Акмолинская область"
@@ -592,43 +618,63 @@ msgstr "Creation time"
 msgid "Время последнего изменения"
 msgstr "Last modified time"
 
-#: .\templates\base.html:25 .\templates\base.html:77
+#: .\telegram_bot\models.py:17
+msgid "Школьник"
+msgstr ""
+
+#: .\telegram_bot\models.py:18
+msgid "Студент"
+msgstr ""
+
+#: .\telegram_bot\models.py:19
+msgid "Учитель"
+msgstr ""
+
+#: .\telegram_bot\models.py:20
+msgid "Работник компании"
+msgstr ""
+
+#: .\telegram_bot\models.py:27
+msgid "Телеграм"
+msgstr ""
+
+#: .\templates\base.html:39 .\templates\base.html:90
 msgid "Главная"
 msgstr "Main page"
 
-#: .\templates\base.html:26
+#: .\templates\base.html:40
 msgid "Соревнования"
 msgstr "Competitions"
 
-#: .\templates\base.html:27
+#: .\templates\base.html:41
 msgid "О ЧРК"
 msgstr "About ЧРК"
 
-#: .\templates\base.html:28 .\templates\base.html:78
+#: .\templates\base.html:42 .\templates\base.html:91
 msgid "О нас"
 msgstr "About us"
 
-#: .\templates\base.html:29 .\templates\base.html:79
+#: .\templates\base.html:43 .\templates\base.html:92
 msgid "Контакты"
 msgstr "Contacts"
 
-#: .\templates\base.html:50
+#: .\templates\base.html:63
 msgid "Привет"
 msgstr "Hello"
 
-#: .\templates\base.html:52
+#: .\templates\base.html:65
 msgid "Выйти"
 msgstr "Logout"
 
-#: .\templates\base.html:56
+#: .\templates\base.html:69
 msgid "Войти"
 msgstr "Enter"
 
-#: .\templates\base.html:80
+#: .\templates\base.html:93
 msgid "Помощь"
 msgstr "Help"
 
-#: .\templates\base.html:84
+#: .\templates\base.html:97
 msgid "Все права защищены."
 msgstr "All rights reserved."
 
@@ -684,8 +730,8 @@ msgstr "Congratulations! You are successfully registered!"
 msgid "Ожидайте уведомления с подробностями и готовьтесь к соревнованию!"
 msgstr "Stay tuned for further details and get ready for the competition!"
 
-#: .\templates\contest_reg_guide.html:25 .\templates\main_page.html:93
-#: .\templates\main_page.html:99
+#: .\templates\contest_reg_guide.html:25 .\templates\main_page.html:92
+#: .\templates\main_page.html:98
 msgid "Зарегистрироваться на контест"
 msgstr "Register on contest"
 
@@ -787,7 +833,7 @@ msgstr ""
 "skills. Take part in the championships, find out the schedule and register "
 "so as not to miss the chance to become the best!"
 
-#: .\templates\main_page.html:24 .\templates\main_page.html:110
+#: .\templates\main_page.html:24 .\templates\main_page.html:109
 msgid "Узнать больше"
 msgstr "Find out more"
 
@@ -811,27 +857,27 @@ msgstr ""
 msgid "Чемпионаты и конкурсы"
 msgstr "Competitions"
 
-#: .\templates\main_page.html:62
+#: .\templates\main_page.html:61
 msgid "Дата"
 msgstr "Date"
 
-#: .\templates\main_page.html:69
+#: .\templates\main_page.html:68
 msgid "Время"
 msgstr "Time"
 
-#: .\templates\main_page.html:74
+#: .\templates\main_page.html:73
 msgid "Вы уже зарегистрированы"
 msgstr "You already registered"
 
-#: .\templates\main_page.html:79
+#: .\templates\main_page.html:78
 msgid "Войти на контест"
 msgstr "Go to the contest"
 
-#: .\templates\main_page.html:85
+#: .\templates\main_page.html:84
 msgid "Войти на пробный тур"
 msgstr "Go to the trial round"
 
-#: .\templates\main_page.html:119
+#: .\templates\main_page.html:118
 #, python-format
 msgid "Остался %(days)s день"
 msgid_plural "Осталось %(days)s дней"
@@ -887,6 +933,12 @@ msgstr ""
 #: .\utils\error_list.py:11
 msgid "Пользователь с таким Телефонный номер уже существует."
 msgstr "A user with this phone number already exists."
+
+#~ msgid "Войти по коду"
+#~ msgstr "Go to the contest"
+
+#~ msgid "Изменить регистрацию"
+#~ msgstr "Change registration"
 
 #, fuzzy
 #~| msgid "Размер футболки"

@@ -133,6 +133,9 @@ def user_login(request: HttpResponse):
     return render(request, 'login.html', {'form': form, 'form_name': _('Войти в аккаунт')})
 
 def user_secret_code_login(request: HttpResponse):
+    if request.user.is_authenticated:
+        return _redirect_after_login(request)
+
     form = UserSecretCodeLoginForm()
     if request.method == 'POST':
         form = UserSecretCodeLoginForm(request.POST)
@@ -142,10 +145,11 @@ def user_secret_code_login(request: HttpResponse):
         except ObjectDoesNotExist:
             pass
         else:
-            login(request, ol.user)
-            return HttpResponseRedirect(f'{reverse("login")}?contest={ol.contest.pk}')
-        form.add_error('password', _('Некорректный код'))
-    return render(request, 'login.html', {'form': form, 'form_name': _('Войти в аккаунт')})
+            if ol.is_still_valid and not ol.user.is_staff:
+                login(request, ol.user)
+                return HttpResponseRedirect(f'{reverse("login")}{f"?contest={ol.contest.pk}" if ol.contest else ""}')
+        form.add_error('code', _('Некорректный код'))
+    return render(request, 'login.html', {'form': form, 'form_name': _('Войти в аккаунт по коду')})
 
 
 def user_logout(request: HttpResponse):
