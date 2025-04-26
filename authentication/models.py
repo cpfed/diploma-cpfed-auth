@@ -288,21 +288,28 @@ class OnsiteLogin(models.Model):
         verbose_name=_("Секретный код"),
         unique=True
     )
+    is_one_time = models.BooleanField(
+        verbose_name=_("Одноразовый ли код?"),
+        default=False
+    )
 
     def __str__(self):
         return f"User: {self.user}, contest: {self.contest}, valid: {self.is_still_valid}"
 
     @property
     def is_still_valid(self):
-        return not hasattr(self, "log") and self.expiration_date > timezone.now()
+        if self.expiration_date <= timezone.now() or (
+                self.is_one_time and OnsiteLoginLogs.objects.filter(onsite_login=self).exists()) or self.user.is_staff:
+            return False
+        return True
 
 
 class OnsiteLoginLogs(models.Model):
-    onsite_login = models.OneToOneField(
+    onsite_login = models.ForeignKey(
         OnsiteLogin,
         on_delete=models.DO_NOTHING,
         verbose_name=_("Использованный код"),
-        related_name="log"
+        related_name="logs"
     )
     ip_address = models.CharField(
         max_length=100,
@@ -314,4 +321,4 @@ class OnsiteLoginLogs(models.Model):
     )
 
     def __str__(self):
-        return f"User: {self.onsite_login.user}, contest: {self.onsite_login.contest}, valid: {self.ip_address}, used at {self.created_time}"
+        return f"User: {self.onsite_login.user}; Contest: {self.onsite_login.contest}; IP address: {self.ip_address}; Used at {self.created_time}"

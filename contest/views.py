@@ -238,7 +238,8 @@ def create_onsite_login(request: HttpResponse):
     class HTMLForm(forms.Form):
         exp_date = forms.DateTimeField(label=_('Expiration date'), initial=timezone.now())  # "%Y-%m-%d %H:%M:%S"
         secret_code_prefix = forms.CharField(max_length=100, label=_('Secret code prefix'))
-        update_date = forms.BooleanField(label='Update date?', required=False)
+        is_one_time = forms.BooleanField(label='Is one time?', required=False)
+        create_new = forms.BooleanField(label='Create new code?', required=False)
 
     if request.method == 'POST':
         form = HTMLForm(request.POST)
@@ -246,24 +247,23 @@ def create_onsite_login(request: HttpResponse):
             contest = get_object_or_404(Contest, pk=int(request.GET['id']))
             res = []
             for user in get_user_model().objects.filter(contests__contest=contest):
-                if user.is_admin or user.is_moderator:
+                if user.is_staff:
                     continue
                 try:
-                    filt = OnsiteLogin.objects.filter(user=user, contest=contest, log__isnull=True)
-                    if not form.cleaned_data["update_date"]:
-                        filt.filter(expiration_date__gt=timezone.now())
-                    ol = filt.get()
-                    res.append((user.handle, user.email, ol.secret_code))
-                except ObjectDoesNotExist:
+                    filt = OnsiteLogin.objects.filter(user=user, contest=contest).order_by("-id")
+                    ol = filt[0]
+                except IndexError:
                     pass
                 else:
-                    if form.cleaned_data["update_date"]:
+                    if not form.cleaned_data["create_new"]:
                         ol.expiration_date = form.cleaned_data["exp_date"]
+                        ol.is_one_time = form.cleaned_data["is_one_time"]
                         ol.save()
-                    continue
+                        res.append((user.handle, user.email, ol.secret_code))
+                        continue
                 code = form.data["secret_code_prefix"] + gen_unambiguous_random_string()
                 ol = OnsiteLogin(user=user, contest=contest, expiration_date=form.cleaned_data["exp_date"],
-                                 secret_code=code)
+                                 secret_code=code, is_one_time=form.cleaned_data["is_one_time"])
                 ol.save()
                 res.append((user.handle, user.email, code))
             return render(request, 'admin/result_message.html', {

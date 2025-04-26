@@ -13,8 +13,10 @@ import django.utils.datastructures
 from django.utils.http import urlencode
 from django.utils import timezone
 
+from ipware import get_client_ip
+
 from authentication.forms import UserCreateForm, UserPasswordRecovery, UserLoginForm, get_user_form_with_data, UserSecretCodeLoginForm
-from authentication.models import UserActivation, MainUser, OnsiteLogin
+from authentication.models import UserActivation, MainUser, OnsiteLogin, OnsiteLoginLogs
 from contest.models import Contest
 from .services.send_email import send_email_with_context
 from utils.cloudflare import check_turnstile_captcha
@@ -146,6 +148,7 @@ def user_secret_code_login(request: HttpResponse):
             pass
         else:
             if ol.is_still_valid and not ol.user.is_staff:
+                OnsiteLoginLogs(onsite_login=ol, ip_address=str(get_client_ip(request)[0]), created_time=timezone.now()).save()
                 login(request, ol.user)
                 return HttpResponseRedirect(f'{reverse("login")}{f"?contest={ol.contest.pk}" if ol.contest else ""}')
         form.add_error('code', _('Некорректный код'))
