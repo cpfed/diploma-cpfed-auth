@@ -43,7 +43,8 @@ def telegram_webhook(request, token):
             text = data['message'].get('text', '')
             parts = text.split()
             if text.startswith('/start'):
-                start(chat_id)
+                send_telegram_message(chat_id, 'Please integrate your telegram account in auth.cpfed.kz')
+                # start(chat_id)
             elif message_cache.matches(text, 'CONTESTS'):
                 contest_names = Contest.objects.filter(
                     show_on_main_page=True,
@@ -101,13 +102,13 @@ def telegram_webhook(request, token):
                     "inline_keyboard": keyboard
                 }
 
-                response = message_cache.get_message(telegram_user.language, 'CHOOSE_CATEGORY')
+                response = message_cache.get_message(choice, 'CHOOSE_CATEGORY')
                 send_telegram_message(chat_id, response, reply_markup=reply_markup)
 
                 telegram_user.language = choice
                 telegram_user.save()
             elif choice in user_categories:
-                start_menu(chat_id, choice)
+                start_menu(chat_id, telegram_user.language)
 
                 telegram_user.user_group = user_categories.index(choice)
                 telegram_user.save()

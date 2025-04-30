@@ -52,7 +52,7 @@ def edit_telegram_message(chat_id, message_id, message):
 
 
 def broadcast_telegram_message(telegram_users_count, message):
-    batch_size = 30
+    batch_size = 20
     telegram_users = TelegramUser.objects.filter(user__isnull=False).values_list('user__first_name', 'chat_id')
     for offset in range(0, telegram_users_count, batch_size):
         batch = telegram_users[offset: offset+batch_size]

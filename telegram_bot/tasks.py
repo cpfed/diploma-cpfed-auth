@@ -55,6 +55,7 @@ def remove_contest_schedule(contest: Contest):
         pass
 
 
+@shared_task
 def schedule_contest_notifications():
     upcoming_contests = Contest.objects.filter(date__gt=timezone.now())
     for contest in upcoming_contests.iterator():
@@ -71,13 +72,21 @@ def send_contest_notification(contest_id, notification_type):
         telegram_users = TelegramUser.objects.filter(user__isnull=False).values_list('user__first_name', 'chat_id', 'language')
         telegram_users_count = telegram_users.count()
 
-        batch_size = 30
+        batch_size = 20
         notification_code = f'CONTEST_IN_{notification_type}'
 
         if notification_type == 'DAY':
+            if contest.telegram_notification.day_before_sent:
+                return
+
+            contest.telegram_notification.day_before_task_id = None
             contest.telegram_notification.day_before_sent = True
             contest.telegram_notification.save()
         else:
+            if contest.telegram_notification.hour_before_sent:
+                return
+
+            contest.telegram_notification.hour_before_task_id = None
             contest.telegram_notification.hour_before_sent = True
             contest.telegram_notification.save()
 
