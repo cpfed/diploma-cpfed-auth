@@ -69,62 +69,93 @@ spec:
             - key: nginx.conf
               path: nginx.conf
 ---
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: auth-redis
   labels:
-    app.kubernetes.io/name: auth-redis
+    app: auth-redis
 spec:
-  containers:
-  - name: auth-redis
-    image: "docker.io/redis:6.0.5"
-    ports:
-      - containerPort: 6379
-        name: auth-redis-svc
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-redis
+  template:
+    metadata:
+      name: auth-redis
+      labels:
+        name: auth-redis
+        app.kubernetes.io/name: auth-redis
+    spec:
+      containers:
+      - name: auth-redis
+        image: "docker.io/redis:6.0.5"
+        ports:
+          - containerPort: 6379
+            name: auth-redis-svc
 ---
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: auth-celery
   labels:
-    app.kubernetes.io/name: auth-celery
+    app: auth-celery
 spec:
-  containers:
-    - name: auth-celery
-      image: "docker.io/zharaskhan/auth-cpfed-master"
-      imagePullPolicy: "Always"
-      workingDir: /app/
-      command: ["celery"]
-      args: ["-A", "cpfed", "worker", "-l", "info"]
-      env:
-        - name: CELERY_BROKER_URL
-          value: "redis://auth-redis:6379/1"
-        - name: CELERY_RESULT_BACKEND
-          value: "redis://auth-redis:6379/2"
-      envFrom:
-        - configMapRef:
-            name: auth-configmap
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-celery
+  template:
+    metadata:
+      labels:
+        app: auth-celery
+        app.kubernetes.io/name: auth-celery
+    spec:
+      containers:
+        - name: auth-celery
+          image: "docker.io/zharaskhan/auth-cpfed-master"
+          imagePullPolicy: "Always"
+          workingDir: /app/
+          command: ["celery"]
+          args: ["-A", "cpfed", "worker", "-l", "info"]
+          env:
+            - name: CELERY_BROKER_URL
+              value: "redis://auth-redis:6379/1"
+            - name: CELERY_RESULT_BACKEND
+              value: "redis://auth-redis:6379/2"
+          envFrom:
+            - configMapRef:
+                name: auth-configmap
 ---
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: auth-celery-beat
   labels:
-    app.kubernetes.io/name: auth-celery-beat
+    app: auth-celery-beat
 spec:
-  containers:
-    - name: auth-celery-beat
-      image: "docker.io/zharaskhan/auth-cpfed-master"
-      imagePullPolicy: "Always"
-      workingDir: /app/
-      command: ["celery"]
-      args: ["-A", "cpfed", "beat", "-l", "info"]
-      env:
-        - name: CELERY_BROKER_URL
-          value: "redis://auth-redis:6379/1"
-        - name: CELERY_RESULT_BACKEND
-          value: "redis://auth-redis:6379/2"
-      envFrom:
-        - configMapRef:
-            name: auth-configmap
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-celery-beat
+  template:
+    metadata:
+      labels:
+        app: auth-celery-beat
+        app.kubernetes.io/name: auth-celery-beat
+    spec:
+      containers:
+        - name: auth-celery-beat
+          image: "docker.io/zharaskhan/auth-cpfed-master"
+          imagePullPolicy: "Always"
+          workingDir: /app/
+          command: ["celery"]
+          args: ["-A", "cpfed", "beat", "-l", "info"]
+          env:
+            - name: CELERY_BROKER_URL
+              value: "redis://auth-redis:6379/1"
+            - name: CELERY_RESULT_BACKEND
+              value: "redis://auth-redis:6379/2"
+          envFrom:
+            - configMapRef:
+                name: auth-configmap
