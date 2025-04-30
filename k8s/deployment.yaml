@@ -84,7 +84,7 @@ spec:
     metadata:
       name: auth-redis
       labels:
-        name: auth-redis
+        app: auth-redis
         app.kubernetes.io/name: auth-redis
     spec:
       containers:
