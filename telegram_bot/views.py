@@ -94,7 +94,7 @@ def telegram_webhook(request, token):
                 for category in user_categories:
                     keyboard.append([
                         {
-                            'text': message_cache.get_message(telegram_user.language, category),
+                            'text': message_cache.get_message(choice, category),
                             'callback_data': category
                         }
                     ])
