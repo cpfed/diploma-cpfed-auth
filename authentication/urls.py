@@ -7,6 +7,7 @@ urlpatterns = [
     path('register/<uuid:token>', user_management.user_activate),
     path('logout/', user_management.user_logout, name='logout'),
     path('profile/', user_management.user_profile, name='profile'),
+    path('profile/change', user_management.user_profile_change, name='profile_change'),
     path('login_code/', user_management.user_secret_code_login, name='login_code'),
 
     path('passwordRecovery/', password_recovery.password_recovery_request, name='pass_rec'),

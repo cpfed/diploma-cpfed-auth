@@ -15,7 +15,7 @@ from django.utils import timezone
 
 from ipware import get_client_ip
 
-from authentication.forms import UserCreateForm, UserPasswordRecovery, UserLoginForm, get_user_form_with_data, UserSecretCodeLoginForm
+import authentication.forms as authforms
 from authentication.models import UserActivation, MainUser, OnsiteLogin, OnsiteLoginLogs
 from contest.models import Contest
 from .services.send_email import send_email_with_context
@@ -27,12 +27,12 @@ from utils.pixel_events import send_registration
 # Create your views here.
 
 def user_new(request: HttpResponse):
-    form = UserCreateForm()
+    form = authforms.UserCreateForm()
     if request.method == 'POST':
         data = {k: request.POST[k] for k in request.POST}
         if 'handle' in data:
             data['handle'] = data['handle'].lower()
-        form = UserCreateForm(data)
+        form = authforms.UserCreateForm(data)
         if form.is_valid():
             check_turnstile_captcha(request)
 
@@ -114,9 +114,9 @@ def user_login(request: HttpResponse):
     if request.user.is_authenticated:
         return _redirect_after_login(request)
 
-    form = UserLoginForm()
+    form = authforms.UserLoginForm()
     if request.method == 'POST':
-        form = UserLoginForm(request.POST)
+        form = authforms.UserLoginForm(request.POST)
         handle_or_email = request.POST['handle_or_email']
         password = request.POST['password']
         try:
@@ -138,9 +138,9 @@ def user_secret_code_login(request: HttpResponse):
     if request.user.is_authenticated:
         return _redirect_after_login(request)
 
-    form = UserSecretCodeLoginForm()
+    form = authforms.UserSecretCodeLoginForm()
     if request.method == 'POST':
-        form = UserSecretCodeLoginForm(request.POST)
+        form = authforms.UserSecretCodeLoginForm(request.POST)
         code = request.POST['code']
         try:
             ol = OnsiteLogin.objects.get(secret_code=code)
@@ -164,8 +164,22 @@ def user_profile(request: HttpResponse):
     if not request.user.is_authenticated:
         return redirect('login')
     context = {
-        'form': get_user_form_with_data(request.user),
+        'form': authforms.get_user_form_with_data(request.user, authforms.PROFILE_FORM_FIELDS),
         'form_name': _('Профиль'),
         'telegram_integrated': hasattr(request.user, 'telegram')
     }
     return render(request, 'profile.html', context=context)
+
+def user_profile_change(request: HttpResponse):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    form = authforms.get_user_form_with_data(request.user, authforms.CHANGE_PROFILE_FORM_FIELDS, True)
+    if request.method == 'POST':
+        form = authforms.get_user_form(authforms.CHANGE_PROFILE_FORM_FIELDS, True)(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    return render(request, 'base_form.html', context={
+        "form": form,
+        'form_name': _('Профиль'),
+    })

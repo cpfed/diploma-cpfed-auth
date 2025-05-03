@@ -42,7 +42,7 @@ class UserPasswordRecovery(forms.Form):
             self.add_error('password1', _('Пароли не совпадают'))
 
 
-def get_user_form(req_fields: list[str]):
+def get_user_form(req_fields: list[str], required=False):
     # if any(f in req_fields for f in ('handle', 'email', 'password')): # TODO
     #     raise Exception('Хэндл, email или пароль не могут быть в форме регистрации')
     user_fields = {x.name for x in MainUser._meta.get_fields()}
@@ -52,20 +52,25 @@ def get_user_form(req_fields: list[str]):
             model = MainUser
             fields = tuple(f for f in req_fields if f in user_fields)
 
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            if required:
+                for f in self.fields:
+                    if f != 'place_of_study_of_work':
+                        self.fields[f].required = True
+
     return UserForm
 
 
-# UserFullForm = get_user_form(
-#     ['handle', 'email', 'first_name', 'last_name', 'phone_number', 'uin', 't_shirt_size', 'employment_status',
-#      'place_of_study_of_work', 'region', 'telegram_id', 'telegram_token'])
+CHANGE_PROFILE_FORM_FIELDS = ['first_name', 'last_name', 'phone_number', 'uin', 't_shirt_size', 'employment_status',
+                              'place_of_study_of_work', 'region']
+PROFILE_FORM_FIELDS = ['handle', 'email'] + CHANGE_PROFILE_FORM_FIELDS
 
 
-def get_user_form_with_data(user: MainUser):
-    fields_to_include = ['handle', 'email', 'first_name', 'last_name', 'phone_number', 'uin', 't_shirt_size', 'employment_status',
-                         'place_of_study_of_work', 'region']
-    UserFullForm = get_user_form(fields_to_include)
+def get_user_form_with_data(user: MainUser, fields_to_include: list[str], required=False):
+    UserFullForm = get_user_form(fields_to_include, required)
 
     data = dict()
     for f in UserFullForm().fields:
         data[f] = getattr(user, f)
-    return UserFullForm(data)
+    return UserFullForm(data, instance=user)

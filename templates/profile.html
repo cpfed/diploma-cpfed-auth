@@ -18,7 +18,7 @@
                 {% for fld in form %}
                 <div>
                     <label>{% translate fld.label %}</label>
-                    {% render_field fld disabled+="" class+="rounded-lg w-full text-black border-inherit px-4 py-2 border focus:outline-none focus:border-2 focus:border-blue-500" %}
+                    {% render_field fld disabled+="" class+="rounded-lg w-full text-black border-inherit px-4 py-2 border" %}
                 </div>
                 {% endfor %}
 
@@ -32,7 +32,12 @@
                 {% else %}
                     <div>Telegram is linked</div>
                 {% endif %}
-                <div>Изменить данные можно <a href="{% url 'contestRegistration' contest_id=1 %}" class="text-blue-500">здесь</a></div>
+
+                <a href="{% url 'profile_change'%}">
+                    <div class="bg-blue-600 py-2 px-6 text-gray-100 rounded-lg text-center">
+                        {% translate "Изменить данные" %}
+                    </div>
+                </a>
             </div>
 
         </div>
