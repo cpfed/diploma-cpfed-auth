@@ -10,8 +10,8 @@ map $http_origin $cors_allowed {
   "https://esep.cpfed.kz" "true";
 }
 server {
-    listen       80;
-    listen       [::]:80;
+    listen       8080;
+    listen       [::]:8080;
     server_name  _;
     client_max_body_size 48M;
 
