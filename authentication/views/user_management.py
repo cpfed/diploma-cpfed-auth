@@ -12,6 +12,7 @@ from django.core.exceptions import ObjectDoesNotExist
 import django.utils.datastructures
 from django.utils.http import urlencode
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 
 from ipware import get_client_ip
 
@@ -134,6 +135,7 @@ def user_login(request: HttpResponse):
         form.add_error('password', _('Некорректный хэндл/email или пароль'))
     return render(request, 'login.html', {'form': form, 'form_name': _('Войти в аккаунт')})
 
+@csrf_exempt
 def user_secret_code_login(request: HttpResponse):
     if request.user.is_authenticated:
         return _redirect_after_login(request)
