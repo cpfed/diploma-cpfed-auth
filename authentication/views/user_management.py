@@ -1,6 +1,7 @@
 import uuid
 import jwt
 import datetime
+import sys
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, response, HttpResponseRedirect
@@ -137,6 +138,10 @@ def user_login(request: HttpResponse):
 
 @csrf_exempt
 def user_secret_code_login(request: HttpResponse):
+    print(get_client_ip(request))
+    for x in settings.IPWARE_META_PRECEDENCE_ORDER:
+        print(f"{x}: {get_client_ip(request, request_header_order=[x])};", end=' ')
+    print()
     if request.user.is_authenticated:
         return _redirect_after_login(request)
 

@@ -26,7 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY", None)
 CPFED_TOKEN = os.getenv("CPFED_TOKEN", None)
-CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "http://localhost:8000,https://auth.cpfed.kz,https://esep.pages.dev,https://app.oqylyq.kz").split(",")
+CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS",
+                                 "http://localhost:8000,https://auth.cpfed.kz,https://esep.pages.dev,https://app.oqylyq.kz").split(
+    ",")
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = os.getenv("EMAIL_HOST", None)
 EMAIL_PORT = os.getenv("EMAIL_PORT", None)
@@ -225,3 +227,28 @@ SESSION_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SECURE = True
 LANGUAGE_COOKIE_SAMESITE = 'None'
 LANGUAGE_COOKIE_SECURE = True
+
+# The default meta precedence order (update as needed)
+IPWARE_META_PRECEDENCE_ORDER = (
+    "X_FORWARDED_FOR",
+    # Load balancers or proxies such as AWS ELB (default client is `left-most` [`<client>, <proxy1>, <proxy2>`])
+    "HTTP_X_FORWARDED_FOR",  # Similar to X_FORWARDED_TO
+    "HTTP_CLIENT_IP",  # Standard headers used by providers such as Amazon EC2, Heroku etc.
+    "HTTP_X_REAL_IP",  # Standard headers used by providers such as Amazon EC2, Heroku etc.
+    "HTTP_X_FORWARDED",  # Squid and others
+    "HTTP_X_CLUSTER_CLIENT_IP",  # Rackspace LB and Riverbed Stingray
+    "HTTP_FORWARDED_FOR",  # RFC 7239
+    "HTTP_FORWARDED",  # RFC 7239
+    "HTTP_CF_CONNECTING_IP",  # CloudFlare
+    "X-CLIENT-IP",  # Microsoft Azure
+    "X-REAL-IP",  # NGINX
+    "X-CLUSTER-CLIENT-IP",  # Rackspace Cloud Load Balancers
+    "X_FORWARDED",  # Squid
+    "FORWARDED_FOR",  # RFC 7239
+    "CF-CONNECTING-IP",  # CloudFlare
+    "TRUE-CLIENT-IP",  # CloudFlare Enterprise,
+    "FASTLY-CLIENT-IP",  # Firebase, Fastly
+    "FORWARDED",  # RFC 7239
+    "CLIENT-IP",  # Akamai and Cloudflare: True-Client-IP and Fastly: Fastly-Client-IP
+    "REMOTE_ADDR",  # Default
+)
