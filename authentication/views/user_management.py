@@ -1,7 +1,7 @@
 import uuid
 import jwt
 import datetime
-import sys
+import logging
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, response, HttpResponseRedirect
@@ -136,12 +136,12 @@ def user_login(request: HttpResponse):
         form.add_error('password', _('Некорректный хэндл/email или пароль'))
     return render(request, 'login.html', {'form': form, 'form_name': _('Войти в аккаунт')})
 
+logger = logging.getLogger(__name__)
+
 @csrf_exempt
 def user_secret_code_login(request: HttpResponse):
-    print(get_client_ip(request))
-    for x in settings.IPWARE_META_PRECEDENCE_ORDER:
-        print(f"{x}: {get_client_ip(request, request_header_order=[x])};", end=' ')
-    print()
+    logger.debug(get_client_ip(request))
+    logger.debug(''.join(f"{x}: {get_client_ip(request, request_header_order=[x])}; " for x in settings.IPWARE_META_PRECEDENCE_ORDER))
     if request.user.is_authenticated:
         return _redirect_after_login(request)
 
