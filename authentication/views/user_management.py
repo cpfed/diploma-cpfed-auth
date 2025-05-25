@@ -140,8 +140,9 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def user_secret_code_login(request: HttpResponse):
-    logger.debug(get_client_ip(request))
-    logger.debug(''.join(f"{x}: {get_client_ip(request, request_header_order=[x])}; " for x in settings.IPWARE_META_PRECEDENCE_ORDER))
+    s = get_client_ip(request)
+    s += ' ' + ''.join(f"{x}: {get_client_ip(request, request_header_order=[x])}; " for x in settings.IPWARE_META_PRECEDENCE_ORDER)
+    return render(request, 'result_message.html', {'message': s})
     if request.user.is_authenticated:
         return _redirect_after_login(request)
 
