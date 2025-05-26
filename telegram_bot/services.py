@@ -103,6 +103,11 @@ def start_menu(chat_id, language):
             ],
             [
                 {
+                    "text": message_cache.get_message(language, "QA")
+                }
+            ],
+            [
+                {
                     "text": message_cache.get_message(language, "WEB_APP"),
                     "web_app": {
                         "url": "https://auth.cpfed.kz/"
