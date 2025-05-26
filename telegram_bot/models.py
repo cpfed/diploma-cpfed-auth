@@ -81,3 +81,15 @@ class ContestNotification(TimestampMixin):
             return f'{self.contest.name} schedule [24h: {self.day_before_sent}] | [1h: {self.hour_before_sent}]'
         else:
             return f'{self.id}'
+
+
+class TelegramQA(TimestampMixin):
+    STATUS = (
+        (0, _('Получено')),
+        (1, _('В обработке')),
+        (2, _('Обработано'))
+    )
+    status = models.SmallIntegerField(choices=STATUS, default=0, verbose_name="Статус вопроса.")
+    text = models.TextField(blank=True, null=True, verbose_name='Текст вопроса: ')
+    telegram_user = models.ForeignKey(TelegramUser, null=True, on_delete=models.SET_NULL, verbose_name=_("Телеграм"))
+    request_write_mode = models.BooleanField(default=False)

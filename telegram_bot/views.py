@@ -3,14 +3,15 @@ import hashlib
 import hmac
 import json
 
+from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse, HttpRequest
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
 from django.conf import settings
 
-from .models import TelegramUser
+from .models import TelegramUser, TelegramQA
 from .services import send_telegram_message, send_telegram_photo, broadcast_telegram_message, start, start_menu, \
     edit_telegram_message
 from .forms import BroadcastForm
@@ -39,12 +40,13 @@ def telegram_webhook(request, token):
         data = json.loads(request.body)
         if 'message' in data:
             chat_id = data['message']['chat']['id']
+            telegram_user = get_telegram_user(chat_id)
 
             text = data['message'].get('text', '')
             parts = text.split()
             if text.startswith('/start'):
-                send_telegram_message(chat_id, 'Please integrate your telegram account in auth.cpfed.kz')
-                # start(chat_id)
+                # send_telegram_message(chat_id, 'Please integrate your telegram account in auth.cpfed.kz')
+                start(chat_id)
             elif message_cache.matches(text, 'CONTESTS'):
                 contest_names = Contest.objects.filter(
                     show_on_main_page=True,
@@ -59,7 +61,6 @@ def telegram_webhook(request, token):
                         }
                     ])
 
-                telegram_user = get_telegram_user(chat_id)
                 reply_markup = {
                     "inline_keyboard": keyboard
                 }
@@ -67,9 +68,24 @@ def telegram_webhook(request, token):
                 response = message_cache.get_message(telegram_user.language, 'CONTESTS_LIST')
                 send_telegram_message(chat_id, response, reply_markup=reply_markup)
             elif message_cache.matches(text, 'COMMUNITY'):
-                telegram_user = get_telegram_user(chat_id)
                 response = message_cache.get_message(telegram_user.language, 'COMMUNITY_CHATS')
                 send_telegram_message(chat_id, response)
+            elif message_cache.matches(text, 'QA'):
+                qa = TelegramQA.objects.create(telegram_user=telegram_user, request_write_mode=True)
+                response = message_cache.get_message(telegram_user.language, 'QA_REQUEST')
+                send_telegram_message(chat_id, response)
+            else:
+                try:
+                    qa = TelegramQA.objects.get(telegram_user=telegram_user, request_write_mode=True)
+                    qa.text = text
+                    qa.request_write_mode = False
+                    qa.save()
+
+                    response = (f'{message_cache.get_message(telegram_user.language, 'QA_NUMBER')} #{qa.id}:\n'
+                                f'{message_cache.get_message(telegram_user.language, 'QA_WAIT')}')
+                    send_telegram_message(chat_id, response)
+                except TelegramQA.DoesNotExist:
+                    pass
         elif 'callback_query' in data:
             choice = data['callback_query']['data']
             chat_id = data['callback_query']['message']['chat']['id']
@@ -141,7 +157,9 @@ def telegram_login(request):
 
     chat_id = params.get('id')
 
-    telegram_user = TelegramUser.objects.get_or_create(chat_id=chat_id, user=user)[0]
+    telegram_user = TelegramUser.objects.get_or_create(chat_id=chat_id)[0]
+    telegram_user.user = user
+    telegram_user.save()
 
     send_telegram_message(chat_id, f'Hello {user.first_name}, you successfully singed in your telegram account.')
     start(chat_id)
@@ -173,3 +191,66 @@ def telegram_broadcast(request):
         'form': form,
         'user_count': telegram_users_count
     })
+
+
+def telegram_requests(request):
+    user = request.user
+    if not user.is_authenticated or not (user.is_staff or user.is_superuser):
+        return HttpResponse(status=403)
+
+    if not request.method == 'GET':
+        return HttpResponse(status=404)
+    # Get all questions ordered by creation date (newest first)
+    questions = TelegramQA.objects.select_related('telegram_user__user').order_by('-created_at')
+
+    # Calculate stats
+    stats = {
+        'received': TelegramQA.objects.filter(status=0).count(),
+        'in_process': TelegramQA.objects.filter(status=1).count(),
+        'processed': TelegramQA.objects.filter(status=2).count(),
+    }
+
+    context = {
+        'questions': questions,
+        'stats': stats,
+        'current_time': timezone.now(),
+    }
+
+    return render(request, 'telegram_bot/requests.html', context)
+
+
+def telegram_respond(request, qa_id):
+    from telegram_bot.message_cache import message_cache
+
+    question = get_object_or_404(TelegramQA, id=qa_id)
+
+    if request.method == 'POST':
+        response_text = request.POST.get('response_text', '').strip()
+        response_text = (f'{message_cache.get_message(question.telegram_user.language, 'QA_NUMBER_RESPONSE')} #{qa_id}:\n'
+                         f'{response_text}')
+        action = request.POST.get('action')
+
+        if not response_text:
+            return render(request, 'telegram_bot/respond.html', {'question': question})
+
+        if action == 'send':
+            # Send response to user via Telegram (you'll need to implement this)
+            success = send_telegram_message(question.telegram_user.chat_id, response_text)
+
+            if success:
+                # Update question status to processed
+                question.status = 2
+                question.save()
+
+                return redirect('telegram_requests')
+            else:
+                pass
+                # messages.error(request, 'Failed to send response. Please try again.')
+
+        elif action == 'save_draft':
+            question.status = 1
+            question.save()
+
+            return redirect('telegram_requests')
+
+    return render(request, 'telegram_bot/respond.html', {'question': question})
