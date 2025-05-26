@@ -138,9 +138,9 @@ def user_login(request: HttpResponse):
 
 @csrf_exempt
 def user_secret_code_login(request: HttpResponse):
-    s = str(get_client_ip(request)) + ' ' + ''.join(f"{x}: {get_client_ip(request, request_header_order=[x])}; " for x in settings.IPWARE_META_PRECEDENCE_ORDER)
-    s += "    |    " + str(request.META.get('HTTP_X_FORWARDED_FOR'))
-    return render(request, 'result_message.html', {'message': s})
+    # s = str(get_client_ip(request)) + ' ' + ''.join(f"{x}: {get_client_ip(request, request_header_order=[x])}; " for x in settings.IPWARE_META_PRECEDENCE_ORDER)
+    # s += "    |    " + str(request.META.get('HTTP_X_FORWARDED_FOR'))
+    # return render(request, 'result_message.html', {'message': s})
     if request.user.is_authenticated:
         return _redirect_after_login(request)
 
