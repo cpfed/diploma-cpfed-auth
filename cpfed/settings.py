@@ -134,6 +134,9 @@ if not DEBUG:
         "default": {
             "BACKEND": "django.core.cache.backends.redis.RedisCache",
             "LOCATION": f"redis://{os.getenv('REDIS_HOST')}:6379",
+        },
+        "internal_cache": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
         }
     }
 

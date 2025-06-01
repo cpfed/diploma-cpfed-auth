@@ -1,8 +1,13 @@
 from django.http import HttpResponse
 from django.db import connection
+from django.core.cache import cache
+
+CACHE_KEY = "KCPC_res_key"
 
 
 def get_kcpc_res():
+    if (res := cache.get(CACHE_KEY)) is not None:
+        return res
     contest_ids = [1, 4, 8]
     subq = '''COALESCE((SELECT U0."points"
                                   FROM "contest_contestresult" U0
@@ -36,4 +41,5 @@ def get_kcpc_res():
         cursor.execute(q)
         columns = [col[0] for col in cursor.description]
         results = [dict(zip(columns, row)) for row in cursor.fetchall()]
+    cache.set(CACHE_KEY, results)
     return results

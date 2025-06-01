@@ -183,7 +183,7 @@ def register_on_contest(request: HttpResponse):
     return render(request, 'admin/form.html', {'form': form, 'form_name': 'Зарегистрировать пользователей'})
 
 
-# @cache_page(60 * 60)
+@cache_page(60 * 60)
 def api_contest_results(request: HttpResponse):
     data = kcpc_res.get_kcpc_res()
 
@@ -207,19 +207,12 @@ def api_contest_results(request: HttpResponse):
         "rank": x["rank"],
         "region": regions[x["region_id"]]
     } for x in list(res)[(page - 1) * limit:page * limit]]
-    return render(request, 'admin/result_message.html', {'message': str(
-    {
+    return JsonResponse({
         "count": len(data),
         "next": None,
         "previous": None,
         "results": res
-    })})
-    # return JsonResponse({
-    #     "count": len(data),
-    #     "next": None,
-    #     "previous": None,
-    #     "results": res
-    # })
+    })
 
 
 def create_onsite_login(request: HttpResponse):

@@ -81,8 +81,8 @@ def telegram_webhook(request, token):
                     qa.request_write_mode = False
                     qa.save()
 
-                    response = (f'{message_cache.get_message(telegram_user.language, 'QA_NUMBER')} #{qa.id}:\n'
-                                f'{message_cache.get_message(telegram_user.language, 'QA_WAIT')}')
+                    response = (f"{message_cache.get_message(telegram_user.language, 'QA_NUMBER')} #{qa.id}:\n",
+                                f"{message_cache.get_message(telegram_user.language, 'QA_WAIT')}")
                     send_telegram_message(chat_id, response)
                 except TelegramQA.DoesNotExist:
                     pass
@@ -226,8 +226,8 @@ def telegram_respond(request, qa_id):
 
     if request.method == 'POST':
         response_text = request.POST.get('response_text', '').strip()
-        response_text = (f'{message_cache.get_message(question.telegram_user.language, 'QA_NUMBER_RESPONSE')} #{qa_id}:\n'
-                         f'{response_text}')
+        response_text = (f"{message_cache.get_message(question.telegram_user.language, 'QA_NUMBER_RESPONSE')} #{qa_id}:\n",
+                         f"{response_text}")
         action = request.POST.get('action')
 
         if not response_text:
