@@ -11,8 +11,8 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.http import urlencode
 from django.utils.crypto import get_random_string
 from django.db.utils import IntegrityError
-from django.db.models.functions import Concat, RowNumber
-from django.db.models import Q, Sum, Value, Window, OuterRef, Exists
+from django.db.models.functions import Concat, RowNumber, Coalesce
+from django.db.models import Q, Sum, Value, Window, OuterRef, Exists, Subquery, FloatField, Case, When, F, Func
 from django.contrib.postgres.aggregates import ArrayAgg
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.cache import cache_page
@@ -23,7 +23,7 @@ from ipware import get_client_ip
 
 from .models import Contest, UserContest, ContestResult
 from .forms import ContestRegistrationForm
-from .utils import contest_parser, gp100, esep, json_encoder
+from .utils import contest_parser, gp100, esep, json_encoder, kcpc_res
 from utils.funcs import gen_unambiguous_random_string
 from authentication.forms import get_user_form
 from authentication.models import OnsiteLogin, OnsiteLoginLogs
@@ -183,52 +183,43 @@ def register_on_contest(request: HttpResponse):
     return render(request, 'admin/form.html', {'form': form, 'form_name': 'Зарегистрировать пользователей'})
 
 
-@cache_page(60 * 60)
+# @cache_page(60 * 60)
 def api_contest_results(request: HttpResponse):
-    cte = With(
-        get_user_model().objects.select_related("region")
-        .filter(contests__contest=8)
-        .filter(contests__result__isnull=False)
-        .annotate(
-            points=ArrayAgg("contests__result__points", ordering="contests__id"),
-            total_points=Sum("contests__result__points", default=0),
-            fullname=Concat("first_name", Value(" "), "last_name"),
-            rank=Window(expression=RowNumber(), order_by="-total_points")
-        )
-        .values("fullname", "points", "total_points", "rank", "region_id")
-    )
-    data = cte.join(Region, id=cte.col.region_id).with_cte(cte).annotate(
-        points=cte.col.points,
-        total_points=cte.col.total_points,
-        fullname=cte.col.fullname,
-        rank=cte.col.rank,
-    ).order_by("rank")
+    data = kcpc_res.get_kcpc_res()
 
     page = int(request.GET.get("page", 1))
     limit = int(request.GET.get("limit", 20))
     fullname = request.GET.get("fullname", "")
     region_id = request.GET.get("region_id", None)
-    if fullname:
-        data = data.filter(Q(fullname__icontains=fullname))
-    if region_id:
-        data = data.filter(Q(id=int(region_id)))
-    res = [{
-        "points": [round(f, 3) for f in x.points],
-        "total_points": round(x.total_points, 3),
-        "fullname": x.fullname,
-        "rank": x.rank,
-        "region": {
-            "id": x.id,
-            "name": x.name
-        }
-    } for x in data[(page - 1) * limit:page * limit]]
 
-    return JsonResponse({
+    regions = {x["id"]: x for x in Region.objects.all().values("id", "name")}
+    print(regions)
+
+    res = (x for x in data)
+    if fullname:
+        res = (x for x in res if fullname in x["full_name"])
+    if region_id:
+        res = (x for x in res if fullname in x["region_id"])
+    res = [{
+        "points": [round(f, 3) for f in x["result_array"]],
+        "total_points": round(x["total_points"], 3),
+        "fullname": x["full_name"],
+        "rank": x["rank"],
+        "region": regions[x["region_id"]]
+    } for x in list(res)[(page - 1) * limit:page * limit]]
+    return render(request, 'admin/result_message.html', {'message': str(
+    {
         "count": len(data),
         "next": None,
         "previous": None,
         "results": res
-    })
+    })})
+    # return JsonResponse({
+    #     "count": len(data),
+    #     "next": None,
+    #     "previous": None,
+    #     "results": res
+    # })
 
 
 def create_onsite_login(request: HttpResponse):
