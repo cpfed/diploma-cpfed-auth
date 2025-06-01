@@ -193,13 +193,14 @@ def api_contest_results(request: HttpResponse):
     region_id = request.GET.get("region_id", None)
 
     regions = {x["id"]: x for x in Region.objects.all().values("id", "name")}
-    print(regions)
 
     res = (x for x in data)
     if fullname:
-        res = (x for x in res if fullname in x["full_name"])
+        fullname = fullname.lower()
+        res = (x for x in res if fullname in x["full_name"].lower())
     if region_id:
-        res = (x for x in res if fullname in x["region_id"])
+        region_id = int(region_id)
+        res = (x for x in res if region_id == (x["region_id"]))
     res = [{
         "points": [round(f, 3) for f in x["result_array"]],
         "total_points": round(x["total_points"], 3),
