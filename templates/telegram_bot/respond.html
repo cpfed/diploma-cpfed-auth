@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write Response - Telegram QA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="{% url 'telegram_requests' %}" class="text-blue-600 hover:text-blue-800 mr-4">
+                        <i class="fas fa-arrow-left text-lg"></i>
+                    </a>
+                    <h1 class="text-xl font-semibold text-gray-900">Write Response</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Question Info -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Question Details</h3>
+                    
+                    <!-- User Info -->
+                    <div class="mb-4">
+                        <div class="flex items-center mb-3">
+                            <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                                <i class="fas fa-user text-gray-500"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-900">{{ question.telegram_user.user.handle|default:"User" }}</p>
+                                <p class="text-sm text-gray-500">ID: {{ question.telegram_user.chat_id }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Question Text -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Question:</h4>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <p class="text-gray-900">{{ question.text|default:"No question text provided" }}</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Date -->
+                    <div class="text-sm text-gray-600">
+                        <i class="fas fa-calendar mr-1"></i>
+                        {{ question.created_at|date:"M d, Y H:i" }}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Response Form -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900">Send Response</h3>
+                    </div>
+                    
+                    <form method="POST" class="p-6">
+                        {% csrf_token %}
+                        
+                        <div class="mb-6">
+                            <label for="response_text" class="block text-sm font-medium text-gray-700 mb-2">
+                                Your Response
+                            </label>
+                            <textarea 
+                                id="response_text" 
+                                name="response_text" 
+                                rows="10" 
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+                                placeholder="Type your response here..."
+                                required
+                            >{{ form.response_text.value|default:"" }}</textarea>
+                            {% if form.response_text.errors %}
+                                <p class="mt-1 text-sm text-red-600">{{ form.response_text.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="flex space-x-4">
+                            <button 
+                                type="submit" 
+                                name="action" 
+                                value="send"
+                                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-200"
+                            >
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                Send Response
+                            </button>
+                            
+                            <button 
+                                type="submit" 
+                                name="action" 
+                                value="save_draft"
+                                class="flex-1 bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium transition duration-200"
+                            >
+                                <i class="fas fa-save mr-2"></i>
+                                Save Draft
+                            </button>
+                        </div>
+                        
+                        <div class="mt-4 text-center">
+                            <a href="{% url 'telegram_requests' %}" class="text-gray-500 hover:text-gray-700 text-sm">
+                                Cancel and go back
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
