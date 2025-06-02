@@ -50,6 +50,8 @@ class ContestAdmin(admin.ModelAdmin):
         try:
             result = []
             for contest in queryset:
+                if contest.fields is None:
+                    continue
                 user_regs = UserContest.objects.filter(contest=contest).select_related('user', 'contest').all()
 
                 sort_by_place = (contest.link is not None)
@@ -77,7 +79,7 @@ class ContestAdmin(admin.ModelAdmin):
                 result.append(curres)
             return xlsx_response.xlsx_response(result)
         except Exception as err:
-            # return render(request, 'admin/result_message.html', {'message': f"Ошибка: {err}"})
+            return render(request, 'admin/result_message.html', {'message': f"Ошибка: {err}"})
             raise err
 
     @admin.action(description="Загрузить результаты контеста")

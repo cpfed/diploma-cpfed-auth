@@ -10,6 +10,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from .utils.json_encoder import CustomJSONEncoder
 from mixins.models import TimestampMixin
+from authentication.forms import PROFILE_FORM_FIELDS
 
 
 # Create your models here.
@@ -152,7 +153,7 @@ class UserContest(models.Model):
     @property
     def get_full_reg_with_additional_data(self) -> dict:
         res = self.get_full_reg
-        res.update(self.user.get_user_data_by_fields(['handle', 'email']))
+        res.update(self.user.get_user_data_by_fields(PROFILE_FORM_FIELDS))
         return res
 
 
