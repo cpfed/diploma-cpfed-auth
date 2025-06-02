@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.conf import settings
 
-from .models import Contest, UserContest, ContestResult, ContestChangeLog
+from .models import Contest, UserContest, ContestResult, ContestChangeLog, EXPORT_FIELDS
 from .utils import contest_parser, xlsx_response, esep
 from .forms import AdminTextAreaWidget
 
@@ -63,8 +63,7 @@ class ContestAdmin(admin.ModelAdmin):
 
                 curres = []
                 data = {f: None for f in contest.fields_name_list}
-                data["email"] = None
-                data["handle"] = None
+                data.update({f: None for f in EXPORT_FIELDS})
 
                 for uc in user_regs:
                     uc_reg = uc.get_full_reg_with_additional_data

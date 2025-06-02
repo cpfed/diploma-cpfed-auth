@@ -11,6 +11,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from .utils.json_encoder import CustomJSONEncoder
 from mixins.models import TimestampMixin
 
+EXPORT_FIELDS = ['first_name', 'last_name', 'phone_number', 'uin', 't_shirt_size', 'employment_status',
+                 'place_of_study_of_work', 'region', 'handle', 'email']
 
 # Create your models here.
 
@@ -152,9 +154,7 @@ class UserContest(models.Model):
     @property
     def get_full_reg_with_additional_data(self) -> dict:
         res = self.get_full_reg
-        res.update(self.user.get_user_data_by_fields(
-            ['first_name', 'last_name', 'phone_number', 'uin', 't_shirt_size', 'employment_status',
-             'place_of_study_of_work', 'region', 'handle', 'email']))
+        res.update(self.user.get_user_data_by_fields(EXPORT_FIELDS))
         return res
 
 
