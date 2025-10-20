@@ -43,6 +43,20 @@ class OnlyRegisteredFilter(admin.SimpleListFilter):
         q = queryset.filter(contests__contest__id=self.value())
         return q
 
+class OnlyRegisteredFilterForLogs(admin.SimpleListFilter):
+    title = _("Только зарегистрированные")
+    parameter_name = "onlyreg"
+
+    def lookups(self, request, model_admin):
+        contests = Contest.objects.all()
+        return [(str(c.id), c.name) for c in contests]
+
+    def queryset(self, request, queryset):
+        if self.value() == None:
+            return queryset
+        q = queryset.filter(onsite_login__contest__id=self.value())
+        return q
+
 
 @admin.register(MainUser)
 class MainUserAdmin(admin.ModelAdmin):
@@ -65,9 +79,10 @@ class MainUserAdmin(admin.ModelAdmin):
         return HttpResponseRedirect(reverse("register_users_from_list"))
 
 
-admin.site.register(OnsiteLoginLogs)
-
-
 @admin.register(OnsiteLogin)
 class OnsiteLoginAdmin(admin.ModelAdmin):
     search_fields = ["user__handle"]
+
+@admin.register(OnsiteLoginLogs)
+class OnsiteLoginAdmin(admin.ModelAdmin):
+    list_filter = [OnlyRegisteredFilterForLogs]

@@ -18,3 +18,4 @@ django-ipware==7.0.1
 redis==5.2.1
 celery==5.4.0
 django-debug-toolbar==5.1.0
+pytz

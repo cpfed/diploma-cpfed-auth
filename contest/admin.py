@@ -5,11 +5,15 @@ from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from django.shortcuts import render
 from django.conf import settings
+from django.utils.timezone import localtime
+
+from authentication.models import OnsiteLoginLogs
 
 from .models import Contest, UserContest, ContestResult, ContestChangeLog, EXPORT_FIELDS
 from .utils import contest_parser, xlsx_response, esep
 from .forms import AdminTextAreaWidget
 
+import pytz
 
 # Register your models here.
 
@@ -38,7 +42,7 @@ class UserContestAdmin(admin.ModelAdmin):
 @admin.register(Contest)
 class ContestAdmin(admin.ModelAdmin):
     actions = ['contest_results', 'upload_contest_results', 'register_on_contest', 'add_bulk_reg',
-               'sync_user_reg_with_esep', 'create_onsite_login']
+               'sync_user_reg_with_esep', 'create_onsite_login', 'export_onsite_login_logs']
     formfield_overrides = {
         models.TextField: {'widget': AdminTextAreaWidget},
     }
@@ -132,6 +136,22 @@ class ContestAdmin(admin.ModelAdmin):
         if len(selected) != 1:
             return render(request, 'admin/result_message.html', {'message': "Должен быть выбран только один контест"})
         return HttpResponseRedirect(reverse("create_onsite_login") + '?id=' + str(selected[0]))
+
+    @admin.action(description="Экспортировать логи onsite login")
+    def export_onsite_login_logs(self, request, queryset):
+        if not request.user.is_authenticated or not (request.user.is_staff or request.user.is_superuser):
+            raise PermissionDenied()
+        selected = queryset.values_list("pk", flat=True)
+        if len(selected) != 1:
+            return render(request, 'admin/result_message.html', {'message': "Должен быть выбран только один контест"})
+        s = ""
+        tz = pytz.timezone('Asia/Almaty')
+        for ol in OnsiteLoginLogs.objects.filter(onsite_login__contest__id=selected[0]).order_by("created_time"):
+            s += f"{ol.onsite_login.user.handle} зашёл с {ol.ip_address} в {localtime(ol.created_time, tz).strftime('%Y-%m-%d %H:%M:%S')}\n"
+        return HttpResponse(s, headers={
+            "Content-Type": "text/plain",
+            "Content-Disposition": 'attachment; filename="logs.txt"',
+        })
 
     def get_actions(self, request):
         actions = super().get_actions(request)
