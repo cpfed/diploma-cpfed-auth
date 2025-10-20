@@ -35,7 +35,6 @@ metadata:
     nginx.ingress.kubernetes.io/real-ip-header: "X-Forwarded-For"
     nginx.ingress.kubernetes.io/x-forwarded-for-header: "X-Forwarded-For"
 spec:
-  externalTrafficPolicy: Local
   ingressClassName: nginx
   tls:
   - hosts:
