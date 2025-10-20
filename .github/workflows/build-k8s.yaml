@@ -48,6 +48,7 @@ jobs:
         uses: Azure/k8s-deploy@v1.4
         with:
           manifests: |
+            k8s/config.yaml
             k8s/deployment.yaml
             k8s/service.yaml
           images: 'zharaskhan/auth-cpfed-master:${{ github.sha }}'
