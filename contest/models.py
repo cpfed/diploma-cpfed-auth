@@ -21,15 +21,6 @@ class Contest(models.Model):
         max_length=128,
         verbose_name=_("Название контеста")
     )
-    # next_contest = models.ForeignKey(
-    #     "self",
-    #     on_delete=models.CASCADE,
-    #     null=True,
-    #     blank=True,
-    #     related_name="next_contest_id+",
-    #     default=None,
-    #     verbose_name=_("ID следующего контеста")
-    # )
     fields = models.JSONField(
         null=True,
         blank=True
@@ -108,13 +99,11 @@ class ContestChangeLog(TimestampMixin):
         encoder=CustomJSONEncoder
     )
 
+    class Meta:
+        ordering = ["-created_at"]
+
     def __str__(self):
         return f"{self.contest}: {self.created_at}"
-
-
-class Championship():
-    # date, contests
-    pass
 
 
 class UserContest(models.Model):
@@ -168,5 +157,7 @@ class ContestResult(models.Model):
     rank = models.IntegerField(verbose_name=_("Ранг"))
     points = models.FloatField(verbose_name=_("Очки"), default=0)
 
+    class Meta:
+        ordering = ["id"]
     def __str__(self):
         return f"{self.user_reg}: #{self.rank}"

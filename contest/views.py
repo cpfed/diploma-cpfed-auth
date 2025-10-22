@@ -148,37 +148,46 @@ def register_on_contest(request: HttpResponse):
         raise PermissionDenied()
 
     class Form(forms.Form):
-        userlist = forms.FileField(widget=forms.ClearableFileInput(), label='Cписок пользователей')
-        need_reg = forms.BooleanField(label='Регистрировать на контест?', required=False)
+        userlist = forms.CharField(widget=forms.Textarea(), label='Cписок пользователей')
+        show_info = forms.BooleanField(label='Показать информацию о пользователе?', required=False)
+        by_handle = forms.BooleanField(label='Искать по хэндлу?', required=False, initial=True)
+        reg_user = forms.BooleanField(label='Регистрировать новых пользователей?', required=False)
+        apply_changes = forms.BooleanField(label='Выполнить необратимое действие?', required=False)
         need_ch_pass = forms.BooleanField(label='Изменить пароль?', required=False)
-        show_info = forms.BooleanField(label='Показать информацию о пользователе', required=False)
-        by_handle = forms.BooleanField(label='Искать по хэндлу?', required=False)
 
     if request.method == 'POST':
         form = Form(request.POST, request.FILES)
         if form.is_valid():
             result = []
-            userlist = form.cleaned_data['userlist'].read().decode(encoding='utf-8')
-
+            userlist = form.cleaned_data['userlist']
+            column = ('handle' if form.cleaned_data['by_handle'] else 'email')
             contest = Contest.objects.get(id=int(request.GET['id']))
 
             for email in userlist.split(','):
+                email = email.strip()
+                user = None
                 try:
-                    user = get_user_model().objects.get(
-                        **{('handle' if form.cleaned_data['by_handle'] else 'email'): email})
+                    user = get_user_model().objects.get(**{column: email})
+                    if form.cleaned_data['reg_user']:
+                        result.append(f"{email}: already exist")
                 except ObjectDoesNotExist:
-                    result.append(f"{email}: not exist")
-                else:
-                    if form.cleaned_data['need_reg']:
+                    if form.cleaned_data['reg_user'] and form.cleaned_data['apply_changes']:
+                        handle = "_".join(email.lower().split('@'))
+                        db_email = handle + "@nonexistent.cpfed.kz"
+                        user = get_user_model().objects.create(handle=handle, email=db_email, password="a")
+                    else:
+                        result.append(f"{email}: not exist")
+                if user is not None:
+                    if form.cleaned_data['apply_changes']:
                         UserContest.objects.get_or_create(user=user, contest=contest)
-                    if form.cleaned_data['need_ch_pass']:
-                        password = get_random_string(10)
-                        user.set_password(password)
-                        user.save()
-                        result.append(f"{email}: {password}")
+                        if form.cleaned_data['need_ch_pass'] and form.cleaned_data['apply_changes']:
+                            password = get_random_string(10)
+                            user.set_password(password)
+                            user.save()
+                            result.append(f"{email}: {password}")
                     if form.cleaned_data['show_info']:
-                        result.append(f"{user.handle},{user.email}")
-            return render(request, 'admin/result_message.html', {'message': ';'.join(result)})
+                        result.append(f"User {user.handle} with email {user.email}")
+            return render(request, 'admin/result_message.html', {'message': ' <br> '.join(result)})
     form = Form()
     return render(request, 'admin/form.html', {'form': form, 'form_name': 'Зарегистрировать пользователей'})
 

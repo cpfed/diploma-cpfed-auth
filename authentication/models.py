@@ -293,6 +293,11 @@ class OnsiteLogin(models.Model):
         default=False
     )
 
+    class Meta:
+        verbose_name = _("Onsite login")
+        verbose_name_plural = _("Onsite logins")
+        ordering = ["-expiration_date"]
+
     def __str__(self):
         return f"User: {self.user}, contest: {self.contest}, valid: {self.is_still_valid}"
 
@@ -319,6 +324,11 @@ class OnsiteLoginLogs(models.Model):
         verbose_name=_("Время использования"),
         auto_now_add=True
     )
+
+    class Meta:
+        verbose_name = _("Onsite login log")
+        verbose_name_plural = _("Onsite login logs")
+        ordering = ["-created_time"]
 
     def __str__(self):
         return f"User: {self.onsite_login.user}; Contest: {self.onsite_login.contest}; IP address: {self.ip_address}; Used at {self.created_time}"

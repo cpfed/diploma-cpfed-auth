@@ -6,3 +6,4 @@ node_modules/
 venv/
 staticfiles/
 .DS_Store
+**.mo
