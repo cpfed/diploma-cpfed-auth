@@ -36,7 +36,7 @@ msgstr ""
 
 #: .\authentication\forms.py:19 .\authentication\forms.py:42
 msgid "Пароли не совпадают"
-msgstr "Құпия сөздер бірдей емес"
+msgstr "Құпиясөздер бірдей емес"
 
 #: .\authentication\forms.py:23
 msgid "Хэндл/Email"
@@ -44,7 +44,7 @@ msgstr "Хэндл/Email"
 
 #: .\authentication\forms.py:28
 msgid "Код"
-msgstr "Жынысы"
+msgstr "Код"
 
 #: .\authentication\forms.py:32 .\authentication\models.py:66
 #: .\authentication\models.py:222
@@ -53,7 +53,7 @@ msgstr "Электрондық пошта"
 
 #: .\authentication\forms.py:37
 msgid "Подтвердите пароль"
-msgstr "Құпия сөзді растаңыз"
+msgstr "Құпиясөзді растаңыз"
 
 #: .\authentication\models.py:20
 msgid "Хэндл может состоять только из латинских букв, цифр и _"
@@ -148,7 +148,7 @@ msgstr "Жарамдылық мерзімі"
 #: .\authentication\models.py:204 .\authentication\models.py:205
 #: .\authentication\views\password_recovery.py:44
 msgid "Восстановление пароля"
-msgstr "Құпия сөзді қалпына келтіру"
+msgstr "Құпиясөзді қалпына келтіру"
 
 #: .\authentication\models.py:226
 msgid "Пароль"
@@ -258,7 +258,7 @@ msgstr "Қате код"
 
 #: .\authentication\views\user_management.py:152 .\templates\login.html:19
 msgid "Войти в аккаунт по коду"
-msgstr "Тіркелгіге код бойынша кіріңіз"
+msgstr "Аккаунтқа код бойынша кіру"
 
 #: .\authentication\views\user_management.py:165
 msgid "Профиль"
@@ -807,12 +807,12 @@ msgid ""
 "Недавно вы запросили сброс пароля для вашей учетной записи Cpfed. Нажмите на "
 "кнопку ниже, чтобы продолжить."
 msgstr ""
-"Жақында сіз Cpfed есептік жазбаңыздың құпия сөзін қалпына келтіруді "
+"Жақында сіз Cpfed есептік жазбаңыздың құпиясөзін қалпына келтіруді "
 "сұрадыңыз. Жалғастыру үшін төмендегі түймені басыңыз."
 
 #: .\templates\emails\recovery_password.html:58
 msgid "Сбросить мой пароль"
-msgstr "Менің құпия сөзімді қалпына келтіру"
+msgstr "Менің құпиясөзімді қалпына келтіру"
 
 #: .\templates\emails\recovery_password.html:73
 msgid ""
@@ -854,7 +854,7 @@ msgstr ""
 
 #: .\templates\login.html:13 .\templates\new_user.html:7
 msgid "Забыли пароль?"
-msgstr "Құпия сөзіңізді ұмыттыңыз ба?"
+msgstr "Құпиясөзіңізді ұмыттыңыз ба?"
 
 #: .\templates\main_page.html:14
 msgid "Чемпионаты и турниры — время побеждать!"
@@ -949,11 +949,11 @@ msgstr "Оқымаймын және жұмыс істемеймін"
 msgid ""
 "Введённый пароль слишком короткий. Он должен содержать как минимум 8 "
 "символов."
-msgstr "Енгізілген құпия сөз тым қысқа. Ол кем дегенде 8 таңбадан тұруы керек."
+msgstr "Енгізілген құпиясөз тым қысқа. Ол кем дегенде 8 таңбадан тұруы керек."
 
 #: .\utils\error_list.py:6
 msgid "Введённый пароль слишком широко распространён."
-msgstr "Енгізілген құпия сөз тым кең таралған."
+msgstr "Енгізілген құпиясөз тым кең таралған."
 
 #: .\utils\error_list.py:7
 msgid "Введённый пароль состоит только из цифр."
