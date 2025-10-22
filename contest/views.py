@@ -149,7 +149,6 @@ def register_on_contest(request: HttpResponse):
 
     class Form(forms.Form):
         userlist = forms.CharField(widget=forms.Textarea(), label='Cписок пользователей')
-        show_info = forms.BooleanField(label='Показать информацию о пользователе?', required=False)
         by_handle = forms.BooleanField(label='Искать по хэндлу?', required=False, initial=True)
         reg_user = forms.BooleanField(label='Регистрировать новых пользователей?', required=False)
         apply_changes = forms.BooleanField(label='Выполнить необратимое действие?', required=False)
@@ -185,8 +184,7 @@ def register_on_contest(request: HttpResponse):
                             user.set_password(password)
                             user.save()
                             result.append(f"{email}: {password}")
-                    if form.cleaned_data['show_info']:
-                        result.append(f"User {user.handle} with email {user.email}")
+                    result.append(f"User {user.handle} with email {user.email}")
             return render(request, 'admin/result_message.html', {'message': ' <br> '.join(result)})
     form = Form()
     return render(request, 'admin/form.html', {'form': form, 'form_name': 'Зарегистрировать пользователей'})
