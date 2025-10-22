@@ -12,4 +12,5 @@ RUN mkdir /app/staticfiles
 WORKDIR /app
 ADD ./ /app/
 
+RUN python manage.py compilemessages
 RUN python manage.py collectstatic --noinput
