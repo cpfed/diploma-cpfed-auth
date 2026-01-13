@@ -1,34 +1,77 @@
-<select name="{{ widget.name }}" {% for name, value in widget.attrs.items %}{% if value is not False %} {{ name }}{% if value is not True %}="{{ value|stringformat:'s' }}"{% endif %}{% endif %}{% endfor %}>
-</select>
+{% load i18n %}
+
+<div class="district-widget-container">
+    <select name="{{ widget.name }}"
+            id="id_{{ widget.name }}"
+            {% for name, value in widget.attrs.items %}
+                {% if value is not False %}
+                    {{ name }}{% if value is not True %}="{{ value|stringformat:'s' }}"{% endif %}
+                {% endif %}
+            {% endfor %}>
+    </select>
+
+    <input type="text"
+           name="{{ widget.name }}_other"
+           id="id_{{ widget.name }}_other"
+           class="rounded-lg w-full text-black border px-4 py-2 mt-2 hidden focus:outline-none focus:border-2 focus:border-blue-500"
+           placeholder="{% trans 'Укажите ваш район' %}">
+</div>
 
 {% autoescape off %}
 <script>
-const regions = JSON.parse(`{{ regions }}`)
+const regions = JSON.parse(`{{ regions }}`);
 
 const region_select = document.getElementById('id_region');
 const district_select = document.getElementById('id_district');
+const district_other_input = document.getElementById('id_district_other');
 
 function update_districts() {
-  district_select.innerHTML = '<option value="">---------</option>';
-  let region = region_select.options[region_select.selectedIndex].text;
-  console.log(region);
-  regions.forEach((reg) => {
-      if (region == reg['name'] && reg['districts']){
-        reg['districts'].forEach(state => {
-          const option = document.createElement('option');
-          option.value = state;
-          {% if widget.value %}
-          if ("{{ widget.value }}" == state){
-            option.selected = true
-          }
-          {% endif %}
-          option.textContent = state;
-          district_select.appendChild(option);
-        })
-      }
-  });
-};
+    district_select.innerHTML = '<option value="">---------</option>';
+
+    // Hide "Other" input when changing regions
+    if (district_other_input) {
+        district_other_input.classList.add('hidden');
+        district_other_input.value = '';
+        district_other_input.removeAttribute('required');
+    }
+
+    let region = region_select.options[region_select.selectedIndex].text;
+    console.log(region);
+
+    regions.forEach((reg) => {
+        if (region == reg['name'] && reg['districts']) {
+            reg['districts'].forEach(state => {
+                const option = document.createElement('option');
+                option.value = state;
+                {% if widget.value %}
+                if ("{{ widget.value }}" == state) {
+                    option.selected = true;
+                }
+                {% endif %}
+                option.textContent = state;
+                district_select.appendChild(option);
+            });
+        }
+    });
+
+    checkOtherOption();
+}
+
+function checkOtherOption() {
+    const selectedValue = district_select.value;
+
+    if (selectedValue === 'Другое' || selectedValue === 'Other' || selectedValue === 'Басқа') {
+        district_other_input.classList.remove('hidden');
+        district_other_input.setAttribute('required', 'required');
+    } else {
+        district_other_input.classList.add('hidden');
+        district_other_input.removeAttribute('required');
+        district_other_input.value = '';
+    }
+}
+
 update_districts();
 region_select.addEventListener('change', update_districts);
+district_select.addEventListener('change', checkOtherOption);
 </script>
 {% endautoescape %}

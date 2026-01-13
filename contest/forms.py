@@ -27,6 +27,21 @@ class ContestRegistrationForm(forms.Form):
             if user_reg is not None and user_reg.additional_fields is not None:
                 self.initial[name] = user_reg.additional_fields.get(name, None)
 
+    def clean(self):
+        cleaned_data = super().clean()
+
+        if 'district' in cleaned_data:
+            district = cleaned_data.get('district')
+            district_other = self.data.get('district_other', '').strip()
+
+            if district in ['Другое', 'Other', 'Басқа']:
+                if district_other:
+                    cleaned_data['district'] = district_other
+                else:
+                    self.add_error('district', _('Пожалуйста, укажите ваш район'))
+
+        return cleaned_data
+
 class AdminTextAreaWidget(forms.Textarea):
     def __init__(self, *args, **kwargs):
         attrs = kwargs.setdefault('attrs', {})
