@@ -38,10 +38,10 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - auth.cpfed.kz
+    - api-auth.cpfed.kz
     secretName: auth-tls-secret
   rules:
-  - host: auth.cpfed.kz
+  - host: api-auth.cpfed.kz
     http:
       paths:
         - path: /
