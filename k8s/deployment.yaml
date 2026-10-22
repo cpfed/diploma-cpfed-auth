@@ -51,7 +51,7 @@ spec:
       volumes:
       - name: config-vol
         configMap:
-          name: nginx-config
+          name: auth-nginx-config
           items:
             - key: nginx.conf
               path: nginx.conf
